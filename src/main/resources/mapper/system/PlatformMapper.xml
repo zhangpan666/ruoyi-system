@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.PlatformMapper">
+    
+    <resultMap type="Platform" id="PlatformResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="md5Key"    column="md5_key"    />
+        <result property="secretKey"    column="secret_key"    />
+        <result property="status"    column="status"    />
+        <result property="creditLimit"    column="credit_limit"    />
+        <result property="usedCreditLimit"    column="used_credit_limit"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPlatformVo">
+        select id, name, md5_key, secret_key, status, credit_limit, used_credit_limit, create_time, update_time from t_platform
+    </sql>
+
+    <select id="selectPlatformList" parameterType="Platform" resultMap="PlatformResult">
+        <include refid="selectPlatformVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="md5Key != null  and md5Key != ''"> and md5_key = #{md5Key}</if>
+            <if test="secretKey != null  and secretKey != ''"> and secret_key = #{secretKey}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="creditLimit != null "> and credit_limit = #{creditLimit}</if>
+            <if test="usedCreditLimit != null "> and used_credit_limit = #{usedCreditLimit}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlatformById" parameterType="Long" resultMap="PlatformResult">
+        <include refid="selectPlatformVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPlatform" parameterType="Platform" useGeneratedKeys="true" keyProperty="id">
+        insert into t_platform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="md5Key != null">md5_key,</if>
+            <if test="secretKey != null">secret_key,</if>
+            <if test="status != null">status,</if>
+            <if test="creditLimit != null">credit_limit,</if>
+            <if test="usedCreditLimit != null">used_credit_limit,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="md5Key != null">#{md5Key},</if>
+            <if test="secretKey != null">#{secretKey},</if>
+            <if test="status != null">#{status},</if>
+            <if test="creditLimit != null">#{creditLimit},</if>
+            <if test="usedCreditLimit != null">#{usedCreditLimit},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlatform" parameterType="Platform">
+        update t_platform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="md5Key != null">md5_key = #{md5Key},</if>
+            <if test="secretKey != null">secret_key = #{secretKey},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="creditLimit != null">credit_limit = #{creditLimit},</if>
+            <if test="usedCreditLimit != null">used_credit_limit = #{usedCreditLimit},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePlatformById" parameterType="Long">
+        delete from t_platform where id = #{id}
+    </delete>
+
+    <delete id="deletePlatformByIds" parameterType="String">
+        delete from t_platform where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
