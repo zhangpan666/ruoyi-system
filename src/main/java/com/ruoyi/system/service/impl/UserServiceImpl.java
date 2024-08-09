@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.UserMapper;
@@ -10,19 +11,19 @@ import com.ruoyi.system.service.IUserService;
 
 /**
  * 会员Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-08-09
  */
 @Service
-public class UserServiceImpl implements IUserService 
+public class UserServiceImpl implements IUserService
 {
     @Autowired
     private UserMapper userMapper;
 
     /**
      * 查询会员
-     * 
+     *
      * @param id 会员主键
      * @return 会员
      */
@@ -34,19 +35,23 @@ public class UserServiceImpl implements IUserService
 
     /**
      * 查询会员列表
-     * 
+     *
      * @param user 会员
      * @return 会员
      */
     @Override
     public List<User> selectUserList(User user)
     {
+        Long platformId = SecurityUtils.getPlatformId();
+        if (platformId != 1){
+            user.setPlatformId(platformId);
+        }
         return userMapper.selectUserList(user);
     }
 
     /**
      * 新增会员
-     * 
+     *
      * @param user 会员
      * @return 结果
      */
@@ -59,7 +64,7 @@ public class UserServiceImpl implements IUserService
 
     /**
      * 修改会员
-     * 
+     *
      * @param user 会员
      * @return 结果
      */
@@ -72,7 +77,7 @@ public class UserServiceImpl implements IUserService
 
     /**
      * 批量删除会员
-     * 
+     *
      * @param ids 需要删除的会员主键
      * @return 结果
      */
@@ -84,7 +89,7 @@ public class UserServiceImpl implements IUserService
 
     /**
      * 删除会员信息
-     * 
+     *
      * @param id 会员主键
      * @return 结果
      */

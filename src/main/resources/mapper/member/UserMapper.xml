@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.UserMapper">
-    
+
     <resultMap type="User" id="UserResult">
         <result property="id"    column="id"    />
         <result property="platformId"    column="platform_id"    />
@@ -39,34 +39,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
-        <include refid="selectUserVo"/>
-        <where>  
-            <if test="platformId != null "> and platform_id = #{platformId}</if>
-            <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
-            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
-            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
-            <if test="sex != null "> and sex = #{sex}</if>
-            <if test="password != null  and password != ''"> and password = #{password}</if>
-            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
-            <if test="type != null "> and type = #{type}</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="lastLoginTime != null "> and last_login_time = #{lastLoginTime}</if>
-            <if test="registerIp != null  and registerIp != ''"> and register_ip = #{registerIp}</if>
-            <if test="registerLocation != null  and registerLocation != ''"> and register_location = #{registerLocation}</if>
-            <if test="deviceId != null  and deviceId != ''"> and device_id = #{deviceId}</if>
-            <if test="model != null  and model != ''"> and model = #{model}</if>
-            <if test="pushId != null  and pushId != ''"> and push_id = #{pushId}</if>
-            <if test="osType != null "> and os_type = #{osType}</if>
-            <if test="registerFrom != null  and registerFrom != ''"> and register_from = #{registerFrom}</if>
-            <if test="bindMobile != null "> and bind_mobile = #{bindMobile}</if>
-            <if test="realName != null  and realName != ''"> and real_name like concat('%', #{realName}, '%')</if>
-            <if test="sameIp != null "> and same_ip = #{sameIp}</if>
-            <if test="loginIp != null  and loginIp != ''"> and login_ip = #{loginIp}</if>
-            <if test="loginLocation != null  and loginLocation != ''"> and login_location = #{loginLocation}</if>
-            <if test="userGroupId != null "> and user_group_id = #{userGroupId}</if>
+        select u.*, p.name as platformName  from t_user u left join t_platform p
+        <where>
+            <if test="platformId != null "> and u.platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and u.platform_user_id = #{platformUserId}</if>
+            <if test="nickname != null  and nickname != ''"> and u.nickname like concat('%', #{nickname}, '%')</if>
+            <if test="username != null  and username != ''"> and u.username like concat('%', #{username}, '%')</if>
+            <if test="sex != null "> and u.sex = #{sex}</if>
+            <if test="password != null  and password != ''"> and u.password = #{password}</if>
+            <if test="mobile != null  and mobile != ''"> and u.mobile = #{mobile}</if>
+            <if test="type != null "> and u.type = #{type}</if>
+            <if test="status != null "> and u.status = #{status}</if>
+            <if test="lastLoginTime != null "> and u.last_login_time = #{lastLoginTime}</if>
+            <if test="registerIp != null  and registerIp != ''"> and u.register_ip = #{registerIp}</if>
+            <if test="registerLocation != null  and registerLocation != ''"> and u.register_location = #{registerLocation}</if>
+            <if test="deviceId != null  and deviceId != ''"> and u.device_id = #{deviceId}</if>
+            <if test="model != null  and model != ''"> and u.model = #{model}</if>
+            <if test="pushId != null  and pushId != ''"> and u.push_id = #{pushId}</if>
+            <if test="osType != null "> and u.os_type = #{osType}</if>
+            <if test="registerFrom != null  and registerFrom != ''"> and u.register_from = #{registerFrom}</if>
+            <if test="bindMobile != null "> and u.bind_mobile = #{bindMobile}</if>
+            <if test="realName != null  and realName != ''"> and u.real_name like concat('%', #{realName}, '%')</if>
+            <if test="sameIp != null "> and u.same_ip = #{sameIp}</if>
+            <if test="loginIp != null  and loginIp != ''"> and u.login_ip = #{loginIp}</if>
+            <if test="loginLocation != null  and loginLocation != ''"> and u.login_location = #{loginLocation}</if>
+            <if test="userGroupId != null "> and u.user_group_id = #{userGroupId}</if>
         </where>
+        order by u.create_time desc
     </select>
-    
+
     <select id="selectUserById" parameterType="Long" resultMap="UserResult">
         <include refid="selectUserVo"/>
         where id = #{id}
@@ -170,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteUserByIds" parameterType="String">
-        delete from t_user where id in 
+        delete from t_user where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
