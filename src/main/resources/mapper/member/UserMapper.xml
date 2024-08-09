@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.UserMapper">
+    
+    <resultMap type="User" id="UserResult">
+        <result property="id"    column="id"    />
+        <result property="platformId"    column="platform_id"    />
+        <result property="platformUserId"    column="platform_user_id"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="username"    column="username"    />
+        <result property="sex"    column="sex"    />
+        <result property="password"    column="password"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="type"    column="type"    />
+        <result property="status"    column="status"    />
+        <result property="lastLoginTime"    column="last_login_time"    />
+        <result property="registerIp"    column="register_ip"    />
+        <result property="registerLocation"    column="register_location"    />
+        <result property="deviceId"    column="device_id"    />
+        <result property="model"    column="model"    />
+        <result property="pushId"    column="push_id"    />
+        <result property="osType"    column="os_type"    />
+        <result property="registerFrom"    column="register_from"    />
+        <result property="bindMobile"    column="bind_mobile"    />
+        <result property="realName"    column="real_name"    />
+        <result property="sameIp"    column="same_ip"    />
+        <result property="loginIp"    column="login_ip"    />
+        <result property="loginLocation"    column="login_location"    />
+        <result property="userGroupId"    column="user_group_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectUserVo">
+        select id, platform_id, platform_user_id, nickname, username, sex, password, mobile, type, status, last_login_time, register_ip, register_location, device_id, model, push_id, os_type, register_from, bind_mobile, real_name, same_ip, login_ip, login_location, user_group_id, remark, create_time, update_time from t_user
+    </sql>
+
+    <select id="selectUserList" parameterType="User" resultMap="UserResult">
+        <include refid="selectUserVo"/>
+        <where>  
+            <if test="platformId != null "> and platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="lastLoginTime != null "> and last_login_time = #{lastLoginTime}</if>
+            <if test="registerIp != null  and registerIp != ''"> and register_ip = #{registerIp}</if>
+            <if test="registerLocation != null  and registerLocation != ''"> and register_location = #{registerLocation}</if>
+            <if test="deviceId != null  and deviceId != ''"> and device_id = #{deviceId}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="pushId != null  and pushId != ''"> and push_id = #{pushId}</if>
+            <if test="osType != null "> and os_type = #{osType}</if>
+            <if test="registerFrom != null  and registerFrom != ''"> and register_from = #{registerFrom}</if>
+            <if test="bindMobile != null "> and bind_mobile = #{bindMobile}</if>
+            <if test="realName != null  and realName != ''"> and real_name like concat('%', #{realName}, '%')</if>
+            <if test="sameIp != null "> and same_ip = #{sameIp}</if>
+            <if test="loginIp != null  and loginIp != ''"> and login_ip = #{loginIp}</if>
+            <if test="loginLocation != null  and loginLocation != ''"> and login_location = #{loginLocation}</if>
+            <if test="userGroupId != null "> and user_group_id = #{userGroupId}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserById" parameterType="Long" resultMap="UserResult">
+        <include refid="selectUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="platformId != null">platform_id,</if>
+            <if test="platformUserId != null">platform_user_id,</if>
+            <if test="nickname != null">nickname,</if>
+            <if test="username != null">username,</if>
+            <if test="sex != null">sex,</if>
+            <if test="password != null">password,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="type != null">type,</if>
+            <if test="status != null">status,</if>
+            <if test="lastLoginTime != null">last_login_time,</if>
+            <if test="registerIp != null">register_ip,</if>
+            <if test="registerLocation != null">register_location,</if>
+            <if test="deviceId != null">device_id,</if>
+            <if test="model != null">model,</if>
+            <if test="pushId != null">push_id,</if>
+            <if test="osType != null">os_type,</if>
+            <if test="registerFrom != null">register_from,</if>
+            <if test="bindMobile != null">bind_mobile,</if>
+            <if test="realName != null">real_name,</if>
+            <if test="sameIp != null">same_ip,</if>
+            <if test="loginIp != null">login_ip,</if>
+            <if test="loginLocation != null">login_location,</if>
+            <if test="userGroupId != null">user_group_id,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="platformId != null">#{platformId},</if>
+            <if test="platformUserId != null">#{platformUserId},</if>
+            <if test="nickname != null">#{nickname},</if>
+            <if test="username != null">#{username},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="password != null">#{password},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="type != null">#{type},</if>
+            <if test="status != null">#{status},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime},</if>
+            <if test="registerIp != null">#{registerIp},</if>
+            <if test="registerLocation != null">#{registerLocation},</if>
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="model != null">#{model},</if>
+            <if test="pushId != null">#{pushId},</if>
+            <if test="osType != null">#{osType},</if>
+            <if test="registerFrom != null">#{registerFrom},</if>
+            <if test="bindMobile != null">#{bindMobile},</if>
+            <if test="realName != null">#{realName},</if>
+            <if test="sameIp != null">#{sameIp},</if>
+            <if test="loginIp != null">#{loginIp},</if>
+            <if test="loginLocation != null">#{loginLocation},</if>
+            <if test="userGroupId != null">#{userGroupId},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        update t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="platformId != null">platform_id = #{platformId},</if>
+            <if test="platformUserId != null">platform_user_id = #{platformUserId},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="username != null">username = #{username},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+            <if test="registerIp != null">register_ip = #{registerIp},</if>
+            <if test="registerLocation != null">register_location = #{registerLocation},</if>
+            <if test="deviceId != null">device_id = #{deviceId},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="pushId != null">push_id = #{pushId},</if>
+            <if test="osType != null">os_type = #{osType},</if>
+            <if test="registerFrom != null">register_from = #{registerFrom},</if>
+            <if test="bindMobile != null">bind_mobile = #{bindMobile},</if>
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="sameIp != null">same_ip = #{sameIp},</if>
+            <if test="loginIp != null">login_ip = #{loginIp},</if>
+            <if test="loginLocation != null">login_location = #{loginLocation},</if>
+            <if test="userGroupId != null">user_group_id = #{userGroupId},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserById" parameterType="Long">
+        delete from t_user where id = #{id}
+    </delete>
+
+    <delete id="deleteUserByIds" parameterType="String">
+        delete from t_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -62,11 +62,6 @@ public class Platform extends BaseEntity
     @TableField("used_credit_limit")
     private BigDecimal usedCreditLimit;
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
 
     @Override
     public String toString() {
