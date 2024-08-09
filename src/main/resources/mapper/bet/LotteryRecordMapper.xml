@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryRecordMapper">
+
+    <resultMap type="LotteryRecord" id="LotteryRecordResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="year"    column="year"    />
+        <result property="period"    column="period"    />
+        <result property="issueNo"    column="issue_no"    />
+        <result property="dateline"    column="dateline"    />
+        <result property="date"    column="date"    />
+        <result property="lotteryTime"    column="lottery_time"    />
+        <result property="sx"    column="sx"    />
+        <result property="wx"    column="wx"    />
+        <result property="numbers"    column="numbers"    />
+        <result property="status"    column="status"    />
+        <result property="lotteryVideoPath"    column="lottery_video_path"    />
+        <result property="lotteryVideoStatus"    column="lottery_video_status"    />
+        <result property="betRecordCountStatus"    column="bet_record_count_status"    />
+        <result property="lotteryStatus"    column="lottery_status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLotteryRecordVo">
+        select id, lottery_id, year, period, issue_no, dateline, date, lottery_time, sx, wx, numbers, status, lottery_video_path, lottery_video_status, bet_record_count_status, lottery_status, create_time, update_time from t_lottery_record
+    </sql>
+
+    <select id="selectLotteryRecordList" parameterType="LotteryRecord" resultMap="LotteryRecordResult">
+        select a.*, b.name as lotteryName from t_lottery_record a left join t_lottery b on a.lottery_id = b.id
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="year != null "> and year = #{year}</if>
+            <if test="period != null "> and period = #{period}</if>
+            <if test="issueNo != null  and issueNo != ''"> and issue_no = #{issueNo}</if>
+            <if test="dateline != null "> and dateline = #{dateline}</if>
+            <if test="date != null  and date != ''"> and date = #{date}</if>
+            <if test="lotteryTime != null "> and lottery_time = #{lotteryTime}</if>
+            <if test="sx != null  and sx != ''"> and sx = #{sx}</if>
+            <if test="wx != null  and wx != ''"> and wx = #{wx}</if>
+            <if test="numbers != null  and numbers != ''"> and numbers = #{numbers}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="lotteryVideoPath != null  and lotteryVideoPath != ''"> and lottery_video_path = #{lotteryVideoPath}</if>
+            <if test="lotteryVideoStatus != null "> and lottery_video_status = #{lotteryVideoStatus}</if>
+            <if test="betRecordCountStatus != null "> and bet_record_count_status = #{betRecordCountStatus}</if>
+            <if test="lotteryStatus != null "> and lottery_status = #{lotteryStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectLotteryRecordById" parameterType="Long" resultMap="LotteryRecordResult">
+        <include refid="selectLotteryRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryRecord" parameterType="LotteryRecord">
+        insert into t_lottery_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="year != null">year,</if>
+            <if test="period != null">period,</if>
+            <if test="issueNo != null and issueNo != ''">issue_no,</if>
+            <if test="dateline != null">dateline,</if>
+            <if test="date != null and date != ''">date,</if>
+            <if test="lotteryTime != null">lottery_time,</if>
+            <if test="sx != null and sx != ''">sx,</if>
+            <if test="wx != null">wx,</if>
+            <if test="numbers != null and numbers != ''">numbers,</if>
+            <if test="status != null">status,</if>
+            <if test="lotteryVideoPath != null">lottery_video_path,</if>
+            <if test="lotteryVideoStatus != null">lottery_video_status,</if>
+            <if test="betRecordCountStatus != null">bet_record_count_status,</if>
+            <if test="lotteryStatus != null">lottery_status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="year != null">#{year},</if>
+            <if test="period != null">#{period},</if>
+            <if test="issueNo != null and issueNo != ''">#{issueNo},</if>
+            <if test="dateline != null">#{dateline},</if>
+            <if test="date != null and date != ''">#{date},</if>
+            <if test="lotteryTime != null">#{lotteryTime},</if>
+            <if test="sx != null and sx != ''">#{sx},</if>
+            <if test="wx != null">#{wx},</if>
+            <if test="numbers != null and numbers != ''">#{numbers},</if>
+            <if test="status != null">#{status},</if>
+            <if test="lotteryVideoPath != null">#{lotteryVideoPath},</if>
+            <if test="lotteryVideoStatus != null">#{lotteryVideoStatus},</if>
+            <if test="betRecordCountStatus != null">#{betRecordCountStatus},</if>
+            <if test="lotteryStatus != null">#{lotteryStatus},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryRecord" parameterType="LotteryRecord">
+        update t_lottery_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="year != null">year = #{year},</if>
+            <if test="period != null">period = #{period},</if>
+            <if test="issueNo != null and issueNo != ''">issue_no = #{issueNo},</if>
+            <if test="dateline != null">dateline = #{dateline},</if>
+            <if test="date != null and date != ''">date = #{date},</if>
+            <if test="lotteryTime != null">lottery_time = #{lotteryTime},</if>
+            <if test="sx != null and sx != ''">sx = #{sx},</if>
+            <if test="wx != null">wx = #{wx},</if>
+            <if test="numbers != null and numbers != ''">numbers = #{numbers},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="lotteryVideoPath != null">lottery_video_path = #{lotteryVideoPath},</if>
+            <if test="lotteryVideoStatus != null">lottery_video_status = #{lotteryVideoStatus},</if>
+            <if test="betRecordCountStatus != null">bet_record_count_status = #{betRecordCountStatus},</if>
+            <if test="lotteryStatus != null">lottery_status = #{lotteryStatus},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryRecordById" parameterType="Long">
+        delete from t_lottery_record where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryRecordByIds" parameterType="String">
+        delete from t_lottery_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

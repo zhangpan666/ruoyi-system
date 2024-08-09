@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryMapper">
+    
+    <resultMap type="Lottery" id="LotteryResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+        <result property="status"    column="status"    />
+        <result property="openStatus"    column="open_status"    />
+        <result property="sort"    column="sort"    />
+        <result property="remark"    column="remark"    />
+        <result property="description"    column="description"    />
+        <result property="rule"    column="rule"    />
+        <result property="cycle"    column="cycle"    />
+        <result property="close"    column="close"    />
+        <result property="killRate"    column="kill_rate"    />
+        <result property="nextCloseTime"    column="next_close_time"    />
+        <result property="nextLotteryTime"    column="next_lottery_time"    />
+        <result property="nextLotteryYear"    column="next_lottery_year"    />
+        <result property="nextLotteryPeriod"    column="next_lottery_period"    />
+        <result property="nextIssueNo"    column="next_issue_no"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLotteryVo">
+        select id, name, code, status, open_status, sort, remark, description, rule, cycle, close, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_lottery_period, next_issue_no, create_time, update_time from t_lottery
+    </sql>
+
+    <select id="selectLotteryList" parameterType="Lottery" resultMap="LotteryResult">
+        <include refid="selectLotteryVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="openStatus != null "> and open_status = #{openStatus}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="rule != null  and rule != ''"> and rule = #{rule}</if>
+            <if test="cycle != null "> and cycle = #{cycle}</if>
+            <if test="close != null "> and close = #{close}</if>
+            <if test="killRate != null "> and kill_rate = #{killRate}</if>
+            <if test="nextCloseTime != null "> and next_close_time = #{nextCloseTime}</if>
+            <if test="nextLotteryTime != null "> and next_lottery_time = #{nextLotteryTime}</if>
+            <if test="nextLotteryYear != null "> and next_lottery_year = #{nextLotteryYear}</if>
+            <if test="nextLotteryPeriod != null "> and next_lottery_period = #{nextLotteryPeriod}</if>
+            <if test="nextIssueNo != null  and nextIssueNo != ''"> and next_issue_no = #{nextIssueNo}</if>
+        </where>
+    </select>
+    
+    <select id="selectLotteryById" parameterType="Long" resultMap="LotteryResult">
+        <include refid="selectLotteryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLottery" parameterType="Lottery" useGeneratedKeys="true" keyProperty="id">
+        insert into t_lottery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+            <if test="status != null">status,</if>
+            <if test="openStatus != null">open_status,</if>
+            <if test="sort != null">sort,</if>
+            <if test="remark != null">remark,</if>
+            <if test="description != null">description,</if>
+            <if test="rule != null">rule,</if>
+            <if test="cycle != null">cycle,</if>
+            <if test="close != null">close,</if>
+            <if test="killRate != null">kill_rate,</if>
+            <if test="nextCloseTime != null">next_close_time,</if>
+            <if test="nextLotteryTime != null">next_lottery_time,</if>
+            <if test="nextLotteryYear != null">next_lottery_year,</if>
+            <if test="nextLotteryPeriod != null">next_lottery_period,</if>
+            <if test="nextIssueNo != null">next_issue_no,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="status != null">#{status},</if>
+            <if test="openStatus != null">#{openStatus},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="description != null">#{description},</if>
+            <if test="rule != null">#{rule},</if>
+            <if test="cycle != null">#{cycle},</if>
+            <if test="close != null">#{close},</if>
+            <if test="killRate != null">#{killRate},</if>
+            <if test="nextCloseTime != null">#{nextCloseTime},</if>
+            <if test="nextLotteryTime != null">#{nextLotteryTime},</if>
+            <if test="nextLotteryYear != null">#{nextLotteryYear},</if>
+            <if test="nextLotteryPeriod != null">#{nextLotteryPeriod},</if>
+            <if test="nextIssueNo != null">#{nextIssueNo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLottery" parameterType="Lottery">
+        update t_lottery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="openStatus != null">open_status = #{openStatus},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="rule != null">rule = #{rule},</if>
+            <if test="cycle != null">cycle = #{cycle},</if>
+            <if test="close != null">close = #{close},</if>
+            <if test="killRate != null">kill_rate = #{killRate},</if>
+            <if test="nextCloseTime != null">next_close_time = #{nextCloseTime},</if>
+            <if test="nextLotteryTime != null">next_lottery_time = #{nextLotteryTime},</if>
+            <if test="nextLotteryYear != null">next_lottery_year = #{nextLotteryYear},</if>
+            <if test="nextLotteryPeriod != null">next_lottery_period = #{nextLotteryPeriod},</if>
+            <if test="nextIssueNo != null">next_issue_no = #{nextIssueNo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryById" parameterType="Long">
+        delete from t_lottery where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryByIds" parameterType="String">
+        delete from t_lottery where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
