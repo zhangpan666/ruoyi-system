@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BetRecordMapper">
+
+    <resultMap type="BetRecord" id="BetRecordResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="betAmount"    column="bet_amount"    />
+        <result property="canWinAmount"    column="can_win_amount"    />
+        <result property="betContent"    column="bet_content"    />
+        <result property="displayBetContent"    column="display_bet_content"    />
+        <result property="betOdds"    column="bet_odds"    />
+        <result property="betAdditionalOdds"    column="bet_additional_odds"    />
+        <result property="platformId"    column="platform_id"    />
+        <result property="platformUserId"    column="platform_user_id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="issueNo"    column="issue_no"    />
+        <result property="playTypeName"    column="play_type_name"    />
+        <result property="displayPlayTypeName"    column="display_play_type_name"    />
+        <result property="win"    column="win"    />
+        <result property="winLoseAmount"    column="win_lose_amount"    />
+        <result property="playTypeCode"    column="play_type_code"    />
+        <result property="playTypeDetailCode"    column="play_type_detail_code"    />
+        <result property="betNo"    column="bet_no"    />
+        <result property="status"    column="status"    />
+        <result property="cancelType"    column="cancel_type"    />
+        <result property="betTime"    column="bet_time"    />
+        <result property="countTime"    column="count_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBetRecordVo">
+        select id, user_id, bet_amount, can_win_amount, bet_content, display_bet_content, bet_odds, bet_additional_odds, platform_id, platform_user_id, lottery_id, issue_no, play_type_name, display_play_type_name, win, win_lose_amount, play_type_code, play_type_detail_code, bet_no, status, cancel_type, bet_time, count_time, create_time, update_time from t_bet_record
+    </sql>
+
+    <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">
+        select a.*, b.name as lotteryName from t_bet_record a left t_lottery b on a.lottery_id = b.id
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+            <if test="canWinAmount != null "> and can_win_amount = #{canWinAmount}</if>
+            <if test="betContent != null  and betContent != ''"> and bet_content = #{betContent}</if>
+            <if test="displayBetContent != null  and displayBetContent != ''"> and display_bet_content = #{displayBetContent}</if>
+            <if test="betOdds != null "> and bet_odds = #{betOdds}</if>
+            <if test="betAdditionalOdds != null "> and bet_additional_odds = #{betAdditionalOdds}</if>
+            <if test="platformId != null "> and platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="issueNo != null  and issueNo != ''"> and issue_no = #{issueNo}</if>
+            <if test="playTypeName != null  and playTypeName != ''"> and play_type_name like concat('%', #{playTypeName}, '%')</if>
+            <if test="displayPlayTypeName != null  and displayPlayTypeName != ''"> and display_play_type_name like concat('%', #{displayPlayTypeName}, '%')</if>
+            <if test="win != null "> and win = #{win}</if>
+            <if test="winLoseAmount != null "> and win_lose_amount = #{winLoseAmount}</if>
+            <if test="playTypeCode != null "> and play_type_code = #{playTypeCode}</if>
+            <if test="playTypeDetailCode != null  and playTypeDetailCode != ''"> and play_type_detail_code = #{playTypeDetailCode}</if>
+            <if test="betNo != null  and betNo != ''"> and bet_no = #{betNo}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="cancelType != null "> and cancel_type = #{cancelType}</if>
+            <if test="betTime != null "> and bet_time = #{betTime}</if>
+            <if test="countTime != null "> and count_time = #{countTime}</if>
+        </where>
+    </select>
+
+    <select id="selectBetRecordById" parameterType="Long" resultMap="BetRecordResult">
+        <include refid="selectBetRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBetRecord" parameterType="BetRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into t_bet_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="betAmount != null">bet_amount,</if>
+            <if test="canWinAmount != null">can_win_amount,</if>
+            <if test="betContent != null and betContent != ''">bet_content,</if>
+            <if test="displayBetContent != null and displayBetContent != ''">display_bet_content,</if>
+            <if test="betOdds != null">bet_odds,</if>
+            <if test="betAdditionalOdds != null">bet_additional_odds,</if>
+            <if test="platformId != null">platform_id,</if>
+            <if test="platformUserId != null">platform_user_id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="issueNo != null and issueNo != ''">issue_no,</if>
+            <if test="playTypeName != null and playTypeName != ''">play_type_name,</if>
+            <if test="displayPlayTypeName != null">display_play_type_name,</if>
+            <if test="win != null">win,</if>
+            <if test="winLoseAmount != null">win_lose_amount,</if>
+            <if test="playTypeCode != null">play_type_code,</if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">play_type_detail_code,</if>
+            <if test="betNo != null">bet_no,</if>
+            <if test="status != null">status,</if>
+            <if test="cancelType != null">cancel_type,</if>
+            <if test="betTime != null">bet_time,</if>
+            <if test="countTime != null">count_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="betAmount != null">#{betAmount},</if>
+            <if test="canWinAmount != null">#{canWinAmount},</if>
+            <if test="betContent != null and betContent != ''">#{betContent},</if>
+            <if test="displayBetContent != null and displayBetContent != ''">#{displayBetContent},</if>
+            <if test="betOdds != null">#{betOdds},</if>
+            <if test="betAdditionalOdds != null">#{betAdditionalOdds},</if>
+            <if test="platformId != null">#{platformId},</if>
+            <if test="platformUserId != null">#{platformUserId},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="issueNo != null and issueNo != ''">#{issueNo},</if>
+            <if test="playTypeName != null and playTypeName != ''">#{playTypeName},</if>
+            <if test="displayPlayTypeName != null">#{displayPlayTypeName},</if>
+            <if test="win != null">#{win},</if>
+            <if test="winLoseAmount != null">#{winLoseAmount},</if>
+            <if test="playTypeCode != null">#{playTypeCode},</if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">#{playTypeDetailCode},</if>
+            <if test="betNo != null">#{betNo},</if>
+            <if test="status != null">#{status},</if>
+            <if test="cancelType != null">#{cancelType},</if>
+            <if test="betTime != null">#{betTime},</if>
+            <if test="countTime != null">#{countTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBetRecord" parameterType="BetRecord">
+        update t_bet_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="betAmount != null">bet_amount = #{betAmount},</if>
+            <if test="canWinAmount != null">can_win_amount = #{canWinAmount},</if>
+            <if test="betContent != null and betContent != ''">bet_content = #{betContent},</if>
+            <if test="displayBetContent != null and displayBetContent != ''">display_bet_content = #{displayBetContent},</if>
+            <if test="betOdds != null">bet_odds = #{betOdds},</if>
+            <if test="betAdditionalOdds != null">bet_additional_odds = #{betAdditionalOdds},</if>
+            <if test="platformId != null">platform_id = #{platformId},</if>
+            <if test="platformUserId != null">platform_user_id = #{platformUserId},</if>
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="issueNo != null and issueNo != ''">issue_no = #{issueNo},</if>
+            <if test="playTypeName != null and playTypeName != ''">play_type_name = #{playTypeName},</if>
+            <if test="displayPlayTypeName != null">display_play_type_name = #{displayPlayTypeName},</if>
+            <if test="win != null">win = #{win},</if>
+            <if test="winLoseAmount != null">win_lose_amount = #{winLoseAmount},</if>
+            <if test="playTypeCode != null">play_type_code = #{playTypeCode},</if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">play_type_detail_code = #{playTypeDetailCode},</if>
+            <if test="betNo != null">bet_no = #{betNo},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="cancelType != null">cancel_type = #{cancelType},</if>
+            <if test="betTime != null">bet_time = #{betTime},</if>
+            <if test="countTime != null">count_time = #{countTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBetRecordById" parameterType="Long">
+        delete from t_bet_record where id = #{id}
+    </delete>
+
+    <delete id="deleteBetRecordByIds" parameterType="String">
+        delete from t_bet_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
