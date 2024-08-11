@@ -2,6 +2,8 @@ package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -103,11 +105,11 @@ public class BetRecord extends BaseEntity
 
     /** 注单状态，0-待结算，1-结算成功，2-结算失败，3-已撤单 */
     @Excel(name = "注单状态，0-待结算，1-结算成功，2-结算失败，3-已撤单")
-    private Integer status;
+    private Byte status;
 
     /** 撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单 */
     @Excel(name = "撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单")
-    private Integer cancelType;
+    private Byte cancelType;
 
     /** 下注时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -121,4 +123,14 @@ public class BetRecord extends BaseEntity
 
     @Excel(name = "彩种")
     private String lotteryName;
+
+    @TableField(exist = false)
+    private Byte timeType;
+
+    @TableField(exist = false)
+    private Date beginTime;
+
+    @TableField(exist = false)
+    private Date endTime;
+
 }

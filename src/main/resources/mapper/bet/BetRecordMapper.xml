@@ -28,41 +28,73 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="cancelType"    column="cancel_type"    />
         <result property="betTime"    column="bet_time"    />
         <result property="countTime"    column="count_time"    />
+        <result property="createBy"           column="create_by"             />
         <result property="createTime"    column="create_time"    />
+        <result property="updateBy"     column="update_by"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectBetRecordVo">
-        select id, user_id, bet_amount, can_win_amount, bet_content, display_bet_content, bet_odds, bet_additional_odds, platform_id, platform_user_id, lottery_id, issue_no, play_type_name, display_play_type_name, win, win_lose_amount, play_type_code, play_type_detail_code, bet_no, status, cancel_type, bet_time, count_time, create_time, update_time from t_bet_record
+        select id, user_id, bet_amount, can_win_amount, bet_content, display_bet_content, bet_odds, bet_additional_odds, platform_id, platform_user_id, lottery_id, issue_no, play_type_name, display_play_type_name, win, win_lose_amount, play_type_code, play_type_detail_code, bet_no, status
+        , cancel_type, bet_time, count_time, create_time, update_time, create_by, update_by from t_bet_record
     </sql>
 
     <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">
         select a.*, b.name as lotteryName from t_bet_record a left t_lottery b on a.lottery_id = b.id
         <where>
-            <if test="id != null "> and id = #{id}</if>
-            <if test="userId != null "> and user_id = #{userId}</if>
-            <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
-            <if test="canWinAmount != null "> and can_win_amount = #{canWinAmount}</if>
-            <if test="betContent != null  and betContent != ''"> and bet_content = #{betContent}</if>
-            <if test="displayBetContent != null  and displayBetContent != ''"> and display_bet_content = #{displayBetContent}</if>
-            <if test="betOdds != null "> and bet_odds = #{betOdds}</if>
-            <if test="betAdditionalOdds != null "> and bet_additional_odds = #{betAdditionalOdds}</if>
-            <if test="platformId != null "> and platform_id = #{platformId}</if>
-            <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
-            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
-            <if test="issueNo != null  and issueNo != ''"> and issue_no = #{issueNo}</if>
-            <if test="playTypeName != null  and playTypeName != ''"> and play_type_name like concat('%', #{playTypeName}, '%')</if>
-            <if test="displayPlayTypeName != null  and displayPlayTypeName != ''"> and display_play_type_name like concat('%', #{displayPlayTypeName}, '%')</if>
-            <if test="win != null "> and win = #{win}</if>
-            <if test="winLoseAmount != null "> and win_lose_amount = #{winLoseAmount}</if>
-            <if test="playTypeCode != null "> and play_type_code = #{playTypeCode}</if>
-            <if test="playTypeDetailCode != null  and playTypeDetailCode != ''"> and play_type_detail_code = #{playTypeDetailCode}</if>
-            <if test="betNo != null  and betNo != ''"> and bet_no = #{betNo}</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="cancelType != null "> and cancel_type = #{cancelType}</if>
-            <if test="betTime != null "> and bet_time = #{betTime}</if>
-            <if test="countTime != null "> and count_time = #{countTime}</if>
+            <if test="id != null "> and a.id = #{id}</if>
+            <if test="userId != null "> and a.user_id = #{userId}</if>
+            <if test="betAmount != null "> and a.bet_amount = #{betAmount}</if>
+            <if test="canWinAmount != null "> and a.can_win_amount = #{canWinAmount}</if>
+            <if test="betContent != null  and betContent != ''"> and a.bet_content = #{betContent}</if>
+            <if test="displayBetContent != null  and displayBetContent != ''"> and a.display_bet_content = #{displayBetContent}</if>
+            <if test="betOdds != null "> and a.bet_odds = #{betOdds}</if>
+            <if test="betAdditionalOdds != null "> and a.bet_additional_odds = #{betAdditionalOdds}</if>
+            <if test="platformId != null "> and a.platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and a.platform_user_id = #{platformUserId}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="issueNo != null  and issueNo != ''"> and a.issue_no = #{issueNo}</if>
+            <if test="playTypeName != null  and playTypeName != ''"> and a.play_type_name like concat('%', #{playTypeName}, '%')</if>
+            <if test="displayPlayTypeName != null  and displayPlayTypeName != ''"> and a.display_play_type_name like concat('%', #{displayPlayTypeName}, '%')</if>
+            <if test="win != null "> and a.win = #{win}</if>
+            <if test="winLoseAmount != null "> and a.win_lose_amount = #{winLoseAmount}</if>
+            <if test="playTypeCode != null "> and a.play_type_code = #{playTypeCode}</if>
+            <if test="playTypeDetailCode != null  and playTypeDetailCode != ''"> and a.play_type_detail_code = #{playTypeDetailCode}</if>
+            <if test="betNo != null  and betNo != ''"> and a.bet_no = #{betNo}</if>
+            <if test="status != null "> and a.status = #{status}</if>
+            <if test="cancelType != null "> and a.cancel_type = #{cancelType}</if>
+            <if test="betTime != null "> and a.bet_time = #{betTime}</if>
+            <if test="countTime != null "> and a.count_time = #{countTime}</if>
+            <if test="createBy != null "> and a.create_by = #{createBy}</if>
+            <if test="updateBy != null "> and a.update_by = #{updateBy}</if>
+            <if test="beginTime != null">
+                <choose>
+                    <when test="timeType == 1">
+                        and bet_time &gt;= #{beginTime}
+                    </when>
+                    <when test="timeType == 2">
+                        and count_time &gt;= #{beginTime}
+                    </when>
+                    <otherwise>
+                        and count_time &gt;= #{beginTime}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="endTime != null">
+                <choose>
+                    <when test="timeType == 1">
+                        and bet_time &lt;= #{endTime}
+                    </when>
+                    <when test="timeType == 2">
+                        and count_time &lt;= #{endTime}
+                    </when>
+                    <otherwise>
+                        and count_time &lt;= #{endTime}
+                    </otherwise>
+                </choose>
+            </if>
         </where>
+            order by a.id desc
     </select>
 
     <select id="selectBetRecordById" parameterType="Long" resultMap="BetRecordResult">
@@ -97,6 +129,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="countTime != null">count_time,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
@@ -123,6 +157,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="countTime != null">#{countTime},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
          </trim>
     </insert>
 
@@ -153,6 +189,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="countTime != null">count_time = #{countTime},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
         </trim>
         where id = #{id}
     </update>

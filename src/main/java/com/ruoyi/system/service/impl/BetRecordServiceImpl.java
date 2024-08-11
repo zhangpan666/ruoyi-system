@@ -7,22 +7,24 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BetRecordMapper;
 import com.ruoyi.system.domain.BetRecord;
 import com.ruoyi.system.service.IBetRecordService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 投注记录Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-08-11
  */
 @Service
-public class BetRecordServiceImpl implements IBetRecordService 
+@Transactional
+public class BetRecordServiceImpl implements IBetRecordService
 {
     @Autowired
     private BetRecordMapper betRecordMapper;
 
     /**
      * 查询投注记录
-     * 
+     *
      * @param id 投注记录主键
      * @return 投注记录
      */
@@ -34,7 +36,7 @@ public class BetRecordServiceImpl implements IBetRecordService
 
     /**
      * 查询投注记录列表
-     * 
+     *
      * @param betRecord 投注记录
      * @return 投注记录
      */
@@ -46,7 +48,7 @@ public class BetRecordServiceImpl implements IBetRecordService
 
     /**
      * 新增投注记录
-     * 
+     *
      * @param betRecord 投注记录
      * @return 结果
      */
@@ -59,7 +61,7 @@ public class BetRecordServiceImpl implements IBetRecordService
 
     /**
      * 修改投注记录
-     * 
+     *
      * @param betRecord 投注记录
      * @return 结果
      */
@@ -72,7 +74,7 @@ public class BetRecordServiceImpl implements IBetRecordService
 
     /**
      * 批量删除投注记录
-     * 
+     *
      * @param ids 需要删除的投注记录主键
      * @return 结果
      */
@@ -84,7 +86,7 @@ public class BetRecordServiceImpl implements IBetRecordService
 
     /**
      * 删除投注记录信息
-     * 
+     *
      * @param id 投注记录主键
      * @return 结果
      */
