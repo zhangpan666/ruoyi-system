@@ -25,13 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="icon"    column="icon"    />
         <result property="width"    column="width"    />
         <result property="height"    column="height"    />
+        <result property="createBy"           column="create_by"             />
         <result property="createTime"    column="create_time"    />
+        <result property="updateBy"     column="update_by"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectLotteryVo">
         select id, name, code, status, open_status, sort, remark, description, rule, cycle, close, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_lottery_period, next_issue_no
-        , icon, width, height, create_time, update_time from t_lottery
+        , icon, width, height, create_by, create_time, update_by, update_time from t_lottery
     </sql>
 
     <select id="selectLotteryList" parameterType="Lottery" resultMap="LotteryResult">
