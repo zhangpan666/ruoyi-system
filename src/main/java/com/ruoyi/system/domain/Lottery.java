@@ -3,6 +3,9 @@ package com.ruoyi.system.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -10,10 +13,14 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 彩种对象 t_lottery
- * 
+ *
  * @author ruoyi
  * @date 2024-08-09
  */
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class Lottery extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -83,150 +90,12 @@ public class Lottery extends BaseEntity
     @Excel(name = "下一期开奖期号")
     private String nextIssueNo;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+    private String icon;
 
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
+    private Integer width;
 
-    public String getName() 
-    {
-        return name;
-    }
-    public void setCode(String code) 
-    {
-        this.code = code;
-    }
+    private Integer height;
 
-    public String getCode() 
-    {
-        return code;
-    }
-    public void setStatus(Integer status) 
-    {
-        this.status = status;
-    }
-
-    public Integer getStatus() 
-    {
-        return status;
-    }
-    public void setOpenStatus(Integer openStatus) 
-    {
-        this.openStatus = openStatus;
-    }
-
-    public Integer getOpenStatus() 
-    {
-        return openStatus;
-    }
-    public void setSort(Long sort) 
-    {
-        this.sort = sort;
-    }
-
-    public Long getSort() 
-    {
-        return sort;
-    }
-    public void setDescription(String description) 
-    {
-        this.description = description;
-    }
-
-    public String getDescription() 
-    {
-        return description;
-    }
-    public void setRule(String rule) 
-    {
-        this.rule = rule;
-    }
-
-    public String getRule() 
-    {
-        return rule;
-    }
-    public void setCycle(Long cycle) 
-    {
-        this.cycle = cycle;
-    }
-
-    public Long getCycle() 
-    {
-        return cycle;
-    }
-    public void setClose(Long close) 
-    {
-        this.close = close;
-    }
-
-    public Long getClose() 
-    {
-        return close;
-    }
-    public void setKillRate(BigDecimal killRate) 
-    {
-        this.killRate = killRate;
-    }
-
-    public BigDecimal getKillRate() 
-    {
-        return killRate;
-    }
-    public void setNextCloseTime(Date nextCloseTime) 
-    {
-        this.nextCloseTime = nextCloseTime;
-    }
-
-    public Date getNextCloseTime() 
-    {
-        return nextCloseTime;
-    }
-    public void setNextLotteryTime(Date nextLotteryTime) 
-    {
-        this.nextLotteryTime = nextLotteryTime;
-    }
-
-    public Date getNextLotteryTime() 
-    {
-        return nextLotteryTime;
-    }
-    public void setNextLotteryYear(Long nextLotteryYear) 
-    {
-        this.nextLotteryYear = nextLotteryYear;
-    }
-
-    public Long getNextLotteryYear() 
-    {
-        return nextLotteryYear;
-    }
-    public void setNextLotteryPeriod(Long nextLotteryPeriod) 
-    {
-        this.nextLotteryPeriod = nextLotteryPeriod;
-    }
-
-    public Long getNextLotteryPeriod() 
-    {
-        return nextLotteryPeriod;
-    }
-    public void setNextIssueNo(String nextIssueNo) 
-    {
-        this.nextIssueNo = nextIssueNo;
-    }
-
-    public String getNextIssueNo() 
-    {
-        return nextIssueNo;
-    }
 
     @Override
     public String toString() {

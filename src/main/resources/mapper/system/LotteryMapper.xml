@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LotteryMapper">
-    
+
     <resultMap type="Lottery" id="LotteryResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
@@ -22,17 +22,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="nextLotteryYear"    column="next_lottery_year"    />
         <result property="nextLotteryPeriod"    column="next_lottery_period"    />
         <result property="nextIssueNo"    column="next_issue_no"    />
+        <result property="icon"    column="icon"    />
+        <result property="width"    column="width"    />
+        <result property="height"    column="height"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectLotteryVo">
-        select id, name, code, status, open_status, sort, remark, description, rule, cycle, close, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_lottery_period, next_issue_no, create_time, update_time from t_lottery
+        select id, name, code, status, open_status, sort, remark, description, rule, cycle, close, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_lottery_period, next_issue_no
+        , icon, width, height, create_time, update_time from t_lottery
     </sql>
 
     <select id="selectLotteryList" parameterType="Lottery" resultMap="LotteryResult">
         <include refid="selectLotteryVo"/>
-        <where>  
+        <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="status != null "> and status = #{status}</if>
@@ -50,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextIssueNo != null  and nextIssueNo != ''"> and next_issue_no = #{nextIssueNo}</if>
         </where>
     </select>
-    
+
     <select id="selectLotteryById" parameterType="Long" resultMap="LotteryResult">
         <include refid="selectLotteryVo"/>
         where id = #{id}
@@ -75,6 +79,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextLotteryYear != null">next_lottery_year,</if>
             <if test="nextLotteryPeriod != null">next_lottery_period,</if>
             <if test="nextIssueNo != null">next_issue_no,</if>
+            <if test="icon != null">icon,</if>
+            <if test="width != null">width,</if>
+            <if test="height != null">height,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
          </trim>
@@ -95,6 +102,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextLotteryYear != null">#{nextLotteryYear},</if>
             <if test="nextLotteryPeriod != null">#{nextLotteryPeriod},</if>
             <if test="nextIssueNo != null">#{nextIssueNo},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="width != null">#{width},</if>
+            <if test="height != null">#{height},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
          </trim>
@@ -119,6 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextLotteryYear != null">next_lottery_year = #{nextLotteryYear},</if>
             <if test="nextLotteryPeriod != null">next_lottery_period = #{nextLotteryPeriod},</if>
             <if test="nextIssueNo != null">next_issue_no = #{nextIssueNo},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="width != null">width = #{width},</if>
+            <if test="height != null">height = #{height},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
@@ -130,7 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLotteryByIds" parameterType="String">
-        delete from t_lottery where id in 
+        delete from t_lottery where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
