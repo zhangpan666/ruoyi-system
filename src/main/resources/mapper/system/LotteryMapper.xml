@@ -150,4 +150,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from t_lottery where name = #{name} limit 1
+    </select>
+
+    <select id="getByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from t_lottery where code = #{code} limit 1
+    </select>
+
+
 </mapper>

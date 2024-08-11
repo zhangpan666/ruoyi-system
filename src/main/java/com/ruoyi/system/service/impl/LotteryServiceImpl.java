@@ -10,19 +10,19 @@ import com.ruoyi.system.service.ILotteryService;
 
 /**
  * 彩种Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-08-09
  */
 @Service
-public class LotteryServiceImpl implements ILotteryService 
+public class LotteryServiceImpl implements ILotteryService
 {
     @Autowired
     private LotteryMapper lotteryMapper;
 
     /**
      * 查询彩种
-     * 
+     *
      * @param id 彩种主键
      * @return 彩种
      */
@@ -34,7 +34,7 @@ public class LotteryServiceImpl implements ILotteryService
 
     /**
      * 查询彩种列表
-     * 
+     *
      * @param lottery 彩种
      * @return 彩种
      */
@@ -46,7 +46,7 @@ public class LotteryServiceImpl implements ILotteryService
 
     /**
      * 新增彩种
-     * 
+     *
      * @param lottery 彩种
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class LotteryServiceImpl implements ILotteryService
 
     /**
      * 修改彩种
-     * 
+     *
      * @param lottery 彩种
      * @return 结果
      */
@@ -72,7 +72,7 @@ public class LotteryServiceImpl implements ILotteryService
 
     /**
      * 批量删除彩种
-     * 
+     *
      * @param ids 需要删除的彩种主键
      * @return 结果
      */
@@ -84,7 +84,7 @@ public class LotteryServiceImpl implements ILotteryService
 
     /**
      * 删除彩种信息
-     * 
+     *
      * @param id 彩种主键
      * @return 结果
      */
@@ -92,5 +92,15 @@ public class LotteryServiceImpl implements ILotteryService
     public int deleteLotteryById(Long id)
     {
         return lotteryMapper.deleteLotteryById(id);
+    }
+
+    @Override
+    public Lottery getByName(String name) {
+        return lotteryMapper.getByName(name);
+    }
+
+    @Override
+    public Lottery getByCode(String code) {
+        return lotteryMapper.getByCode(code);
     }
 }
