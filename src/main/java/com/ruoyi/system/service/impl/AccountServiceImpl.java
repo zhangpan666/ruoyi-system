@@ -1,5 +1,6 @@
 package com.ruoyi.system.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.AccountMapper;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 账户Service业务层处理
@@ -16,6 +18,7 @@ import com.ruoyi.system.service.IAccountService;
  * @date 2024-08-09
  */
 @Service
+@Transactional
 public class AccountServiceImpl implements IAccountService
 {
     @Autowired
@@ -98,4 +101,45 @@ public class AccountServiceImpl implements IAccountService
     {
         return accountMapper.deleteAccountById(id);
     }
+
+    @Override
+    public boolean addBalance(BigDecimal amount, Long accountId) {
+        return accountMapper.addBalance(amount, accountId) == 1;
+    }
+
+    @Override
+    public boolean reduceBalance(BigDecimal amount, Long accountId) {
+        return accountMapper.reduceBalance(amount, accountId) == 1;
+    }
+
+    @Override
+    public boolean doFreezeBalance(BigDecimal amount, Long accountId) {
+        return accountMapper.doFreezeBalance(amount, accountId) == 1;
+    }
+
+    @Override
+    public boolean doUnFreezeBalance(BigDecimal amount, Long accountId) {
+        return accountMapper.doUnFreezeBalance(amount, accountId) == 1;
+    }
+
+    @Override
+    public int addTotalBetAmount(BigDecimal amount, Long accountId) {
+        return accountMapper.addTotalBetAmount(amount, accountId);
+    }
+
+    @Override
+    public int reduceTotalBetAmount(BigDecimal amount, Long accountId) {
+        return accountMapper.reduceTotalBetAmount(amount, accountId);
+    }
+
+    @Override
+    public int addTotalWinLoseAmount(BigDecimal amount, Long accountId) {
+        return accountMapper.addTotalWinLoseAmount(amount, accountId);
+    }
+
+    @Override
+    public int reduceTotalWinLoseAmount(BigDecimal amount, Long accountId) {
+        return accountMapper.reduceTotalWinLoseAmount(amount, accountId);
+    }
+
 }

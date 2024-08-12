@@ -124,13 +124,10 @@ public class BetRecord extends BaseEntity
     @Excel(name = "彩种")
     private String lotteryName;
 
-    @TableField(exist = false)
     private Byte timeType;
 
-    @TableField(exist = false)
     private Date beginTime;
 
-    @TableField(exist = false)
     private Date endTime;
 
 }

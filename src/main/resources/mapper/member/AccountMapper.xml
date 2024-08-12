@@ -100,4 +100,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <update id="doFreezeBalance">
+        update t_account set
+        freeze_balance_amount = freeze_balance_amount + #{amount},
+        available_balance = available_balance - #{amount},
+        update_time = now()
+        where id = #{accountId} and available_balance &gt;= #{amount}
+    </update>
+
+    <update id="doUnFreezeBalance">
+        update t_account set
+        freeze_balance_amount = freeze_balance_amount - #{amount},
+        available_balance = available_balance + #{amount},
+        update_time = now()
+        where id = #{accountId} and freeze_balance_amount &gt;= #{amount}
+    </update>
+
+    <update id="addBalance">
+        update t_account set
+        balance_income_amount = balance_income_amount + #{amount},
+        available_balance = available_balance + #{amount},
+        update_time = now()
+        where id = #{accountId}
+    </update>
+
+    <update id="reduceBalance">
+        update t_account set
+        balance_expense_amount = balance_expense_amount + #{amount},
+        available_balance = available_balance - #{amount},
+        update_time = now()
+        where id = #{accountId} and available_balance &gt;= #{amount}
+    </update>
+
+    <update id="addTotalBetAmount">
+       update t_account set total_bet_amount = total_bet_amount + #{amount} where id = #{accountId}
+   </update>
+
+    <update id="reduceTotalBetAmount">
+       update t_account set total_bet_amount = total_bet_amount - #{amount} where id = #{accountId}
+   </update>
+
+    <update id="addTotalWinLoseAmount">
+       update t_account set total_win_lose_amount = total_win_lose_amount + #{amount} where id = #{accountId}
+   </update>
+
+    <update id="reduceTotalWinLoseAmount">
+       update t_account set total_win_lose_amount = total_win_lose_amount - #{amount} where id = #{accountId}
+   </update>
+
 </mapper>
