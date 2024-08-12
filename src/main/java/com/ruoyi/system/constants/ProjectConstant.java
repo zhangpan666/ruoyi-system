@@ -1,10 +1,7 @@
 package com.ruoyi.system.constants;
 
 import com.light.core.model.CommonConstantInfo;
-import com.light.core.model.CommonKVString;
-import com.light.core.utils.BaseCommonKVStringClassUtil;
 import com.light.core.utils.BaseConstantClassUtil;
-import com.light.redis.model.RedisInfo;
 
 import java.util.Map;
 
