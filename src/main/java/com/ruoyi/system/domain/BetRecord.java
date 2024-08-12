@@ -85,7 +85,7 @@ public class BetRecord extends BaseEntity
 
     /** 输赢状态，1-赢，0-输，2-打和 */
     @Excel(name = "输赢状态，1-赢，0-输，2-打和")
-    private Integer win;
+    private Byte win;
 
     /** 输赢金额 */
     @Excel(name = "输赢金额")
@@ -93,7 +93,7 @@ public class BetRecord extends BaseEntity
 
     /** 玩法code */
     @Excel(name = "玩法code")
-    private Integer playTypeCode;
+    private Byte playTypeCode;
 
     /** 玩法明细code */
     @Excel(name = "玩法明细code")
