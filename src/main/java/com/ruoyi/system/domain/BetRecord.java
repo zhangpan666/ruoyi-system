@@ -112,13 +112,13 @@ public class BetRecord extends BaseEntity
     private Byte cancelType;
 
     /** 下注时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "下注时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "下注时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date betTime;
 
     /** 结算时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "结算时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "结算时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date countTime;
 
     @Excel(name = "彩种")
