@@ -113,8 +113,7 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         accountService.addBalance(amount, userId);
         AccountDetail accountDetail = new AccountDetail().setUserId(userId).setRelatedId(relatedId).setPaymentType(ProjectConstant.PaymentType.INCOME)
                 .setAmount(amount).setAvailableBalance(availableBalance).setTradeType(tradeType).setStatus(ProjectConstant.AccountDetailStatus.DONE)
-                .setOrderNo(orderNo).setMchOrderNo(mchOrderNo);
-        accountDetail.setRemark(remark);
+                .setOrderNo(orderNo).setMchOrderNo(mchOrderNo).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
     }
@@ -126,8 +125,7 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         accountService.reduceBalance(amount, userId);
         AccountDetail accountDetail=new AccountDetail().setOrderNo(orderNo).setMchOrderNo(mchOrderNo).setPaymentType(ProjectConstant.PaymentType.EXPENSE).setAmount(amount)
                 .setUserId(userId).setAvailableBalance(availableBalance.subtract(amount)).setStatus(ProjectConstant.AccountDetailStatus.DONE)
-                .setTradeType(tradeType).setRelatedId(relatedId);
-        accountDetail.setRemark(remark);
+                .setTradeType(tradeType).setRelatedId(relatedId).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
     }
@@ -139,8 +137,7 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         accountService.doFreezeBalance(amount, userId);
         AccountDetail accountDetail=new AccountDetail().setOrderNo(orderNo).setPaymentType(ProjectConstant.PaymentType.EXPENSE).setAmount(amount)
                 .setUserId(userId).setAvailableBalance(availableBalance.subtract(amount)).setStatus(ProjectConstant.AccountDetailStatus.FREEZE)
-                .setTradeType(tradeType).setRelatedId(relatedId);
-        accountDetail.setRemark(remark);
+                .setTradeType(tradeType).setRelatedId(relatedId).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
     }
@@ -151,8 +148,7 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         accountService.doUnFreezeBalance(amount, userId);
         AccountDetail accountDetail = new AccountDetail().setUserId(userId).setRelatedId(relatedId).setPaymentType(ProjectConstant.PaymentType.INCOME)
                 .setAmount(amount).setAvailableBalance(account.getAvailableBalance().add(amount)).setTradeType(tradeType)
-                .setStatus(ProjectConstant.AccountDetailStatus.DONE).setOrderNo(orderNo);
-        accountDetail.setRemark(remark);
+                .setStatus(ProjectConstant.AccountDetailStatus.DONE).setOrderNo(orderNo).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
     }
