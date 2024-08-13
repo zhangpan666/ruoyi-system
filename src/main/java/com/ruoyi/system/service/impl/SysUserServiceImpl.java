@@ -75,10 +75,6 @@ public class SysUserServiceImpl implements ISysUserService
     @DataScope(deptAlias = "d", userAlias = "u", platformAlias = "p")
     public List<SysUser> selectUserList(SysUser user)
     {
-        Long platformId = SecurityUtils.getPlatformId();
-        if (platformId != 1) {
-            user.setPlatformId(platformId);
-        }
         return userMapper.selectUserList(user);
     }
 
