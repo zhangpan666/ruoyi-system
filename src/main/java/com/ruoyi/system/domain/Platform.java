@@ -30,6 +30,7 @@ public class Platform extends BaseEntity
 
     /** $column.columnComment */
     @TableId(value = "id",type = IdType.AUTO)
+    @Excel(name = "平台ID")
     private Long id;
 
     /** 平台名称 */
@@ -50,7 +51,7 @@ public class Platform extends BaseEntity
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态，1-有效，0-无效")
     @TableField("status")
-    private Integer status;
+    private Byte status;
 
     /** 信用额度 */
     @Excel(name = "信用额度")
