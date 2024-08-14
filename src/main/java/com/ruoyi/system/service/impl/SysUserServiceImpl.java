@@ -250,11 +250,13 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Override
     public void checkSysUserDataScope(Long userId) {
-        Long platformId = SecurityUtils.getPlatformId();
-        if (platformId != 1L){
-            SysUser sysUser = userMapper.selectUserById(userId);
-            if (!sysUser.getPlatformId().equals(platformId)){
-                throw new ServiceException("没有权限访问用户数据！");
+        if (!SysUser.isAdmin(SecurityUtils.getUserId())) {
+            Long platformId = SecurityUtils.getPlatformId();
+            if (platformId != 1L){
+                SysUser sysUser = userMapper.selectUserById(userId);
+                if (!sysUser.getPlatformId().equals(platformId)){
+                    throw new ServiceException("没有权限访问用户数据！");
+                }
             }
         }
     }
