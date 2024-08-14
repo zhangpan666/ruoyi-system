@@ -2,6 +2,7 @@ package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,39 +27,48 @@ public class Account extends BaseEntity
 
     /** 主键ID */
     @Excel(name = "账户ID")
+    @ApiModelProperty(example = "账户ID")
     private Long id;
 
     /** 用户ID */
     @Excel(name = "用户ID")
+    @ApiModelProperty(example = "用户ID")
     private Long userId;
 
     /** 总收入 */
     @Excel(name = "总收入")
+    @ApiModelProperty(example = "总收入")
     private BigDecimal balanceIncomeAmount;
 
     /** 总支出 */
     @Excel(name = "总支出")
+    @ApiModelProperty(example = "总支出")
     private BigDecimal balanceExpenseAmount;
 
     /** 可用余额 */
     @Excel(name = "可用余额")
+    @ApiModelProperty(example = "可用余额")
     private BigDecimal availableBalance;
 
     /** 冻结余额 */
     @Excel(name = "冻结余额")
+    @ApiModelProperty(example = "冻结余额")
     private BigDecimal freezeBalanceAmount;
 
     /** 总投注金额 */
     @Excel(name = "总投注金额")
+    @ApiModelProperty(example = "总投注金额")
     private BigDecimal totalBetAmount;
 
     /** 总输赢金额 */
     @Excel(name = "总输赢金额")
+    @ApiModelProperty(example = "总输赢金额")
     private BigDecimal totalWinLoseAmount;
 
     /** 账户状态，1-正常，0-冻结 */
     @Excel(name = "账户状态，1-正常，0-冻结")
-    private Integer status;
+    @ApiModelProperty(example = "账户状态，1-正常，0-冻结")
+    private Byte status;
 
     private Long platformId;
 
