@@ -3,6 +3,7 @@ package com.ruoyi.system.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,24 +27,28 @@ public class User extends BaseEntity {
      * 主键ID
      */
     @Excel(name = "用户id")
+    @ApiModelProperty(example = "用户ID")
     private Long id;
 
     /**
      * 平台id
      */
     @Excel(name = "平台id")
+    @ApiModelProperty(example = "平台ID")
     private Long platformId;
 
     /**
      * 平台用户id
      */
     @Excel(name = "平台用户id")
+    @ApiModelProperty(example = "平台用户ID")
     private Long platformUserId;
 
     /**
      * 昵称
      */
     @Excel(name = "昵称")
+    @ApiModelProperty(example = "昵称")
     private String nickname;
 
     /**
@@ -60,7 +65,8 @@ public class User extends BaseEntity {
     /**
      * 状态
      */
-    @Excel(name = "帐号状态", readConverterExp = "1=正常,0=停用")
+    @Excel(name = "状态", readConverterExp = "1=正常,0=停用")
+    @ApiModelProperty(example = "状态，1=正常,0=停用")
     private Integer status;
 
     /**
@@ -68,18 +74,21 @@ public class User extends BaseEntity {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "最近登录时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "最近登录时间")
     private Date lastLoginTime;
 
     /**
      * IP地址
      */
     @Excel(name = "IP地址")
+    @ApiModelProperty(example = "IP地址")
     private String registerIp;
 
     /**
      * 注册地
      */
     @Excel(name = "注册地")
+    @ApiModelProperty(example = "注册地")
     private String registerLocation;
 
     /**
@@ -92,20 +101,21 @@ public class User extends BaseEntity {
      * 登录IP地址
      */
     @Excel(name = "登录IP地址")
+    @ApiModelProperty(example = "登录IP地址")
     private String loginIp;
 
     /**
      * 登录地
      */
     @Excel(name = "登录地")
+    @ApiModelProperty(example = "登录地")
     private String loginLocation;
 
     /**
-     * 用户组ID
+     * 平台名称
      */
-    private Long userGroupId;
-
-    @Excel(name = "平台", type = Excel.Type.EXPORT)
+    @Excel(name = "平台名称", type = Excel.Type.EXPORT)
+    @ApiModelProperty(example = "平台名称")
     private String platformName;
 
 }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -31,26 +32,31 @@ public class Platform extends BaseEntity
     /** $column.columnComment */
     @TableId(value = "id",type = IdType.AUTO)
     @Excel(name = "平台ID")
+    @ApiModelProperty(example = "平台ID")
     private Long id;
 
     /** 平台名称 */
     @Excel(name = "平台名称")
     @TableField("name")
+    @ApiModelProperty(example = "平台名称")
     private String name;
 
     /** md5Key */
     @Excel(name = "md5Key")
     @TableField("md5_key")
+    @ApiModelProperty(example = "md5Key")
     private String md5Key;
 
     /** 秘钥 */
     @Excel(name = "秘钥")
     @TableField("secret_key")
+    @ApiModelProperty(example = "秘钥")
     private String secretKey;
 
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态，1-有效，0-无效")
     @TableField("status")
+    @ApiModelProperty(example = "状态，1-有效，0-无效")
     private Byte status;
 
     /** 信用额度 */

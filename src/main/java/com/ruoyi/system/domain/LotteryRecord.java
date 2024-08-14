@@ -2,6 +2,7 @@ package com.ruoyi.system.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,69 +27,81 @@ public class LotteryRecord extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "id")
+    @ApiModelProperty(example = "ID")
     private Long id;
 
     /** 彩种ID */
     @Excel(name = "彩种ID")
+    @ApiModelProperty(example = "彩种ID")
     private Long lotteryId;
 
     /** 年份 */
     @Excel(name = "年份")
+    @ApiModelProperty(example = "年份")
     private Long year;
-
-    /** 期数 */
-    @Excel(name = "期数")
-    private Long period;
 
     /** 期号 */
     @Excel(name = "期号")
+    @ApiModelProperty(example = "期号")
     private String issueNo;
 
     /** 开奖日期 */
     @Excel(name = "开奖日期")
-    private Long dateline;
+    @ApiModelProperty(example = "开奖日期")
+    private Integer dateline;
 
-    /** $column.columnComment */
+    /** 开奖日期 */
+    @ApiModelProperty(example = "开奖日期")
     private String date;
 
     /** 开奖时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "开奖时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "开奖时间")
     private Date lotteryTime;
 
     /** 生肖 */
     @Excel(name = "生肖")
+    @ApiModelProperty(example = "生肖")
     private String sx;
 
     /** 五行 */
     @Excel(name = "五行")
+    @ApiModelProperty(example = "五行")
     private String wx;
 
     /** 数字 */
     @Excel(name = "数字")
+    @ApiModelProperty(example = "数字")
     private String numbers;
 
     /** 状态(1-有效，0-无效) */
     @Excel(name = "状态(1-有效，0-无效)")
-    private Integer status;
+    @ApiModelProperty(example = "状态(1-有效，0-无效)")
+    private Byte status;
 
     /** 开奖视频回放地址 */
     @Excel(name = "开奖视频回放地址")
+    @ApiModelProperty(example = "开奖视频回放地址")
     private String lotteryVideoPath;
 
     /** 开奖回放视频上传状态，0-未上传，1-已上传 */
     @Excel(name = "开奖回放视频上传状态，0-未上传，1-已上传")
-    private Integer lotteryVideoStatus;
+    @ApiModelProperty(example = "开奖回放视频上传状态，0-未上传，1-已上传")
+    private Byte lotteryVideoStatus;
 
     /** 注单结算状态，0-待结算，1-结算中，2-结算完成 */
     @Excel(name = "注单结算状态，0-待结算，1-结算中，2-结算完成")
-    private Integer betRecordCountStatus;
+    @ApiModelProperty(example = "注单结算状态，0-待结算，1-结算中，2-结算完成")
+    private Byte betRecordCountStatus;
 
     /** 开奖状态，0-开奖中，1-开奖完成 */
     @Excel(name = "开奖状态，0-开奖中，1-开奖完成")
-    private Integer lotteryStatus;
+    @ApiModelProperty(example = "开奖状态，0-开奖中，1-开奖完成")
+    private Byte lotteryStatus;
 
-    @Excel(name = "彩种")
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
 
 }

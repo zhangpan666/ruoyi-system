@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryRelationMapper">
+    
+    <resultMap type="LotteryRelation" id="LotteryRelationResult">
+        <result property="id"    column="id"    />
+        <result property="number"    column="number"    />
+        <result property="color"    column="color"    />
+        <result property="wx"    column="wx"    />
+        <result property="sx"    column="sx"    />
+        <result property="year"    column="year"    />
+    </resultMap>
+
+    <sql id="selectLotteryRelationVo">
+        select id, number, color, wx, sx, year from t_lottery_relation
+    </sql>
+
+    <select id="selectLotteryRelationList" parameterType="LotteryRelation" resultMap="LotteryRelationResult">
+        <include refid="selectLotteryRelationVo"/>
+        <where>  
+            <if test="number != null  and number != ''"> and number = #{number}</if>
+            <if test="color != null "> and color = #{color}</if>
+            <if test="wx != null  and wx != ''"> and wx = #{wx}</if>
+            <if test="sx != null  and sx != ''"> and sx = #{sx}</if>
+            <if test="year != null "> and year = #{year}</if>
+        </where>
+    </select>
+    
+    <select id="selectLotteryRelationById" parameterType="Long" resultMap="LotteryRelationResult">
+        <include refid="selectLotteryRelationVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryRelation" parameterType="LotteryRelation" useGeneratedKeys="true" keyProperty="id">
+        insert into t_lottery_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="number != null">number,</if>
+            <if test="color != null">color,</if>
+            <if test="wx != null">wx,</if>
+            <if test="sx != null">sx,</if>
+            <if test="year != null">year,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="number != null">#{number},</if>
+            <if test="color != null">#{color},</if>
+            <if test="wx != null">#{wx},</if>
+            <if test="sx != null">#{sx},</if>
+            <if test="year != null">#{year},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryRelation" parameterType="LotteryRelation">
+        update t_lottery_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="number != null">number = #{number},</if>
+            <if test="color != null">color = #{color},</if>
+            <if test="wx != null">wx = #{wx},</if>
+            <if test="sx != null">sx = #{sx},</if>
+            <if test="year != null">year = #{year},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryRelationById" parameterType="Long">
+        delete from t_lottery_relation where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryRelationByIds" parameterType="String">
+        delete from t_lottery_relation where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
