@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LotteryRelationMapper">
-    
+
     <resultMap type="LotteryRelation" id="LotteryRelationResult">
         <result property="id"    column="id"    />
         <result property="number"    column="number"    />
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectLotteryRelationList" parameterType="LotteryRelation" resultMap="LotteryRelationResult">
         <include refid="selectLotteryRelationVo"/>
-        <where>  
+        <where>
             <if test="number != null  and number != ''"> and number = #{number}</if>
             <if test="color != null "> and color = #{color}</if>
             <if test="wx != null  and wx != ''"> and wx = #{wx}</if>
@@ -27,13 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="year != null "> and year = #{year}</if>
         </where>
     </select>
-    
+
     <select id="selectLotteryRelationById" parameterType="Long" resultMap="LotteryRelationResult">
         <include refid="selectLotteryRelationVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertLotteryRelation" parameterType="LotteryRelation" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertLotteryRelation" parameterType="LotteryRelation" useGeneratedKeys="false" keyProperty="id">
         insert into t_lottery_relation
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="number != null">number,</if>
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLotteryRelationByIds" parameterType="String">
-        delete from t_lottery_relation where id in 
+        delete from t_lottery_relation where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

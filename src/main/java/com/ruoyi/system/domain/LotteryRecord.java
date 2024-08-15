@@ -1,7 +1,10 @@
 package com.ruoyi.system.domain;
 
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.system.domain.vo.LotterySingleNumberInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,7 +41,7 @@ public class LotteryRecord extends BaseEntity
     /** 年份 */
     @Excel(name = "年份")
     @ApiModelProperty(example = "年份")
-    private Long year;
+    private Integer year;
 
     /** 期号 */
     @Excel(name = "期号")
@@ -103,5 +106,7 @@ public class LotteryRecord extends BaseEntity
     @Excel(name = "彩种名称")
     @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
+
+    private List<LotterySingleNumberInfo> numberList;
 
 }
