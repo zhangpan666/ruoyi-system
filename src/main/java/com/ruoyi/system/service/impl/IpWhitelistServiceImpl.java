@@ -83,6 +83,9 @@ public class IpWhitelistServiceImpl implements IIpWhitelistService
     @Override
     public int deleteIpWhitelistByIds(Long[] ids)
     {
+        for (Long id : ids) {
+            checkSysUserDataScope(id);
+        }
         return ipWhitelistMapper.deleteIpWhitelistByIds(ids);
     }
 
