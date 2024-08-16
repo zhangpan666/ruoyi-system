@@ -1,6 +1,9 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,5 +100,19 @@ public class UserServiceImpl implements IUserService
     public int deleteUserById(Long id)
     {
         return userMapper.deleteUserById(id);
+    }
+
+
+    @Override
+    public void checkSysUserDataScope(Long userId) {
+        if (!SysUser.isAdmin(SecurityUtils.getUserId())) {
+            Long platformId = SecurityUtils.getPlatformId();
+            if (platformId != 1L){
+                User user = userMapper.selectUserById(userId);
+                if (!user.getPlatformId().equals(platformId)){
+                    throw new ServiceException("没有权限访问用户数据！");
+                }
+            }
+        }
     }
 }
