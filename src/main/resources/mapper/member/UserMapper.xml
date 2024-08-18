@@ -28,7 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sameIp"    column="same_ip"    />
         <result property="loginIp"    column="login_ip"    />
         <result property="loginLocation"    column="login_location"    />
-        <result property="userGroupId"    column="user_group_id"    />
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
@@ -39,23 +38,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
-        select u.*, p.name as platformName  from t_user u left join t_platform p
+        select a.*, b.name as platformName  from t_user a left join t_platform b on a.platform_id = b.id
         <where>
-            <if test="platformId != null "> and u.platform_id = #{platformId}</if>
-            <if test="platformUserId != null "> and u.platform_user_id = #{platformUserId}</if>
-            <if test="nickname != null  and nickname != ''"> and u.nickname like concat('%', #{nickname}, '%')</if>
-            <if test="username != null  and username != ''"> and u.username like concat('%', #{username}, '%')</if>
-            <if test="sex != null "> and u.sex = #{sex}</if>
-            <if test="type != null "> and u.type = #{type}</if>
-            <if test="status != null "> and u.status = #{status}</if>
-            <if test="lastLoginTime != null "> and u.last_login_time = #{lastLoginTime}</if>
-            <if test="registerIp != null  and registerIp != ''"> and u.register_ip = #{registerIp}</if>
-            <if test="registerLocation != null  and registerLocation != ''"> and u.register_location = #{registerLocation}</if>
-            <if test="sameIp != null "> and u.same_ip = #{sameIp}</if>
-            <if test="loginIp != null  and loginIp != ''"> and u.login_ip = #{loginIp}</if>
-            <if test="loginLocation != null  and loginLocation != ''"> and u.login_location = #{loginLocation}</if>
+            <if test="platformId != null "> and a.platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and a.platform_user_id = #{platformUserId}</if>
+            <if test="nickname != null  and nickname != ''"> and a.nickname like concat('%', #{nickname}, '%')</if>
+            <if test="username != null  and username != ''"> and a.username like concat('%', #{username}, '%')</if>
+            <if test="sex != null "> and a.sex = #{sex}</if>
+            <if test="type != null "> and a.type = #{type}</if>
+            <if test="status != null "> and a.status = #{status}</if>
+            <if test="lastLoginTime != null "> and a.last_login_time = #{lastLoginTime}</if>
+            <if test="registerIp != null  and registerIp != ''"> and a.register_ip = #{registerIp}</if>
+            <if test="registerLocation != null  and registerLocation != ''"> and a.register_location = #{registerLocation}</if>
+            <if test="sameIp != null "> and a.same_ip = #{sameIp}</if>
+            <if test="loginIp != null  and loginIp != ''"> and a.login_ip = #{loginIp}</if>
+            <if test="loginLocation != null  and loginLocation != ''"> and a.login_location = #{loginLocation}</if>
         </where>
-        order by u.create_time desc
+        order by a.create_time desc
     </select>
 
     <select id="selectUserById" parameterType="Long" resultMap="UserResult">
