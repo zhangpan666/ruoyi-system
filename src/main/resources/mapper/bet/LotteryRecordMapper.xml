@@ -8,9 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="lotteryId"    column="lottery_id"    />
         <result property="year"    column="year"    />
-        <result property="period"    column="period"    />
         <result property="issueNo"    column="issue_no"    />
-        <result property="dateline"    column="dateline"    />
         <result property="date"    column="date"    />
         <result property="lotteryTime"    column="lottery_time"    />
         <result property="sx"    column="sx"    />
@@ -26,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryRecordVo">
-        select id, lottery_id, year, period, issue_no, dateline, date, lottery_time, sx, wx, numbers, status, lottery_video_path, lottery_video_status, bet_record_count_status, lottery_status, create_time, update_time from t_lottery_record
+        select id, lottery_id, year, issue_no, date, lottery_time, sx, wx, numbers, status, lottery_video_path, lottery_video_status, bet_record_count_status, lottery_status, create_time, update_time from t_lottery_record
     </sql>
 
     <select id="selectLotteryRecordList" parameterType="LotteryRecord" resultMap="LotteryRecordResult">
@@ -35,9 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="id != null "> and id = #{id}</if>
             <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
             <if test="year != null "> and year = #{year}</if>
-            <if test="period != null "> and period = #{period}</if>
             <if test="issueNo != null  and issueNo != ''"> and issue_no = #{issueNo}</if>
-            <if test="dateline != null "> and dateline = #{dateline}</if>
             <if test="date != null  and date != ''"> and date = #{date}</if>
             <if test="lotteryTime != null "> and lottery_time = #{lotteryTime}</if>
             <if test="sx != null  and sx != ''"> and sx = #{sx}</if>
@@ -62,9 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="id != null">id,</if>
             <if test="lotteryId != null">lottery_id,</if>
             <if test="year != null">year,</if>
-            <if test="period != null">period,</if>
             <if test="issueNo != null and issueNo != ''">issue_no,</if>
-            <if test="dateline != null">dateline,</if>
             <if test="date != null and date != ''">date,</if>
             <if test="lotteryTime != null">lottery_time,</if>
             <if test="sx != null and sx != ''">sx,</if>
@@ -82,9 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="id != null">#{id},</if>
             <if test="lotteryId != null">#{lotteryId},</if>
             <if test="year != null">#{year},</if>
-            <if test="period != null">#{period},</if>
             <if test="issueNo != null and issueNo != ''">#{issueNo},</if>
-            <if test="dateline != null">#{dateline},</if>
             <if test="date != null and date != ''">#{date},</if>
             <if test="lotteryTime != null">#{lotteryTime},</if>
             <if test="sx != null and sx != ''">#{sx},</if>
@@ -105,9 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
             <if test="year != null">year = #{year},</if>
-            <if test="period != null">period = #{period},</if>
             <if test="issueNo != null and issueNo != ''">issue_no = #{issueNo},</if>
-            <if test="dateline != null">dateline = #{dateline},</if>
             <if test="date != null and date != ''">date = #{date},</if>
             <if test="lotteryTime != null">lottery_time = #{lotteryTime},</if>
             <if test="sx != null and sx != ''">sx = #{sx},</if>

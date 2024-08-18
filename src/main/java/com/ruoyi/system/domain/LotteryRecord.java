@@ -49,11 +49,6 @@ public class LotteryRecord extends BaseEntity
     private String issueNo;
 
     /** 开奖日期 */
-    @Excel(name = "开奖日期")
-    @ApiModelProperty(example = "开奖日期")
-    private Integer dateline;
-
-    /** 开奖日期 */
     @ApiModelProperty(example = "开奖日期")
     private String date;
 
