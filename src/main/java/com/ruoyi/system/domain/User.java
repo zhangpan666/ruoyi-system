@@ -51,23 +51,32 @@ public class User extends BaseEntity {
     @ApiModelProperty(example = "昵称")
     private String nickname;
 
+
     /**
      * 用户名
      */
     @Excel(name = "用户名")
     private String username;
 
+
+    /**
+     * 类型
+     */
+    @ApiModelProperty(example = "类型，1-真实用户,2-虚拟用户")
+    private Byte type;
+
+
     /**
      * 性别(0:未知;1:男;2:女)
      */
-    private Integer sex;
+    private Byte sex;
 
     /**
      * 状态
      */
     @Excel(name = "状态", readConverterExp = "1=正常,0=停用")
     @ApiModelProperty(example = "状态，1=正常,0=停用")
-    private Integer status;
+    private Byte status;
 
     /**
      * 最近登录时间
@@ -95,7 +104,7 @@ public class User extends BaseEntity {
      * 是否有相同的IP地址：1有；0:无
      */
     @Excel(name = "是否有相同的IP地址：1有；0:无")
-    private Integer sameIp;
+    private Byte sameIp;
 
     /**
      * 登录IP地址

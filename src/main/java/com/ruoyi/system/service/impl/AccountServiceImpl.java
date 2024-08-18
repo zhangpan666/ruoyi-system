@@ -45,10 +45,6 @@ public class AccountServiceImpl implements IAccountService
     @Override
     public List<Account> selectAccountList(Account account)
     {
-        Long platformId = SecurityUtils.getPlatformId();
-        if (platformId != 1) {
-            account.setPlatformId(platformId);
-        }
         return accountMapper.selectAccountList(account);
     }
 

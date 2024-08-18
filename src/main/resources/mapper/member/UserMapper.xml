@@ -46,24 +46,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nickname != null  and nickname != ''"> and u.nickname like concat('%', #{nickname}, '%')</if>
             <if test="username != null  and username != ''"> and u.username like concat('%', #{username}, '%')</if>
             <if test="sex != null "> and u.sex = #{sex}</if>
-            <if test="password != null  and password != ''"> and u.password = #{password}</if>
-            <if test="mobile != null  and mobile != ''"> and u.mobile = #{mobile}</if>
             <if test="type != null "> and u.type = #{type}</if>
             <if test="status != null "> and u.status = #{status}</if>
             <if test="lastLoginTime != null "> and u.last_login_time = #{lastLoginTime}</if>
             <if test="registerIp != null  and registerIp != ''"> and u.register_ip = #{registerIp}</if>
             <if test="registerLocation != null  and registerLocation != ''"> and u.register_location = #{registerLocation}</if>
-            <if test="deviceId != null  and deviceId != ''"> and u.device_id = #{deviceId}</if>
-            <if test="model != null  and model != ''"> and u.model = #{model}</if>
-            <if test="pushId != null  and pushId != ''"> and u.push_id = #{pushId}</if>
-            <if test="osType != null "> and u.os_type = #{osType}</if>
-            <if test="registerFrom != null  and registerFrom != ''"> and u.register_from = #{registerFrom}</if>
-            <if test="bindMobile != null "> and u.bind_mobile = #{bindMobile}</if>
-            <if test="realName != null  and realName != ''"> and u.real_name like concat('%', #{realName}, '%')</if>
             <if test="sameIp != null "> and u.same_ip = #{sameIp}</if>
             <if test="loginIp != null  and loginIp != ''"> and u.login_ip = #{loginIp}</if>
             <if test="loginLocation != null  and loginLocation != ''"> and u.login_location = #{loginLocation}</if>
-            <if test="userGroupId != null "> and u.user_group_id = #{userGroupId}</if>
         </where>
         order by u.create_time desc
     </select>
@@ -81,24 +71,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nickname != null">nickname,</if>
             <if test="username != null">username,</if>
             <if test="sex != null">sex,</if>
-            <if test="password != null">password,</if>
-            <if test="mobile != null">mobile,</if>
             <if test="type != null">type,</if>
             <if test="status != null">status,</if>
             <if test="lastLoginTime != null">last_login_time,</if>
             <if test="registerIp != null">register_ip,</if>
             <if test="registerLocation != null">register_location,</if>
-            <if test="deviceId != null">device_id,</if>
-            <if test="model != null">model,</if>
-            <if test="pushId != null">push_id,</if>
-            <if test="osType != null">os_type,</if>
             <if test="registerFrom != null">register_from,</if>
-            <if test="bindMobile != null">bind_mobile,</if>
-            <if test="realName != null">real_name,</if>
             <if test="sameIp != null">same_ip,</if>
             <if test="loginIp != null">login_ip,</if>
             <if test="loginLocation != null">login_location,</if>
-            <if test="userGroupId != null">user_group_id,</if>
             <if test="remark != null">remark,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
@@ -109,24 +90,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nickname != null">#{nickname},</if>
             <if test="username != null">#{username},</if>
             <if test="sex != null">#{sex},</if>
-            <if test="password != null">#{password},</if>
-            <if test="mobile != null">#{mobile},</if>
             <if test="type != null">#{type},</if>
             <if test="status != null">#{status},</if>
             <if test="lastLoginTime != null">#{lastLoginTime},</if>
             <if test="registerIp != null">#{registerIp},</if>
             <if test="registerLocation != null">#{registerLocation},</if>
-            <if test="deviceId != null">#{deviceId},</if>
-            <if test="model != null">#{model},</if>
-            <if test="pushId != null">#{pushId},</if>
-            <if test="osType != null">#{osType},</if>
-            <if test="registerFrom != null">#{registerFrom},</if>
-            <if test="bindMobile != null">#{bindMobile},</if>
-            <if test="realName != null">#{realName},</if>
             <if test="sameIp != null">#{sameIp},</if>
             <if test="loginIp != null">#{loginIp},</if>
             <if test="loginLocation != null">#{loginLocation},</if>
-            <if test="userGroupId != null">#{userGroupId},</if>
             <if test="remark != null">#{remark},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
@@ -141,24 +112,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nickname != null">nickname = #{nickname},</if>
             <if test="username != null">username = #{username},</if>
             <if test="sex != null">sex = #{sex},</if>
-            <if test="password != null">password = #{password},</if>
             <if test="mobile != null">mobile = #{mobile},</if>
             <if test="type != null">type = #{type},</if>
             <if test="status != null">status = #{status},</if>
             <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
             <if test="registerIp != null">register_ip = #{registerIp},</if>
             <if test="registerLocation != null">register_location = #{registerLocation},</if>
-            <if test="deviceId != null">device_id = #{deviceId},</if>
-            <if test="model != null">model = #{model},</if>
-            <if test="pushId != null">push_id = #{pushId},</if>
-            <if test="osType != null">os_type = #{osType},</if>
-            <if test="registerFrom != null">register_from = #{registerFrom},</if>
-            <if test="bindMobile != null">bind_mobile = #{bindMobile},</if>
-            <if test="realName != null">real_name = #{realName},</if>
             <if test="sameIp != null">same_ip = #{sameIp},</if>
             <if test="loginIp != null">login_ip = #{loginIp},</if>
             <if test="loginLocation != null">login_location = #{loginLocation},</if>
-            <if test="userGroupId != null">user_group_id = #{userGroupId},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
