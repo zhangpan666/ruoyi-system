@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectUserVo">
-        select id, platform_id, platform_user_id, nickname, username, sex, password, mobile, type, status, last_login_time, register_ip, register_location, device_id, model, push_id, os_type, register_from, bind_mobile, real_name, same_ip, login_ip, login_location, user_group_id, remark, create_time, update_time from t_user
+        select id, platform_id, platform_user_id, nickname, username, sex, password, type, status, last_login_time, register_ip, register_location, same_ip, login_ip, login_location, remark, create_time, update_time from t_user
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
