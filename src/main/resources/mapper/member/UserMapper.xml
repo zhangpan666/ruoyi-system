@@ -101,7 +101,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nickname != null">nickname = #{nickname},</if>
             <if test="username != null">username = #{username},</if>
             <if test="sex != null">sex = #{sex},</if>
-            <if test="mobile != null">mobile = #{mobile},</if>
             <if test="type != null">type = #{type},</if>
             <if test="status != null">status = #{status},</if>
             <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
