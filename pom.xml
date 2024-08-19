@@ -48,6 +48,14 @@
                     <artifactId>pagehelper-spring-boot-starter</artifactId>
                     <groupId>com.github.pagehelper</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>poi</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>poi-ooxml</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
