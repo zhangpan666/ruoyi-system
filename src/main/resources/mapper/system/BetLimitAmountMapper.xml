@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BetLimitAmountMapper">
+    
+    <resultMap type="BetLimitAmount" id="BetLimitAmountResult">
+        <result property="id"    column="id"    />
+        <result property="platformId"    column="platform_id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="type"    column="type"    />
+        <result property="singleTimeBetMinAmount"    column="single_time_bet_min_amount"    />
+        <result property="singleTimeBetMaxAmount"    column="single_time_bet_max_amount"    />
+        <result property="singlePeriodBetMaxAmount"    column="single_period_bet_max_amount"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBetLimitAmountVo">
+        select id, platform_id, lottery_id, type, single_time_bet_min_amount, single_time_bet_max_amount, single_period_bet_max_amount, remark, create_time, update_time from t_bet_limit_amount
+    </sql>
+
+    <select id="selectBetLimitAmountList" parameterType="BetLimitAmount" resultMap="BetLimitAmountResult">
+        <include refid="selectBetLimitAmountVo"/>
+        <where>  
+            <if test="platformId != null "> and platform_id = #{platformId}</if>
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="singleTimeBetMinAmount != null "> and single_time_bet_min_amount = #{singleTimeBetMinAmount}</if>
+            <if test="singleTimeBetMaxAmount != null "> and single_time_bet_max_amount = #{singleTimeBetMaxAmount}</if>
+            <if test="singlePeriodBetMaxAmount != null "> and single_period_bet_max_amount = #{singlePeriodBetMaxAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectBetLimitAmountById" parameterType="Long" resultMap="BetLimitAmountResult">
+        <include refid="selectBetLimitAmountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBetLimitAmount" parameterType="BetLimitAmount" useGeneratedKeys="true" keyProperty="id">
+        insert into t_bet_limit_amount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="platformId != null">platform_id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="type != null">type,</if>
+            <if test="singleTimeBetMinAmount != null">single_time_bet_min_amount,</if>
+            <if test="singleTimeBetMaxAmount != null">single_time_bet_max_amount,</if>
+            <if test="singlePeriodBetMaxAmount != null">single_period_bet_max_amount,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="platformId != null">#{platformId},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="singleTimeBetMinAmount != null">#{singleTimeBetMinAmount},</if>
+            <if test="singleTimeBetMaxAmount != null">#{singleTimeBetMaxAmount},</if>
+            <if test="singlePeriodBetMaxAmount != null">#{singlePeriodBetMaxAmount},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBetLimitAmount" parameterType="BetLimitAmount">
+        update t_bet_limit_amount
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="platformId != null">platform_id = #{platformId},</if>
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="singleTimeBetMinAmount != null">single_time_bet_min_amount = #{singleTimeBetMinAmount},</if>
+            <if test="singleTimeBetMaxAmount != null">single_time_bet_max_amount = #{singleTimeBetMaxAmount},</if>
+            <if test="singlePeriodBetMaxAmount != null">single_period_bet_max_amount = #{singlePeriodBetMaxAmount},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBetLimitAmountById" parameterType="Long">
+        delete from t_bet_limit_amount where id = #{id}
+    </delete>
+
+    <delete id="deleteBetLimitAmountByIds" parameterType="String">
+        delete from t_bet_limit_amount where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

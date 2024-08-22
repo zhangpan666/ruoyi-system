@@ -9,10 +9,10 @@ import com.ruoyi.system.domain.BetLimit;
 import com.ruoyi.system.service.IBetLimitService;
 
 /**
- * 投注限额Service业务层处理
+ * 投注限制Service业务层处理
  * 
  * @author ruoyi
- * @date 2024-08-18
+ * @date 2024-08-22
  */
 @Service
 public class BetLimitServiceImpl implements IBetLimitService 
@@ -21,10 +21,10 @@ public class BetLimitServiceImpl implements IBetLimitService
     private BetLimitMapper betLimitMapper;
 
     /**
-     * 查询投注限额
+     * 查询投注限制
      * 
-     * @param id 投注限额主键
-     * @return 投注限额
+     * @param id 投注限制主键
+     * @return 投注限制
      */
     @Override
     public BetLimit selectBetLimitById(Long id)
@@ -33,10 +33,10 @@ public class BetLimitServiceImpl implements IBetLimitService
     }
 
     /**
-     * 查询投注限额列表
+     * 查询投注限制列表
      * 
-     * @param betLimit 投注限额
-     * @return 投注限额
+     * @param betLimit 投注限制
+     * @return 投注限制
      */
     @Override
     public List<BetLimit> selectBetLimitList(BetLimit betLimit)
@@ -45,9 +45,9 @@ public class BetLimitServiceImpl implements IBetLimitService
     }
 
     /**
-     * 新增投注限额
+     * 新增投注限制
      * 
-     * @param betLimit 投注限额
+     * @param betLimit 投注限制
      * @return 结果
      */
     @Override
@@ -58,9 +58,9 @@ public class BetLimitServiceImpl implements IBetLimitService
     }
 
     /**
-     * 修改投注限额
+     * 修改投注限制
      * 
-     * @param betLimit 投注限额
+     * @param betLimit 投注限制
      * @return 结果
      */
     @Override
@@ -71,9 +71,9 @@ public class BetLimitServiceImpl implements IBetLimitService
     }
 
     /**
-     * 批量删除投注限额
+     * 批量删除投注限制
      * 
-     * @param ids 需要删除的投注限额主键
+     * @param ids 需要删除的投注限制主键
      * @return 结果
      */
     @Override
@@ -83,9 +83,9 @@ public class BetLimitServiceImpl implements IBetLimitService
     }
 
     /**
-     * 删除投注限额信息
+     * 删除投注限制信息
      * 
-     * @param id 投注限额主键
+     * @param id 投注限制主键
      * @return 结果
      */
     @Override

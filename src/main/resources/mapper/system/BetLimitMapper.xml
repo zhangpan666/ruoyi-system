@@ -8,8 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="code"    column="code"    />
         <result property="name"    column="name"    />
-        <result property="minBetAmount"    column="min_bet_amount"    />
-        <result property="maxBetAmount"    column="max_bet_amount"    />
         <result property="minBetCount"    column="min_bet_count"    />
         <result property="maxBetCount"    column="max_bet_count"    />
         <result property="status"    column="status"    />
@@ -19,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBetLimitVo">
-        select id, code, name, min_bet_amount, max_bet_amount, min_bet_count, max_bet_count, status, remark, create_time, update_time from t_bet_limit
+        select id, code, name, min_bet_count, max_bet_count, status, remark, create_time, update_time from t_bet_limit
     </sql>
 
     <select id="selectBetLimitList" parameterType="BetLimit" resultMap="BetLimitResult">
@@ -27,8 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="minBetAmount != null "> and min_bet_amount = #{minBetAmount}</if>
-            <if test="maxBetAmount != null "> and max_bet_amount = #{maxBetAmount}</if>
             <if test="minBetCount != null "> and min_bet_count = #{minBetCount}</if>
             <if test="maxBetCount != null "> and max_bet_count = #{maxBetCount}</if>
             <if test="status != null "> and status = #{status}</if>
@@ -45,8 +41,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null and code != ''">code,</if>
             <if test="name != null and name != ''">name,</if>
-            <if test="minBetAmount != null">min_bet_amount,</if>
-            <if test="maxBetAmount != null">max_bet_amount,</if>
             <if test="minBetCount != null">min_bet_count,</if>
             <if test="maxBetCount != null">max_bet_count,</if>
             <if test="status != null">status,</if>
@@ -57,8 +51,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="code != null and code != ''">#{code},</if>
             <if test="name != null and name != ''">#{name},</if>
-            <if test="minBetAmount != null">#{minBetAmount},</if>
-            <if test="maxBetAmount != null">#{maxBetAmount},</if>
             <if test="minBetCount != null">#{minBetCount},</if>
             <if test="maxBetCount != null">#{maxBetCount},</if>
             <if test="status != null">#{status},</if>
@@ -73,8 +65,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="code != null and code != ''">code = #{code},</if>
             <if test="name != null and name != ''">name = #{name},</if>
-            <if test="minBetAmount != null">min_bet_amount = #{minBetAmount},</if>
-            <if test="maxBetAmount != null">max_bet_amount = #{maxBetAmount},</if>
             <if test="minBetCount != null">min_bet_count = #{minBetCount},</if>
             <if test="maxBetCount != null">max_bet_count = #{maxBetCount},</if>
             <if test="status != null">status = #{status},</if>
