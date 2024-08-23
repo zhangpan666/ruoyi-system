@@ -29,7 +29,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
      * @return 投注限额
      */
     @Override
-    public BetLimitAmount selectBetLimitAmountById(Long id)
+    public BetLimitAmount selectBetLimitAmountById(String id)
     {
         return betLimitAmountMapper.selectBetLimitAmountById(id);
     }
@@ -79,7 +79,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
      * @return 结果
      */
     @Override
-    public int deleteBetLimitAmountByIds(Long[] ids)
+    public int deleteBetLimitAmountByIds(String[] ids)
     {
         return betLimitAmountMapper.deleteBetLimitAmountByIds(ids);
     }
@@ -91,7 +91,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
      * @return 结果
      */
     @Override
-    public int deleteBetLimitAmountById(Long id)
+    public int deleteBetLimitAmountById(String id)
     {
         return betLimitAmountMapper.deleteBetLimitAmountById(id);
     }

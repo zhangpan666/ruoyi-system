@@ -5,23 +5,24 @@ import com.ruoyi.system.domain.BetLimitAmount;
 
 /**
  * 投注限额Service接口
- * 
+ *
  * @author ruoyi
  * @date 2024-08-22
  */
-public interface IBetLimitAmountService 
+public interface IBetLimitAmountService
 {
     /**
      * 查询投注限额
-     * 
+     *
      * @param id 投注限额主键
      * @return 投注限额
      */
-    public BetLimitAmount selectBetLimitAmountById(Long id);
+    public BetLimitAmount selectBetLimitAmountById(String id);
+
 
     /**
      * 查询投注限额列表
-     * 
+     *
      * @param betLimitAmount 投注限额
      * @return 投注限额集合
      */
@@ -29,7 +30,7 @@ public interface IBetLimitAmountService
 
     /**
      * 新增投注限额
-     * 
+     *
      * @param betLimitAmount 投注限额
      * @return 结果
      */
@@ -37,7 +38,7 @@ public interface IBetLimitAmountService
 
     /**
      * 修改投注限额
-     * 
+     *
      * @param betLimitAmount 投注限额
      * @return 结果
      */
@@ -45,17 +46,18 @@ public interface IBetLimitAmountService
 
     /**
      * 批量删除投注限额
-     * 
+     *
      * @param ids 需要删除的投注限额主键集合
      * @return 结果
      */
-    public int deleteBetLimitAmountByIds(Long[] ids);
+    public int deleteBetLimitAmountByIds(String[] ids);
 
     /**
      * 删除投注限额信息
-     * 
+     *
      * @param id 投注限额主键
      * @return 结果
      */
-    public int deleteBetLimitAmountById(Long id);
+    public int deleteBetLimitAmountById(String id);
+
 }
