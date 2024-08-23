@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.UserBetLimitAmountMapper">
-    
+
     <resultMap type="UserBetLimitAmount" id="UserBetLimitAmountResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="betLimitAmountName"    column="betLimitAmountName"    />
     </resultMap>
 
     <sql id="selectUserBetLimitAmountVo">
@@ -22,17 +23,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectUserBetLimitAmountList" parameterType="UserBetLimitAmount" resultMap="UserBetLimitAmountResult">
-        <include refid="selectUserBetLimitAmountVo"/>
-        <where>  
-            <if test="userId != null "> and user_id = #{userId}</if>
-            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
-            <if test="type != null "> and type = #{type}</if>
-            <if test="singleTimeBetMinAmount != null "> and single_time_bet_min_amount = #{singleTimeBetMinAmount}</if>
-            <if test="singleTimeBetMaxAmount != null "> and single_time_bet_max_amount = #{singleTimeBetMaxAmount}</if>
-            <if test="singlePeriodBetMaxAmount != null "> and single_period_bet_max_amount = #{singlePeriodBetMaxAmount}</if>
+        select a.*,b.name as betLimitAmountName from t_user_bet_limit_amount a inner join t_bet_limit_amount_type b on a.type = b.type
+        <where>
+            <if test="userId != null "> and a.user_id = #{userId}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="type != null "> and a.type = #{type}</if>
+            <if test="singleTimeBetMinAmount != null "> and a.single_time_bet_min_amount = #{singleTimeBetMinAmount}</if>
+            <if test="singleTimeBetMaxAmount != null "> and a.single_time_bet_max_amount = #{singleTimeBetMaxAmount}</if>
+            <if test="singlePeriodBetMaxAmount != null "> and a.single_period_bet_max_amount = #{singlePeriodBetMaxAmount}</if>
         </where>
     </select>
-    
+
     <select id="selectUserBetLimitAmountById" parameterType="String" resultMap="UserBetLimitAmountResult">
         <include refid="selectUserBetLimitAmountVo"/>
         where id = #{id}
@@ -87,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteUserBetLimitAmountByIds" parameterType="String">
-        delete from t_user_bet_limit_amount where id in 
+        delete from t_user_bet_limit_amount where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

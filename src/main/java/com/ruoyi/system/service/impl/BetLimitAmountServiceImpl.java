@@ -7,22 +7,24 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BetLimitAmountMapper;
 import com.ruoyi.system.domain.BetLimitAmount;
 import com.ruoyi.system.service.IBetLimitAmountService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 投注限额Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-08-22
  */
 @Service
-public class BetLimitAmountServiceImpl implements IBetLimitAmountService 
+@Transactional
+public class BetLimitAmountServiceImpl implements IBetLimitAmountService
 {
     @Autowired
     private BetLimitAmountMapper betLimitAmountMapper;
 
     /**
      * 查询投注限额
-     * 
+     *
      * @param id 投注限额主键
      * @return 投注限额
      */
@@ -34,7 +36,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
 
     /**
      * 查询投注限额列表
-     * 
+     *
      * @param betLimitAmount 投注限额
      * @return 投注限额
      */
@@ -46,7 +48,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
 
     /**
      * 新增投注限额
-     * 
+     *
      * @param betLimitAmount 投注限额
      * @return 结果
      */
@@ -59,7 +61,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
 
     /**
      * 修改投注限额
-     * 
+     *
      * @param betLimitAmount 投注限额
      * @return 结果
      */
@@ -72,7 +74,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
 
     /**
      * 批量删除投注限额
-     * 
+     *
      * @param ids 需要删除的投注限额主键
      * @return 结果
      */
@@ -84,7 +86,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
 
     /**
      * 删除投注限额信息
-     * 
+     *
      * @param id 投注限额主键
      * @return 结果
      */

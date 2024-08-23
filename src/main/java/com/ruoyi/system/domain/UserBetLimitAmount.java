@@ -59,5 +59,10 @@ public class UserBetLimitAmount extends BaseEntity
     @ApiModelProperty(example = "单期限额")
     private BigDecimal singlePeriodBetMaxAmount;
 
+    @Excel(name = "限额类型")
+    @ApiModelProperty(example = "限额类型")
+    private String betLimitAmountName;
+
+
 
 }
