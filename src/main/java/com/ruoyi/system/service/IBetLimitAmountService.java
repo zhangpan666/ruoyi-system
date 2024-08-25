@@ -60,4 +60,6 @@ public interface IBetLimitAmountService
      */
     public int deleteBetLimitAmountById(String id);
 
+    void checkBetLimitAmountDataScope(String id);
+
 }

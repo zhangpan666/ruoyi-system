@@ -1,7 +1,11 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BetLimitAmountMapper;
@@ -94,5 +98,19 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
     public int deleteBetLimitAmountById(String id)
     {
         return betLimitAmountMapper.deleteBetLimitAmountById(id);
+    }
+
+    @Override
+
+    public void checkBetLimitAmountDataScope(String id) {
+        if (!SysUser.isAdmin(SecurityUtils.getUserId())){
+            Long platformId = SecurityUtils.getPlatformId();
+            if (platformId != 1L){
+                BetLimitAmount betLimitAmount = betLimitAmountMapper.selectBetLimitAmountById(id);
+                if (!platformId.equals(betLimitAmount.getPlatformId())){
+                    throw new ServiceException("无操作权限！");
+                }
+            }
+        }
     }
 }
