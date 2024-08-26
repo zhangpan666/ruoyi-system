@@ -60,4 +60,9 @@ public class Odds extends BaseEntity
     @ApiModelProperty(example = "状态，1-有效，0-无效")
     private Byte status;
 
+    /** code */
+    @Excel(name = "description")
+    @ApiModelProperty(example = "描述")
+    private String description;
+
 }

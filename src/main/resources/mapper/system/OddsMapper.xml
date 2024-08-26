@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.OddsMapper">
-    
+
     <resultMap type="Odds" id="OddsResult">
         <result property="id"    column="id"    />
         <result property="lotteryId"    column="lottery_id"    />
@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="description"    column="description"    />
     </resultMap>
 
     <sql id="selectOddsVo">
@@ -22,17 +23,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectOddsList" parameterType="Odds" resultMap="OddsResult">
-        <include refid="selectOddsVo"/>
-        <where>  
-            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
-            <if test="code != null  and code != ''"> and code = #{code}</if>
-            <if test="odds != null "> and odds = #{odds}</if>
-            <if test="additionalOdds != null "> and additional_odds = #{additionalOdds}</if>
-            <if test="sort != null "> and sort = #{sort}</if>
-            <if test="status != null "> and status = #{status}</if>
+        select a.*,b.description from t_odds a left join t_play_type_detail b on a.code =b.code
+        <where>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="code != null  and code != ''"> and a.code = #{code}</if>
+            <if test="odds != null "> and a.odds = #{odds}</if>
+            <if test="additionalOdds != null "> and a.additional_odds = #{additionalOdds}</if>
+            <if test="sort != null "> and a.sort = #{sort}</if>
+            <if test="status != null "> and a.status = #{status}</if>
         </where>
     </select>
-    
+
     <select id="selectOddsById" parameterType="Long" resultMap="OddsResult">
         <include refid="selectOddsVo"/>
         where id = #{id}
@@ -85,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteOddsByIds" parameterType="String">
-        delete from t_odds where id in 
+        delete from t_odds where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
