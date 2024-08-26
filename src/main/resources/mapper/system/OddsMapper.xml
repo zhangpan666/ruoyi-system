@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.OddsMapper">
+    
+    <resultMap type="Odds" id="OddsResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="code"    column="code"    />
+        <result property="odds"    column="odds"    />
+        <result property="additionalOdds"    column="additional_odds"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectOddsVo">
+        select id, lottery_id, code, odds, additional_odds, sort, status, remark, create_time, update_time from t_odds
+    </sql>
+
+    <select id="selectOddsList" parameterType="Odds" resultMap="OddsResult">
+        <include refid="selectOddsVo"/>
+        <where>  
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="odds != null "> and odds = #{odds}</if>
+            <if test="additionalOdds != null "> and additional_odds = #{additionalOdds}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectOddsById" parameterType="Long" resultMap="OddsResult">
+        <include refid="selectOddsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOdds" parameterType="Odds" useGeneratedKeys="true" keyProperty="id">
+        insert into t_odds
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="odds != null">odds,</if>
+            <if test="additionalOdds != null">additional_odds,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="odds != null">#{odds},</if>
+            <if test="additionalOdds != null">#{additionalOdds},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOdds" parameterType="Odds">
+        update t_odds
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="odds != null">odds = #{odds},</if>
+            <if test="additionalOdds != null">additional_odds = #{additionalOdds},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOddsById" parameterType="Long">
+        delete from t_odds where id = #{id}
+    </delete>
+
+    <delete id="deleteOddsByIds" parameterType="String">
+        delete from t_odds where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

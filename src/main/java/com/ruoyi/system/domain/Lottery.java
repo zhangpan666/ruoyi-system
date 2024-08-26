@@ -111,28 +111,4 @@ public class Lottery extends BaseEntity
     @ApiModelProperty(example = "高度")
     private Integer height;
 
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("name", getName())
-            .append("code", getCode())
-            .append("status", getStatus())
-            .append("openStatus", getOpenStatus())
-            .append("sort", getSort())
-            .append("remark", getRemark())
-            .append("description", getDescription())
-            .append("rule", getRule())
-            .append("cycle", getCycle())
-            .append("close", getClose())
-            .append("killRate", getKillRate())
-            .append("nextCloseTime", getNextCloseTime())
-            .append("nextLotteryTime", getNextLotteryTime())
-            .append("nextLotteryYear", getNextLotteryYear())
-            .append("nextIssueNo", getNextIssueNo())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

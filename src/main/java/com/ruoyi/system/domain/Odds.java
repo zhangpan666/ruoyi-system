@@ -1,0 +1,63 @@
+package com.ruoyi.system.domain;
+
+import java.math.BigDecimal;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.core.domain.BaseEntity;
+
+/**
+ * 赔率设置对象 t_odds
+ *
+ * @author ruoyi
+ * @date 2024-08-26
+ */
+
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class Odds extends BaseEntity
+{
+    private static final long serialVersionUID = 1L;
+
+    /** ID */
+    @ApiModelProperty(example = "ID")
+    private Long id;
+
+    /** 彩种ID */
+    @Excel(name = "彩种ID")
+    @ApiModelProperty(example = "彩种ID")
+    private Long lotteryId;
+
+    /** code */
+    @Excel(name = "code")
+    @ApiModelProperty(example = "code")
+    private String code;
+
+    /** 赔率 */
+    @Excel(name = "赔率")
+    @ApiModelProperty(example = "赔率")
+    private BigDecimal odds;
+
+    /** 副赔率 */
+    @Excel(name = "副赔率")
+    @ApiModelProperty(example = "副赔率")
+    private BigDecimal additionalOdds;
+
+    /** 排序 */
+    @Excel(name = "排序")
+    @ApiModelProperty(example = "排序")
+    private Integer sort;
+
+    /** 状态，1-有效，0-无效 */
+    @Excel(name = "状态，1-有效，0-无效")
+    @ApiModelProperty(example = "状态，1-有效，0-无效")
+    private Byte status;
+
+}
