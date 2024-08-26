@@ -20,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="nextCloseTime"    column="next_close_time"    />
         <result property="nextLotteryTime"    column="next_lottery_time"    />
         <result property="nextLotteryYear"    column="next_lottery_year"    />
-        <result property="nextLotteryPeriod"    column="next_lottery_period"    />
         <result property="nextIssueNo"    column="next_issue_no"    />
         <result property="icon"    column="icon"    />
         <result property="width"    column="width"    />
@@ -32,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryVo">
-        select id, name, code, status, open_status, sort, remark, description, rule, cycle, close, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_lottery_period, next_issue_no
+        select id, name, code, status, open_status, sort, remark, description, rule, cycle, close, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_issue_no
         , icon, width, height, create_by, create_time, update_by, update_time from t_lottery
     </sql>
 
@@ -52,7 +51,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextCloseTime != null "> and next_close_time = #{nextCloseTime}</if>
             <if test="nextLotteryTime != null "> and next_lottery_time = #{nextLotteryTime}</if>
             <if test="nextLotteryYear != null "> and next_lottery_year = #{nextLotteryYear}</if>
-            <if test="nextLotteryPeriod != null "> and next_lottery_period = #{nextLotteryPeriod}</if>
             <if test="nextIssueNo != null  and nextIssueNo != ''"> and next_issue_no = #{nextIssueNo}</if>
         </where>
     </select>
@@ -79,7 +77,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextCloseTime != null">next_close_time,</if>
             <if test="nextLotteryTime != null">next_lottery_time,</if>
             <if test="nextLotteryYear != null">next_lottery_year,</if>
-            <if test="nextLotteryPeriod != null">next_lottery_period,</if>
             <if test="nextIssueNo != null">next_issue_no,</if>
             <if test="icon != null">icon,</if>
             <if test="width != null">width,</if>
@@ -129,7 +126,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextCloseTime != null">next_close_time = #{nextCloseTime},</if>
             <if test="nextLotteryTime != null">next_lottery_time = #{nextLotteryTime},</if>
             <if test="nextLotteryYear != null">next_lottery_year = #{nextLotteryYear},</if>
-            <if test="nextLotteryPeriod != null">next_lottery_period = #{nextLotteryPeriod},</if>
             <if test="nextIssueNo != null">next_issue_no = #{nextIssueNo},</if>
             <if test="icon != null">icon = #{icon},</if>
             <if test="width != null">width = #{width},</if>
