@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="additionalOdds != null "> and a.additional_odds = #{additionalOdds}</if>
             <if test="sort != null "> and a.sort = #{sort}</if>
             <if test="status != null "> and a.status = #{status}</if>
+            <if test="playTypeCode != null "> and b.play_type_code = #{playTypeCode}</if>
         </where>
     </select>
 

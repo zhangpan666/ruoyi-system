@@ -65,4 +65,6 @@ public class Odds extends BaseEntity
     @ApiModelProperty(example = "描述")
     private String description;
 
+    private Byte playTypeCode;
+
 }
