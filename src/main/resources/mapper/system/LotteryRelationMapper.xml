@@ -36,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertLotteryRelation" parameterType="LotteryRelation" useGeneratedKeys="false" keyProperty="id">
         insert into t_lottery_relation
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
             <if test="number != null">number,</if>
             <if test="color != null">color,</if>
             <if test="wx != null">wx,</if>
@@ -43,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="year != null">year,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
             <if test="number != null">#{number},</if>
             <if test="color != null">#{color},</if>
             <if test="wx != null">#{wx},</if>

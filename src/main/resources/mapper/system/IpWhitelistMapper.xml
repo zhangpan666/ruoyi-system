@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="platformName"    column="platformName"    />
     </resultMap>
 
     <sql id="selectIpWhitelistVo">
@@ -20,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectIpWhitelistList" parameterType="IpWhitelist" resultMap="IpWhitelistResult">
-         select a.*,b.name as platformName from t_ip_whitelist a left join b on a.platformId = b.id
+         select a.*,b.name as platformName from t_ip_whitelist a left join t_platform b on a.platform_id = b.id
         <where>
             <if test="platformId != null "> and a.platform_id = #{platformId}</if>
             <if test="platformName != null  and platformName != ''"> and b.name like concat('%', #{platformName}, '%')</if>
