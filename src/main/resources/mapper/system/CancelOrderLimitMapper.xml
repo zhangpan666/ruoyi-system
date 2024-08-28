@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CancelOrderLimitMapper">
+
+    <resultMap type="CancelOrderLimit" id="CancelOrderLimitResult">
+        <result property="id"    column="id"    />
+        <result property="platformId"    column="platform_id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="type"    column="type"    />
+        <result property="timeout"    column="timeout"    />
+        <result property="singlePeriodAllowMaxCancelCount"    column="single_period_allow_max_cancel_count"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lotteryName"    column="lotteryName"    />
+    </resultMap>
+
+    <sql id="selectCancelOrderLimitVo">
+        select id, platform_id, lottery_id, type, timeout, single_period_allow_max_cancel_count, status, create_time, update_time from t_cancel_order_limit
+    </sql>
+
+    <select id="selectCancelOrderLimitList" parameterType="CancelOrderLimit" resultMap="CancelOrderLimitResult">
+        select a.*,b.name as lotteryName from t_cancel_order_limit a inner join t_lottery b on a.lottery_id = b.id
+        <where>
+            <if test="platformId != null "> and a.platform_id = #{platformId}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="type != null "> and a.type = #{type}</if>
+            <if test="timeout != null "> and a.timeout = #{timeout}</if>
+            <if test="singlePeriodAllowMaxCancelCount != null "> and a.single_period_allow_max_cancel_count = #{singlePeriodAllowMaxCancelCount}</if>
+            <if test="status != null "> and a.status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectCancelOrderLimitById" parameterType="Long" resultMap="CancelOrderLimitResult">
+        <include refid="selectCancelOrderLimitVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCancelOrderLimit" parameterType="CancelOrderLimit" useGeneratedKeys="true" keyProperty="id">
+        insert into t_cancel_order_limit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="platformId != null">platform_id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="type != null">type,</if>
+            <if test="timeout != null">timeout,</if>
+            <if test="singlePeriodAllowMaxCancelCount != null">single_period_allow_max_cancel_count,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="platformId != null">#{platformId},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="timeout != null">#{timeout},</if>
+            <if test="singlePeriodAllowMaxCancelCount != null">#{singlePeriodAllowMaxCancelCount},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCancelOrderLimit" parameterType="CancelOrderLimit">
+        update t_cancel_order_limit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="platformId != null">platform_id = #{platformId},</if>
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="timeout != null">timeout = #{timeout},</if>
+            <if test="singlePeriodAllowMaxCancelCount != null">single_period_allow_max_cancel_count = #{singlePeriodAllowMaxCancelCount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCancelOrderLimitById" parameterType="Long">
+        delete from t_cancel_order_limit where id = #{id}
+    </delete>
+
+    <delete id="deleteCancelOrderLimitByIds" parameterType="String">
+        delete from t_cancel_order_limit where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
