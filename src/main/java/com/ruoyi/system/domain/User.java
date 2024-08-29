@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -126,5 +127,10 @@ public class User extends BaseEntity {
     @Excel(name = "平台名称", type = Excel.Type.EXPORT)
     @ApiModelProperty(example = "平台名称")
     private String platformName;
+
+    /** 可用余额 */
+    @Excel(name = "可用余额")
+    @ApiModelProperty(example = "可用余额")
+    private BigDecimal availableBalance;
 
 }

@@ -22,6 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="platformName"    column="platformName"    />
+        <result property="availableBalance"    column="availableBalance"    />
     </resultMap>
 
     <sql id="selectUserVo">
@@ -29,7 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
-        select a.*, b.name as platformName  from t_user a left join t_platform b on a.platform_id = b.id
+        select a.*, b.name as platformName,c.available_balance as availableBalance from t_user a left join t_platform b on a.platform_id = b.id
+        left join t_account c on a.id = c.id
         <where>
             <if test="platformId != null "> and a.platform_id = #{platformId}</if>
             <if test="platformUserId != null "> and a.platform_user_id = #{platformUserId}</if>

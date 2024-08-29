@@ -48,9 +48,9 @@ public class CancelOrderLimit extends BaseEntity
     private Integer timeout;
 
     /** 单期允许最大撤单注数 */
-    @Excel(name = "单期允许最大撤单注数")
-    @ApiModelProperty(example = "单期允许最大撤单注数")
-    private Long singlePeriodAllowMaxCancelCount;
+    @Excel(name = "单期允许最大撤单注数，0为不限制")
+    @ApiModelProperty(example = "单期允许最大撤单注数，0为不限制")
+    private Integer singlePeriodAllowMaxCancelCount;
 
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态，1-有效，0-无效")
