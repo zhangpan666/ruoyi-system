@@ -133,4 +133,8 @@ public class User extends BaseEntity {
     @ApiModelProperty(example = "可用余额")
     private BigDecimal availableBalance;
 
+    private Date beginTime;
+
+    private Date endTime;
+
 }

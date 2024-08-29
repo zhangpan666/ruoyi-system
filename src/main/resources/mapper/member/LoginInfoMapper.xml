@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LoginInfoMapper">
-    
+
     <resultMap type="LoginInfo" id="LoginInfoResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
@@ -14,18 +14,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="deviceId"    column="device_id"    />
         <result property="token"    column="token"    />
         <result property="status"    column="status"    />
-        <result property="endTime"    column="end_time"    />
+        <result property="expireTime"    column="expire_time"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectLoginInfoVo">
-        select id, user_id, platform_id, platform_user_id, client_type, ip, device_id, token, status, end_time, create_time, update_time from t_login_info
+        select id, user_id, platform_id, platform_user_id, client_type, ip, device_id, token, status, expire_time, create_time, update_time from t_login_info
     </sql>
 
     <select id="selectLoginInfoList" parameterType="LoginInfo" resultMap="LoginInfoResult">
         <include refid="selectLoginInfoVo"/>
-        <where>  
+        <where>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="platformId != null "> and platform_id = #{platformId}</if>
             <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceId != null  and deviceId != ''"> and device_id = #{deviceId}</if>
             <if test="token != null  and token != ''"> and token = #{token}</if>
             <if test="status != null "> and status = #{status}</if>
-            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="expireTime != null "> and expire_time = #{expireTime}</if>
         </where>
     </select>
-    
+
     <select id="selectLoginInfoById" parameterType="Long" resultMap="LoginInfoResult">
         <include refid="selectLoginInfoVo"/>
         where id = #{id}
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceId != null">device_id,</if>
             <if test="token != null">token,</if>
             <if test="status != null">status,</if>
-            <if test="endTime != null">end_time,</if>
+            <if test="expireTime != null">expire_time,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
          </trim>
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceId != null">#{deviceId},</if>
             <if test="token != null">#{token},</if>
             <if test="status != null">#{status},</if>
-            <if test="endTime != null">#{endTime},</if>
+            <if test="expireTime != null">#{expireTime},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
          </trim>
@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceId != null">device_id = #{deviceId},</if>
             <if test="token != null">token = #{token},</if>
             <if test="status != null">status = #{status},</if>
-            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="expireTime != null">expire_time = #{expireTime},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLoginInfoByIds" parameterType="String">
-        delete from t_login_info where id in 
+        delete from t_login_info where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

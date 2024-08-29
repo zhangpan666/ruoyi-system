@@ -73,6 +73,10 @@ public class LoginInfo extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "过期时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "id")
+    private Date expireTime;
+
+    private Date beginTime;
+
     private Date endTime;
 
 }
