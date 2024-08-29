@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LoginInfoMapper">
+    
+    <resultMap type="LoginInfo" id="LoginInfoResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="platformId"    column="platform_id"    />
+        <result property="platformUserId"    column="platform_user_id"    />
+        <result property="clientType"    column="client_type"    />
+        <result property="ip"    column="ip"    />
+        <result property="deviceId"    column="device_id"    />
+        <result property="token"    column="token"    />
+        <result property="status"    column="status"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLoginInfoVo">
+        select id, user_id, platform_id, platform_user_id, client_type, ip, device_id, token, status, end_time, create_time, update_time from t_login_info
+    </sql>
+
+    <select id="selectLoginInfoList" parameterType="LoginInfo" resultMap="LoginInfoResult">
+        <include refid="selectLoginInfoVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="platformId != null "> and platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
+            <if test="clientType != null "> and client_type = #{clientType}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="deviceId != null  and deviceId != ''"> and device_id = #{deviceId}</if>
+            <if test="token != null  and token != ''"> and token = #{token}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectLoginInfoById" parameterType="Long" resultMap="LoginInfoResult">
+        <include refid="selectLoginInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLoginInfo" parameterType="LoginInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_login_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="platformId != null">platform_id,</if>
+            <if test="platformUserId != null">platform_user_id,</if>
+            <if test="clientType != null">client_type,</if>
+            <if test="ip != null">ip,</if>
+            <if test="deviceId != null">device_id,</if>
+            <if test="token != null">token,</if>
+            <if test="status != null">status,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="platformId != null">#{platformId},</if>
+            <if test="platformUserId != null">#{platformUserId},</if>
+            <if test="clientType != null">#{clientType},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="token != null">#{token},</if>
+            <if test="status != null">#{status},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLoginInfo" parameterType="LoginInfo">
+        update t_login_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="platformId != null">platform_id = #{platformId},</if>
+            <if test="platformUserId != null">platform_user_id = #{platformUserId},</if>
+            <if test="clientType != null">client_type = #{clientType},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="deviceId != null">device_id = #{deviceId},</if>
+            <if test="token != null">token = #{token},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLoginInfoById" parameterType="Long">
+        delete from t_login_info where id = #{id}
+    </delete>
+
+    <delete id="deleteLoginInfoByIds" parameterType="String">
+        delete from t_login_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
