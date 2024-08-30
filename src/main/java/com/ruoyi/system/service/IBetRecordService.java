@@ -68,5 +68,5 @@ public interface IBetRecordService
 
     List<BetRecordStatVO> statCountBetRecordByDateAndLotteryIdAndGroupByUserId(Long platformId,Long lotteryId, Date beginTime, Date endTime);
 
-    List<BetRecordStatVO> statCountBetRecordByDateAndGroupByLotteryId(Long platformId, Date beginTime, Date endTime);
+    List<BetRecordStatVO> statBetRecordAndGroupByLotteryId(BetRecord betRecord);
 }

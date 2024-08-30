@@ -114,7 +114,7 @@ public class BetRecordServiceImpl implements IBetRecordService
     }
 
     @Override
-    public List<BetRecordStatVO> statCountBetRecordByDateAndGroupByLotteryId(Long platformId, Date beginTime, Date endTime) {
-        return betRecordMapper.statCountBetRecordByDateAndGroupByLotteryId(platformId, beginTime, endTime);
+    public List<BetRecordStatVO> statBetRecordAndGroupByLotteryId(BetRecord betRecord) {
+        return betRecordMapper.statBetRecordAndGroupByLotteryId(betRecord);
     }
 }
