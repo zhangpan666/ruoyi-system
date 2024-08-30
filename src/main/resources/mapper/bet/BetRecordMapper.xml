@@ -229,12 +229,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="statCountBetRecordByDateAndGroupByLotteryId"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
        select a.*,b.name as lotteryName, from (select lottery_id as lotteryId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
-        where platform_id = #{platformId}
-        <if test="lotteryId != null">
-            and lottery_id = #{lotteryId}
-        </if>
-        and status = 1 and create_time &gt;=#{beginTime} and create_time &lt;#{endTime} group by lottery_id) a inner join t_lottery b
-        on a.lotteryId = b.id
+        where platform_id = #{platformId} and status = 1 and create_time &gt;=#{beginTime} and create_time &lt;#{endTime} group by lottery_id) a inner join t_lottery b on a.lotteryId = b.id
     </select>
 
 </mapper>
