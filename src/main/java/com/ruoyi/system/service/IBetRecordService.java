@@ -62,11 +62,9 @@ public interface IBetRecordService
      */
     public int deleteBetRecordById(Long id);
 
-    BetRecordStatVO statCountBetRecordByDate(Long platformId,  Date beginTime, Date endTime);
+    BetRecordStatVO statBetRecord(BetRecord betRecord);
 
-    BetRecordStatVO statCountBetRecordByDateAndLotteryId(Long platformId,Long lotteryId, Date beginTime, Date endTime);
-
-    List<BetRecordStatVO> statCountBetRecordByDateAndLotteryIdAndGroupByUserId(Long platformId,Long lotteryId, Date beginTime, Date endTime);
+    List<BetRecordStatVO> statBetRecordAndGroupByUserId(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByLotteryId(BetRecord betRecord);
 }
