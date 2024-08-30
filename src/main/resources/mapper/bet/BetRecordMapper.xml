@@ -206,13 +206,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
+    <select id="statCountBetRecordByDate"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
+        select count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
+        where platform_id = #{platformId} and status = 1 and create_time &gt;=#{beginTime} and create_time &lt;#{endTime}
+    </select>
+
     <select id="statCountBetRecordByDateAndLotteryId"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
         select count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
-        where platform_id = #{platformId}
-         <if test="lotteryId != null">
-             and lottery_id = #{lotteryId}
-         </if>
-         and status = 1 and create_time &gt;=#{beginTime} and create_time &lt;#{endTime}
+        where platform_id = #{platformId}  and lottery_id = #{lotteryId} and status = 1 and create_time &gt;=#{beginTime} and create_time &lt;#{endTime}
     </select>
 
     <select id="statCountBetRecordByDateAndLotteryIdAndGroupByUserId"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">

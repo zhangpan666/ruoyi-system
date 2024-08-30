@@ -62,6 +62,8 @@ public interface BetRecordMapper
      */
     public int deleteBetRecordByIds(Long[] ids);
 
+    BetRecordStatVO statCountBetRecordByDate(@Param("platformId") Long platformId, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
+
     BetRecordStatVO statCountBetRecordByDateAndLotteryId(@Param("platformId") Long platformId, @Param("lotteryId") Long lotteryId, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
     List<BetRecordStatVO> statCountBetRecordByDateAndLotteryIdAndGroupByUserId(@Param("platformId") Long platformId, @Param("lotteryId") Long lotteryId, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
