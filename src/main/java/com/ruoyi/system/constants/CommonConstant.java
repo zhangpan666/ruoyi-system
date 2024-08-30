@@ -5,7 +5,7 @@ import com.light.core.utils.BaseConstantClassUtil;
 
 import java.util.Map;
 
-public class ProjectConstant {
+public class CommonConstant {
 
     public static final byte COMMON_STATUS_AVAILABLE = 1;
 

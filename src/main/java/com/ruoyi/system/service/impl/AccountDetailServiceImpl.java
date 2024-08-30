@@ -3,7 +3,7 @@ package com.ruoyi.system.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.system.constants.ProjectConstant;
+import com.ruoyi.system.constants.CommonConstant;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,8 +111,8 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         Account account = accountService.selectAccountById(userId);
         BigDecimal availableBalance = account.getAvailableBalance().add(amount);
         accountService.addBalance(amount, userId);
-        AccountDetail accountDetail = new AccountDetail().setUserId(userId).setRelatedId(relatedId).setPaymentType(ProjectConstant.PaymentType.INCOME)
-                .setAmount(amount).setAvailableBalance(availableBalance).setTradeType(tradeType).setStatus(ProjectConstant.AccountDetailStatus.DONE)
+        AccountDetail accountDetail = new AccountDetail().setUserId(userId).setRelatedId(relatedId).setPaymentType(CommonConstant.PaymentType.INCOME)
+                .setAmount(amount).setAvailableBalance(availableBalance).setTradeType(tradeType).setStatus(CommonConstant.AccountDetailStatus.DONE)
                 .setOrderNo(orderNo).setMchOrderNo(mchOrderNo).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
@@ -123,8 +123,8 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         Account account = accountService.selectAccountById(userId);
         BigDecimal availableBalance = account.getAvailableBalance();
         accountService.reduceBalance(amount, userId);
-        AccountDetail accountDetail=new AccountDetail().setOrderNo(orderNo).setMchOrderNo(mchOrderNo).setPaymentType(ProjectConstant.PaymentType.EXPENSE).setAmount(amount)
-                .setUserId(userId).setAvailableBalance(availableBalance.subtract(amount)).setStatus(ProjectConstant.AccountDetailStatus.DONE)
+        AccountDetail accountDetail=new AccountDetail().setOrderNo(orderNo).setMchOrderNo(mchOrderNo).setPaymentType(CommonConstant.PaymentType.EXPENSE).setAmount(amount)
+                .setUserId(userId).setAvailableBalance(availableBalance.subtract(amount)).setStatus(CommonConstant.AccountDetailStatus.DONE)
                 .setTradeType(tradeType).setRelatedId(relatedId).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
@@ -135,8 +135,8 @@ public class AccountDetailServiceImpl implements IAccountDetailService
         Account account = accountService.selectAccountById(userId);
         BigDecimal availableBalance = account.getAvailableBalance();
         accountService.doFreezeBalance(amount, userId);
-        AccountDetail accountDetail=new AccountDetail().setOrderNo(orderNo).setPaymentType(ProjectConstant.PaymentType.EXPENSE).setAmount(amount)
-                .setUserId(userId).setAvailableBalance(availableBalance.subtract(amount)).setStatus(ProjectConstant.AccountDetailStatus.FREEZE)
+        AccountDetail accountDetail=new AccountDetail().setOrderNo(orderNo).setPaymentType(CommonConstant.PaymentType.EXPENSE).setAmount(amount)
+                .setUserId(userId).setAvailableBalance(availableBalance.subtract(amount)).setStatus(CommonConstant.AccountDetailStatus.FREEZE)
                 .setTradeType(tradeType).setRelatedId(relatedId).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
@@ -146,9 +146,9 @@ public class AccountDetailServiceImpl implements IAccountDetailService
     public boolean unFreezeBalance(Byte tradeType, Long relatedId, String orderNo, BigDecimal amount, Long userId, String remark) {
         Account account = accountService.selectAccountById(userId);
         accountService.doUnFreezeBalance(amount, userId);
-        AccountDetail accountDetail = new AccountDetail().setUserId(userId).setRelatedId(relatedId).setPaymentType(ProjectConstant.PaymentType.INCOME)
+        AccountDetail accountDetail = new AccountDetail().setUserId(userId).setRelatedId(relatedId).setPaymentType(CommonConstant.PaymentType.INCOME)
                 .setAmount(amount).setAvailableBalance(account.getAvailableBalance().add(amount)).setTradeType(tradeType)
-                .setStatus(ProjectConstant.AccountDetailStatus.DONE).setOrderNo(orderNo).setRemark(remark);
+                .setStatus(CommonConstant.AccountDetailStatus.DONE).setOrderNo(orderNo).setRemark(remark);
         accountDetailMapper.insertAccountDetail(accountDetail);
         return true;
     }
