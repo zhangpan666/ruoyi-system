@@ -43,6 +43,12 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(example = "投注金额")
     private BigDecimal betAmount;
 
+    /** 有效投注金额 */
+    @Excel(name = "有效投注金额")
+    @ApiModelProperty(example = "有效投注金额")
+    private BigDecimal validBetAmount;
+
+
     /** 可赢金额 */
     @Excel(name = "可赢金额")
     @ApiModelProperty(example = "可赢金额")

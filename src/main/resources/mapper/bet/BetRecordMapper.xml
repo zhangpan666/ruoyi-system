@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
         <result property="betAmount"    column="bet_amount"    />
+        <result property="validBetAmount"    column="valid_bet_amount"    />
         <result property="canWinAmount"    column="can_win_amount"    />
         <result property="betContent"    column="bet_content"    />
         <result property="displayBetContent"    column="display_bet_content"    />
@@ -207,7 +208,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <select id="statBetRecord" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-        select count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
+        select count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
+        ,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
         <where>
             <if test="platformId != null">
                 and platform_id = #{platformId}
@@ -234,7 +236,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="statBetRecordAndGroupByUserId" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-        select user_id as userId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
+        select user_id as userId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
+        ,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
         <where>
             <if test="platformId != null">
                 and platform_id = #{platformId}
@@ -262,7 +265,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="statBetRecordAndGroupByLotteryId" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-       select a.*,b.name as lotteryName from (select lottery_id as lotteryId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
+       select a.*,b.name as lotteryName from (select lottery_id as lotteryId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount
+       ,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
         <where>
             <if test="platformId != null">
                 and platform_id = #{platformId}
