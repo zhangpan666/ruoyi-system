@@ -1,19 +1,22 @@
 package com.ruoyi.system.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.BetRecord;
+import com.ruoyi.system.pojo.BetRecordStatVO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 投注记录Service接口
- * 
+ *
  * @author ruoyi
  * @date 2024-08-11
  */
-public interface IBetRecordService 
+public interface IBetRecordService
 {
     /**
      * 查询投注记录
-     * 
+     *
      * @param id 投注记录主键
      * @return 投注记录
      */
@@ -21,7 +24,7 @@ public interface IBetRecordService
 
     /**
      * 查询投注记录列表
-     * 
+     *
      * @param betRecord 投注记录
      * @return 投注记录集合
      */
@@ -29,7 +32,7 @@ public interface IBetRecordService
 
     /**
      * 新增投注记录
-     * 
+     *
      * @param betRecord 投注记录
      * @return 结果
      */
@@ -37,7 +40,7 @@ public interface IBetRecordService
 
     /**
      * 修改投注记录
-     * 
+     *
      * @param betRecord 投注记录
      * @return 结果
      */
@@ -45,7 +48,7 @@ public interface IBetRecordService
 
     /**
      * 批量删除投注记录
-     * 
+     *
      * @param ids 需要删除的投注记录主键集合
      * @return 结果
      */
@@ -53,9 +56,15 @@ public interface IBetRecordService
 
     /**
      * 删除投注记录信息
-     * 
+     *
      * @param id 投注记录主键
      * @return 结果
      */
     public int deleteBetRecordById(Long id);
+
+    BetRecordStatVO statCountBetRecordByDateAndLotteryId(Long platformId,Long lotteryId, Date beginTime, Date endTime);
+
+    List<BetRecordStatVO> statCountBetRecordByDateAndLotteryIdAndGroupByUserId(Long platformId,Long lotteryId, Date beginTime, Date endTime);
+
+    List<BetRecordStatVO> statCountBetRecordByDateAndGroupByLotteryId(Long platformId, Date beginTime, Date endTime);
 }

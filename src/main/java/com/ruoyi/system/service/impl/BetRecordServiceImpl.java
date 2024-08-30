@@ -1,7 +1,9 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.pojo.BetRecordStatVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BetRecordMapper;
@@ -94,5 +96,20 @@ public class BetRecordServiceImpl implements IBetRecordService
     public int deleteBetRecordById(Long id)
     {
         return betRecordMapper.deleteBetRecordById(id);
+    }
+
+    @Override
+    public BetRecordStatVO statCountBetRecordByDateAndLotteryId(Long platformId,Long lotteryId, Date beginTime, Date endTime) {
+        return betRecordMapper.statCountBetRecordByDateAndLotteryId(platformId,lotteryId, beginTime, endTime);
+    }
+
+    @Override
+    public List<BetRecordStatVO> statCountBetRecordByDateAndLotteryIdAndGroupByUserId(Long platformId,Long lotteryId, Date beginTime, Date endTime) {
+        return betRecordMapper.statCountBetRecordByDateAndLotteryIdAndGroupByUserId(platformId,lotteryId, beginTime, endTime);
+    }
+
+    @Override
+    public List<BetRecordStatVO> statCountBetRecordByDateAndGroupByLotteryId(Long platformId, Date beginTime, Date endTime) {
+        return betRecordMapper.statCountBetRecordByDateAndGroupByLotteryId(platformId, beginTime, endTime);
     }
 }
