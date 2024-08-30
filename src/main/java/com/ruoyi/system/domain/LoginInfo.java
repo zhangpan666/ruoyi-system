@@ -21,12 +21,12 @@ import com.ruoyi.common.core.domain.BaseEntity;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class LoginInfo extends BaseEntity
+public class LoginInfo
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键ID */
-    @ApiModelProperty(example = "id")
+    @ApiModelProperty(example = "ID")
     private Long id;
 
     /** 用户ID */
@@ -36,32 +36,27 @@ public class LoginInfo extends BaseEntity
 
     /** 平台id */
     @Excel(name = "平台id")
-    @ApiModelProperty(example = "平台ID")
     private Long platformId;
 
     /** 平台用户id */
     @Excel(name = "平台用户id")
-    @ApiModelProperty(example = "id")
     private Long platformUserId;
 
     /** 客户端类型 */
     @Excel(name = "客户端类型")
-    @ApiModelProperty(example = "id")
     private Byte clientType;
 
     /** 登录ip */
-    @Excel(name = "登录ip")
-    @ApiModelProperty(example = "id")
+    @Excel(name = "登录IP")
+    @ApiModelProperty(example = "登录IP")
     private String ip;
 
     /** 设备ID */
     @Excel(name = "设备ID")
-    @ApiModelProperty(example = "id")
     private String deviceId;
 
     /** token */
     @Excel(name = "token")
-    @ApiModelProperty(example = "id")
     private String token;
 
     /** 状态 */
@@ -69,9 +64,15 @@ public class LoginInfo extends BaseEntity
     @ApiModelProperty(example = "id")
     private Byte status;
 
+    @Excel(name = "登录时间", width = 50, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    @Excel(name = "更新时间", width = 50, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
     /** 过期时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "过期时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "过期时间", width = 50, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "id")
     private Date expireTime;
 
