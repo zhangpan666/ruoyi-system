@@ -66,5 +66,5 @@ public interface BetRecordMapper
 
     List<BetRecordStatVO> statCountBetRecordByDateAndLotteryIdAndGroupByUserId(@Param("platformId") Long platformId, @Param("lotteryId") Long lotteryId, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
-    List<BetRecordStatVO> statCountBetRecordByDateAndGroupByLotteryId(@Param("platformId") Long platformId, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
+    List<BetRecordStatVO> statCountBetRecordByDateAndGroupByLotteryId(@Param("platformId") Long platformId, @Param("lotteryId") Long lotteryId, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 }
