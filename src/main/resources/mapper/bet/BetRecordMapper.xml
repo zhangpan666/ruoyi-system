@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">
-        select a.*, b.name as lotteryName from t_bet_record a left join t_lottery b on a.lottery_id = b.id
+        select a.*, b.name as lotteryName from t_bet_record a inner join t_lottery b on a.lottery_id = b.id
         <where>
             <if test="id != null "> and a.id = #{id}</if>
             <if test="userId != null "> and a.user_id = #{userId}</if>
