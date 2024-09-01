@@ -3,8 +3,10 @@ package com.ruoyi.system.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.light.core.utils.DateUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -143,12 +145,14 @@ public class BetRecord extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "下注时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "下注时间")
+    @JSONField(format = DateUtils.DATE_TIME_FORMAT)
     private Date betTime;
 
     /** 结算时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "结算时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "结算时间")
+    @JSONField(format = DateUtils.DATE_TIME_FORMAT)
     private Date countTime;
 
     @Excel(name = "彩种名称")
