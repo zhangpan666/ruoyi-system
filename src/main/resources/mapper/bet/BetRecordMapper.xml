@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">
-        select a.*, b.name as lotteryName from t_bet_record a left t_lottery b on a.lottery_id = b.id
+        select a.*, b.name as lotteryName from t_bet_record a left join t_lottery b on a.lottery_id = b.id
         <where>
             <if test="id != null "> and a.id = #{id}</if>
             <if test="userId != null "> and a.user_id = #{userId}</if>
@@ -71,26 +71,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="beginTime != null">
                 <choose>
                     <when test="timeType == 1">
-                        and bet_time &gt;= #{beginTime}
+                        and a.bet_time &gt;= #{beginTime}
                     </when>
                     <when test="timeType == 2">
-                        and count_time &gt;= #{beginTime}
+                        and a.count_time &gt;= #{beginTime}
                     </when>
                     <otherwise>
-                        and count_time &gt;= #{beginTime}
+                        and a.count_time &gt;= #{beginTime}
                     </otherwise>
                 </choose>
             </if>
             <if test="endTime != null">
                 <choose>
                     <when test="timeType == 1">
-                        and bet_time &lt;= #{endTime}
+                        and a.bet_time &lt;= #{endTime}
                     </when>
                     <when test="timeType == 2">
-                        and count_time &lt;= #{endTime}
+                        and a.count_time &lt;= #{endTime}
                     </when>
                     <otherwise>
-                        and count_time &lt;= #{endTime}
+                        and a.count_time &lt;= #{endTime}
                     </otherwise>
                 </choose>
             </if>
