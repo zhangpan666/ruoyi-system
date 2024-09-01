@@ -264,6 +264,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          group by user_id
     </select>
 
+    <select id="statBetRecordAndGroupByDate" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
+        select date(create_time) as betDate,user_id as userId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
+        ,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
+        <where>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="lotteryId != null">
+                and lottery_id = #{lotteryId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="issueNo != null and issueNo != ''">
+                and issue_no = #{issueNo}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="beginTime != null">
+                and create_time &gt;=#{beginTime}
+            </if>
+            <if test="endTime != null">
+                and create_time &lt;#{endTime}
+            </if>
+        </where>
+        group by date(create_time) desc
+    </select>
+
     <select id="statBetRecordAndGroupByLotteryId" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
        select a.*,b.name as lotteryName from (select lottery_id as lotteryId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount
        ,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record

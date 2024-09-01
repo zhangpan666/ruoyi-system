@@ -1,6 +1,8 @@
 package com.ruoyi.system.pojo;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.light.core.utils.DateUtils;
 import com.ruoyi.common.annotation.Excel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,10 +10,15 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @Accessors(chain = true)
 public class BetRecordStatVO implements Serializable {
+
+    @JSONField(format = DateUtils.DATE_FORMAT)
+    @ApiModelProperty(example = "日期")
+    private Date betDate;
 
     @ApiModelProperty(example = "用户ID")
     private Long userId;
