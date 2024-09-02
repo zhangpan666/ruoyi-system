@@ -41,4 +41,10 @@ public class BetRecordStatVO implements Serializable {
     @ApiModelProperty(example = "游戏输赢")
     private BigDecimal winLoseAmount = BigDecimal.ZERO;
 
+    @ApiModelProperty(example = "玩法名称")
+    private String playTypeName;
+
+    @ApiModelProperty(example = "玩法code")
+    private Byte playTypeCode;
+
 }
