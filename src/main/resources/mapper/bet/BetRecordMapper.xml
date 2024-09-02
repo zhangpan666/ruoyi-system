@@ -322,7 +322,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         group by lottery_id) a inner join t_lottery b on a.lotteryId = b.id
     </select>
 
-    <select id="statBetRecordAndGroupByUserId" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
+    <select id="statBetRecordAndGroupByPlayTypeCode" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
         select a.*,b.name as playTypeName from (select play_type_code as playTypeCode, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
         ,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
         <where>

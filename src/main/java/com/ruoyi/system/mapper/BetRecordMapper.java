@@ -69,4 +69,6 @@ public interface BetRecordMapper
     List<BetRecordStatVO> statBetRecordAndGroupByDate(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByLotteryId(BetRecord betRecord);
+
+    List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeCode(BetRecord betRecord);
 }
