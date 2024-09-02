@@ -71,4 +71,6 @@ public interface IBetRecordService
     List<BetRecordStatVO> statBetRecordAndGroupByLotteryId(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeCode(BetRecord betRecord);
+
+    List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord);
 }
