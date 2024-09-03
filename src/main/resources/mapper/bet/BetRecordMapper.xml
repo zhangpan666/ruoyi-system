@@ -226,6 +226,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">
                 and status = #{status}
             </if>
+            <if test="playTypeCode != null">
+                and play_type_code = #{playTypeCode}
+            </if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
+                and play_type_detail_code = #{playTypeDetailCode}
+            </if>
             <if test="beginTime != null">
                 and create_time &gt;=#{beginTime}
             </if>
@@ -253,6 +259,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+            <if test="playTypeCode != null">
+                and play_type_code = #{playTypeCode}
+            </if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
+                and play_type_detail_code = #{playTypeDetailCode}
             </if>
             <if test="beginTime != null">
                 and create_time &gt;=#{beginTime}
@@ -283,6 +295,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">
                 and status = #{status}
             </if>
+            <if test="playTypeCode != null">
+                and play_type_code = #{playTypeCode}
+            </if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
+                and play_type_detail_code = #{playTypeDetailCode}
+            </if>
             <if test="beginTime != null">
                 and create_time &gt;=#{beginTime}
             </if>
@@ -311,6 +329,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+            <if test="playTypeCode != null">
+                and play_type_code = #{playTypeCode}
+            </if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
+                and play_type_detail_code = #{playTypeDetailCode}
             </if>
             <if test="beginTime != null">
                 and create_time &gt;=#{beginTime}
@@ -341,6 +365,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">
                 and status = #{status}
             </if>
+            <if test="playTypeCode != null">
+                and play_type_code = #{playTypeCode}
+            </if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
+                and play_type_detail_code = #{playTypeDetailCode}
+            </if>
             <if test="beginTime != null">
                 and create_time &gt;=#{beginTime}
             </if>
@@ -370,6 +400,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+            <if test="playTypeCode != null">
+                and play_type_code = #{playTypeCode}
+            </if>
+            <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
+                and play_type_detail_code = #{playTypeDetailCode}
             </if>
             <if test="beginTime != null">
                 and create_time &gt;=#{beginTime}
