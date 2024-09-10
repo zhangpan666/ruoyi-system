@@ -19,7 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotteryId"    column="lottery_id"    />
         <result property="issueNo"    column="issue_no"    />
         <result property="playTypeName"    column="play_type_name"    />
-        <result property="displayPlayTypeName"    column="display_play_type_name"    />
         <result property="win"    column="win"    />
         <result property="winLoseAmount"    column="win_lose_amount"    />
         <result property="playTypeCode"    column="play_type_code"    />
@@ -36,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBetRecordVo">
-        select id, user_id, bet_amount, can_win_amount, bet_content, display_bet_content, bet_odds, bet_additional_odds, platform_id, platform_user_id, lottery_id, issue_no, play_type_name, display_play_type_name, win, win_lose_amount, play_type_code, play_type_detail_code, bet_no, status
+        select id, user_id, bet_amount, can_win_amount, bet_content, display_bet_content, bet_odds, bet_additional_odds, platform_id, platform_user_id, lottery_id, issue_no, play_type_name, win, win_lose_amount, play_type_code, play_type_detail_code, bet_no, status
         , cancel_type, bet_time, count_time, create_time, update_time, create_by, update_by from t_bet_record
     </sql>
 
@@ -56,7 +55,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
             <if test="issueNo != null  and issueNo != ''"> and a.issue_no = #{issueNo}</if>
             <if test="playTypeName != null  and playTypeName != ''"> and a.play_type_name like concat('%', #{playTypeName}, '%')</if>
-            <if test="displayPlayTypeName != null  and displayPlayTypeName != ''"> and a.display_play_type_name like concat('%', #{displayPlayTypeName}, '%')</if>
             <if test="win != null "> and a.win = #{win}</if>
             <if test="winLoseAmount != null "> and a.win_lose_amount = #{winLoseAmount}</if>
             <if test="playTypeCode != null "> and a.play_type_code = #{playTypeCode}</if>
@@ -118,7 +116,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryId != null">lottery_id,</if>
             <if test="issueNo != null and issueNo != ''">issue_no,</if>
             <if test="playTypeName != null and playTypeName != ''">play_type_name,</if>
-            <if test="displayPlayTypeName != null">display_play_type_name,</if>
             <if test="win != null">win,</if>
             <if test="winLoseAmount != null">win_lose_amount,</if>
             <if test="playTypeCode != null">play_type_code,</if>
@@ -178,7 +175,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
             <if test="issueNo != null and issueNo != ''">issue_no = #{issueNo},</if>
             <if test="playTypeName != null and playTypeName != ''">play_type_name = #{playTypeName},</if>
-            <if test="displayPlayTypeName != null">display_play_type_name = #{displayPlayTypeName},</if>
             <if test="win != null">win = #{win},</if>
             <if test="winLoseAmount != null">win_lose_amount = #{winLoseAmount},</if>
             <if test="playTypeCode != null">play_type_code = #{playTypeCode},</if>

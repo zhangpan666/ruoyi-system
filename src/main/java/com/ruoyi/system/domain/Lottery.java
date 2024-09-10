@@ -81,14 +81,14 @@ public class Lottery extends BaseEntity
     private BigDecimal killRate;
 
     /** 下一期封盘时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "下一期封盘时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "下一期封盘时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "下一期封盘时间")
     private Date nextCloseTime;
 
     /** 下一期开奖时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "下一期开奖时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "下一期开奖时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "下一期开奖时间")
     private Date nextLotteryTime;
 

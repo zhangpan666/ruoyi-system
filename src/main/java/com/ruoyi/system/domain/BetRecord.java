@@ -101,11 +101,6 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(example = "玩法名称")
     private String playTypeName;
 
-    /** 玩法名称 */
-    @Excel(name = "玩法名称")
-    @ApiModelProperty(example = "玩法名称")
-    private String displayPlayTypeName;
-
     /** 输赢状态，1-赢，0-输，2-打和 */
     @Excel(name = "输赢状态，1-赢，0-输，2-打和")
     @ApiModelProperty(example = "输赢状态，1-赢，0-输，2-打和")
