@@ -69,19 +69,4 @@ public class Platform extends BaseEntity
     @TableField("used_credit_limit")
     private BigDecimal usedCreditLimit;
 
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("name", getName())
-            .append("md5Key", getMd5Key())
-            .append("secretKey", getSecretKey())
-            .append("status", getStatus())
-            .append("creditLimit", getCreditLimit())
-            .append("usedCreditLimit", getUsedCreditLimit())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

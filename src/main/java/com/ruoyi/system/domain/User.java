@@ -104,7 +104,6 @@ public class User extends BaseEntity {
     /**
      * 是否有相同的IP地址：1有；0:无
      */
-    @Excel(name = "是否有相同的IP地址：1有；0:无")
     private Byte sameIp;
 
     /**

@@ -53,8 +53,8 @@ public class AccountDetail
     private String mchOrderNo;
 
     /** 收支类型(-1：支出，1：收入，0：非收支记录) */
-    @Excel(name = "收支类型(-1：支出，1：收入，0：非收支记录)")
     @ApiModelProperty(example = "收支类型(-1：支出，1：收入，0：非收支记录)")
+    @Excel(name = "收支类型", readConverterExp = "-1-支出,1-收入,0-非收支记录")
     private Byte paymentType;
 
     /** 金额 */
@@ -68,7 +68,7 @@ public class AccountDetail
     private BigDecimal availableBalance;
 
     /** 0-退款，1-额度转入，2-额度转出，3-投注，4-派彩，5-冻结 */
-    @Excel(name = "0-退款，1-额度转入，2-额度转出，3-投注，4-派彩，5-冻结，6-解冻，7-撤单")
+    @Excel(name = "状态", readConverterExp = "0-退款,1-额度转入,2-额度转出,3-投注，4-派彩,5-冻结,6-解冻,7-撤单")
     @ApiModelProperty(example = "id")
     private Byte tradeType;
 
