@@ -61,8 +61,6 @@ public class Lottery extends BaseEntity
     private String description;
 
     /** 游戏规则 */
-    @Excel(name = "游戏规则")
-    @ApiModelProperty(example = "游戏规则")
     private String rule;
 
     /** 开奖周期，单位：分钟 */
