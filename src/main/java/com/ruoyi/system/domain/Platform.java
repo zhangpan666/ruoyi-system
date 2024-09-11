@@ -42,17 +42,13 @@ public class Platform extends BaseEntity
     private String name;
 
     /** md5Key */
-    @Excel(name = "md5Key")
     @TableField("md5_key")
-    @ApiModelProperty(example = "md5Key")
     private String md5Key;
 
-    /** 秘钥 */
-    @Excel(name = "秘钥")
-    @TableField("secret_key")
-    @ApiModelProperty(example = "秘钥")
-    private String secretKey;
 
+    /** 秘钥 */
+    @TableField("secret_key")
+    private String secretKey;
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态，1-有效，0-无效")
     @TableField("status")
