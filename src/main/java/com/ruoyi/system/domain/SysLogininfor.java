@@ -62,6 +62,14 @@ public class SysLogininfor extends BaseEntity
     @ApiModelProperty(example = "访问时间")
     private Date loginTime;
 
+    @Excel(name = "平台ID", type = Excel.Type.EXPORT)
+    @ApiModelProperty(example = "平台ID")
+    private Long platformId;
+
+    @Excel(name = "平台名称", type = Excel.Type.EXPORT)
+    @ApiModelProperty(example = "平台名称")
+    private String platformName;
+
     public Long getInfoId()
     {
         return infoId;
@@ -150,5 +158,21 @@ public class SysLogininfor extends BaseEntity
     public void setLoginTime(Date loginTime)
     {
         this.loginTime = loginTime;
+    }
+
+    public Long getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(Long platformId) {
+        this.platformId = platformId;
+    }
+
+    public String getPlatformName() {
+        return platformName;
+    }
+
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
     }
 }

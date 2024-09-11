@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.domain.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 操作日志记录表 oper_log
@@ -45,6 +46,14 @@ public class SysOperLog extends BaseEntity
     /** 操作人员 */
     @Excel(name = "操作人员")
     private String operName;
+
+    @Excel(name = "平台ID", type = Excel.Type.EXPORT)
+    @ApiModelProperty(example = "平台ID")
+    private Long platformId;
+
+    @Excel(name = "平台名称", type = Excel.Type.EXPORT)
+    @ApiModelProperty(example = "平台名称")
+    private String platformName;
 
     /** 部门名称 */
     @Excel(name = "部门名称")
@@ -265,5 +274,21 @@ public class SysOperLog extends BaseEntity
     public void setCostTime(Long costTime)
     {
         this.costTime = costTime;
+    }
+
+    public Long getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(Long platformId) {
+        this.platformId = platformId;
+    }
+
+    public String getPlatformName() {
+        return platformName;
+    }
+
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
     }
 }
