@@ -1,11 +1,16 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.core.redis.RedisInfo;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.system.constants.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.IpWhitelistMapper;
@@ -23,6 +28,9 @@ public class IpWhitelistServiceImpl implements IIpWhitelistService
 {
     @Autowired
     private IpWhitelistMapper ipWhitelistMapper;
+
+    @Autowired
+    private RedisCache redisCache;
 
     /**
      * 查询白名单
@@ -113,5 +121,19 @@ public class IpWhitelistServiceImpl implements IIpWhitelistService
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getIpWhitelistList(Long platformId, Byte type) {
+        RedisInfo redisInfo = CommonConstant.RedisKey.IP_WHITE_LIST_LIST;
+        String key = redisInfo.getKey(platformId, type);
+        List<String> ipWhitelistList = redisCache.getCacheObject(key);
+        if (ipWhitelistList != null){
+            return ipWhitelistList;
+        }
+        List<IpWhitelist> selectIpWhitelistList = ipWhitelistMapper.selectIpWhitelistList(new IpWhitelist().setPlatformId(platformId).setType(type));
+        ipWhitelistList = selectIpWhitelistList.stream().map(IpWhitelist::getIp).distinct().collect(Collectors.toList());
+        redisCache.setCacheObject(key, ipWhitelistList, redisInfo.getExpire(), TimeUnit.MILLISECONDS);
+        return ipWhitelistList;
     }
 }

@@ -60,4 +60,6 @@ public interface IIpWhitelistService
     public int deleteIpWhitelistById(Long id);
 
     void checkSysUserDataScope(Long id);
+
+    List<String> getIpWhitelistList(Long platformId,Byte type);
 }
