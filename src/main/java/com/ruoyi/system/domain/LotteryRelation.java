@@ -36,7 +36,7 @@ public class LotteryRelation extends BaseEntity {
     /**
      * 颜色(1红色，2-蓝色，3-绿色)
      */
-    @Excel(name = "颜色(1红色，2-蓝色，3-绿色)")
+    @Excel(name = "颜色", readConverterExp = "1-红色,2-蓝色,3-绿色")
     @ApiModelProperty(example = "颜色(1红色，2-蓝色，3-绿色)")
     private Byte color;
 
