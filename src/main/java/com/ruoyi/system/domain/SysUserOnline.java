@@ -1,5 +1,6 @@
 package com.ruoyi.system.domain;
 
+import com.ruoyi.common.annotation.Excel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -40,6 +41,12 @@ public class SysUserOnline
     /** 登录时间 */
     @ApiModelProperty(example = "登录时间")
     private Long loginTime;
+
+    @ApiModelProperty(example = "平台ID")
+    private Long platformId;
+
+    @ApiModelProperty(example = "平台名称")
+    private String platformName;
 
     public String getTokenId()
     {
@@ -119,5 +126,21 @@ public class SysUserOnline
     public void setLoginTime(Long loginTime)
     {
         this.loginTime = loginTime;
+    }
+
+    public Long getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(Long platformId) {
+        this.platformId = platformId;
+    }
+
+    public String getPlatformName() {
+        return platformName;
+    }
+
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
     }
 }
