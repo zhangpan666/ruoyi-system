@@ -32,6 +32,9 @@ public class BetRecordStatVO implements Serializable {
     @ApiModelProperty(example = "注单笔数")
     private int totalCount;
 
+    @ApiModelProperty(example = "投注人数")
+    private int totalUserCount;
+
     @ApiModelProperty(example = "下注金额")
     private BigDecimal totalAmount = BigDecimal.ZERO;
 

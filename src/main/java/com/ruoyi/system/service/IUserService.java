@@ -61,4 +61,6 @@ public interface IUserService
 
     void checkSysUserDataScope(Long userId);
 
+    int getCount(User user);
+
 }

@@ -129,4 +129,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="getCount" parameterType="com.ruoyi.system.domain.User" resultType="java.lang.Integer">
+        select count(*) from t_user
+        <where>
+            <if test="platformId != null "> and platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and platform_user_id = #{platformUserId}</if>
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="lastLoginTime != null "> and last_login_time = #{lastLoginTime}</if>
+            <if test="registerIp != null  and registerIp != ''"> and register_ip = #{registerIp}</if>
+            <if test="registerLocation != null  and registerLocation != ''"> and register_location = #{registerLocation}</if>
+            <if test="sameIp != null "> and same_ip = #{sameIp}</if>
+            <if test="loginIp != null  and loginIp != ''"> and login_ip = #{loginIp}</if>
+            <if test="loginLocation != null  and loginLocation != ''"> and login_location = #{loginLocation}</if>
+        </where>
+    </select>
+
 </mapper>

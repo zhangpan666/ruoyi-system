@@ -115,4 +115,9 @@ public class UserServiceImpl implements IUserService
             }
         }
     }
+
+    @Override
+    public int getCount(User user) {
+        return userMapper.getCount(user);
+    }
 }
