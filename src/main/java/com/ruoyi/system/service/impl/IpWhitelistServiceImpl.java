@@ -131,7 +131,8 @@ public class IpWhitelistServiceImpl implements IIpWhitelistService
         if (ipWhitelistList != null){
             return ipWhitelistList;
         }
-        List<IpWhitelist> selectIpWhitelistList = ipWhitelistMapper.selectIpWhitelistList(new IpWhitelist().setPlatformId(platformId).setType(type));
+        List<IpWhitelist> selectIpWhitelistList = ipWhitelistMapper.selectIpWhitelistList(new IpWhitelist().setPlatformId(platformId).setType(type)
+                .setStatus(CommonConstant.COMMON_STATUS_AVAILABLE));
         ipWhitelistList = selectIpWhitelistList.stream().map(IpWhitelist::getIp).distinct().collect(Collectors.toList());
         redisCache.setCacheObject(key, ipWhitelistList, redisInfo.getExpire(), TimeUnit.MILLISECONDS);
         return ipWhitelistList;
