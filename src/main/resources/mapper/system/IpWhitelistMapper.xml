@@ -28,6 +28,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null "> and a.type = #{type}</if>
             <if test="ip != null  and ip != ''"> and a.ip = #{ip}</if>
             <if test="status != null "> and a.status = #{status}</if>
+             <if test="ids != null and ids.length > 0">
+                 and a.id in
+                 <foreach collection="ids" item="id" open="(" close=")" separator="," index="i">
+                     #{id}
+                 </foreach>
+             </if>
         </where>
         order by a.create_time desc
     </select>

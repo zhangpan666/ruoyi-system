@@ -50,4 +50,6 @@ public class IpWhitelist extends BaseEntity
     @ApiModelProperty(example = "平台名称")
     private String platformName;
 
+    private Long[] ids;
+
 }
