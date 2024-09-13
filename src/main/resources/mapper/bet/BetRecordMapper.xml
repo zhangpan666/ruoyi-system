@@ -204,7 +204,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <select id="statBetRecord" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-        select count(*) as totalCount,count(distinct user_id) as totalUserCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
+        select count(*) as totalCount,count(distinct user_id) as totalBetUserCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
         ,coalesce(sum(win_lose_amount),0) as winLoseAmount from t_bet_record
         <where>
             <if test="platformId != null">
