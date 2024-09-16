@@ -73,4 +73,76 @@ public class CacheServiceImpl implements CacheService {
     public void clearLotteryIssueNoList() {
         redisCache.deleteByPattern(CommonConstant.RedisKey.LOTTERY_ISSUE_NO_LIST.getKeyPrefix());
     }
+
+    @Override
+    public void clearBetLimitAmount() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.BET_LIMIT_AMOUNT.getKeyPrefix());
+    }
+
+
+    @Override
+    public void clearBetLimitAmount(Long platformId) {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.BET_LIMIT_AMOUNT.getKey(platformId));
+    }
+
+    @Override
+    public void clearBetLimitAmount(Long platformId, Long lotteryId) {
+        redisCache.deleteObject(CommonConstant.RedisKey.BET_LIMIT_AMOUNT.getKey(platformId,lotteryId));
+    }
+
+    @Override
+    public void clearOddsMap() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.ODDS_MAP.getKeyPrefix());
+    }
+
+    @Override
+    public void clearOddsList() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.ODDS_LIST.getKeyPrefix());
+    }
+
+    @Override
+    public void clearAllOddsList() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.ALL_ODDS_MAP.getKeyPrefix());
+    }
+
+    @Override
+    public void clearPlatformDetail() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.PLATFORM_DETAIL.getKeyPrefix());
+    }
+
+    @Override
+    public void clearPlatformDetail(Long platformId) {
+        redisCache.deleteObject(CommonConstant.RedisKey.PLATFORM_DETAIL.getKey(platformId));
+    }
+
+    @Override
+    public void clearCancelOrderLimit() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.CANCEL_ORDER_LIMIT.getKeyPrefix());
+    }
+
+    @Override
+    public void clearCancelOrderLimit(Long platformId) {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.CANCEL_ORDER_LIMIT.getKey(platformId));
+    }
+
+    @Override
+    public void clearCancelOrderLimit(Long platformId, Long lotteryId) {
+        redisCache.deleteObject(CommonConstant.RedisKey.CANCEL_ORDER_LIMIT.getKey(platformId,lotteryId));
+    }
+
+
+    @Override
+    public void clearUserBetLimitAmount() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.USER_BET_LIMIT_AMOUNT.getKeyPrefix());
+    }
+
+    @Override
+    public void clearUserBetLimitAmount(Long lotteryId) {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.USER_BET_LIMIT_AMOUNT.getKey(lotteryId));
+    }
+
+    @Override
+    public void clearUserBetLimitAmount(Long lotteryId, Long userId) {
+        redisCache.deleteObject(CommonConstant.RedisKey.USER_BET_LIMIT_AMOUNT.getKey(lotteryId,userId));
+    }
 }

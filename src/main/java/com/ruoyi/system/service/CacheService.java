@@ -24,5 +24,33 @@ public interface CacheService {
 
     void clearLotteryIssueNoList();
 
+    void clearBetLimitAmount();
+
+    void clearBetLimitAmount(Long platformId);
+
+    void clearBetLimitAmount(Long platformId,Long lotteryId);
+
+    void clearOddsMap();
+
+    void clearOddsList();
+
+    void clearAllOddsList();
+
+    void clearPlatformDetail();
+
+    void clearPlatformDetail(Long platformId);
+
+    void clearCancelOrderLimit();
+
+    void clearCancelOrderLimit(Long platformId);
+
+    void clearCancelOrderLimit(Long platformId,Long lotteryId);
+
+    void clearUserBetLimitAmount();
+
+    void clearUserBetLimitAmount(Long lotteryId);
+
+    void clearUserBetLimitAmount(Long lotteryId,Long userId);
+
 
 }
