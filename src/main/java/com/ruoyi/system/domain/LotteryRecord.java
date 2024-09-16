@@ -104,4 +104,25 @@ public class LotteryRecord extends BaseEntity
 
     private List<LotterySingleNumberInfo> numberList;
 
+    @ApiModelProperty(example = "总和")
+    private Integer sum;
+
+    @ApiModelProperty(example = "特码单双")
+    private String teMaDanShuang;
+
+    @ApiModelProperty(example = "特码大小")
+    private String teMaDaXiao;
+
+    @ApiModelProperty(example = "合数单双")
+    private String heShuDanShuang;
+
+    @ApiModelProperty(example = "合数单双")
+    private String zongFenDanShuang;
+
+    @ApiModelProperty(example = "总分大小")
+    private String zongFenDaXiao;
+
+    @ApiModelProperty(example = "波色")
+    private String bs;
+
 }

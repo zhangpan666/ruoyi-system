@@ -10,19 +10,19 @@ import com.ruoyi.system.service.ILotteryRecordService;
 
 /**
  * 开奖记录Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-08-09
  */
 @Service
-public class LotteryRecordServiceImpl implements ILotteryRecordService 
+public class LotteryRecordServiceImpl implements ILotteryRecordService
 {
     @Autowired
     private LotteryRecordMapper lotteryRecordMapper;
 
     /**
      * 查询开奖记录
-     * 
+     *
      * @param id 开奖记录主键
      * @return 开奖记录
      */
@@ -34,7 +34,7 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
 
     /**
      * 查询开奖记录列表
-     * 
+     *
      * @param lotteryRecord 开奖记录
      * @return 开奖记录
      */
@@ -46,7 +46,7 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
 
     /**
      * 新增开奖记录
-     * 
+     *
      * @param lotteryRecord 开奖记录
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
 
     /**
      * 修改开奖记录
-     * 
+     *
      * @param lotteryRecord 开奖记录
      * @return 结果
      */
@@ -72,7 +72,7 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
 
     /**
      * 批量删除开奖记录
-     * 
+     *
      * @param ids 需要删除的开奖记录主键
      * @return 结果
      */
@@ -84,7 +84,7 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
 
     /**
      * 删除开奖记录信息
-     * 
+     *
      * @param id 开奖记录主键
      * @return 结果
      */
