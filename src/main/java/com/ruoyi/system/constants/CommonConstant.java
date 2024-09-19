@@ -28,6 +28,7 @@ public class CommonConstant {
         public static final RedisInfo CURRENT_LOTTERY_PERIOD_INFO = new RedisInfo().setMinute(4).setKeyPrefix("CURRENT_LOTTERY_PERIOD_INFO").setName("当前开奖期数信息");
         public static final RedisInfo LOGIN_USER = new RedisInfo().setMinute(30).setKeyPrefix("LOGIN_USER").setName("登录信息");
         public static final RedisInfo PLAY_TYPE_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLAY_TYPE_LIST").setName("彩票玩法列表");
+        public static final RedisInfo PLAY_TYPE_MAP = new RedisInfo().setMinute(30).setKeyPrefix("PLAY_TYPE_MAP").setName("彩票玩法列表");
         public static final RedisInfo ODDS_LIST = new RedisInfo().setMinute(30).setKeyPrefix("ODDS_LIST").setName("彩票赔率列表");
         public static final RedisInfo ODDS_MAP = new RedisInfo().setMinute(30).setKeyPrefix("ODDS_MAP").setName("彩票赔率列表");
         public static final RedisInfo LOTTERY_LIST = new RedisInfo().setMinute(30).setKeyPrefix("LOTTERY_LIST").setName("彩种列表");
@@ -41,7 +42,6 @@ public class CommonConstant {
         public static final RedisInfo CANCEL_ORDER_LIMIT = new RedisInfo().setHour(2).setKeyPrefix("CANCEL_ORDER_LIMIT").setName("撤单限制");
         public static final RedisInfo ALL_ODDS_MAP = new RedisInfo().setMinute(30).setKeyPrefix("ALL_ODDS_MAP").setName("彩票赔率表");
         public static final RedisInfo PLATFORM_DETAIL = new RedisInfo().setDay(1).setKeyPrefix("PLATFORM_DETAIL").setName("平台详情");
-        public static final RedisInfo IP_WHITE_LIST_LIST = new RedisInfo().setDay(1).setKeyPrefix("IP_WHITE_LIST_LIST").setName("IP白名单列表");
     }
 
 

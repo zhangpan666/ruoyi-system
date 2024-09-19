@@ -20,6 +20,8 @@ public interface CacheService {
 
     void clearPlayTypeList();
 
+    void clearPlayTypeList(Long lotteryId);
+
     void clearCacheForLotteryRecord();
 
     void clearLotteryIssueNoList();
@@ -51,6 +53,10 @@ public interface CacheService {
     void clearUserBetLimitAmount(Long lotteryId);
 
     void clearUserBetLimitAmount(Long lotteryId,Long userId);
+
+    void clearPlayTypeMap();
+
+    void clearPlayTypeMap(Long lotteryId);
 
 
 }

@@ -60,6 +60,11 @@ public class CacheServiceImpl implements CacheService {
     }
 
     @Override
+    public void clearPlayTypeList(Long lotteryId) {
+        redisCache.deleteObject(CommonConstant.RedisKey.PLAY_TYPE_LIST.getKey(lotteryId));
+    }
+
+    @Override
     public void clearCacheForLotteryRecord() {
         this.clearLastLotteryRecord();
         this.clearCurrentLotteryPeriodInfo();
@@ -144,5 +149,15 @@ public class CacheServiceImpl implements CacheService {
     @Override
     public void clearUserBetLimitAmount(Long lotteryId, Long userId) {
         redisCache.deleteObject(CommonConstant.RedisKey.USER_BET_LIMIT_AMOUNT.getKey(lotteryId,userId));
+    }
+
+    @Override
+    public void clearPlayTypeMap() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.PLAY_TYPE_MAP.getKeyPrefix());
+    }
+
+    @Override
+    public void clearPlayTypeMap(Long lotteryId) {
+        redisCache.deleteObject(CommonConstant.RedisKey.PLAY_TYPE_MAP.getKey(lotteryId));
     }
 }
