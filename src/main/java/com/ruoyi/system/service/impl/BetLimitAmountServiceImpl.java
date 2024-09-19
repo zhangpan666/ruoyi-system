@@ -33,7 +33,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
      * @return 投注限额
      */
     @Override
-    public BetLimitAmount selectBetLimitAmountById(String id)
+    public BetLimitAmount selectBetLimitAmountById(Long id)
     {
         return betLimitAmountMapper.selectBetLimitAmountById(id);
     }
@@ -83,7 +83,7 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
      * @return 结果
      */
     @Override
-    public int deleteBetLimitAmountByIds(String[] ids)
+    public int deleteBetLimitAmountByIds(Long[] ids)
     {
         return betLimitAmountMapper.deleteBetLimitAmountByIds(ids);
     }
@@ -95,14 +95,14 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
      * @return 结果
      */
     @Override
-    public int deleteBetLimitAmountById(String id)
+    public int deleteBetLimitAmountById(Long id)
     {
         return betLimitAmountMapper.deleteBetLimitAmountById(id);
     }
 
     @Override
 
-    public void checkBetLimitAmountDataScope(String id) {
+    public void checkBetLimitAmountDataScope(Long id) {
         if (!SysUser.isAdmin(SecurityUtils.getUserId())){
             Long platformId = SecurityUtils.getPlatformId();
             if (platformId != 1L){

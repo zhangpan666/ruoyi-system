@@ -17,7 +17,7 @@ public interface BetLimitAmountMapper
      * @param id 投注限额主键
      * @return 投注限额
      */
-    public BetLimitAmount selectBetLimitAmountById(String id);
+    public BetLimitAmount selectBetLimitAmountById(Long id);
 
     /**
      * 查询投注限额列表
@@ -49,7 +49,7 @@ public interface BetLimitAmountMapper
      * @param id 投注限额主键
      * @return 结果
      */
-    public int deleteBetLimitAmountById(String id);
+    public int deleteBetLimitAmountById(Long id);
 
     /**
      * 批量删除投注限额
@@ -57,5 +57,5 @@ public interface BetLimitAmountMapper
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteBetLimitAmountByIds(String[] ids);
+    public int deleteBetLimitAmountByIds(Long[] ids);
 }
