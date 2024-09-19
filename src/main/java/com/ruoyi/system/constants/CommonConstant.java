@@ -42,6 +42,7 @@ public class CommonConstant {
         public static final RedisInfo CANCEL_ORDER_LIMIT = new RedisInfo().setHour(2).setKeyPrefix("CANCEL_ORDER_LIMIT").setName("撤单限制");
         public static final RedisInfo ALL_ODDS_MAP = new RedisInfo().setMinute(30).setKeyPrefix("ALL_ODDS_MAP").setName("彩票赔率表");
         public static final RedisInfo PLATFORM_DETAIL = new RedisInfo().setDay(1).setKeyPrefix("PLATFORM_DETAIL").setName("平台详情");
+        public static final RedisInfo IP_WHITE_LIST_LIST = new RedisInfo().setDay(1).setKeyPrefix("IP_WHITE_LIST_LIST").setName("IP白名单列表");
     }
 
 
