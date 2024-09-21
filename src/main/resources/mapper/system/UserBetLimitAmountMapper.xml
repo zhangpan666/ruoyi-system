@@ -34,15 +34,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
-    <select id="selectUserBetLimitAmountById" parameterType="String" resultMap="UserBetLimitAmountResult">
+    <select id="selectUserBetLimitAmountById" parameterType="Long" resultMap="UserBetLimitAmountResult">
         <include refid="selectUserBetLimitAmountVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertUserBetLimitAmount" parameterType="UserBetLimitAmount">
+    <insert id="insertUserBetLimitAmount" parameterType="UserBetLimitAmount" useGeneratedKeys="true" keyProperty="id">
         insert into t_user_bet_limit_amount
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="userId != null">user_id,</if>
             <if test="lotteryId != null">lottery_id,</if>
             <if test="type != null">type,</if>
@@ -54,7 +53,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="userId != null">#{userId},</if>
             <if test="lotteryId != null">#{lotteryId},</if>
             <if test="type != null">#{type},</if>
@@ -83,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteUserBetLimitAmountById" parameterType="String">
+    <delete id="deleteUserBetLimitAmountById" parameterType="Long">
         delete from t_user_bet_limit_amount where id = #{id}
     </delete>
 

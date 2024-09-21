@@ -1,26 +1,32 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.BetLimitAmount;
+import com.ruoyi.system.service.IBetLimitAmountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.UserBetLimitAmountMapper;
 import com.ruoyi.system.domain.UserBetLimitAmount;
 import com.ruoyi.system.service.IUserBetLimitAmountService;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户投注限额Service业务层处理
  *
  * @author ruoyi
- * @date 2024-08-22
+ * @date 2024-09-21
  */
 @Service
-@Transactional
 public class UserBetLimitAmountServiceImpl implements IUserBetLimitAmountService
 {
     @Autowired
     private UserBetLimitAmountMapper userBetLimitAmountMapper;
+
+    @Autowired
+    private IBetLimitAmountService betLimitAmountService;
 
     /**
      * 查询用户投注限额
@@ -29,7 +35,7 @@ public class UserBetLimitAmountServiceImpl implements IUserBetLimitAmountService
      * @return 用户投注限额
      */
     @Override
-    public UserBetLimitAmount selectUserBetLimitAmountById(String id)
+    public UserBetLimitAmount selectUserBetLimitAmountById(Long id)
     {
         return userBetLimitAmountMapper.selectUserBetLimitAmountById(id);
     }
@@ -79,7 +85,7 @@ public class UserBetLimitAmountServiceImpl implements IUserBetLimitAmountService
      * @return 结果
      */
     @Override
-    public int deleteUserBetLimitAmountByIds(String[] ids)
+    public int deleteUserBetLimitAmountByIds(Long[] ids)
     {
         return userBetLimitAmountMapper.deleteUserBetLimitAmountByIds(ids);
     }
@@ -91,8 +97,22 @@ public class UserBetLimitAmountServiceImpl implements IUserBetLimitAmountService
      * @return 结果
      */
     @Override
-    public int deleteUserBetLimitAmountById(String id)
+    public int deleteUserBetLimitAmountById(Long id)
     {
         return userBetLimitAmountMapper.deleteUserBetLimitAmountById(id);
     }
+
+
+    @Override
+    public void initUserBetLimitAmount(Long userId) {
+        List<BetLimitAmount> betLimitAmountList = betLimitAmountService.selectBetLimitAmountList(new BetLimitAmount().setPlatformId(0L));
+        List<UserBetLimitAmount> userBetLimitAmountList = betLimitAmountList.stream().map(betLimitAmount -> new UserBetLimitAmount().setLotteryId(betLimitAmount.getLotteryId()).setType(betLimitAmount.getType())
+                .setUserId(userId).setSingleTimeBetMinAmount(betLimitAmount.getSingleTimeBetMinAmount()).setSingleTimeBetMaxAmount(betLimitAmount.getSingleTimeBetMaxAmount())
+                .setSinglePeriodBetMaxAmount(betLimitAmount.getSinglePeriodBetMaxAmount())).collect(Collectors.toList());
+        userBetLimitAmountList.forEach(userBetLimitAmount -> {
+            userBetLimitAmountMapper.insertUserBetLimitAmount(userBetLimitAmount);
+        });
+    }
+
+
 }
