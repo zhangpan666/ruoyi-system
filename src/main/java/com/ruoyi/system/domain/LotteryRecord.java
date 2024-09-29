@@ -116,7 +116,7 @@ public class LotteryRecord extends BaseEntity
     @ApiModelProperty(example = "合数单双")
     private String heShuDanShuang;
 
-    @ApiModelProperty(example = "合数单双")
+    @ApiModelProperty(example = "总分单双")
     private String zongFenDanShuang;
 
     @ApiModelProperty(example = "总分大小")
