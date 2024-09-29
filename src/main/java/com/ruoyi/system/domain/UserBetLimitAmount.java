@@ -27,7 +27,7 @@ public class UserBetLimitAmount extends BaseEntity
 
     /** ID */
     @ApiModelProperty(example = "id")
-    private String id;
+    private Long id;
 
     /** 用户ID */
     @Excel(name = "用户ID")

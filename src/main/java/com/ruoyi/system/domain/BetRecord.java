@@ -154,6 +154,15 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
 
+    @Excel(name = "单注投注金额")
+    @ApiModelProperty(example = "单注投注金额")
+    private BigDecimal singleTimeBetAmount;
+
+    @Excel(name = "注数")
+    @ApiModelProperty(example = "注数")
+    private Integer singleTimeCount;
+
+
     private Byte timeType;
 
     private Byte type;
