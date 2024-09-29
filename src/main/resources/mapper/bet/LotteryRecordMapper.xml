@@ -125,4 +125,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <select id="selectLotteryRecordByIds" parameterType="Long" resultMap="LotteryRecordResult">
+        select * from t_lottery_record
+        where id in
+        <foreach collection="idList" item="id" open="(" close=")" index="i" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+
 </mapper>

@@ -93,4 +93,10 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
     {
         return lotteryRecordMapper.deleteLotteryRecordById(id);
     }
+
+
+    @Override
+    public List<LotteryRecord> selectLotteryRecordByIds(List<Long> idList) {
+        return lotteryRecordMapper.selectLotteryRecordByIds(idList);
+    }
 }
