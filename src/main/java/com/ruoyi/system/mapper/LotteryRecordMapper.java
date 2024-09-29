@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.LotteryRecord;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 开奖记录Mapper接口
@@ -60,6 +61,6 @@ public interface LotteryRecordMapper
     public int deleteLotteryRecordByIds(Long[] ids);
 
 
-    List<LotteryRecord> selectLotteryRecordByIds(List<Long> idList);
+    List<LotteryRecord> selectLotteryRecordByIds(@Param("idList") List<Long> idList);
 
 }
