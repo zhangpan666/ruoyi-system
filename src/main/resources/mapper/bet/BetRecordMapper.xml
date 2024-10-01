@@ -34,11 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="singleTimeBetAmount"    column="single_time_bet_amount"    />
         <result property="singleTimeCount"    column="single_time_count"    />
+        <result property="winAmount"    column="win_amount"    />
     </resultMap>
 
     <sql id="selectBetRecordVo">
         select id, user_id, bet_amount, can_win_amount, bet_content, display_bet_content, bet_odds, bet_additional_odds, platform_id, platform_user_id, lottery_id, issue_no, play_type_name, win, win_lose_amount, play_type_code, play_type_detail_code, bet_no, status
-        , cancel_type, bet_time, count_time, create_time, update_time, create_by, update_by,single_time_bet_amount,single_time_count from t_bet_record
+        , cancel_type, bet_time, count_time, create_time, update_time, create_by, update_by,single_time_bet_amount,single_time_count,win_amount from t_bet_record
     </sql>
 
     <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">

@@ -105,6 +105,11 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(example = "输赢状态，1-赢，0-输，2-打和")
     private Byte win;
 
+    /** 派彩金额 */
+    @Excel(name = "派彩金额")
+    @ApiModelProperty(example = "派彩金额")
+    private BigDecimal winAmount;
+
     /** 输赢金额 */
     @Excel(name = "输赢金额")
     @ApiModelProperty(example = "输赢金额")
