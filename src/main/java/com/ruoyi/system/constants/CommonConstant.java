@@ -357,6 +357,12 @@ public class CommonConstant {
     }
 
 
+    public static class ReportStatType {
+        public static final CommonConstantInfo BY_DATE = new CommonConstantInfo(1, "按日期");
+        public static final CommonConstantInfo BY_ISSUENO = new CommonConstantInfo(2, "按期数");
+    }
+
+
     public static class ReportType {
         public static final CommonConstantInfo SETTLEMENT_REPORT = new CommonConstantInfo(1, "交收报表");
         public static final CommonConstantInfo CLASSIFICATION_REPORT = new CommonConstantInfo(2, "分类报表");

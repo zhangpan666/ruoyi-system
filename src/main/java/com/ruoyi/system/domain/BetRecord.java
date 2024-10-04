@@ -171,6 +171,8 @@ public class BetRecord extends BaseEntity
 
     private Byte type;
 
+    private Byte reportType;
+
     private Date beginTime;
 
     private Date endTime;
