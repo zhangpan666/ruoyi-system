@@ -369,6 +369,14 @@ public class CommonConstant {
     }
 
 
+    public static class BetRecordCountStatus {
+        public static final CommonConstantInfo STATUS_WAIT = new CommonConstantInfo(0, "待结算");
+        public static final CommonConstantInfo STATUS_ING = new CommonConstantInfo(1, "结算中");
+        public static final CommonConstantInfo STATUS_SUCCESS = new CommonConstantInfo(2, "结算完成");
+        public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(BetRecordCountStatus.class);
+    }
+
+
     public static void main(String[] args) {
 
     }
