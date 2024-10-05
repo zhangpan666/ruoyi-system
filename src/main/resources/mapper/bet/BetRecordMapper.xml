@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         and a.count_time &gt;= #{beginTime}
                     </when>
                     <otherwise>
-                        and a.count_time &gt;= #{beginTime}
+                        and a.bet_time &gt;= #{beginTime}
                     </otherwise>
                 </choose>
             </if>
@@ -91,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         and a.count_time &lt;= #{endTime}
                     </when>
                     <otherwise>
-                        and a.count_time &lt;= #{endTime}
+                        and a.bet_time &lt;= #{endTime}
                     </otherwise>
                 </choose>
             </if>
