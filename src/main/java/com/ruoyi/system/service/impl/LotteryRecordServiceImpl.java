@@ -1,7 +1,9 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.LotteryRecordMapper;
@@ -97,6 +99,9 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
 
     @Override
     public List<LotteryRecord> selectLotteryRecordByIds(List<Long> idList) {
+        if (CollectionUtils.isEmpty(idList)){
+            return new ArrayList<>();
+        }
         return lotteryRecordMapper.selectLotteryRecordByIds(idList);
     }
 }
