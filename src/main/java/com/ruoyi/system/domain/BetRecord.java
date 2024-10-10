@@ -101,7 +101,7 @@ public class BetRecord extends BaseEntity
     private String playTypeName;
 
     /** 输赢状态，1-赢，0-输，2-打和 */
-    @Excel(name = "输赢状态，1-赢，0-输，2-打和")
+    @Excel(name = "输赢状态", readConverterExp = "1=赢,0=输,2=打和")
     @ApiModelProperty(example = "输赢状态，1-赢，0-输，2-打和")
     private Byte win;
 
@@ -131,12 +131,12 @@ public class BetRecord extends BaseEntity
     private String betNo;
 
     /** 注单状态，0-待结算，1-结算成功，2-结算失败，3-已撤单 */
-    @Excel(name = "注单状态，0-待结算，1-结算成功，2-结算失败，3-已撤单")
+    @Excel(name = "注单状态", readConverterExp = "0=待结算,1=结算成功,2=结算失败,3=已撤单")
     @ApiModelProperty(example = "注单状态，0-待结算，1-结算成功，2-结算失败，3-已撤单")
     private Byte status;
 
     /** 撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单 */
-    @Excel(name = "撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单")
+    @Excel(name = "撤单类型", readConverterExp = "1=个人撤单,2=系统撤单,3=管理员撤单")
     @ApiModelProperty(example = "撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单")
     private Byte cancelType;
 
