@@ -1,9 +1,7 @@
 package com.ruoyi.system.pojo;
 
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.light.core.utils.DateUtils;
-import com.ruoyi.common.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -16,7 +14,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class BetRecordStatVO implements Serializable {
 
-    @JSONField(format = DateUtils.DATE_FORMAT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "日期")
     private Date betDate;
 
