@@ -1,16 +1,15 @@
 package com.ruoyi.system.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.core.domain.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 彩种对象 t_lottery
@@ -108,5 +107,11 @@ public class Lottery extends BaseEntity
 
     @ApiModelProperty(example = "高度")
     private Integer height;
+
+    /**
+     * 开奖直播地址
+     */
+    @ApiModelProperty(example = "开奖直播地址")
+    private String lotteryLiveAddress;
 
 }

@@ -1,8 +1,8 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,7 +110,7 @@ public class BetRecordServiceImpl implements IBetRecordService
 
 
     @Override
-    public List<BetRecordStatVO> statBetRecordAndGroupByDate(BetRecord betRecord) {
+    public List<BetRecordDateStatVO> statBetRecordAndGroupByDate(BetRecord betRecord) {
         return betRecordMapper.statBetRecordAndGroupByDate(betRecord);
     }
 

@@ -3,6 +3,7 @@ package com.ruoyi.system.mapper;
 import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.BetRecord;
+import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -66,7 +67,7 @@ public interface BetRecordMapper
 
     List<BetRecordStatVO> statBetRecordAndGroupByUserId(BetRecord betRecord);
 
-    List<BetRecordStatVO> statBetRecordAndGroupByDate(BetRecord betRecord);
+    List<BetRecordDateStatVO> statBetRecordAndGroupByDate(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByLotteryId(BetRecord betRecord);
 
