@@ -114,4 +114,11 @@ public class Lottery extends BaseEntity
     @ApiModelProperty(example = "开奖直播地址")
     private String lotteryLiveAddress;
 
+    @ApiModelProperty(example = "封盘倒计时，单位毫秒")
+    private long closeCount;
+
+    @ApiModelProperty(example = "开奖倒计时，单位毫秒")
+    private long openCount;
+
+
 }
