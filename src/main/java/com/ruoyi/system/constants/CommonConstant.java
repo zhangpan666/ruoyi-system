@@ -341,16 +341,6 @@ public class CommonConstant {
     }
 
 
-    public static class MessageType {
-        public static final CommonConstantInfo CONNECT_NOTICE = new CommonConstantInfo(1, "连接通知");
-        public static final CommonConstantInfo LOTTERY_VIDEO_NOTICE = new CommonConstantInfo(2, "开奖直播通知");
-        public static final CommonConstantInfo REFRESH_CONFIGURATION_VAR_NOTICE = new CommonConstantInfo(3, "系统参数变更通知");
-        public static final CommonConstantInfo LOTTERY_CLOSE_NOTICE = new CommonConstantInfo(4, "封盘通知");
-        public static final CommonConstantInfo LOTTERY_PREPARE_NOTICE = new CommonConstantInfo(5, "准备开奖通知");
-        public static final CommonConstantInfo LOTTERY_COMPLETE_NOTICE = new CommonConstantInfo(6, "开奖结束通知");
-        public static final CommonConstantInfo LOTTERY_PUSH_NOTICE = new CommonConstantInfo(7, "开奖结果通知");
-    }
-
     public static class CancelOrderLimitType {
         public static final CommonConstantInfo BEFORE_CLOSE = new CommonConstantInfo(1, "封盘前");
         public static final CommonConstantInfo AFTER_BET = new CommonConstantInfo(2, "下注后");
@@ -374,6 +364,18 @@ public class CommonConstant {
         public static final CommonConstantInfo STATUS_ING = new CommonConstantInfo(1, "结算中");
         public static final CommonConstantInfo STATUS_SUCCESS = new CommonConstantInfo(2, "结算完成");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(BetRecordCountStatus.class);
+    }
+
+
+    public static class MessageType {
+        public static final CommonConstantInfo CONNECT_NOTICE = new CommonConstantInfo(1, "连接通知");
+        public static final CommonConstantInfo LOTTERY_VIDEO_NOTICE = new CommonConstantInfo(2, "开奖直播通知");
+        public static final CommonConstantInfo REFRESH_CONFIGURATION_VAR_NOTICE = new CommonConstantInfo(3, "系统参数变更通知");
+        public static final CommonConstantInfo LOTTERY_CLOSE_NOTICE = new CommonConstantInfo(4, "封盘通知");
+        public static final CommonConstantInfo LOTTERY_PREPARE_NOTICE = new CommonConstantInfo(5, "准备开奖通知");
+        public static final CommonConstantInfo LOTTERY_COMPLETE_NOTICE = new CommonConstantInfo(6, "开奖结束通知");
+        public static final CommonConstantInfo LOTTERY_PUSH_NOTICE = new CommonConstantInfo(7, "开奖结果通知");
+        public static final CommonConstantInfo LOTTERY_COUNT_NOTICE = new CommonConstantInfo(8, "开奖结算通知");
     }
 
 

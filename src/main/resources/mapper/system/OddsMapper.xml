@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectOddsList" parameterType="Odds" resultMap="OddsResult">
-        select a.*,b.description from t_odds a left join t_play_type_detail b on a.code =b.code
+        select a.*,b.description from t_odds a inner join t_play_type_detail b on a.code =b.code
         <where>
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
             <if test="code != null  and code != ''"> and a.code = #{code}</if>
@@ -32,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sort != null "> and a.sort = #{sort}</if>
             <if test="status != null "> and a.status = #{status}</if>
             <if test="playTypeCode != null "> and b.play_type_code = #{playTypeCode}</if>
+            <if test="playTypeItem != null "> and b.play_type_item = #{playTypeItem}</if>
         </where>
     </select>
 

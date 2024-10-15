@@ -67,4 +67,8 @@ public class Odds extends BaseEntity
 
     private Byte playTypeCode;
 
+    private Byte playTypeItem;
+
+
+
 }
