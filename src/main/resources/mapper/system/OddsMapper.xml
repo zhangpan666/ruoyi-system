@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="description"    column="description"    />
+        <result property="value"    column="value"    />
     </resultMap>
 
     <sql id="selectOddsVo">
@@ -23,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectOddsList" parameterType="Odds" resultMap="OddsResult">
-        select a.*,b.description from t_odds a inner join t_play_type_detail b on a.code =b.code
+        select a.*,b.value,b.description from t_odds a inner join t_play_type_detail b on a.code =b.code
         <where>
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
             <if test="code != null  and code != ''"> and a.code = #{code}</if>
