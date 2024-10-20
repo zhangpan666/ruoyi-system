@@ -65,12 +65,12 @@ public class Lottery extends BaseEntity
     /** 开奖周期，单位：分钟 */
     @Excel(name = "开奖周期，单位：分钟")
     @ApiModelProperty(example = "开奖周期，单位：分钟")
-    private Integer cycle;
+    private Integer lotteryPeriod;
 
     /** 封盘时间，单位：秒 */
     @Excel(name = "封盘时间，单位：秒")
     @ApiModelProperty(example = "封盘时间，单位：秒")
-    private Integer close;
+    private Integer closePeriod;
 
     /** 杀率 */
     @Excel(name = "杀率")
