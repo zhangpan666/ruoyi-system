@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 </choose>
             </if>
         </where>
-            order by a.id desc
+            order by a.bet_time desc
     </select>
 
     <select id="selectBetRecordById" parameterType="Long" resultMap="BetRecordResult">
