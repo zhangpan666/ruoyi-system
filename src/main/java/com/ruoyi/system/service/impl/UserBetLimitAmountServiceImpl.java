@@ -105,7 +105,7 @@ public class UserBetLimitAmountServiceImpl implements IUserBetLimitAmountService
 
     @Override
     public void initUserBetLimitAmount(Long userId) {
-        List<BetLimitAmount> betLimitAmountList = betLimitAmountService.selectBetLimitAmountList(new BetLimitAmount().setPlatformId(0L));
+        List<BetLimitAmount> betLimitAmountList = betLimitAmountService.selectBetLimitAmountList(new BetLimitAmount().setPlatformId(1L));
         List<UserBetLimitAmount> userBetLimitAmountList = betLimitAmountList.stream().map(betLimitAmount -> new UserBetLimitAmount().setLotteryId(betLimitAmount.getLotteryId()).setType(betLimitAmount.getType())
                 .setUserId(userId).setSingleTimeBetMinAmount(betLimitAmount.getSingleTimeBetMinAmount()).setSingleTimeBetMaxAmount(betLimitAmount.getSingleTimeBetMaxAmount())
                 .setSinglePeriodBetMaxAmount(betLimitAmount.getSinglePeriodBetMaxAmount())).collect(Collectors.toList());
