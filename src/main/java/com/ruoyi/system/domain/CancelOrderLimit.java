@@ -61,4 +61,7 @@ public class CancelOrderLimit extends BaseEntity
     @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
 
+    @ApiModelProperty(example = "平台名称")
+    private String platformName;
+
 }

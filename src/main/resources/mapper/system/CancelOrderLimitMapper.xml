@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="lotteryName"    column="lotteryName"    />
+        <result property="platformName"    column="platformName"    />
     </resultMap>
 
     <sql id="selectCancelOrderLimitVo">
@@ -22,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectCancelOrderLimitList" parameterType="CancelOrderLimit" resultMap="CancelOrderLimitResult">
-        select a.*,b.name as lotteryName from t_cancel_order_limit a inner join t_lottery b on a.lottery_id = b.id
+        select a.*,b.name as lotteryName,c.name as platformName from t_cancel_order_limit a inner join t_lottery b on a.lottery_id = b.id
+        inner join t_platform c on a.platform_id = c.id
         <where>
             <if test="platformId != null "> and a.platform_id = #{platformId}</if>
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
