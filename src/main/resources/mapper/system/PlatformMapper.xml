@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.PlatformMapper">
-    
+
     <resultMap type="Platform" id="PlatformResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
@@ -22,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPlatformList" parameterType="Platform" resultMap="PlatformResult">
         <include refid="selectPlatformVo"/>
-        <where>  
+        <where>
+            <if test="id != null "> and id = #{id}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="md5Key != null  and md5Key != ''"> and md5_key = #{md5Key}</if>
             <if test="secretKey != null  and secretKey != ''"> and secret_key = #{secretKey}</if>
@@ -30,8 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="creditLimit != null "> and credit_limit = #{creditLimit}</if>
             <if test="usedCreditLimit != null "> and used_credit_limit = #{usedCreditLimit}</if>
         </where>
+            order by create_time desc
     </select>
-    
+
     <select id="selectPlatformById" parameterType="Long" resultMap="PlatformResult">
         <include refid="selectPlatformVo"/>
         where id = #{id}
@@ -81,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deletePlatformByIds" parameterType="String">
-        delete from t_platform where id in 
+        delete from t_platform where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
