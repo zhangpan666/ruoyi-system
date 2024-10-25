@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND login_time &lt;= #{params.endTime}
 			</if>
 		</where>
-		order by info_id desc
+		order by login_time desc
 	</select>
 
 	<delete id="deleteLogininforByIds" parameterType="Long">
