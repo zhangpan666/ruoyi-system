@@ -38,6 +38,10 @@ public class LotteryRecord extends BaseEntity
     @ApiModelProperty(example = "彩种ID")
     private Long lotteryId;
 
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(example = "彩种名称")
+    private String lotteryName;
+
     /** 年份 */
     @Excel(name = "年份")
     @ApiModelProperty(example = "年份")
@@ -98,10 +102,6 @@ public class LotteryRecord extends BaseEntity
     @Excel(name = "开奖状态", readConverterExp = "0=开奖中,1=开奖完成")
     @ApiModelProperty(example = "开奖状态，0-开奖中，1-开奖完成")
     private Byte lotteryStatus;
-
-    @Excel(name = "彩种名称")
-    @ApiModelProperty(example = "彩种名称")
-    private String lotteryName;
 
     private List<LotterySingleNumberInfo> numberList;
 
