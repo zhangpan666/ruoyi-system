@@ -49,6 +49,7 @@ public class LotteryRecord extends BaseEntity
     private String issueNo;
 
     /** 开奖日期 */
+    @Excel(name = "开奖日期")
     @ApiModelProperty(example = "开奖日期")
     private String date;
 
@@ -74,7 +75,7 @@ public class LotteryRecord extends BaseEntity
     private String numbers;
 
     /** 状态(1-有效，0-无效) */
-    @Excel(name = "状态(1-有效，0-无效)")
+    @Excel(name = "状态", readConverterExp = "1=有效,0=无效")
     @ApiModelProperty(example = "状态(1-有效，0-无效)")
     private Byte status;
 
@@ -84,17 +85,17 @@ public class LotteryRecord extends BaseEntity
     private String lotteryVideoPath;
 
     /** 开奖回放视频上传状态，0-未上传，1-已上传 */
-    @Excel(name = "开奖回放视频上传状态，0-未上传，1-已上传")
+    @Excel(name = "开奖回放视频上传状态", readConverterExp = "0=未上传,1=已上传")
     @ApiModelProperty(example = "开奖回放视频上传状态，0-未上传，1-已上传")
     private Byte lotteryVideoStatus;
 
     /** 注单结算状态，0-待结算，1-结算中，2-结算完成 */
-    @Excel(name = "注单结算状态，0-待结算，1-结算中，2-结算完成")
+    @Excel(name = "注单结算状态", readConverterExp = "0=待结算,1=结算中,2=结算完成")
     @ApiModelProperty(example = "注单结算状态，0-待结算，1-结算中，2-结算完成")
     private Byte betRecordCountStatus;
 
     /** 开奖状态，0-开奖中，1-开奖完成 */
-    @Excel(name = "开奖状态，0-开奖中，1-开奖完成")
+    @Excel(name = "开奖状态", readConverterExp = "0=开奖中,1=开奖完成")
     @ApiModelProperty(example = "开奖状态，0-开奖中，1-开奖完成")
     private Byte lotteryStatus;
 
