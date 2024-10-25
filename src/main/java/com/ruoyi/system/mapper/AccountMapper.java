@@ -77,5 +77,6 @@ public interface AccountMapper
 
     int reduceTotalWinLoseAmount(@Param(value = "amount") BigDecimal amount, @Param(value = "accountId") Long accountId);
 
+    BigDecimal getTotalAvailableBalance(Account account);
 
 }

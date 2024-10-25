@@ -76,4 +76,6 @@ public interface IAccountService
 
     int reduceTotalWinLoseAmount(BigDecimal amount, Long accountId);
 
+    BigDecimal getTotalAvailableBalance(Account account);
+
 }

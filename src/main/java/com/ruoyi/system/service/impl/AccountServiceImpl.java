@@ -138,4 +138,8 @@ public class AccountServiceImpl implements IAccountService
         return accountMapper.reduceTotalWinLoseAmount(amount, accountId);
     }
 
+    @Override
+    public BigDecimal getTotalAvailableBalance(Account account) {
+        return accountMapper.getTotalAvailableBalance(account);
+    }
 }
