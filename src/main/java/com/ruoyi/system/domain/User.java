@@ -27,29 +27,29 @@ public class User extends BaseEntity {
     /**
      * 主键ID
      */
-    @Excel(name = "用户id")
-    @ApiModelProperty(example = "用户ID")
+    @Excel(name = "id")
+    @ApiModelProperty(value = "ID")
     private Long id;
 
     /**
      * 平台id
      */
     @Excel(name = "平台id")
-    @ApiModelProperty(example = "平台ID")
+    @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
     /**
      * 平台用户id
      */
     @Excel(name = "平台用户id")
-    @ApiModelProperty(example = "平台用户ID")
+    @ApiModelProperty(value = "平台用户ID")
     private Long platformUserId;
 
     /**
      * 昵称
      */
     @Excel(name = "昵称")
-    @ApiModelProperty(example = "昵称")
+    @ApiModelProperty(value = "昵称")
     private String nickname;
 
 
@@ -76,7 +76,7 @@ public class User extends BaseEntity {
      * 状态
      */
     @Excel(name = "状态", readConverterExp = "1=正常,0=停用")
-    @ApiModelProperty(example = "状态，1=正常,0=停用")
+    @ApiModelProperty(value = "状态，1=正常,0=停用")
     private Byte status;
 
     /**
@@ -84,21 +84,21 @@ public class User extends BaseEntity {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "最近登录时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(example = "最近登录时间")
+    @ApiModelProperty(value = "最近登录时间")
     private Date lastLoginTime;
 
     /**
      * IP地址
      */
     @Excel(name = "IP地址")
-    @ApiModelProperty(example = "IP地址")
+    @ApiModelProperty(value = "IP地址")
     private String registerIp;
 
     /**
      * 注册地
      */
     @Excel(name = "注册地")
-    @ApiModelProperty(example = "注册地")
+    @ApiModelProperty(value = "注册地")
     private String registerLocation;
 
     /**
@@ -110,26 +110,26 @@ public class User extends BaseEntity {
      * 登录IP地址
      */
     @Excel(name = "登录IP地址")
-    @ApiModelProperty(example = "登录IP地址")
+    @ApiModelProperty(value = "登录IP地址")
     private String loginIp;
 
     /**
      * 登录地
      */
     @Excel(name = "登录地")
-    @ApiModelProperty(example = "登录地")
+    @ApiModelProperty(value = "登录地")
     private String loginLocation;
 
     /**
      * 平台名称
      */
     @Excel(name = "平台名称", type = Excel.Type.EXPORT)
-    @ApiModelProperty(example = "平台名称")
+    @ApiModelProperty(value = "平台名称")
     private String platformName;
 
     /** 可用余额 */
     @Excel(name = "可用余额")
-    @ApiModelProperty(example = "可用余额")
+    @ApiModelProperty(value = "可用余额")
     private BigDecimal availableBalance;
 
     private Date beginTime;
