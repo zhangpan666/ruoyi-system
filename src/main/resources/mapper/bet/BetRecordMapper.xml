@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             order by a.bet_time desc
     </select>
 
-    <select id="selectBetRecordById" parameterType="String" resultMap="BetRecordResult">
+    <select id="selectBetRecordById" parameterType="Long" resultMap="BetRecordResult">
         <include refid="selectBetRecordVo"/>
         where id = #{id}
     </select>
@@ -195,7 +195,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteBetRecordById" parameterType="String">
+    <delete id="deleteBetRecordById" parameterType="Long">
         delete from t_bet_record where id = #{id}
     </delete>
 

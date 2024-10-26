@@ -31,7 +31,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 投注记录
      */
     @Override
-    public BetRecord selectBetRecordById(String id)
+    public BetRecord selectBetRecordById(Long id)
     {
         return betRecordMapper.selectBetRecordById(id);
     }
@@ -81,7 +81,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 结果
      */
     @Override
-    public int deleteBetRecordByIds(String[] ids)
+    public int deleteBetRecordByIds(Long[] ids)
     {
         return betRecordMapper.deleteBetRecordByIds(ids);
     }
@@ -93,7 +93,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 结果
      */
     @Override
-    public int deleteBetRecordById(String id)
+    public int deleteBetRecordById(Long id)
     {
         return betRecordMapper.deleteBetRecordById(id);
     }

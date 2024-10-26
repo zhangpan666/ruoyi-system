@@ -21,7 +21,7 @@ public interface BetRecordMapper
      * @param id 投注记录主键
      * @return 投注记录
      */
-    public BetRecord selectBetRecordById(String id);
+    public BetRecord selectBetRecordById(Long id);
 
     /**
      * 查询投注记录列表
@@ -53,7 +53,7 @@ public interface BetRecordMapper
      * @param id 投注记录主键
      * @return 结果
      */
-    public int deleteBetRecordById(String id);
+    public int deleteBetRecordById(Long id);
 
     /**
      * 批量删除投注记录
@@ -61,7 +61,7 @@ public interface BetRecordMapper
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteBetRecordByIds(String[] ids);
+    public int deleteBetRecordByIds(Long[] ids);
 
     BetRecordStatVO statBetRecord(BetRecord betRecord);
 

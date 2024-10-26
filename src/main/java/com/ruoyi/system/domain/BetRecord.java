@@ -32,7 +32,10 @@ public class BetRecord extends BaseEntity
     /** ID */
     @Excel(name = "id")
     @ApiModelProperty(value = "id")
-    private String id;
+    private Long id;
+
+    @ApiModelProperty(value = "id，字符串类型")
+    private String idStr;
 
     /** 用户ID */
     @Excel(name = "用户ID")
