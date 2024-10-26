@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="singleTimeBetAmount"    column="single_time_bet_amount"    />
         <result property="singleTimeCount"    column="single_time_count"    />
         <result property="winAmount"    column="win_amount"    />
+        <result property="idStr"    column="idStr"    />
     </resultMap>
 
     <sql id="selectBetRecordVo">
@@ -43,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">
-        select a.*, b.name as lotteryName from t_bet_record a inner join t_lottery b on a.lottery_id = b.id
+        select a.*,a.id as idStr, b.name as lotteryName from t_bet_record a inner join t_lottery b on a.lottery_id = b.id
         <where>
             <if test="id != null "> and a.id = #{id}</if>
             <if test="userId != null "> and a.user_id = #{userId}</if>
