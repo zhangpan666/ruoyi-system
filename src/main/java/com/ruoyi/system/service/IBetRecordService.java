@@ -19,7 +19,7 @@ public interface IBetRecordService
      * @param id 投注记录主键
      * @return 投注记录
      */
-    public BetRecord selectBetRecordById(Long id);
+    public BetRecord selectBetRecordById(String id);
 
     /**
      * 查询投注记录列表
@@ -51,7 +51,7 @@ public interface IBetRecordService
      * @param ids 需要删除的投注记录主键集合
      * @return 结果
      */
-    public int deleteBetRecordByIds(Long[] ids);
+    public int deleteBetRecordByIds(String[] ids);
 
     /**
      * 删除投注记录信息
@@ -59,7 +59,7 @@ public interface IBetRecordService
      * @param id 投注记录主键
      * @return 结果
      */
-    public int deleteBetRecordById(Long id);
+    public int deleteBetRecordById(String id);
 
     BetRecordStatVO statBetRecord(BetRecord betRecord);
 

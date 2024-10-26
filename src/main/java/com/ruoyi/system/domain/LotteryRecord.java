@@ -29,7 +29,7 @@ public class LotteryRecord extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    @Excel(name = "id")
+    @Excel(name = "ID")
     @ApiModelProperty(example = "ID")
     private Long id;
 
