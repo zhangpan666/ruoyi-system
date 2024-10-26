@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="beginTime != null "> and create_time &gt;= #{beginTime}</if>
             <if test="endTime != null "> and create_time lt;= #{endTime}</if>
         </where>
+            order by create_time desc
     </select>
 
     <select id="selectLoginInfoById" parameterType="Long" resultMap="LoginInfoResult">

@@ -65,13 +65,15 @@ public class LoginInfo
     private Byte status;
 
     @Excel(name = "登录时间", width = 50, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     @Excel(name = "更新时间", width = 50, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     /** 过期时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "过期时间", width = 50, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "id")
     private Date expireTime;
