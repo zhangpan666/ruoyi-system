@@ -6,6 +6,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BetLimitAmountMapper;
@@ -101,7 +102,6 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
     }
 
     @Override
-
     public void checkBetLimitAmountDataScope(Long id) {
         if (!SysUser.isAdmin(SecurityUtils.getUserId())){
             Long platformId = SecurityUtils.getPlatformId();
@@ -113,4 +113,25 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
             }
         }
     }
+
+
+    @Override
+    public void initBetLimitAmount(Long platformId, Long lotteryId) {
+        List<BetLimitAmount> defaultBetLimitAmountList = betLimitAmountMapper.selectBetLimitAmountList(new BetLimitAmount().setPlatformId(1L).setLotteryId(lotteryId));
+        defaultBetLimitAmountList.forEach(betLimitAmount -> {
+            List<BetLimitAmount> betLimitAmountList = betLimitAmountMapper.selectBetLimitAmountList(new BetLimitAmount().setType(betLimitAmount.getType()).setLotteryId(lotteryId).setPlatformId(platformId));
+            BetLimitAmount newBetLimitAmount = new BetLimitAmount().setLotteryId(lotteryId).setSingleTimeBetMinAmount(betLimitAmount.getSingleTimeBetMinAmount())
+                    .setSingleTimeBetMaxAmount(betLimitAmount.getSingleTimeBetMaxAmount()).setSinglePeriodBetMaxAmount(betLimitAmount.getSinglePeriodBetMaxAmount());
+            if (CollectionUtils.isEmpty(betLimitAmountList)){
+                betLimitAmountMapper.insertBetLimitAmount(newBetLimitAmount);
+            } else {
+                BetLimitAmount oldBetLimitAmount = betLimitAmountList.get(0);
+                newBetLimitAmount.setId(oldBetLimitAmount.getId());
+                betLimitAmountMapper.updateBetLimitAmount(newBetLimitAmount);
+            }
+        });
+    }
+
+
+
 }

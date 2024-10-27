@@ -62,4 +62,6 @@ public interface IBetLimitAmountService
 
     void checkBetLimitAmountDataScope(Long id);
 
+
+    void initBetLimitAmount(Long platformId, Long lotteryId);
 }
