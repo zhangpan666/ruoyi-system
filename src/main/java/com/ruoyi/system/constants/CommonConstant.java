@@ -378,6 +378,11 @@ public class CommonConstant {
         public static final CommonConstantInfo LOTTERY_COUNT_NOTICE = new CommonConstantInfo(8, "开奖结算通知");
     }
 
+    public static class WinRateConfigType {
+        public static final CommonConstantInfo FULL_CONTROL = new CommonConstantInfo(1, "全部控制");
+        public static final CommonConstantInfo SINGLE_CONTROL = new CommonConstantInfo(2, "单个控制");
+    }
+
 
     public static void main(String[] args) {
 
