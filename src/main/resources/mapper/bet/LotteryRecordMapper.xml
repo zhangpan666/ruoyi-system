@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="year != null "> and year = #{year}</if>
             <if test="issueNo != null  and issueNo != ''"> and issue_no = #{issueNo}</if>
             <if test="date != null  and date != ''"> and date = #{date}</if>
-            <if test="lotteryTime != null "> and lottery_time = #{lotteryTime}</if>
+            <if test="lotteryTime != null "> and date(lottery_time) = date(#{lotteryTime})</if>
             <if test="sx != null  and sx != ''"> and sx = #{sx}</if>
             <if test="wx != null  and wx != ''"> and wx = #{wx}</if>
             <if test="numbers != null  and numbers != ''"> and numbers = #{numbers}</if>
