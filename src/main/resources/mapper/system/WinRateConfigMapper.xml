@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.WinRateConfigMapper">
+
+    <resultMap type="WinRateConfig" id="WinRateConfigResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="type"    column="type"    />
+        <result property="relatedUserIds"    column="related_user_ids"    />
+        <result property="moneyReturnRate"    column="money_return_rate"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lotteryName"    column="lotteryName"    />
+    </resultMap>
+
+    <sql id="selectWinRateConfigVo">
+        select id, lottery_id, type, related_user_ids, money_return_rate, status,remark, create_time, update_time from t_win_rate_config
+    </sql>
+
+    <select id="selectWinRateConfigList" parameterType="WinRateConfig" resultMap="WinRateConfigResult">
+        select a.*,b.name as lotteryName from t_win_rate_config a inner join t_lottery b on a.id = b.id
+        <where>
+            <if test="id != null "> and a.id = #{id}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="type != null "> and a.type = #{type}</if>
+            <if test="relatedUserIds != null  and relatedUserIds != ''"> and a.related_user_ids = #{relatedUserIds}</if>
+            <if test="moneyReturnRate != null  and moneyReturnRate != ''"> and a.money_return_rate = #{moneyReturnRate}</if>
+            <if test="status != null "> and a.status = #{status}</if>
+        </where>
+        order by a.create_time desc
+    </select>
+
+    <select id="selectWinRateConfigById" parameterType="Long" resultMap="WinRateConfigResult">
+        <include refid="selectWinRateConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWinRateConfig" parameterType="WinRateConfig">
+        insert into t_win_rate_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="type != null">type,</if>
+            <if test="relatedUserIds != null">related_user_ids,</if>
+            <if test="moneyReturnRate != null">money_return_rate,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="relatedUserIds != null">#{relatedUserIds},</if>
+            <if test="moneyReturnRate != null">#{moneyReturnRate},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWinRateConfig" parameterType="WinRateConfig">
+        update t_win_rate_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="relatedUserIds != null">related_user_ids = #{relatedUserIds},</if>
+            <if test="moneyReturnRate != null">money_return_rate = #{moneyReturnRate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWinRateConfigById" parameterType="Long">
+        delete from t_win_rate_config where id = #{id}
+    </delete>
+
+    <delete id="deleteWinRateConfigByIds" parameterType="String">
+        delete from t_win_rate_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
