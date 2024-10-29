@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryOpenPlanMapper">
+
+    <resultMap type="LotteryOpenPlan" id="LotteryOpenPlanResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="issueNo"    column="issue_no"    />
+        <result property="presetNumbers"    column="preset_numbers"    />
+        <result property="autoNumbers"    column="auto_numbers"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lotteryName"    column="lotteryName"    />
+    </resultMap>
+
+    <sql id="selectLotteryOpenPlanVo">
+        select id, lottery_id, issue_no, preset_numbers, auto_numbers, create_time, update_time from t_lottery_open_plan
+    </sql>
+
+    <select id="selectLotteryOpenPlanList" parameterType="LotteryOpenPlan" resultMap="LotteryOpenPlanResult">
+            select a.*,b.name as lotteryName from t_lottery_open_plan a inner  join t_lottery b on a.lottery_id = b.id
+        <where>
+            <if test="id != null "> and a.id = #{id}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="issueNo != null  and issueNo != ''"> and a.issue_no = #{issueNo}</if>
+            <if test="presetNumbers != null  and presetNumbers != ''"> and a.preset_numbers = #{presetNumbers}</if>
+            <if test="autoNumbers != null  and autoNumbers != ''"> and a.auto_numbers = #{autoNumbers}</if>
+        </where>
+        order by a.create_time desc
+    </select>
+
+    <select id="selectLotteryOpenPlanById" parameterType="Long" resultMap="LotteryOpenPlanResult">
+        <include refid="selectLotteryOpenPlanVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryOpenPlan" parameterType="LotteryOpenPlan">
+        insert into t_lottery_open_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="issueNo != null and issueNo != ''">issue_no,</if>
+            <if test="presetNumbers != null">preset_numbers,</if>
+            <if test="autoNumbers != null">auto_numbers,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="issueNo != null and issueNo != ''">#{issueNo},</if>
+            <if test="presetNumbers != null">#{presetNumbers},</if>
+            <if test="autoNumbers != null">#{autoNumbers},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryOpenPlan" parameterType="LotteryOpenPlan">
+        update t_lottery_open_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="issueNo != null and issueNo != ''">issue_no = #{issueNo},</if>
+            <if test="presetNumbers != null">preset_numbers = #{presetNumbers},</if>
+            <if test="autoNumbers != null">auto_numbers = #{autoNumbers},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryOpenPlanById" parameterType="Long">
+        delete from t_lottery_open_plan where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryOpenPlanByIds" parameterType="String">
+        delete from t_lottery_open_plan where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
