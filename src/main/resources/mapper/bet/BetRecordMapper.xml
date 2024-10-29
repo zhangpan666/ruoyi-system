@@ -308,7 +308,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and create_time &lt;#{endTime}
             </if>
         </where>
-        group by date(create_time) desc
+        group by date(create_time) order by betDate desc
     </select>
 
     <select id="statBetRecordAndGroupByLotteryId" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
