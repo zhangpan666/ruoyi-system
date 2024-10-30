@@ -16,7 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="rule"    column="rule"    />
         <result property="lotteryPeriod"    column="lottery_period"    />
         <result property="closePeriod"    column="close_period"    />
-        <result property="killRate"    column="kill_rate"    />
         <result property="nextCloseTime"    column="next_close_time"    />
         <result property="nextLotteryTime"    column="next_lottery_time"    />
         <result property="nextLotteryYear"    column="next_lottery_year"    />
@@ -32,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryVo">
-        select id, name, code, status, open_status, sort, remark, description, rule, lottery_period, close_period, kill_rate, next_close_time, next_lottery_time, next_lottery_year, next_issue_no
+        select id, name, code, status, open_status, sort, remark, description, rule, lottery_period, close_period, next_close_time, next_lottery_time, next_lottery_year, next_issue_no
         , icon, width, height, create_by, create_time, update_by, update_time,lottery_live_address from t_lottery
     </sql>
 
@@ -48,7 +47,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rule != null  and rule != ''"> and rule = #{rule}</if>
             <if test="lotteryPeriod != null "> and lottery_period = #{lotteryPeriod}</if>
             <if test="closePeriod != null "> and close_period = #{closePeriod}</if>
-            <if test="killRate != null "> and kill_rate = #{killRate}</if>
             <if test="nextCloseTime != null "> and next_close_time = #{nextCloseTime}</if>
             <if test="nextLotteryTime != null "> and next_lottery_time = #{nextLotteryTime}</if>
             <if test="nextLotteryYear != null "> and next_lottery_year = #{nextLotteryYear}</if>
@@ -74,7 +72,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rule != null">rule,</if>
             <if test="lotteryPeriod != null">lottery_period,</if>
             <if test="closePeriod != null">close_period,</if>
-            <if test="killRate != null">kill_rate,</if>
             <if test="nextCloseTime != null">next_close_time,</if>
             <if test="nextLotteryTime != null">next_lottery_time,</if>
             <if test="nextLotteryYear != null">next_lottery_year,</if>
@@ -96,7 +93,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rule != null">#{rule},</if>
             <if test="lotteryPeriod != null">#{lotteryPeriod},</if>
             <if test="closePeriod != null">#{closePeriod},</if>
-            <if test="killRate != null">#{killRate},</if>
             <if test="nextCloseTime != null">#{nextCloseTime},</if>
             <if test="nextLotteryTime != null">#{nextLotteryTime},</if>
             <if test="nextLotteryYear != null">#{nextLotteryYear},</if>
@@ -123,7 +119,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rule != null">rule = #{rule},</if>
             <if test="lotteryPeriod != null">lottery_period = #{lotteryPeriod},</if>
             <if test="closePeriod != null">close_period = #{closePeriod},</if>
-            <if test="killRate != null">kill_rate = #{killRate},</if>
             <if test="nextCloseTime != null">next_close_time = #{nextCloseTime},</if>
             <if test="nextLotteryTime != null">next_lottery_time = #{nextLotteryTime},</if>
             <if test="nextLotteryYear != null">next_lottery_year = #{nextLotteryYear},</if>
