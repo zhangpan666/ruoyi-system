@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="type"    column="type"    />
         <result property="relatedUserIds"    column="related_user_ids"    />
         <result property="moneyReturnRate"    column="money_return_rate"    />
+        <result property="randomForce"    column="random_force"    />
         <result property="status"    column="status"    />
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
@@ -18,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectWinRateConfigVo">
-        select id, lottery_id, type, related_user_ids, money_return_rate, status,remark, create_time, update_time from t_win_rate_config
+        select id, lottery_id, type, related_user_ids, money_return_rate,random_force, status,remark, create_time, update_time from t_win_rate_config
     </sql>
 
     <select id="selectWinRateConfigList" parameterType="WinRateConfig" resultMap="WinRateConfigResult">

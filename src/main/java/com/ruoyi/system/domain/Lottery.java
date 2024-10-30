@@ -72,11 +72,6 @@ public class Lottery extends BaseEntity
     @ApiModelProperty(example = "封盘时间，单位：秒")
     private Integer closePeriod;
 
-    /** 杀率 */
-    @Excel(name = "杀率")
-    @ApiModelProperty(example = "杀率")
-    private BigDecimal killRate;
-
     /** 下一期封盘时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "下一期封盘时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")

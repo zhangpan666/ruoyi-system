@@ -52,6 +52,11 @@ public class WinRateConfig
     @ApiModelProperty(value = "返奖率")
     private String moneyReturnRate;
 
+    /** 随机力度 */
+    @Excel(name = "随机力度")
+    @ApiModelProperty(value = "随机力度")
+    private Integer randomForce;
+
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态，1-有效，0-无效")
     @ApiModelProperty(value = "状态，1-有效，0-无效")
