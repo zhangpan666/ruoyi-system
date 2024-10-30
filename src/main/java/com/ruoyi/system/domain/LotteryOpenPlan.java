@@ -36,6 +36,10 @@ public class LotteryOpenPlan
     @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
 
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(example = "彩种名称")
+    private String lotteryName;
+
     /** 彩种名称 */
     @Excel(name = "彩种名称")
     @ApiModelProperty(value = "彩种名称")
