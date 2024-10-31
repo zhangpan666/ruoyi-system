@@ -36,8 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectLotteryList" parameterType="Lottery" resultMap="LotteryResult">
-        <include refid="selectLotteryVo"/>
+        select * from t_lottery
         <where>
+            <if test="id != null"> and id = #{id}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="status != null "> and status = #{status}</if>
