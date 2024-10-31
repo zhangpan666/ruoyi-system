@@ -10,19 +10,19 @@ import com.ruoyi.system.service.ILoginInfoService;
 
 /**
  * 登录日志Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-08-29
  */
 @Service
-public class LoginInfoServiceImpl implements ILoginInfoService 
+public class LoginInfoServiceImpl implements ILoginInfoService
 {
     @Autowired
     private LoginInfoMapper loginInfoMapper;
 
     /**
      * 查询登录日志
-     * 
+     *
      * @param id 登录日志主键
      * @return 登录日志
      */
@@ -34,7 +34,7 @@ public class LoginInfoServiceImpl implements ILoginInfoService
 
     /**
      * 查询登录日志列表
-     * 
+     *
      * @param loginInfo 登录日志
      * @return 登录日志
      */
@@ -46,7 +46,7 @@ public class LoginInfoServiceImpl implements ILoginInfoService
 
     /**
      * 新增登录日志
-     * 
+     *
      * @param loginInfo 登录日志
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class LoginInfoServiceImpl implements ILoginInfoService
 
     /**
      * 修改登录日志
-     * 
+     *
      * @param loginInfo 登录日志
      * @return 结果
      */
@@ -72,7 +72,7 @@ public class LoginInfoServiceImpl implements ILoginInfoService
 
     /**
      * 批量删除登录日志
-     * 
+     *
      * @param ids 需要删除的登录日志主键
      * @return 结果
      */
@@ -84,7 +84,7 @@ public class LoginInfoServiceImpl implements ILoginInfoService
 
     /**
      * 删除登录日志信息
-     * 
+     *
      * @param id 登录日志主键
      * @return 结果
      */
@@ -92,5 +92,10 @@ public class LoginInfoServiceImpl implements ILoginInfoService
     public int deleteLoginInfoById(Long id)
     {
         return loginInfoMapper.deleteLoginInfoById(id);
+    }
+
+    @Override
+    public int getLoginUserCount(LoginInfo loginInfo) {
+        return loginInfoMapper.getLoginUserCount(loginInfo);
     }
 }
