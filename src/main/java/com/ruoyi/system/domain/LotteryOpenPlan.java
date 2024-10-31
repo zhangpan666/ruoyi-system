@@ -40,11 +40,6 @@ public class LotteryOpenPlan
     @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
 
-    /** 彩种名称 */
-    @Excel(name = "彩种名称")
-    @ApiModelProperty(value = "彩种名称")
-    private String name;
-
     /** 期号 */
     @Excel(name = "期号")
     @ApiModelProperty(value = "期号")
