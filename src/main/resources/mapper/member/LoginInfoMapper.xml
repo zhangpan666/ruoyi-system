@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null "> and status = #{status}</if>
             <if test="expireTime != null "> and expire_time = #{expireTime}</if>
             <if test="beginTime != null "> and create_time &gt;= #{beginTime}</if>
-            <if test="endTime != null "> and create_time lt;= #{endTime}</if>
+            <if test="endTime != null "> and create_time &lt;= #{endTime}</if>
         </where>
             order by create_time desc
     </select>
@@ -120,10 +120,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="token != null  and token != ''"> and token = #{token}</if>
             <if test="status != null "> and status = #{status}</if>
             <if test="expireTime != null "> and expire_time = #{expireTime}</if>
-            <if test="beginTime != null "> and create_time &gt;= #{beginTime}</if>
-            <if test="endTime != null "> and create_time lt;= #{endTime}</if>
+            <if test="beginTime != null"> and create_time &gt;= #{beginTime}</if>
+            <if test="endTime != null"> and create_time &lt;= #{endTime}</if>
         </where>
-        order by create_time desc
     </select>
 
 

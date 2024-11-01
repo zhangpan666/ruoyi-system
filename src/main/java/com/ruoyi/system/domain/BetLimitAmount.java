@@ -1,7 +1,9 @@
 package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +23,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class BetLimitAmount extends BaseEntity
+public class BetLimitAmount
 {
     private static final long serialVersionUID = 1L;
 
@@ -59,9 +61,28 @@ public class BetLimitAmount extends BaseEntity
     @ApiModelProperty(value = "单期限额")
     private BigDecimal singlePeriodBetMaxAmount;
 
+    /** 创建时间 */
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    /** 更新时间 */
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
     @Excel(name = "限额类型")
     @ApiModelProperty(value = "限额类型")
     private String betLimitAmountName;
 
+    @Excel(name = "平台名称")
+    @ApiModelProperty(example = "平台名称")
+    private String platformName;
+
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(example = "彩种名称")
+    private String lotteryName;
 
 }
