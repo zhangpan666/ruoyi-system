@@ -221,6 +221,11 @@ public class CommonConstant {
         public static final CommonConstantInfo LIAN_XIAO = new CommonConstantInfo(12, "连肖");
         public static final CommonConstantInfo LIAN_WEI = new CommonConstantInfo(13, "连尾");
         public static final CommonConstantInfo LONG_HU_1_6 = new CommonConstantInfo(14, "1-6龙虎");
+        public static final CommonConstantInfo ZONG_XIAO = new CommonConstantInfo(15, "总肖");
+        public static final CommonConstantInfo ZONG_HE = new CommonConstantInfo(16, "总和");
+        public static final CommonConstantInfo ZI_XUAN = new CommonConstantInfo(17, "自选");
+        public static final CommonConstantInfo HE_XIAO = new CommonConstantInfo(18, "合肖");
+        public static final CommonConstantInfo LONG_HU = new CommonConstantInfo(19, "龙虎");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(PlayTypeCode.class);
     }
 
@@ -238,6 +243,49 @@ public class CommonConstant {
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(PlayTypeDetailType.class);
     }
 
+    public static class BetLimitAmountType {
+        public static final CommonConstantInfo TE_MA = new CommonConstantInfo(1, "特码");
+        public static final CommonConstantInfo DAN_SHUANG = new CommonConstantInfo(2, "单双");
+        public static final CommonConstantInfo DA_XIAO = new CommonConstantInfo(3, "大小");
+        public static final CommonConstantInfo HE_SHU_DAN_SHUANG = new CommonConstantInfo(4, "合数单双");
+        public static final CommonConstantInfo ZHENG_TE = new CommonConstantInfo(5, "正特");
+        public static final CommonConstantInfo ZHENG_MA = new CommonConstantInfo(6, "正码");
+        public static final CommonConstantInfo ZONG_HE_DAN_SHUANG = new CommonConstantInfo(7, "总和单双");
+        public static final CommonConstantInfo ZONG_HE_DA_XIAO = new CommonConstantInfo(8, "总和大小");
+        public static final CommonConstantInfo SE_BO = new CommonConstantInfo(9, "波色");
+        public static final CommonConstantInfo BAN_BO = new CommonConstantInfo(10, "半波");
+        public static final CommonConstantInfo ZHENG_MA_GUO_GUAN = new CommonConstantInfo(11, "正码过关");
+        public static final CommonConstantInfo ER_QUAN_ZHONG = new CommonConstantInfo(12, "二全中");
+        public static final CommonConstantInfo SAN_QUAN_ZHONG = new CommonConstantInfo(13, "三全中");
+        public static final CommonConstantInfo SAN_ZHONG_ER = new CommonConstantInfo(14, "三中二");
+        public static final CommonConstantInfo ER_ZHONG_TE = new CommonConstantInfo(15, "二中特");
+        public static final CommonConstantInfo TE_CHUAN = new CommonConstantInfo(16, "特串");
+        public static final CommonConstantInfo LIAN_XIAO = new CommonConstantInfo(17, "连肖");
+        public static final CommonConstantInfo LIU_XIAO = new CommonConstantInfo(18, "六肖");
+        public static final CommonConstantInfo YI_XIAO = new CommonConstantInfo(19, "一肖");
+        public static final CommonConstantInfo WEI_SHU = new CommonConstantInfo(20, "尾数");
+        public static final CommonConstantInfo JIA_QIN_YE_SHOU = new CommonConstantInfo(21, "家禽野兽");
+        public static final CommonConstantInfo WEI_DA_WEI_XIAO = new CommonConstantInfo(22, "尾大尾小");
+        public static final CommonConstantInfo TE_XIAO = new CommonConstantInfo(23, "特肖");
+        public static final CommonConstantInfo BU_ZHONG = new CommonConstantInfo(24, "不中");
+        public static final CommonConstantInfo LIAN_WEI = new CommonConstantInfo(25, "连尾");
+        public static final CommonConstantInfo LONG_HU = new CommonConstantInfo(26, "龙虎");
+        public static final CommonConstantInfo TE_MA_FEN_DUAN = new CommonConstantInfo(27, "特码分段");
+        public static final CommonConstantInfo ZHENG_1_6_LONG_HU = new CommonConstantInfo(28, "正1-6龙虎");
+        public static final CommonConstantInfo ZONG_HE_WEI_DA_XIAO = new CommonConstantInfo(29, "总和尾大小");
+        public static final CommonConstantInfo HE_SHU_DA_XIAO = new CommonConstantInfo(30, "合数大小");
+        public static final CommonConstantInfo HE_XIAO = new CommonConstantInfo(31, "合肖");
+        public static final CommonConstantInfo WU_XING = new CommonConstantInfo(32, "五行");
+        public static final CommonConstantInfo ZHENG_XIAO = new CommonConstantInfo(33, "正肖");
+        public static final CommonConstantInfo QI_SE_BO = new CommonConstantInfo(34, "七色波");
+        public static final CommonConstantInfo SI_QUAN_ZHONG = new CommonConstantInfo(35, "四全中");
+        public static final CommonConstantInfo ZONG_XIAO = new CommonConstantInfo(36, "总肖");
+        public static final CommonConstantInfo ZONG_HE = new CommonConstantInfo(37, "总和");
+        public static final CommonConstantInfo ZI_XUAN = new CommonConstantInfo(38, "自选");
+        public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(BetLimitAmountType.class);
+    }
+
+
     public static class BetLimitCode {
         public static final CommonKVString DEFAULT = new CommonKVString("0", "默认");
         public static final CommonKVString TE_MA = new CommonKVString("1", "特码");
@@ -254,8 +302,8 @@ public class CommonConstant {
         public static final CommonKVString BA_BU_ZHONG = new CommonKVString("12", "八不中");
         public static final CommonKVString JIU_BU_ZHONG = new CommonKVString("13", "九不中");
         public static final CommonKVString SHI_BU_ZHONG = new CommonKVString("14", "十不中");
-        public static final CommonKVString LIU_XIAO_LIAN_ZHONG = new CommonKVString("15", "六肖连中");
-        public static final CommonKVString LIU_XIAO_LIAN_BU_ZHONG = new CommonKVString("16", "六肖连不中");
+        public static final CommonKVString LIU_XIAO_LIAN_ZHONG = new CommonKVString("15", "六肖中");
+        public static final CommonKVString LIU_XIAO_LIAN_BU_ZHONG = new CommonKVString("16", "六肖不中");
         public static final CommonKVString ER_LIAN_XIAO_ZHONG = new CommonKVString("17", "二连肖(中)");
         public static final CommonKVString ER_LIAN_XIAO_BU_ZHONG = new CommonKVString("18", "二连肖(不中)");
         public static final CommonKVString SAN_LIAN_XIAO_ZHONG = new CommonKVString("19", "三连肖(中)");
@@ -270,6 +318,12 @@ public class CommonConstant {
         public static final CommonKVString SI_LIAN_WEI_BU_ZHONG = new CommonKVString("28", "四连尾(不中)");
         public static final CommonKVString LONG = new CommonKVString("29", "龙");
         public static final CommonKVString HU = new CommonKVString("30", "虎");
+        public static final CommonKVString HE_XIAO = new CommonKVString("31", "虎");
+        public static final CommonKVString WU_LIAN_XIAO_ZHONG = new CommonKVString("32", "五连肖(中)");
+        public static final CommonKVString WU_LIAN_XIAO_BU_ZHONG = new CommonKVString("33", "五连肖(不中)");
+        public static final CommonKVString WU_LIAN_WEI_ZHONG = new CommonKVString("34", "五连尾(中)");
+        public static final CommonKVString WU_LIAN_WEI_BU_ZHONG = new CommonKVString("35", "五连尾(不中)");
+        public static final CommonKVString SI_QUAN_ZHONG = new CommonKVString("36", "四全中");
         public static final Map<String, String> map = BaseCommonKVStringClassUtil.getMap(BetLimitCode.class);
     }
 
@@ -295,8 +349,8 @@ public class CommonConstant {
         public static final CommonConstantInfo BA_BU_ZHONG = new CommonConstantInfo(18, "八不中");
         public static final CommonConstantInfo JIU_BU_ZHONG = new CommonConstantInfo(19, "九不中");
         public static final CommonConstantInfo SHI_BU_ZHONG = new CommonConstantInfo(20, "十不中");
-        public static final CommonConstantInfo LIU_XIAO_LIAN_ZHONG = new CommonConstantInfo(21, "六肖连中");
-        public static final CommonConstantInfo LIU_XIAO_LIAN_BU_ZHONG = new CommonConstantInfo(22, "六肖连不中");
+        public static final CommonConstantInfo LIU_XIAO_LIAN_ZHONG = new CommonConstantInfo(21, "六肖中");
+        public static final CommonConstantInfo LIU_XIAO_LIAN_BU_ZHONG = new CommonConstantInfo(22, "六肖不中");
         public static final CommonConstantInfo ER_LIAN_XIAO_ZHONG = new CommonConstantInfo(23, "二连肖(中)");
         public static final CommonConstantInfo ER_LIAN_XIAO_BU_ZHONG = new CommonConstantInfo(24, "二连肖(不中)");
         public static final CommonConstantInfo SAN_LIAN_XIAO_ZHONG = new CommonConstantInfo(25, "三连肖(中)");
@@ -311,9 +365,13 @@ public class CommonConstant {
         public static final CommonConstantInfo SI_LIAN_WEI_BU_ZHONG = new CommonConstantInfo(34, "四连尾(不中)");
         public static final CommonConstantInfo LONG = new CommonConstantInfo(35, "龙");
         public static final CommonConstantInfo HU = new CommonConstantInfo(36, "虎");
+        public static final CommonConstantInfo WU_LIAN_XIAO_ZHONG = new CommonConstantInfo(37, "五连肖(中)");
+        public static final CommonConstantInfo WU_LIAN_XIAO_BU_ZHONG = new CommonConstantInfo(38, "五连肖(不中)");
+        public static final CommonConstantInfo WU_LIAN_WEI_ZHONG = new CommonConstantInfo(39, "五连尾(中)");
+        public static final CommonConstantInfo WU_LIAN_WEI_BU_ZHONG = new CommonConstantInfo(40, "五连尾(不中)");
+        public static final CommonConstantInfo SI_QUAN_ZHONG = new CommonConstantInfo(41, "四全中");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(PlayTypeItemCode.class);
     }
-
 
     public static class BetRecordTimeType {
         public static final byte BET_TIME = 1;
