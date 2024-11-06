@@ -46,7 +46,7 @@ public class LoginInfo
     private Long platformUserId;
 
     /** 客户端类型 */
-    @Excel(name = "客户端类型")
+    @Excel(name = "客户端类型", readConverterExp = "1=安卓,2=ios,3=H5")
     @ApiModelProperty(example = "客户端类型")
     private Byte clientType;
 
@@ -65,7 +65,7 @@ public class LoginInfo
     private String token;
 
     /** 状态 */
-    @Excel(name = "状态")
+    @Excel(name = "状态", readConverterExp = "1=有效,2=无效")
     @ApiModelProperty(example = "状态")
     private Byte status;
 
