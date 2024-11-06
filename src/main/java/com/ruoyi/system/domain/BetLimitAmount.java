@@ -28,6 +28,7 @@ public class BetLimitAmount
     private static final long serialVersionUID = 1L;
 
     /** ID */
+    @Excel(name = "ID")
     @ApiModelProperty(value = "id")
     private Long id;
 
@@ -84,5 +85,10 @@ public class BetLimitAmount
     @Excel(name = "彩种名称")
     @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
+
+    /** 备注 */
+    @Excel(name = "备注")
+    @ApiModelProperty(value = "备注")
+    private String remark;
 
 }

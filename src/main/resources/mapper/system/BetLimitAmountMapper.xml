@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBetLimitAmountList" parameterType="BetLimitAmount" resultMap="BetLimitAmountResult">
         select a.*,b.name as betLimitAmountName,c.name as platformName,d.name as lotteryName from t_bet_limit_amount a inner join t_bet_limit_amount_type b on a.type = b.type
-        inner join t_platform c on a.platform_id = b.id inner join t_lottery d on a.lottery_id = b.id
+        inner join t_platform c on a.platform_id = c.id inner join t_lottery d on a.lottery_id = d.id
         <where>
             <if test="id != null "> and a.id = #{id}</if>
             <if test="platformId != null "> and a.platform_id = #{platformId}</if>
