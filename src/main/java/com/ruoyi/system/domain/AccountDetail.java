@@ -68,7 +68,7 @@ public class AccountDetail
     private BigDecimal availableBalance;
 
     /** 0-退款，1-额度转入，2-额度转出，3-投注，4-派彩，5-冻结 */
-    @Excel(name = "交易类型", readConverterExp = "0=退款,1=额度转入,2=额度转出,3=投注，4=派彩,5=冻结,6=解冻,7=撤单")
+    @Excel(name = "交易类型", readConverterExp = "0=退款,1=额度转入,2=额度转出,3=投注,4=派彩,5=冻结,6=解冻,7=撤单")
     @ApiModelProperty(value = "id")
     private Byte tradeType;
 
