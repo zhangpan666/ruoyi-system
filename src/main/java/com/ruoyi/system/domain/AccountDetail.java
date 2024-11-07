@@ -98,9 +98,11 @@ public class AccountDetail
 
     private Date endTime;
 
+    @Excel(name = "平台ID")
     @ApiModelProperty(example = "平台ID")
     private Long platformId;
 
+    @Excel(name = "平台用户ID")
     @ApiModelProperty(example = "平台用户ID")
     private Long platformUserId;
 
