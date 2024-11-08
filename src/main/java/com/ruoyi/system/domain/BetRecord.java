@@ -1,6 +1,7 @@
 package com.ruoyi.system.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.light.core.utils.DateUtils;
 import com.ruoyi.common.annotation.Excel;
@@ -83,6 +84,13 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
+    /**
+     * 平台名称
+     */
+    @Excel(name = "平台名称")
+    @ApiModelProperty(value = "平台名称")
+    private String platformName;
+
     /** 平台用户id */
     @Excel(name = "平台用户ID")
     @ApiModelProperty(value = "平台用户ID")
@@ -92,6 +100,13 @@ public class BetRecord extends BaseEntity
     @Excel(name = "彩种ID")
     @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
+
+    /**
+     * 彩种名称
+     */
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(value = "彩种名称")
+    private String lotteryName;
 
     /** 期号 */
     @Excel(name = "期号")
@@ -156,10 +171,6 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "结算时间")
     @JSONField(format = DateUtils.DATE_TIME_FORMAT)
     private Date countTime;
-
-    @Excel(name = "彩种名称")
-    @ApiModelProperty(value = "彩种名称")
-    private String lotteryName;
 
     @Excel(name = "单注投注金额")
     @ApiModelProperty(value = "单注投注金额")
