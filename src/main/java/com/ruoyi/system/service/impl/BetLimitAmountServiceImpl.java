@@ -119,8 +119,8 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
     public void initBetLimitAmount(Long platformId, Long lotteryId) {
         List<BetLimitAmount> defaultBetLimitAmountList = betLimitAmountMapper.selectBetLimitAmountList(new BetLimitAmount().setPlatformId(1L).setLotteryId(lotteryId));
         defaultBetLimitAmountList.forEach(betLimitAmount -> {
-            List<BetLimitAmount> betLimitAmountList = betLimitAmountMapper.selectBetLimitAmountList(new BetLimitAmount().setType(betLimitAmount.getType()).setLotteryId(lotteryId).setPlatformId(platformId));
-            BetLimitAmount newBetLimitAmount = new BetLimitAmount().setPlatformId(platformId).setLotteryId(lotteryId).setType(betLimitAmount.getType()).setSingleTimeBetMinAmount(betLimitAmount.getSingleTimeBetMinAmount())
+            List<BetLimitAmount> betLimitAmountList = betLimitAmountMapper.selectBetLimitAmountList(new BetLimitAmount().setType(betLimitAmount.getType()).setLotteryId(betLimitAmount.getLotteryId()).setPlatformId(platformId));
+            BetLimitAmount newBetLimitAmount = new BetLimitAmount().setPlatformId(platformId).setLotteryId(betLimitAmount.getLotteryId()).setType(betLimitAmount.getType()).setSingleTimeBetMinAmount(betLimitAmount.getSingleTimeBetMinAmount())
                     .setSingleTimeBetMaxAmount(betLimitAmount.getSingleTimeBetMaxAmount()).setSinglePeriodBetMaxAmount(betLimitAmount.getSinglePeriodBetMaxAmount());
             if (CollectionUtils.isEmpty(betLimitAmountList)){
                 betLimitAmountMapper.insertBetLimitAmount(newBetLimitAmount);
@@ -133,5 +133,8 @@ public class BetLimitAmountServiceImpl implements IBetLimitAmountService
     }
 
 
-
+    @Override
+    public void initBetLimitAmount(Long platformId) {
+      this.initBetLimitAmount(platformId, null);
+    }
 }

@@ -64,4 +64,6 @@ public interface IBetLimitAmountService
 
 
     void initBetLimitAmount(Long platformId, Long lotteryId);
+
+    void initBetLimitAmount(Long platformId);
 }
