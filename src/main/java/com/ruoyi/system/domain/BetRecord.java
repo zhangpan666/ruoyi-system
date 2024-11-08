@@ -79,13 +79,13 @@ public class BetRecord extends BaseEntity
     private BigDecimal betAdditionalOdds;
 
     /** 平台id */
-    @Excel(name = "平台id")
-    @ApiModelProperty(value = "平台id")
+    @Excel(name = "平台ID")
+    @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
     /** 平台用户id */
-    @Excel(name = "平台用户id")
-    @ApiModelProperty(value = "平台用户id")
+    @Excel(name = "平台用户ID")
+    @ApiModelProperty(value = "平台用户ID")
     private Long platformUserId;
 
     /** 彩种ID */
