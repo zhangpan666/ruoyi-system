@@ -30,11 +30,11 @@ public class BetRecord extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** ID */
-    @Excel(name = "id")
-    @ApiModelProperty(value = "id")
+    @Excel(name = "ID")
+    @ApiModelProperty(value = "ID")
     private Long id;
 
-    @ApiModelProperty(value = "id，字符串类型")
+    @ApiModelProperty(value = "ID，字符串类型")
     private String idStr;
 
     /** 用户ID */
