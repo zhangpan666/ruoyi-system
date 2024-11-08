@@ -127,14 +127,13 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     public void clearCancelOrderLimit(Long platformId) {
-        redisCache.deleteByPattern(CommonConstant.RedisKey.CANCEL_ORDER_LIMIT.getKey(platformId));
+        redisCache.deleteObject(CommonConstant.RedisKey.CANCEL_ORDER_LIMIT.getKey(platformId));
     }
 
     @Override
     public void clearCancelOrderLimit(Long platformId, Long lotteryId) {
         redisCache.deleteObject(CommonConstant.RedisKey.CANCEL_ORDER_LIMIT.getKey(platformId,lotteryId));
     }
-
 
     @Override
     public void clearUserBetLimitAmount() {
