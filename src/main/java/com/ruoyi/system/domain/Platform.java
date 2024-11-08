@@ -1,11 +1,13 @@
 package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,7 +27,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_platform")
-public class Platform extends BaseEntity
+public class Platform
 {
     private static final long serialVersionUID = 1L;
 
@@ -45,12 +47,12 @@ public class Platform extends BaseEntity
     @TableField("md5_key")
     private String md5Key;
 
-
     /** 秘钥 */
     @TableField("secret_key")
     private String secretKey;
+
     /** 状态，1-有效，0-无效 */
-    @Excel(name = "状态，1-有效，0-无效")
+    @Excel(name = "状态", readConverterExp = "1=有效,0=无效")
     @TableField("status")
     @ApiModelProperty(example = "状态，1-有效，0-无效")
     private Byte status;
@@ -64,5 +66,15 @@ public class Platform extends BaseEntity
     @Excel(name = "已用额度")
     @TableField("used_credit_limit")
     private BigDecimal usedCreditLimit;
+
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
 
 }
