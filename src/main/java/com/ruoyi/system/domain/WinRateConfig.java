@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -58,9 +59,21 @@ public class WinRateConfig
     private Integer randomForce;
 
     /** 状态，1-有效，0-无效 */
-    @Excel(name = "状态，1-有效，0-无效")
+    @Excel(name = "状态", readConverterExp = "1=有效,0=无效")
     @ApiModelProperty(value = "状态，1-有效，0-无效")
     private Byte status;
+
+    /** 是否开启虚拟注单，1-是，0-否 */
+    @Excel(name = "是否开启虚拟注单", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "是否开启虚拟注单，1-是，0-否")
+    private Byte autoBetStatus;
+
+
+    /** 虚拟注单金额 */
+    @Excel(name = "虚拟注单金额")
+    @ApiModelProperty(value = "虚拟注单金额")
+    private BigDecimal autoBetAmount;
+
 
     /** 创建时间 */
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
