@@ -48,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type,</if>
             <if test="relatedUserIds != null">related_user_ids,</if>
             <if test="moneyReturnRate != null">money_return_rate,</if>
+            <if test="randomForce != null">random_force,</if>
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
             <if test="createTime != null">create_time,</if>
@@ -59,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">#{type},</if>
             <if test="relatedUserIds != null">#{relatedUserIds},</if>
             <if test="moneyReturnRate != null">#{moneyReturnRate},</if>
+            <if test="randomForce != null">#{randomForce},</if>
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -73,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type = #{type},</if>
             <if test="relatedUserIds != null">related_user_ids = #{relatedUserIds},</if>
             <if test="moneyReturnRate != null">money_return_rate = #{moneyReturnRate},</if>
+            <if test="randomForce != null">random_force = #{randomForce},</if>
             <if test="status != null">status = #{status},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
