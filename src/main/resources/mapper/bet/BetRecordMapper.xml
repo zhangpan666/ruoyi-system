@@ -381,7 +381,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and create_time &lt;#{endTime}
             </if>
         </where>
-        group by play_type_code) a inner join t_play_type b on a.playTypeCode = b.code
+        group by play_type_code) a inner join t_play_type b on a.playTypeCode = b.code and b.lottery_id = #{lotteryId}
     </select>
 
 
