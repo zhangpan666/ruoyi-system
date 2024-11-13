@@ -129,4 +129,5 @@ public class BetRecordServiceImpl implements IBetRecordService
     public List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord) {
         return betRecordMapper.statBetRecordAndGroupByPlayTypeDetailCode(betRecord);
     }
+
 }

@@ -74,4 +74,5 @@ public interface BetRecordMapper
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeCode(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord);
+
 }

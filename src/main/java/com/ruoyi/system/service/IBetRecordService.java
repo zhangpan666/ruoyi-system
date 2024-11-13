@@ -72,4 +72,5 @@ public interface IBetRecordService
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeCode(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord);
+
 }
