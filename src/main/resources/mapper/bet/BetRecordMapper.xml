@@ -314,7 +314,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="statBetRecordAndGroupByLotteryId" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-       select a.*,b.name as lotteryName from (select lottery_id as lotteryId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount
+       select lottery_id as lotteryId, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount
        ,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount,coalesce(sum(win_lose_amount),0) as winLoseAmount,coalesce(sum(win_amount),0) as totalWinAmount
        from t_bet_record
         <where>
@@ -346,7 +346,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and create_time &lt;#{endTime}
             </if>
         </where>
-        group by lottery_id) a inner join t_lottery b on a.lotteryId = b.id
+        group by lottery_id
     </select>
 
     <select id="statBetRecordAndGroupByPlayTypeCode" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
