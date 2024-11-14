@@ -350,7 +350,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="statBetRecordAndGroupByPlayTypeCode" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-        select a.*,b.name as playTypeName from (select play_type_code as playTypeCode, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
+        select play_type_code as playTypeCode, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
         ,coalesce(sum(win_lose_amount),0) as winLoseAmount,coalesce(sum(win_amount),0) as totalWinAmount from t_bet_record
         <where>
             <if test="platformId != null">
@@ -381,12 +381,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and create_time &lt;#{endTime}
             </if>
         </where>
-        group by play_type_code) a inner join t_play_type b on a.playTypeCode = b.code and b.lottery_id = #{lotteryId}
+        group by play_type_code
     </select>
 
 
     <select id="statBetRecordAndGroupByPlayTypeDetailCode" parameterType="com.ruoyi.system.domain.BetRecord"  resultType="com.ruoyi.system.pojo.BetRecordStatVO">
-        select a.*,b.description from (select play_type_detail_code as playTypeDetailCode, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
+        select play_type_detail_code as playTypeDetailCode, count(*) as totalCount,coalesce(sum(bet_amount),0) as totalAmount,coalesce(sum(valid_bet_amount),0) as totalValidBetAmount
         ,coalesce(sum(win_lose_amount),0) as winLoseAmount,coalesce(sum(win_amount),0) as totalWinAmount from t_bet_record
         <where>
             <if test="platformId != null">
@@ -417,7 +417,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and create_time &lt;#{endTime}
             </if>
         </where>
-        group by play_type_detail_code) a inner join t_play_type_detail b on a.playTypeDetailCode = b.code
+        group by play_type_detail_code
     </select>
 
 </mapper>

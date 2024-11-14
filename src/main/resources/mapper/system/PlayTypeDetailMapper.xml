@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.PlayTypeDetailMapper">
+    
+    <resultMap type="PlayTypeDetail" id="PlayTypeDetailResult">
+        <result property="id"    column="id"    />
+        <result property="playTypeCode"    column="play_type_code"    />
+        <result property="type"    column="type"    />
+        <result property="code"    column="code"    />
+        <result property="betLimitCode"    column="bet_limit_code"    />
+        <result property="value"    column="value"    />
+        <result property="description"    column="description"    />
+        <result property="playTypeItem"    column="play_type_item"    />
+        <result property="betLimitAmountType"    column="bet_limit_amount_type"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="availableOption"    column="available_option"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPlayTypeDetailVo">
+        select id, play_type_code, type, code, bet_limit_code, value, description, play_type_item, bet_limit_amount_type, sort, status, available_option, remark, create_time, update_time from t_play_type_detail
+    </sql>
+
+    <select id="selectPlayTypeDetailList" parameterType="PlayTypeDetail" resultMap="PlayTypeDetailResult">
+        <include refid="selectPlayTypeDetailVo"/>
+        <where>  
+            <if test="playTypeCode != null "> and play_type_code = #{playTypeCode}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="betLimitCode != null  and betLimitCode != ''"> and bet_limit_code = #{betLimitCode}</if>
+            <if test="value != null  and value != ''"> and value = #{value}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="playTypeItem != null "> and play_type_item = #{playTypeItem}</if>
+            <if test="betLimitAmountType != null "> and bet_limit_amount_type = #{betLimitAmountType}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="availableOption != null "> and available_option = #{availableOption}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlayTypeDetailById" parameterType="Long" resultMap="PlayTypeDetailResult">
+        <include refid="selectPlayTypeDetailVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPlayTypeDetail" parameterType="PlayTypeDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into t_play_type_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="playTypeCode != null">play_type_code,</if>
+            <if test="type != null">type,</if>
+            <if test="code != null">code,</if>
+            <if test="betLimitCode != null">bet_limit_code,</if>
+            <if test="value != null">value,</if>
+            <if test="description != null">description,</if>
+            <if test="playTypeItem != null">play_type_item,</if>
+            <if test="betLimitAmountType != null">bet_limit_amount_type,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="availableOption != null">available_option,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="playTypeCode != null">#{playTypeCode},</if>
+            <if test="type != null">#{type},</if>
+            <if test="code != null">#{code},</if>
+            <if test="betLimitCode != null">#{betLimitCode},</if>
+            <if test="value != null">#{value},</if>
+            <if test="description != null">#{description},</if>
+            <if test="playTypeItem != null">#{playTypeItem},</if>
+            <if test="betLimitAmountType != null">#{betLimitAmountType},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="availableOption != null">#{availableOption},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlayTypeDetail" parameterType="PlayTypeDetail">
+        update t_play_type_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="playTypeCode != null">play_type_code = #{playTypeCode},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="betLimitCode != null">bet_limit_code = #{betLimitCode},</if>
+            <if test="value != null">value = #{value},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="playTypeItem != null">play_type_item = #{playTypeItem},</if>
+            <if test="betLimitAmountType != null">bet_limit_amount_type = #{betLimitAmountType},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="availableOption != null">available_option = #{availableOption},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePlayTypeDetailById" parameterType="Long">
+        delete from t_play_type_detail where id = #{id}
+    </delete>
+
+    <delete id="deletePlayTypeDetailByIds" parameterType="String">
+        delete from t_play_type_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
