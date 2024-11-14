@@ -51,6 +51,9 @@ public class BetRecordStatVO implements Serializable {
     @ApiModelProperty(value = "玩法code")
     private Byte playTypeCode;
 
+    @ApiModelProperty(value = "玩法明细code")
+    private String playTypeDetailCode;
+
     @ApiModelProperty(value = "玩法描述")
     private String description;
 
