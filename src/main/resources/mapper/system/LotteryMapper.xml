@@ -77,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextLotteryTime != null">next_lottery_time,</if>
             <if test="nextLotteryYear != null">next_lottery_year,</if>
             <if test="nextIssueNo != null">next_issue_no,</if>
+            <if test="lotteryLiveAddress != null">lottery_live_address,</if>
             <if test="icon != null">icon,</if>
             <if test="width != null">width,</if>
             <if test="height != null">height,</if>
@@ -99,6 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextLotteryYear != null">#{nextLotteryYear},</if>
             <if test="nextLotteryPeriod != null">#{nextLotteryPeriod},</if>
             <if test="nextIssueNo != null">#{nextIssueNo},</if>
+            <if test="lotteryLiveAddress != null">#{lotteryLiveAddress},</if>
             <if test="icon != null">#{icon},</if>
             <if test="width != null">#{width},</if>
             <if test="height != null">#{height},</if>
@@ -124,6 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nextLotteryTime != null">next_lottery_time = #{nextLotteryTime},</if>
             <if test="nextLotteryYear != null">next_lottery_year = #{nextLotteryYear},</if>
             <if test="nextIssueNo != null">next_issue_no = #{nextIssueNo},</if>
+            <if test="lotteryLiveAddress != null">lottery_live_address = #{lotteryLiveAddress},</if>
             <if test="icon != null">icon = #{icon},</if>
             <if test="width != null">width = #{width},</if>
             <if test="height != null">height = #{height},</if>
