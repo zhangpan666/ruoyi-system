@@ -25,8 +25,8 @@ public class Lottery extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
-    @ApiModelProperty(value = "id")
+    @Excel(name = "ID")
+    @ApiModelProperty(value = "ID")
     private Long id;
 
     /** 彩种名称 */
