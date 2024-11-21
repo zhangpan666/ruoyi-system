@@ -81,17 +81,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
 			AND date_format(u.create_time,'%Y%m%d') &lt;= date_format(#{params.endTime},'%Y%m%d')
 		</if>
-		<if test="platformId != null and platformId != 0">
-			AND platform_id = #{platformId}
+		<if test="platformId != null">
+			AND u.platform_id = #{platformId}
 		</if>
-		<!-- 数据范围过滤 -->
-		${params.dataScope}
+			order by u.user_id desc
 	</select>
 
 	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber, u.status, u.create_time, u.platform_id
 	    from sys_user u
-			 left join sys_dept d on u.dept_id = d.dept_id
 			 left join t_platform p on u.platform_id = p.id
 			 left join sys_user_role ur on u.user_id = ur.user_id
 			 left join sys_role r on r.role_id = ur.role_id
@@ -102,14 +100,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
-		<!-- 数据范围过滤 -->
-		${params.dataScope}
 	</select>
 
 	<select id="selectUnallocatedList" parameterType="SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber, u.status, u.create_time, u.platform_id
 	    from sys_user u
-			 left join sys_dept d on u.dept_id = d.dept_id
 			 left join t_platform p on u.platform_id = p.id
 			 left join sys_user_role ur on u.user_id = ur.user_id
 			 left join sys_role r on r.role_id = ur.role_id
@@ -121,8 +116,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
-		<!-- 数据范围过滤 -->
-		${params.dataScope}
 	</select>
 
 	<select id="selectUserByUserName" parameterType="String" resultMap="SysUserResult">
