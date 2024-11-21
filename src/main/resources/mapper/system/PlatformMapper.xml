@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectPlatformList" parameterType="Platform" resultMap="PlatformResult">
-        <include refid="selectPlatformVo"/>
+        select id, name, status, credit_limit, used_credit_limit, create_time, update_time from t_platform
         <where>
             <if test="id != null "> and id = #{id}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
