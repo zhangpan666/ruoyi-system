@@ -396,6 +396,7 @@ public class CommonConstant {
     public static class UserType {
         public static final byte TYPE_APP = 1;
         public static final byte TYPE_AUTO = 2;//虚拟用户
+        public static final byte TYPE_TEST = 3;//测试用户
     }
 
 
