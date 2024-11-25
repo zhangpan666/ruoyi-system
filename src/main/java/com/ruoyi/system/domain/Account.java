@@ -35,6 +35,18 @@ public class Account extends BaseEntity
     @ApiModelProperty(example = "用户ID")
     private Long userId;
 
+    @Excel(name = "平台ID")
+    @ApiModelProperty(example = "平台ID")
+    private Long platformId;
+
+    @Excel(name = "平台名称")
+    @ApiModelProperty(example = "平台名称")
+    private String platformName;
+
+    @Excel(name = "平台用户ID")
+    @ApiModelProperty(example = "平台用户ID")
+    private Long platformUserId;
+
     /** 总收入 */
     @Excel(name = "总收入")
     @ApiModelProperty(example = "总收入")
@@ -69,11 +81,5 @@ public class Account extends BaseEntity
     @Excel(name = "账户状态，1-正常，0-冻结")
     @ApiModelProperty(example = "账户状态，1-正常，0-冻结")
     private Byte status;
-
-    @ApiModelProperty(example = "平台ID")
-    private Long platformId;
-
-    @ApiModelProperty(example = "平台用户ID")
-    private Long platformUserId;
 
 }
