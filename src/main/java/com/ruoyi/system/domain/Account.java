@@ -78,7 +78,7 @@ public class Account extends BaseEntity
     private BigDecimal totalWinLoseAmount;
 
     /** 账户状态，1-正常，0-冻结 */
-    @Excel(name = "账户状态，1-正常，0-冻结")
+    @Excel(name = "账户状态", readConverterExp = "1=正常,0=冻结")
     @ApiModelProperty(example = "账户状态，1-正常，0-冻结")
     private Byte status;
 
