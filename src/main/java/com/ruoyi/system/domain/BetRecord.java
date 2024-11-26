@@ -60,12 +60,12 @@ public class BetRecord extends BaseEntity
     private BigDecimal canWinAmount;
 
     /** 下注内容 */
-    @Excel(name = "下注内容")
-    @ApiModelProperty(value = "下注内容")
+//    @Excel(name = "下注内容(展示)")
+    @ApiModelProperty(value = "下注内容(展示)")
     private String betContent;
 
     /** 下注内容 */
-    @Excel(name = "展示下注内容")
+    @Excel(name = "下注内容")
     @ApiModelProperty(value = "下注内容")
     private String displayBetContent;
 
