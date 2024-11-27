@@ -16,11 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryOpenPlanVo">
-        select id, lottery_id, issue_no, preset_numbers, auto_numbers, create_time, update_time from t_lottery_open_plan
+        select id, lottery_id, issue_no, preset_numbers, create_time, update_time from t_lottery_open_plan
     </sql>
 
     <select id="selectLotteryOpenPlanList" parameterType="LotteryOpenPlan" resultMap="LotteryOpenPlanResult">
-            select a.*,b.name as lotteryName from t_lottery_open_plan a inner  join t_lottery b on a.lottery_id = b.id
+        select a.id, a.lottery_id, a.issue_no, a.preset_numbers, a.create_time, a.update_time,b.name as lotteryName
+        from t_lottery_open_plan a inner  join t_lottery b on a.lottery_id = b.id
         <where>
             <if test="id != null "> and a.id = #{id}</if>
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
