@@ -79,4 +79,10 @@ public class Platform
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
+    /**
+     * 免转钱包回调地址
+     */
+    @TableField("free_transfer_wallet_callback_address")
+    private String freeTransferWalletCallbackAddress;
+
 }
