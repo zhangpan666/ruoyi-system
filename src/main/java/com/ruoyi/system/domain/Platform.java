@@ -31,16 +31,15 @@ public class Platform
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
     @TableId(value = "id",type = IdType.AUTO)
     @Excel(name = "平台ID")
-    @ApiModelProperty(example = "平台ID")
+    @ApiModelProperty(value = "平台ID")
     private Long id;
 
     /** 平台名称 */
     @Excel(name = "平台名称")
     @TableField("name")
-    @ApiModelProperty(example = "平台名称")
+    @ApiModelProperty(value = "平台名称")
     private String name;
 
     /** md5Key */
@@ -54,18 +53,25 @@ public class Platform
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态", readConverterExp = "1=有效,0=无效")
     @TableField("status")
-    @ApiModelProperty(example = "状态，1-有效，0-无效")
+    @ApiModelProperty(value = "状态，1-有效，0-无效")
     private Byte status;
 
     /** 信用额度 */
     @Excel(name = "信用额度")
-    @TableField("credit_limit")
+    @ApiModelProperty(value = "信用额度")
     private BigDecimal creditLimit;
 
     /** 已用额度 */
     @Excel(name = "已用额度")
-    @TableField("used_credit_limit")
+    @ApiModelProperty(value = "已用额度")
     private BigDecimal usedCreditLimit;
+
+    /**
+     * 免转钱包回调地址
+     */
+    @Excel(name = "免转钱包回调地址")
+    @ApiModelProperty(example = "免转钱包回调地址")
+    private String freeTransferWalletCallbackAddress;
 
     /** 创建时间 */
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
@@ -78,11 +84,5 @@ public class Platform
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
-
-    /**
-     * 免转钱包回调地址
-     */
-    @TableField("free_transfer_wallet_callback_address")
-    private String freeTransferWalletCallbackAddress;
 
 }
