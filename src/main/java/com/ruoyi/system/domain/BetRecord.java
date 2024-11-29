@@ -191,4 +191,8 @@ public class BetRecord extends BaseEntity
 
     private List<LotterySingleNumberInfo> numberList;
 
+    private String platformUserIds;
+
+    private List<Long> platformUserIdList;
+
 }

@@ -70,7 +70,7 @@ public class Platform
      * 免转钱包回调地址
      */
     @Excel(name = "免转钱包回调地址")
-    @ApiModelProperty(example = "免转钱包回调地址")
+    @ApiModelProperty(value = "免转钱包回调地址")
     private String freeTransferWalletCallbackAddress;
 
     /** 创建时间 */
