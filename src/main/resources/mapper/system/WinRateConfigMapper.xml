@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="randomForce"    column="random_force"    />
         <result property="status"    column="status"    />
         <result property="autoBetStatus"    column="auto_bet_status"    />
+        <result property="autoBetAmountRate"    column="auto_bet_amount_rate"    />
         <result property="autoBetAmount"    column="auto_bet_amount"    />
         <result property="remark"    column="remark"    />
         <result property="createTime"    column="create_time"    />
@@ -21,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectWinRateConfigVo">
-        select id, lottery_id, type, related_user_ids, money_return_rate,random_force, status,auto_bet_status,auto_bet_amount,remark, create_time, update_time from t_win_rate_config
+        select id, lottery_id, type, related_user_ids, money_return_rate,random_force, status,auto_bet_status,auto_bet_amount_rate,auto_bet_amount,remark, create_time, update_time from t_win_rate_config
     </sql>
 
     <select id="selectWinRateConfigList" parameterType="WinRateConfig" resultMap="WinRateConfigResult">
@@ -53,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="moneyReturnRate != null">money_return_rate,</if>
             <if test="randomForce != null">random_force,</if>
             <if test="autoBetStatus != null">auto_bet_status,</if>
+            <if test="autoBetAmountRate != null">auto_bet_amount_rate,</if>
             <if test="autoBetAmount != null">auto_bet_amount,</if>
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
@@ -67,6 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="moneyReturnRate != null">#{moneyReturnRate},</if>
             <if test="randomForce != null">#{randomForce},</if>
             <if test="autoBetStatus != null">#{autoBetStatus},</if>
+            <if test="autoBetAmountRate != null">#{autoBetAmountRate},</if>
             <if test="autoBetAmount != null">#{autoBetAmount},</if>
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
@@ -84,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="moneyReturnRate != null">money_return_rate = #{moneyReturnRate},</if>
             <if test="randomForce != null">random_force = #{randomForce},</if>
             <if test="autoBetStatus != null">auto_bet_status = #{autoBetStatus},</if>
+            <if test="autoBetAmountRate != null">auto_bet_amount_rate = #{autoBetAmountRate},</if>
             <if test="autoBetAmount != null">auto_bet_amount = #{autoBetAmount},</if>
             <if test="status != null">status = #{status},</if>
             <if test="remark != null">remark = #{remark},</if>

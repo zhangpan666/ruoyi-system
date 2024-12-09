@@ -68,12 +68,17 @@ public class WinRateConfig
     @ApiModelProperty(value = "是否开启虚拟注单，1-是，0-否")
     private Byte autoBetStatus;
 
+    /**
+     * 虚拟注单配单比例
+     */
+    @Excel(name = "虚拟注单配单比例")
+    @ApiModelProperty(value = "虚拟注单配单比例")
+    private String autoBetAmountRate;
 
     /** 虚拟注单金额 */
     @Excel(name = "虚拟注单金额")
     @ApiModelProperty(value = "虚拟注单金额")
     private BigDecimal autoBetAmount;
-
 
     /** 创建时间 */
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
