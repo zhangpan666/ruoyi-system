@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="idStr"    column="idStr"    />
         <result property="platformName"    column="platform_name"    />
         <result property="lotteryName"    column="lottery_name"    />
+        <result property="rewardStatus"    column="reward_status"    />
     </resultMap>
 
     <sql id="selectBetRecordVo">
@@ -71,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="countTime != null "> and count_time = #{countTime}</if>
             <if test="createBy != null "> and create_by = #{createBy}</if>
             <if test="updateBy != null "> and update_by = #{updateBy}</if>
+            <if test="rewardStatus != null "> and reward_status = #{rewardStatus}</if>
             <if test="platformUserIdList != null and platformUserIdList.size() >0">
               and platform_user_id in
               <foreach collection="platformUserIdList" open="(" close=")" separator="," item="platformUserId">
