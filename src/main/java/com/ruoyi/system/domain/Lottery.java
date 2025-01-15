@@ -29,6 +29,13 @@ public class Lottery extends BaseEntity
     @ApiModelProperty(value = "ID")
     private Long id;
 
+    /**
+     * 类型，1-六合彩，2-动物彩
+     */
+    @Excel(name = "类型", readConverterExp = "1=六合彩,2=动物彩")
+    @ApiModelProperty(example = "类型，1-六合彩，2-动物彩")
+    private Byte type;
+
     /** 彩种名称 */
     @Excel(name = "彩种名称")
     @ApiModelProperty(value = "彩种名称")

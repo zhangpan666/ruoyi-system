@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <resultMap type="Lottery" id="LotteryResult">
         <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
         <result property="name"    column="name"    />
         <result property="code"    column="code"    />
         <result property="status"    column="status"    />
@@ -31,14 +32,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryVo">
-        select id, name, code, status, open_status, sort, remark, description, rule, lottery_period, close_period, next_close_time, next_lottery_time, next_lottery_year, next_issue_no
-        , icon, width, height, create_by, create_time, update_by, update_time,lottery_live_address from t_lottery
+        select * from t_lottery
     </sql>
 
     <select id="selectLotteryList" parameterType="Lottery" resultMap="LotteryResult">
         select * from t_lottery
         <where>
             <if test="id != null"> and id = #{id}</if>
+            <if test="type != null "> and type = #{type}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="status != null "> and status = #{status}</if>
