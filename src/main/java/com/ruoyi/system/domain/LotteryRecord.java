@@ -82,6 +82,22 @@ public class LotteryRecord extends BaseEntity
     @ApiModelProperty(example = "数字")
     private String numbers;
 
+    /**
+     * 动物彩选手名称
+     */
+
+    @Excel(name = "动物彩选手名称")
+    @ApiModelProperty(example = "动物彩选手名称")
+    private String playerNames;
+
+    /**
+     * 动物彩选手字母编号
+     */
+
+    @Excel(name = "动物彩选手字母编号")
+    @ApiModelProperty(example = "动物彩选手字母编号")
+    private String playerLetterNumbers;
+
     /** 状态(1-有效，0-无效) */
     @Excel(name = "状态", readConverterExp = "1=有效,0=无效")
     @ApiModelProperty(example = "状态(1-有效，0-无效)")
