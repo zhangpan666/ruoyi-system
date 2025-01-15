@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <resultMap type="LotteryRecord" id="LotteryRecordResult">
         <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
         <result property="lotteryId"    column="lottery_id"    />
         <result property="year"    column="year"    />
         <result property="issueNo"    column="issue_no"    />
@@ -24,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryRecordVo">
-        select id, lottery_id, year, issue_no, date, lottery_time, sx, wx, numbers, status, lottery_video_path, lottery_video_status, bet_record_count_status, lottery_status, create_time, update_time from t_lottery_record
+        select * from t_lottery_record
     </sql>
 
     <select id="selectLotteryRecordList" parameterType="LotteryRecord" resultMap="LotteryRecordResult">

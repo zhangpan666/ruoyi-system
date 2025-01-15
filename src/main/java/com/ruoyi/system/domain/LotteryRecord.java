@@ -1,18 +1,16 @@
 package com.ruoyi.system.domain;
 
-import java.util.Date;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.system.domain.vo.LotterySingleNumberInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 开奖记录对象 t_lottery_record
@@ -28,10 +26,16 @@ public class LotteryRecord extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
     @Excel(name = "ID")
     @ApiModelProperty(example = "ID")
     private Long id;
+
+    /**
+     * 类型，1-六合彩，2-动物彩
+     */
+    @Excel(name = "类型", readConverterExp = "1=六合彩,2=动物彩")
+    @ApiModelProperty(example = "类型，1-六合彩，2-动物彩")
+    private Byte type;
 
     /** 彩种ID */
     @Excel(name = "彩种ID")
