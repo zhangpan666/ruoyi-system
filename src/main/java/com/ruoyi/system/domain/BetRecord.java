@@ -199,4 +199,6 @@ public class BetRecord extends BaseEntity
 
     private List<Long> platformUserIdList;
 
+    private List<Byte> statusList;
+
 }
