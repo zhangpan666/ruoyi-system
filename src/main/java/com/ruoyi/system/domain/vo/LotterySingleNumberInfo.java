@@ -35,6 +35,12 @@ public class LotterySingleNumberInfo implements Serializable {
     @ApiModelProperty(example = "特码，1-是，0-否")
     private Byte specialNumber;
 
+    @ApiModelProperty(example = "动物彩选手名称")
+    private String playerName;
+
+    @ApiModelProperty(example = "动物彩选手字母编号")
+    private String playerLetterNumber;
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

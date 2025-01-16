@@ -442,6 +442,11 @@ public class CommonConstant {
         public static final CommonConstantInfo SINGLE_CONTROL = new CommonConstantInfo(2, "单个控制");
     }
 
+    public static final class LotteryType {
+        public static final byte LHC = 1;
+        public static final byte DWC = 2;
+    }
+
 
     public static void main(String[] args) {
 
