@@ -226,6 +226,12 @@ public class CommonConstant {
         public static final CommonConstantInfo ZI_XUAN = new CommonConstantInfo(17, "自选");
         public static final CommonConstantInfo HE_XIAO = new CommonConstantInfo(18, "合肖");
         public static final CommonConstantInfo LONG_HU = new CommonConstantInfo(19, "龙虎");
+        public static final CommonConstantInfo DING_WEI_DAN = new CommonConstantInfo(20, "定位胆");
+        public static final CommonConstantInfo DA_XIAO_DAN_SHUANG = new CommonConstantInfo(21, "大小单双");
+        public static final CommonConstantInfo CAI_GUAN_YA_JUN = new CommonConstantInfo(22, "猜冠亚军");
+        public static final CommonConstantInfo CAI_QIAN_SAN_MING = new CommonConstantInfo(23, "猜前三名");
+        public static final CommonConstantInfo CAI_QIAN_SI_MING = new CommonConstantInfo(24, "猜前四名");
+        public static final CommonConstantInfo CAI_QIAN_WU_MING = new CommonConstantInfo(25, "猜前五名");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(PlayTypeCode.class);
     }
 
@@ -242,6 +248,7 @@ public class CommonConstant {
         public static final CommonConstantInfo WEI_SHU = new CommonConstantInfo(10, "尾数");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(PlayTypeDetailType.class);
     }
+
 
     public static class BetLimitAmountType {
         public static final CommonConstantInfo TE_MA = new CommonConstantInfo(1, "特码");
@@ -282,6 +289,12 @@ public class CommonConstant {
         public static final CommonConstantInfo ZONG_XIAO = new CommonConstantInfo(36, "总肖");
         public static final CommonConstantInfo ZONG_HE = new CommonConstantInfo(37, "总和");
         public static final CommonConstantInfo ZI_XUAN = new CommonConstantInfo(38, "自选");
+        public static final CommonConstantInfo DING_WEI_DAN = new CommonConstantInfo(39, "定位胆");
+        public static final CommonConstantInfo DA_XIAO_DAN_SHUANG = new CommonConstantInfo(40, "大小单双");
+        public static final CommonConstantInfo CAI_GUAN_YA_JUN = new CommonConstantInfo(41, "猜冠亚军");
+        public static final CommonConstantInfo CAI_QIAN_SAN_MING = new CommonConstantInfo(42, "猜前三名");
+        public static final CommonConstantInfo CAI_QIAN_SI_MING = new CommonConstantInfo(43, "猜前四名");
+        public static final CommonConstantInfo CAI_QIAN_WU_MING = new CommonConstantInfo(44, "猜前五名");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(BetLimitAmountType.class);
     }
 
@@ -324,6 +337,10 @@ public class CommonConstant {
         public static final CommonKVString WU_LIAN_WEI_ZHONG = new CommonKVString("34", "五连尾(中)");
         public static final CommonKVString WU_LIAN_WEI_BU_ZHONG = new CommonKVString("35", "五连尾(不中)");
         public static final CommonKVString SI_QUAN_ZHONG = new CommonKVString("36", "四全中");
+        public static final CommonKVString CAI_GUAN_YA_JUN = new CommonKVString("37", "猜冠亚军");
+        public static final CommonKVString CAI_QIAN_SAN_MING = new CommonKVString("38", "猜前三名");
+        public static final CommonKVString CAI_QIAN_SI_MING = new CommonKVString("39", "猜前四名");
+        public static final CommonKVString CAI_QIAN_WU_MING = new CommonKVString("40", "猜前五名");
         public static final Map<String, String> map = BaseCommonKVStringClassUtil.getMap(BetLimitCode.class);
     }
 
@@ -370,6 +387,12 @@ public class CommonConstant {
         public static final CommonConstantInfo WU_LIAN_WEI_ZHONG = new CommonConstantInfo(39, "五连尾(中)");
         public static final CommonConstantInfo WU_LIAN_WEI_BU_ZHONG = new CommonConstantInfo(40, "五连尾(不中)");
         public static final CommonConstantInfo SI_QUAN_ZHONG = new CommonConstantInfo(41, "四全中");
+        public static final CommonConstantInfo GUAN_JUN = new CommonConstantInfo(42, "冠军");
+        public static final CommonConstantInfo YA_JUN = new CommonConstantInfo(43, "亚军");
+        public static final CommonConstantInfo JI_JUN = new CommonConstantInfo(44, "季军");
+        public static final CommonConstantInfo DI_SI_MING = new CommonConstantInfo(45, "第四名");
+        public static final CommonConstantInfo DI_WU_MING = new CommonConstantInfo(46, "第五名");
+        public static final CommonConstantInfo DI_LIU_MING = new CommonConstantInfo(47, "第六名");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(PlayTypeItemCode.class);
     }
 
