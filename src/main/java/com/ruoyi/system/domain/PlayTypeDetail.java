@@ -50,7 +50,7 @@ public class PlayTypeDetail extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Byte playTypeItem;
+    private Integer playTypeItem;
 
     /** 限额类型 */
     @Excel(name = "限额类型")
