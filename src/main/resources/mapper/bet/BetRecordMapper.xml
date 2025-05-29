@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="displayBetContent"    column="display_bet_content"    />
         <result property="betOdds"    column="bet_odds"    />
         <result property="betAdditionalOdds"    column="bet_additional_odds"    />
+        <result property="betAdditionalOdds1"    column="bet_additional_odds1"    />
         <result property="platformId"    column="platform_id"    />
         <result property="platformUserId"    column="platform_user_id"    />
         <result property="lotteryId"    column="lottery_id"    />
@@ -39,6 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="platformName"    column="platform_name"    />
         <result property="lotteryName"    column="lottery_name"    />
         <result property="rewardStatus"    column="reward_status"    />
+        <result property="betPosition"    column="bet_position"    />
+        <result property="displayBetPosition"    column="display_bet_position"    />
     </resultMap>
 
     <sql id="selectBetRecordVo">

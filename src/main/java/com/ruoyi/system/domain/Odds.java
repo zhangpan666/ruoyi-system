@@ -40,15 +40,20 @@ public class Odds extends BaseEntity
     @ApiModelProperty(example = "code")
     private String code;
 
-    /** 赔率 */
-    @Excel(name = "赔率")
-    @ApiModelProperty(example = "赔率")
+    /** 第一赔率 */
+    @Excel(name = "第一赔率")
+    @ApiModelProperty(example = "第一赔率")
     private BigDecimal odds;
 
-    /** 副赔率 */
-    @Excel(name = "副赔率")
-    @ApiModelProperty(example = "副赔率")
+    /** 第二赔率 */
+    @Excel(name = "第二赔率")
+    @ApiModelProperty(example = "第二赔率")
     private BigDecimal additionalOdds;
+
+    /** 第三赔率 */
+    @Excel(name = "第三赔率")
+    @ApiModelProperty(example = "第三赔率")
+    private BigDecimal additionalOdds1;
 
     /** 排序 */
     @Excel(name = "排序")

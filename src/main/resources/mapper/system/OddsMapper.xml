@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="code"    column="code"    />
         <result property="odds"    column="odds"    />
         <result property="additionalOdds"    column="additional_odds"    />
+        <result property="additionalOdds1"    column="additional_odds1"    />
         <result property="sort"    column="sort"    />
         <result property="status"    column="status"    />
         <result property="remark"    column="remark"    />
@@ -49,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="code != null and code != ''">code,</if>
             <if test="odds != null">odds,</if>
             <if test="additionalOdds != null">additional_odds,</if>
+            <if test="additionalOdds1 != null">additional_odds1,</if>
             <if test="sort != null">sort,</if>
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
@@ -60,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="code != null and code != ''">#{code},</if>
             <if test="odds != null">#{odds},</if>
             <if test="additionalOdds != null">#{additionalOdds},</if>
+            <if test="additionalOdds1 != null">#{additionalOdds1},</if>
             <if test="sort != null">#{sort},</if>
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
@@ -75,6 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="code != null and code != ''">code = #{code},</if>
             <if test="odds != null">odds = #{odds},</if>
             <if test="additionalOdds != null">additional_odds = #{additionalOdds},</if>
+            <if test="additionalOdds1 != null">additional_odds1 = #{additionalOdds1},</if>
             <if test="sort != null">sort = #{sort},</if>
             <if test="status != null">status = #{status},</if>
             <if test="remark != null">remark = #{remark},</if>

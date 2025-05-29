@@ -106,15 +106,30 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "注数")
     private Integer singleTimeCount;
 
-    /** 赔率 */
-    @Excel(name = "赔率")
-    @ApiModelProperty(value = "赔率")
+    /** 第一赔率 */
+    @Excel(name = "第一赔率")
+    @ApiModelProperty(value = "第一赔率")
     private BigDecimal betOdds;
 
-    /** 附加赔率 */
-    @Excel(name = "附加赔率")
-    @ApiModelProperty(value = "附加赔率")
+    /** 第二赔率 */
+    @Excel(name = "第二赔率")
+    @ApiModelProperty(value = "第二赔率")
     private BigDecimal betAdditionalOdds;
+
+    /** 第三赔率 */
+    @Excel(name = "第三赔率")
+    @ApiModelProperty(value = "第三赔率")
+    private BigDecimal betAdditionalOdds1;
+
+    /** 下注位置 */
+//    @Excel(name = "下注位置")
+    @ApiModelProperty(value = "下注位置")
+    private String betPosition;
+
+    /** 下注位置 */
+    @Excel(name = "下注位置")
+    @ApiModelProperty(value = "下注位置")
+    private String displayBetPosition;
 
     /** 下注时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
