@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectOddsVo">
-        select id, lottery_id, code, odds, additional_odds, sort, status, remark, create_time, update_time from t_odds
+        select * from t_odds
     </sql>
 
     <select id="selectOddsList" parameterType="Odds" resultMap="OddsResult">
