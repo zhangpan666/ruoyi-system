@@ -69,7 +69,7 @@ public class AccountDetail
 
     /** 0-退款，1-额度转入，2-额度转出，3-投注，4-派彩，5-冻结 */
     @Excel(name = "交易类型", readConverterExp = "0=退款,1=额度转入,2=额度转出,3=投注,4=派彩,5=冻结,6=解冻,7=撤单")
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "交易类型，0-退款,1-额度转入,2-额度转出,3-投注,4-派彩,5-冻结,6-解冻,7-撤单")
     private Byte tradeType;
 
     /** 状态(1-到账，2-冻结,3-取消) */
