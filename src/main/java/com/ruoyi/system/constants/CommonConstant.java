@@ -468,6 +468,7 @@ public class CommonConstant {
     public static final class LotteryType {
         public static final byte LHC = 1;
         public static final byte DWC = 2;
+        public static final byte SZC = 3;
     }
 
 
