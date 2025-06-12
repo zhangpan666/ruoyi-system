@@ -20,7 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectplatformPlayTypeItemList" parameterType="platformPlayTypeItem" resultMap="platformPlayTypeItemResult">
-        select a.*,b.name as playTypeItemName from t_platform_play_type_item a inner join t_play_type_item b on a.code = b.type
+        select a.*,b.name as playTypeItemName,c.name as platformName from t_platform_play_type_item a inner join t_play_type_item b on a.code = b.type
+        inner join t_platform c on a.platform_id = c.id
         <where>
             <if test="platformId != null "> and a.platform_id = #{platformId}</if>
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
