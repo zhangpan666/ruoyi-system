@@ -1,5 +1,6 @@
 package com.ruoyi.system.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,22 +24,32 @@ public class PlatformPlayType extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** id */
+    @ApiModelProperty(value = "ID")
     private Long id;
 
     /** 平台id，0-默认 */
     @Excel(name = "平台id，0-默认")
+    @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
     /** 彩种ID */
     @Excel(name = "彩种ID")
+    @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
 
     /** code */
     @Excel(name = "code")
-    private Long code;
+    @ApiModelProperty(value = "code")
+    private Byte code;
 
     /** 状态，1-有效，0-无效 */
     @Excel(name = "状态，1-有效，0-无效")
-    private Long status;
+    @ApiModelProperty(value = "状态，1-有效，0-无效")
+    private Byte status;
+
+    /** 玩法名称 */
+    @Excel(name = "玩法名称")
+    @ApiModelProperty(value = "玩法名称")
+    private String playTypeName;
 
 }

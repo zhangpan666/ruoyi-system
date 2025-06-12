@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.PlatformPlayTypeMapper">
-    
+
     <resultMap type="PlatformPlayType" id="PlatformPlayTypeResult">
         <result property="id"    column="id"    />
         <result property="platformId"    column="platform_id"    />
@@ -20,15 +20,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectPlatformPlayTypeList" parameterType="PlatformPlayType" resultMap="PlatformPlayTypeResult">
-        <include refid="selectPlatformPlayTypeVo"/>
-        <where>  
-            <if test="platformId != null "> and platform_id = #{platformId}</if>
-            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
-            <if test="code != null "> and code = #{code}</if>
-            <if test="status != null "> and status = #{status}</if>
+        select a.*,b.name as playTypeName from t_platform_play_type a inner join t_play_type b on a.code = b.code
+        <where>
+            <if test="platformId != null "> and a.platform_id = #{platformId}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="code != null "> and a.code = #{code}</if>
+            <if test="status != null "> and a.status = #{status}</if>
         </where>
+        order by a.create_time desc
     </select>
-    
+
     <select id="selectPlatformPlayTypeById" parameterType="Long" resultMap="PlatformPlayTypeResult">
         <include refid="selectPlatformPlayTypeVo"/>
         where id = #{id}
@@ -75,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deletePlatformPlayTypeByIds" parameterType="String">
-        delete from t_platform_play_type where id in 
+        delete from t_platform_play_type where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

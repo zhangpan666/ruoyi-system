@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.platformPlayTypeItemMapper">
-    
+
     <resultMap type="platformPlayTypeItem" id="platformPlayTypeItemResult">
         <result property="id"    column="id"    />
         <result property="platformId"    column="platform_id"    />
@@ -20,15 +20,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectplatformPlayTypeItemList" parameterType="platformPlayTypeItem" resultMap="platformPlayTypeItemResult">
-        <include refid="selectplatformPlayTypeItemVo"/>
-        <where>  
-            <if test="platformId != null "> and platform_id = #{platformId}</if>
-            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
-            <if test="code != null "> and code = #{code}</if>
-            <if test="status != null "> and status = #{status}</if>
+        select a.*,b.name as playTypeItemName from t_platform_play_type_item a inner join t_play_type_item b on a.code = b.type
+        <where>
+            <if test="platformId != null "> and a.platform_id = #{platformId}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="code != null "> and a.code = #{code}</if>
+            <if test="status != null "> and a.status = #{status}</if>
         </where>
+        order by a.create_time desc
     </select>
-    
+
     <select id="selectplatformPlayTypeItemById" parameterType="Long" resultMap="platformPlayTypeItemResult">
         <include refid="selectplatformPlayTypeItemVo"/>
         where id = #{id}
@@ -75,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteplatformPlayTypeItemByIds" parameterType="String">
-        delete from t_platform_play_type_item where id in 
+        delete from t_platform_play_type_item where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
