@@ -43,6 +43,8 @@ public class CommonConstant {
         public static final RedisInfo ALL_ODDS_MAP = new RedisInfo().setMinute(30).setKeyPrefix("ALL_ODDS_MAP").setName("彩票赔率表");
         public static final RedisInfo PLATFORM_DETAIL = new RedisInfo().setDay(1).setKeyPrefix("PLATFORM_DETAIL").setName("平台详情");
         public static final RedisInfo IP_WHITE_LIST_LIST = new RedisInfo().setDay(1).setKeyPrefix("IP_WHITE_LIST_LIST").setName("IP白名单列表");
+        public static final RedisInfo PLATFORM_PLAY_TYPE_MAP = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_MAP").setName("平台玩法大类");
+        public static final RedisInfo PLATFORM_PLAY_TYPE_ITEM_MAP = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_ITEM_MAP").setName("平台玩法小类");
     }
 
 
@@ -458,6 +460,8 @@ public class CommonConstant {
         public static final CommonConstantInfo LOTTERY_COMPLETE_NOTICE = new CommonConstantInfo(6, "开奖结束通知");
         public static final CommonConstantInfo LOTTERY_PUSH_NOTICE = new CommonConstantInfo(7, "开奖结果通知");
         public static final CommonConstantInfo LOTTERY_COUNT_NOTICE = new CommonConstantInfo(8, "开奖结算通知");
+        public static final CommonConstantInfo LOTTERY_CONTROL_NOTICE = new CommonConstantInfo(9, "控奖通知");
+        public static final CommonConstantInfo ACTIVITY_SPECIAL_NUMBER_NOTICE = new CommonConstantInfo(10, "活动特码通知");
     }
 
     public static class WinRateConfigType {
