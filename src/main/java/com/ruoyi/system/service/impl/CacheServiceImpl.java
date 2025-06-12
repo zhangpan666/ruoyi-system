@@ -159,4 +159,27 @@ public class CacheServiceImpl implements CacheService {
     public void clearPlayTypeMap(Long lotteryId) {
         redisCache.deleteObject(CommonConstant.RedisKey.PLAY_TYPE_MAP.getKey(lotteryId));
     }
+
+
+    @Override
+    public void clearPlatformPlayTypeMap() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.PLATFORM_PLAY_TYPE_MAP.getKeyPrefix());
+    }
+
+    @Override
+    public void clearPlatformPlayTypeMap(Long platformId) {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.PLATFORM_PLAY_TYPE_MAP.getKey(platformId));
+    }
+
+
+    @Override
+    public void clearPlatformPlayTypeItemMap() {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.PLATFORM_PLAY_TYPE_ITEM_MAP.getKeyPrefix());
+    }
+
+    @Override
+    public void clearPlatformPlayTypeItemMap(Long platformId) {
+        redisCache.deleteByPattern(CommonConstant.RedisKey.PLATFORM_PLAY_TYPE_ITEM_MAP.getKey(platformId));
+    }
+
 }

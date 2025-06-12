@@ -4,21 +4,21 @@ import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.platformPlayTypeItemMapper;
-import com.ruoyi.system.domain.platformPlayTypeItem;
-import com.ruoyi.system.service.IplatformPlayTypeItemService;
+import com.ruoyi.system.mapper.PlatformPlayTypeItemMapper;
+import com.ruoyi.system.domain.PlatformPlayTypeItem;
+import com.ruoyi.system.service.IPlatformPlayTypeItemService;
 
 /**
  * 平台玩法小类Service业务层处理
  * 
  * @author ruoyi
- * @date 2025-06-11
+ * @date 2025-06-12
  */
 @Service
-public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemService 
+public class PlatformPlayTypeItemServiceImpl implements IPlatformPlayTypeItemService 
 {
     @Autowired
-    private platformPlayTypeItemMapper platformPlayTypeItemMapper;
+    private PlatformPlayTypeItemMapper platformPlayTypeItemMapper;
 
     /**
      * 查询平台玩法小类
@@ -27,9 +27,9 @@ public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemSer
      * @return 平台玩法小类
      */
     @Override
-    public platformPlayTypeItem selectplatformPlayTypeItemById(Long id)
+    public PlatformPlayTypeItem selectPlatformPlayTypeItemById(Long id)
     {
-        return platformPlayTypeItemMapper.selectplatformPlayTypeItemById(id);
+        return platformPlayTypeItemMapper.selectPlatformPlayTypeItemById(id);
     }
 
     /**
@@ -39,9 +39,9 @@ public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemSer
      * @return 平台玩法小类
      */
     @Override
-    public List<platformPlayTypeItem> selectplatformPlayTypeItemList(platformPlayTypeItem platformPlayTypeItem)
+    public List<PlatformPlayTypeItem> selectPlatformPlayTypeItemList(PlatformPlayTypeItem platformPlayTypeItem)
     {
-        return platformPlayTypeItemMapper.selectplatformPlayTypeItemList(platformPlayTypeItem);
+        return platformPlayTypeItemMapper.selectPlatformPlayTypeItemList(platformPlayTypeItem);
     }
 
     /**
@@ -51,10 +51,10 @@ public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemSer
      * @return 结果
      */
     @Override
-    public int insertplatformPlayTypeItem(platformPlayTypeItem platformPlayTypeItem)
+    public int insertPlatformPlayTypeItem(PlatformPlayTypeItem platformPlayTypeItem)
     {
         platformPlayTypeItem.setCreateTime(DateUtils.getNowDate());
-        return platformPlayTypeItemMapper.insertplatformPlayTypeItem(platformPlayTypeItem);
+        return platformPlayTypeItemMapper.insertPlatformPlayTypeItem(platformPlayTypeItem);
     }
 
     /**
@@ -64,10 +64,10 @@ public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemSer
      * @return 结果
      */
     @Override
-    public int updateplatformPlayTypeItem(platformPlayTypeItem platformPlayTypeItem)
+    public int updatePlatformPlayTypeItem(PlatformPlayTypeItem platformPlayTypeItem)
     {
         platformPlayTypeItem.setUpdateTime(DateUtils.getNowDate());
-        return platformPlayTypeItemMapper.updateplatformPlayTypeItem(platformPlayTypeItem);
+        return platformPlayTypeItemMapper.updatePlatformPlayTypeItem(platformPlayTypeItem);
     }
 
     /**
@@ -77,9 +77,9 @@ public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemSer
      * @return 结果
      */
     @Override
-    public int deleteplatformPlayTypeItemByIds(Long[] ids)
+    public int deletePlatformPlayTypeItemByIds(Long[] ids)
     {
-        return platformPlayTypeItemMapper.deleteplatformPlayTypeItemByIds(ids);
+        return platformPlayTypeItemMapper.deletePlatformPlayTypeItemByIds(ids);
     }
 
     /**
@@ -89,8 +89,8 @@ public class platformPlayTypeItemServiceImpl implements IplatformPlayTypeItemSer
      * @return 结果
      */
     @Override
-    public int deleteplatformPlayTypeItemById(Long id)
+    public int deletePlatformPlayTypeItemById(Long id)
     {
-        return platformPlayTypeItemMapper.deleteplatformPlayTypeItemById(id);
+        return platformPlayTypeItemMapper.deletePlatformPlayTypeItemById(id);
     }
 }

@@ -1,15 +1,15 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.platformPlayTypeItem;
+import com.ruoyi.system.domain.PlatformPlayTypeItem;
 
 /**
  * 平台玩法小类Mapper接口
  * 
  * @author ruoyi
- * @date 2025-06-11
+ * @date 2025-06-12
  */
-public interface platformPlayTypeItemMapper 
+public interface PlatformPlayTypeItemMapper 
 {
     /**
      * 查询平台玩法小类
@@ -17,7 +17,7 @@ public interface platformPlayTypeItemMapper
      * @param id 平台玩法小类主键
      * @return 平台玩法小类
      */
-    public platformPlayTypeItem selectplatformPlayTypeItemById(Long id);
+    public PlatformPlayTypeItem selectPlatformPlayTypeItemById(Long id);
 
     /**
      * 查询平台玩法小类列表
@@ -25,7 +25,7 @@ public interface platformPlayTypeItemMapper
      * @param platformPlayTypeItem 平台玩法小类
      * @return 平台玩法小类集合
      */
-    public List<platformPlayTypeItem> selectplatformPlayTypeItemList(platformPlayTypeItem platformPlayTypeItem);
+    public List<PlatformPlayTypeItem> selectPlatformPlayTypeItemList(PlatformPlayTypeItem platformPlayTypeItem);
 
     /**
      * 新增平台玩法小类
@@ -33,7 +33,7 @@ public interface platformPlayTypeItemMapper
      * @param platformPlayTypeItem 平台玩法小类
      * @return 结果
      */
-    public int insertplatformPlayTypeItem(platformPlayTypeItem platformPlayTypeItem);
+    public int insertPlatformPlayTypeItem(PlatformPlayTypeItem platformPlayTypeItem);
 
     /**
      * 修改平台玩法小类
@@ -41,7 +41,7 @@ public interface platformPlayTypeItemMapper
      * @param platformPlayTypeItem 平台玩法小类
      * @return 结果
      */
-    public int updateplatformPlayTypeItem(platformPlayTypeItem platformPlayTypeItem);
+    public int updatePlatformPlayTypeItem(PlatformPlayTypeItem platformPlayTypeItem);
 
     /**
      * 删除平台玩法小类
@@ -49,7 +49,7 @@ public interface platformPlayTypeItemMapper
      * @param id 平台玩法小类主键
      * @return 结果
      */
-    public int deleteplatformPlayTypeItemById(Long id);
+    public int deletePlatformPlayTypeItemById(Long id);
 
     /**
      * 批量删除平台玩法小类
@@ -57,5 +57,5 @@ public interface platformPlayTypeItemMapper
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteplatformPlayTypeItemByIds(Long[] ids);
+    public int deletePlatformPlayTypeItemByIds(Long[] ids);
 }

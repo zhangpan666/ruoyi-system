@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.platformPlayTypeItemMapper">
+<mapper namespace="com.ruoyi.system.mapper.PlatformPlayTypeItemMapper">
 
-    <resultMap type="platformPlayTypeItem" id="platformPlayTypeItemResult">
+    <resultMap type="PlatformPlayTypeItem" id="PlatformPlayTypeItemResult">
         <result property="id"    column="id"    />
         <result property="platformId"    column="platform_id"    />
         <result property="lotteryId"    column="lottery_id"    />
@@ -15,11 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectplatformPlayTypeItemVo">
+    <sql id="selectPlatformPlayTypeItemVo">
         select id, platform_id, lottery_id, code, status, remark, create_time, update_time from t_platform_play_type_item
     </sql>
 
-    <select id="selectplatformPlayTypeItemList" parameterType="platformPlayTypeItem" resultMap="platformPlayTypeItemResult">
+    <select id="selectPlatformPlayTypeItemList" parameterType="PlatformPlayTypeItem" resultMap="PlatformPlayTypeItemResult">
         select a.*,b.name as playTypeItemName,c.name as platformName from t_platform_play_type_item a inner join t_play_type_item b on a.code = b.type
         inner join t_platform c on a.platform_id = c.id
         <where>
@@ -31,12 +31,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by a.create_time desc
     </select>
 
-    <select id="selectplatformPlayTypeItemById" parameterType="Long" resultMap="platformPlayTypeItemResult">
-        <include refid="selectplatformPlayTypeItemVo"/>
+    <select id="selectPlatformPlayTypeItemById" parameterType="Long" resultMap="PlatformPlayTypeItemResult">
+        <include refid="selectPlatformPlayTypeItemVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertplatformPlayTypeItem" parameterType="platformPlayTypeItem" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertPlatformPlayTypeItem" parameterType="PlatformPlayTypeItem" useGeneratedKeys="true" keyProperty="id">
         insert into t_platform_play_type_item
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="platformId != null">platform_id,</if>
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateplatformPlayTypeItem" parameterType="platformPlayTypeItem">
+    <update id="updatePlatformPlayTypeItem" parameterType="PlatformPlayTypeItem">
         update t_platform_play_type_item
         <trim prefix="SET" suffixOverrides=",">
             <if test="platformId != null">platform_id = #{platformId},</if>
@@ -72,11 +72,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteplatformPlayTypeItemById" parameterType="Long">
+    <delete id="deletePlatformPlayTypeItemById" parameterType="Long">
         delete from t_platform_play_type_item where id = #{id}
     </delete>
 
-    <delete id="deleteplatformPlayTypeItemByIds" parameterType="String">
+    <delete id="deletePlatformPlayTypeItemByIds" parameterType="String">
         delete from t_platform_play_type_item where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
