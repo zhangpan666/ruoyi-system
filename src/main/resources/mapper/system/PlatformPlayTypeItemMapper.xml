@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null "> and a.status = #{status}</if>
             <if test="playTypeCode != null "> and b.play_type_code = #{playTypeCode}</if>
         </where>
-        order by a.platform_id,a.create_time desc
+        order by a.platform_id asc,a.code asc
     </select>
 
     <select id="selectPlatformPlayTypeItemById" parameterType="Long" resultMap="PlatformPlayTypeItemResult">
