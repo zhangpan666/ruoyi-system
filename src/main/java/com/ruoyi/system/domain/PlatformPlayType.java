@@ -56,4 +56,8 @@ public class PlatformPlayType extends BaseEntity
     @ApiModelProperty(example = "平台名称")
     private String platformName;
 
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(example = "彩种名称")
+    private String lotteryName;
+
 }

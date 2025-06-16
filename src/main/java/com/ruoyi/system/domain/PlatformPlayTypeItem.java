@@ -72,6 +72,10 @@ public class PlatformPlayTypeItem extends BaseEntity {
     @ApiModelProperty(value = "玩法大类名称")
     private String playTypeName;
 
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(example = "彩种名称")
+    private String lotteryName;
+
     private Byte playTypeCode;
 
 }
