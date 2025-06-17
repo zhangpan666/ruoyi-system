@@ -58,13 +58,13 @@ public interface CacheService {
 
     void clearPlayTypeMap(Long lotteryId);
 
-    void clearPlatformPlayTypeMap();
+    void clearPlatformPlayTypeList();
 
-    void clearPlatformPlayTypeMap(Long platformId);
+    void clearPlatformPlayTypeList(Long platformId);
 
-    void clearPlatformPlayTypeItemMap();
+    void clearPlatformPlayTypeItemList();
 
-    void clearPlatformPlayTypeItemMap(Long platformId);
+    void clearPlatformPlayTypeItemList(Long platformId);
 
 
 }
