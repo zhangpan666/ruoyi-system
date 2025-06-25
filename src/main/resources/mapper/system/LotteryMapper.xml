@@ -117,8 +117,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateLottery" parameterType="Lottery">
         update t_lottery
         <trim prefix="SET" suffixOverrides=",">
-            <if test="name != null">name = #{name},</if>
-            <if test="code != null">code = #{code},</if>
             <if test="status != null">status = #{status},</if>
             <if test="openStatus != null">open_status = #{openStatus},</if>
             <if test="sort != null">sort = #{sort},</if>
