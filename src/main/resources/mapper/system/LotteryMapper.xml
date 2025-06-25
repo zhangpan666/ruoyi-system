@@ -29,6 +29,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"     column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="lotteryLiveAddress"    column="lottery_live_address"    />
+        <result property="specialNumberOddsAmount"    column="special_number_odds_amount"    />
+        <result property="activitySpecialNumber"    column="activity_special_number"    />
+        <result property="activitySpecialNumberOddsAmount"    column="activity_special_number_odds_amount"    />
+        <result property="activitySpecialNumberStatus"    column="activity_special_number_status"    />
     </resultMap>
 
     <sql id="selectLotteryVo">
@@ -131,6 +135,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="icon != null">icon = #{icon},</if>
             <if test="width != null">width = #{width},</if>
             <if test="height != null">height = #{height},</if>
+            <if test="specialNumberOddsAmount != null">special_number_odds_amount = #{specialNumberOddsAmount},</if>
+            <if test="activitySpecialNumberStatus != null">activity_special_number_status = #{activitySpecialNumberStatus},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>

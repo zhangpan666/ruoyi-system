@@ -114,6 +114,18 @@ public class Lottery extends BaseEntity
     @ApiModelProperty(value = "开奖直播地址")
     private String lotteryLiveAddress;
 
+    @ApiModelProperty(value = "特码赔率")
+    private BigDecimal specialNumberOddsAmount;
+
+    @ApiModelProperty(value = "活动特码")
+    private String activitySpecialNumber;
+
+    @ApiModelProperty(value = "活动特码赔率")
+    private BigDecimal activitySpecialNumberOddsAmount;
+
+    @ApiModelProperty(value = "活动特码状态，1-有效，0-无效")
+    private Byte activitySpecialNumberStatus;
+
     @ApiModelProperty(value = "封盘倒计时，单位毫秒")
     private long closeCount;
 
