@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="betRecordCountStatus != null "> and a.bet_record_count_status = #{betRecordCountStatus}</if>
             <if test="lotteryStatus != null "> and a.lottery_status = #{lotteryStatus}</if>
         </where>
-            order by a.lottery_time desc
+            order by a.id desc
     </select>
 
     <select id="selectLotteryRecordById" parameterType="Long" resultMap="LotteryRecordResult">
