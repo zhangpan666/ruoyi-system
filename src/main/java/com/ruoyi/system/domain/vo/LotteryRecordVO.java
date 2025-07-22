@@ -24,6 +24,9 @@ public class LotteryRecordVO implements Serializable {
     @ApiModelProperty(example = "彩种ID")
     private Long lotteryId;
 
+    @ApiModelProperty(example = "玩法大类code")
+    private String playTypeCode;
+
     @ApiModelProperty(example = "开奖时间")
     @JSONField(format = DateUtils.DATE_TIME_FORMAT)
     private Date lotteryTime;

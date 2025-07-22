@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.BetRecord;
+import com.ruoyi.system.domain.vo.LotteryBetDataVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
 
@@ -72,5 +73,7 @@ public interface IBetRecordService
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeCode(BetRecord betRecord);
 
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord);
+
+    List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord);
 
 }

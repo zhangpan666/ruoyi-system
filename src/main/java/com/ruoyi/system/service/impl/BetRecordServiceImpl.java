@@ -1,7 +1,9 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.vo.LotteryBetDataVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class BetRecordServiceImpl implements IBetRecordService
-{
+public class BetRecordServiceImpl implements IBetRecordService {
     @Autowired
     private BetRecordMapper betRecordMapper;
 
@@ -31,8 +32,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 投注记录
      */
     @Override
-    public BetRecord selectBetRecordById(Long id)
-    {
+    public BetRecord selectBetRecordById(Long id) {
         return betRecordMapper.selectBetRecordById(id);
     }
 
@@ -43,8 +43,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 投注记录
      */
     @Override
-    public List<BetRecord> selectBetRecordList(BetRecord betRecord)
-    {
+    public List<BetRecord> selectBetRecordList(BetRecord betRecord) {
         return betRecordMapper.selectBetRecordList(betRecord);
     }
 
@@ -55,8 +54,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 结果
      */
     @Override
-    public int insertBetRecord(BetRecord betRecord)
-    {
+    public int insertBetRecord(BetRecord betRecord) {
         betRecord.setCreateTime(DateUtils.getNowDate());
         return betRecordMapper.insertBetRecord(betRecord);
     }
@@ -68,8 +66,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 结果
      */
     @Override
-    public int updateBetRecord(BetRecord betRecord)
-    {
+    public int updateBetRecord(BetRecord betRecord) {
         betRecord.setUpdateTime(DateUtils.getNowDate());
         return betRecordMapper.updateBetRecord(betRecord);
     }
@@ -81,8 +78,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 结果
      */
     @Override
-    public int deleteBetRecordByIds(Long[] ids)
-    {
+    public int deleteBetRecordByIds(Long[] ids) {
         return betRecordMapper.deleteBetRecordByIds(ids);
     }
 
@@ -93,8 +89,7 @@ public class BetRecordServiceImpl implements IBetRecordService
      * @return 结果
      */
     @Override
-    public int deleteBetRecordById(Long id)
-    {
+    public int deleteBetRecordById(Long id) {
         return betRecordMapper.deleteBetRecordById(id);
     }
 
@@ -128,6 +123,14 @@ public class BetRecordServiceImpl implements IBetRecordService
     @Override
     public List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord) {
         return betRecordMapper.statBetRecordAndGroupByPlayTypeDetailCode(betRecord);
+    }
+
+    @Override
+    public List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord) {
+        if (betRecord.getPlayTypeCode() == null) {
+            return betRecordMapper.getPlayTypeList(betRecord);
+        }
+        return betRecordMapper.statLotteryDataList(betRecord);
     }
 
 }
