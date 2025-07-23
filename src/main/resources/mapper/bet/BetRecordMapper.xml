@@ -688,7 +688,7 @@
         WHERE lottery_id = #{lotteryId}
           AND issue_no = #{issueNo}
         GROUP BY play_type_code
-        ORDER BY totalBetAmount DESC;
+        ORDER BY totalBetAmount DESC
     </select>
 
     <select id="statLotteryDataList" resultType="com.ruoyi.system.domain.vo.LotteryBetDataVO">
@@ -749,7 +749,7 @@
           AND a.issue_no = #{issueNo}
           AND a.play_type_code = #{playTypeCode}
         GROUP BY a.play_type_detail_code
-        ORDER BY totalBetAmount DESC;
+        ORDER BY totalBetAmount DESC
     </select>
 
 </mapper>
