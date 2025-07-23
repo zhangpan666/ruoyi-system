@@ -744,7 +744,7 @@
                COUNT(*)                                                                                    AS totalCount,
                SUM(a.bet_amount)                                                                           AS totalBetAmount,
                SUM(a.can_win_amount)                                                                       AS canWinAmount
-        FROM t_bet_record_49 a
+        FROM t_bet_record a
         WHERE a.lottery_id = #{lotteryId}
           AND a.issue_no = #{issueNo}
           AND a.play_type_code = #{playTypeCode}
