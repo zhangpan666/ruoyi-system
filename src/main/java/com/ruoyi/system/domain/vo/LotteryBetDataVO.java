@@ -29,6 +29,9 @@ public class LotteryBetDataVO implements Serializable {
     @ApiModelProperty(example = "玩法编码")
     private String playTypeCode;
 
+    @ApiModelProperty(example = "玩法明细编码")
+    private String playTypeDetailCode;
+
     @ApiModelProperty(example = "玩法值")
     private String value;
 

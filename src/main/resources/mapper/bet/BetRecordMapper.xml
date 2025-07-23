@@ -680,7 +680,7 @@
         SELECT MAX(lottery_id)     AS lotteryId,
                MAX(lottery_name)   AS lotteryName,
                play_type_code      AS playTypeCode,
-               MAX(play_type_name) AS playTypeName,    -- 取分组内最大值（其实只有一个）
+               MAX(play_type_name) AS playTypeName,   -- 取分组内最大值（其实只有一个）
                COUNT(*)            AS totalCount,     -- 每组记录数
                SUM(bet_amount)     AS totalBetAmount, -- 每组下注金额合计,
                SUM(can_win_amount) AS canWinAmount
@@ -692,17 +692,16 @@
     </select>
 
     <select id="statLotteryDataList" resultType="com.ruoyi.system.domain.vo.LotteryBetDataVO">
-        SELECT MAX(a.lottery_id)                                                                           AS lotteryId,
-               MAX(a.lottery_name)                                                                         AS lotteryName,
-               a.play_type_code                                                                            AS playTypeCode,
-               MAX(a.play_type_name)                                                                       AS playTypeName,
-               a.play_type_detail_code                                                                     AS playTypeDetailCode,
+        SELECT MAX(a.lottery_id)       AS lotteryId,
+               MAX(a.lottery_name)     AS lotteryName,
+               a.play_type_code        AS playTypeCode,
+               MAX(a.play_type_name)   AS playTypeName,
+               a.play_type_detail_code AS playTypeDetailCode,
                (SELECT GROUP_CONCAT(
                                (SELECT GROUP_CONCAT(b1.VALUE ORDER BY FIELD(b1.CODE, SUBSTRING_INDEX(parts.part, ',', - 1)) SEPARATOR ',')
                                 FROM t_play_type_detail b1
                                 WHERE FIND_IN_SET(b1.CODE, parts.part) > 0)
-                                   ORDER BY
-                                   parts.pos SEPARATOR '|'
+                                   ORDER BY parts.pos SEPARATOR '|'
                        )
                 FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(a.play_type_detail_code, '|', numbers.n), '|',
                                              - 1) AS part,
@@ -716,34 +715,33 @@
                             SELECT 4
                             UNION ALL
                             SELECT 5) numbers
-                      WHERE
-                          numbers.n &lt; LENGTH(a.play_type_detail_code) - LENGTH(REPLACE(a.play_type_detail_code, '|',
-                                                                                          '')) + 1) parts) AS `value`,
-               (SELECT GROUP_CONCAT(
-                               (SELECT GROUP_CONCAT(b2.description ORDER BY FIELD(b2.CODE, SUBSTRING_INDEX(parts.part, ',', - 1)) SEPARATOR ',')
-                                FROM t_play_type_detail b2
-                                WHERE FIND_IN_SET(b2.CODE, parts.part) > 0)
-                                   ORDER BY
-                                   parts.pos SEPARATOR '|'
-                       )
-                FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(a.play_type_detail_code, '|', numbers.n), '|',
-                                             - 1) AS part,
-                             numbers.n            AS pos
-                      FROM (SELECT 1 AS n
-                            UNION ALL
-                            SELECT 2
-                            UNION ALL
-                            SELECT 3
-                            UNION ALL
-                            SELECT 4
-                            UNION ALL
-                            SELECT 5) numbers
-                      WHERE numbers.n &lt;
+                      WHERE numbers.n &lt;=
                             LENGTH(a.play_type_detail_code) - LENGTH(REPLACE(a.play_type_detail_code, '|', '')) +
-                            1) parts)                                                                      AS description,
-               COUNT(*)                                                                                    AS totalCount,
-               SUM(a.bet_amount)                                                                           AS totalBetAmount,
-               SUM(a.can_win_amount)                                                                       AS canWinAmount
+                            1) parts) AS `value`,
+            (SELECT GROUP_CONCAT(
+            (SELECT GROUP_CONCAT(b2.description ORDER BY FIELD(b2.CODE, SUBSTRING_INDEX(parts.part, ',', - 1)) SEPARATOR ',')
+            FROM t_play_type_detail b2
+            WHERE FIND_IN_SET(b2.CODE, parts.part) > 0)
+            ORDER BY parts.pos SEPARATOR '|'
+            )
+            FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(a.play_type_detail_code, '|', numbers.n), '|',
+            - 1) AS part,
+            numbers.n AS pos
+            FROM (SELECT 1 AS n
+            UNION ALL
+            SELECT 2
+            UNION ALL
+            SELECT 3
+            UNION ALL
+            SELECT 4
+            UNION ALL
+            SELECT 5) numbers
+            WHERE numbers.n &lt;=
+                LENGTH(a.play_type_detail_code) - LENGTH(REPLACE(a.play_type_detail_code, '|', '')) +
+            1) parts) AS description,
+            COUNT(*) AS totalCount,
+            SUM(a.bet_amount) AS totalBetAmount,
+            SUM(a.can_win_amount) AS canWinAmount
         FROM t_bet_record a
         WHERE a.lottery_id = #{lotteryId}
           AND a.issue_no = #{issueNo}
@@ -752,4 +750,4 @@
         ORDER BY totalBetAmount DESC
     </select>
 
-</mapper>
+        </mapper>
