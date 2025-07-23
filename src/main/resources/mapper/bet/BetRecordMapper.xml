@@ -680,7 +680,7 @@
         SELECT MAX(lottery_id)     AS lotteryId,
                MAX(lottery_name)   AS lotteryName,
                play_type_code      AS playTypeCode,
-               MAX(play_type_name) AS plaTypeName,    -- 取分组内最大值（其实只有一个）
+               MAX(play_type_name) AS playTypeName,    -- 取分组内最大值（其实只有一个）
                COUNT(*)            AS totalCount,     -- 每组记录数
                SUM(bet_amount)     AS totalBetAmount, -- 每组下注金额合计,
                SUM(can_win_amount) AS canWinAmount
