@@ -18,7 +18,7 @@ public class LotteryBetDataVO implements Serializable {
 
 
     @ApiModelProperty(example = "彩种ID")
-    private Long lotteryId;
+    private String lotteryId;
 
     @ApiModelProperty(example = "彩种名称")
     private String lotteryName;
@@ -36,12 +36,12 @@ public class LotteryBetDataVO implements Serializable {
     private String description;
 
     @ApiModelProperty(example = "注单笔数")
-    private Integer totalCount;
+    private String totalCount = "0";
 
     @ApiModelProperty(example = "总下注金额")
-    private BigDecimal totalBetAmount = BigDecimal.ZERO;
+    private String totalBetAmount = "0.00";
 
     @ApiModelProperty(example = "可赢金额")
-    private BigDecimal canWinAmount = BigDecimal.ZERO;
+    private String canWinAmount = "0.00";
 
 }
