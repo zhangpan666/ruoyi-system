@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 /**
  * @author Alan   2025/7/21 22:04
  */
-@ApiModel(description = "及时注单数据")
+@ApiModel(description = "下注数据")
 @Data
 @Accessors(chain = true)
 public class LotteryBetDataVO implements Serializable {

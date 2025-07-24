@@ -1,10 +1,13 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+
 import com.ruoyi.system.domain.BetRecord;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 投注记录Service接口
@@ -12,8 +15,7 @@ import com.ruoyi.system.pojo.BetRecordStatVO;
  * @author ruoyi
  * @date 2024-08-11
  */
-public interface IBetRecordService
-{
+public interface IBetRecordService {
     /**
      * 查询投注记录
      *
@@ -75,5 +77,7 @@ public interface IBetRecordService
     List<BetRecordStatVO> statBetRecordAndGroupByPlayTypeDetailCode(BetRecord betRecord);
 
     List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord);
+
+    List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type);
 
 }

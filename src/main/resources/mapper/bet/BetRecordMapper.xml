@@ -717,31 +717,31 @@
                             SELECT 5) numbers
                       WHERE numbers.n &lt;=
                             LENGTH(a.play_type_detail_code) - LENGTH(REPLACE(a.play_type_detail_code, '|', '')) +
-                            1) parts) AS `value`,
-            (SELECT GROUP_CONCAT(
-            (SELECT GROUP_CONCAT(b2.description ORDER BY FIELD(b2.CODE, SUBSTRING_INDEX(parts.part, ',', - 1)) SEPARATOR ',')
-            FROM t_play_type_detail b2
-            WHERE FIND_IN_SET(b2.CODE, parts.part) > 0)
-            ORDER BY parts.pos SEPARATOR '|'
-            )
-            FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(a.play_type_detail_code, '|', numbers.n), '|',
-            - 1) AS part,
-            numbers.n AS pos
-            FROM (SELECT 1 AS n
-            UNION ALL
-            SELECT 2
-            UNION ALL
-            SELECT 3
-            UNION ALL
-            SELECT 4
-            UNION ALL
-            SELECT 5) numbers
-            WHERE numbers.n &lt;=
-                LENGTH(a.play_type_detail_code) - LENGTH(REPLACE(a.play_type_detail_code, '|', '')) +
-            1) parts) AS description,
-            COUNT(*) AS totalCount,
-            SUM(a.bet_amount) AS totalBetAmount,
-            SUM(a.can_win_amount) AS canWinAmount
+                            1) parts)  AS `value`,
+               (SELECT GROUP_CONCAT(
+                               (SELECT GROUP_CONCAT(b2.description ORDER BY FIELD(b2.CODE, SUBSTRING_INDEX(parts.part, ',', - 1)) SEPARATOR ',')
+                                FROM t_play_type_detail b2
+                                WHERE FIND_IN_SET(b2.CODE, parts.part) > 0)
+                                   ORDER BY parts.pos SEPARATOR '|'
+                       )
+                FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(a.play_type_detail_code, '|', numbers.n), '|',
+                                             - 1) AS part,
+                             numbers.n            AS pos
+                      FROM (SELECT 1 AS n
+                            UNION ALL
+                            SELECT 2
+                            UNION ALL
+                            SELECT 3
+                            UNION ALL
+                            SELECT 4
+                            UNION ALL
+                            SELECT 5) numbers
+                      WHERE numbers.n &lt;=
+                            LENGTH(a.play_type_detail_code) - LENGTH(REPLACE(a.play_type_detail_code, '|', '')) +
+                            1) parts)  AS description,
+               COUNT(*)                AS totalCount,
+               SUM(a.bet_amount)       AS totalBetAmount,
+               SUM(a.can_win_amount)   AS canWinAmount
         FROM t_bet_record a
         WHERE a.lottery_id = #{lotteryId}
           AND a.issue_no = #{issueNo}
@@ -750,4 +750,102 @@
         ORDER BY totalBetAmount DESC
     </select>
 
-        </mapper>
+    <select id="realTimeOrderByNumber" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT MAX(br.bet_content)        AS number,
+               br.play_type_detail_code   AS playTypeDetailCode,
+               COUNT(DISTINCT br.user_id) AS userCount,
+               COUNT(*)                   AS orderCount,
+               SUM(br.bet_amount)         AS totalBetAmount,
+               SUM(br.can_win_amount)     AS totalCanWinAmount,
+               lr.color                   AS colour,
+               lr.sx                      AS sx,
+               -- 大小判断
+               CONCAT(
+                       CASE
+                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) = 49 THEN '和'
+                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) >= 25 THEN '大'
+                           ELSE '小'
+                           END, '/',
+                   -- 单双判断
+                       CASE
+                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) = 49 THEN '和'
+                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) % 2 = 0 THEN '双'
+                           ELSE '单'
+                           END
+               )                          AS type, RIGHT(MAX(br.bet_content),1) AS mantissa
+        FROM t_bet_record br
+            LEFT JOIN t_lottery_relation lr
+        ON lr.number = br.bet_content
+        WHERE br.lottery_id = #{lotteryId}
+          AND lr.year = 2025
+          AND br.play_type_code = #{playTypeCode}
+          AND br.play_type_detail_code BETWEEN 1
+          AND 49
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        GROUP BY br.play_type_detail_code
+        ORDER BY totalBetAmount DESC
+    </select>
+
+    <select id="realTimeOrderBySx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT base.sx,
+               IFNULL(sx_numbers.numbers, '')   AS number,
+               COALESCE(t.userCount, 0)         AS userCount,
+               COALESCE(t.orderCount, 0)        AS orderCount,
+               COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
+               COALESCE(t.totalCanWinAmount, 0) AS totalCanWinAmount
+        FROM
+        (SELECT '鼠' AS sx
+         UNION ALL
+         SELECT '牛'
+         UNION ALL
+         SELECT '虎'
+         UNION ALL
+         SELECT '兔'
+         UNION ALL
+         SELECT '龙'
+         UNION ALL
+         SELECT '蛇'
+         UNION ALL
+         SELECT '马'
+         UNION ALL
+         SELECT '羊'
+         UNION ALL
+         SELECT '猴'
+         UNION ALL
+         SELECT '鸡'
+         UNION ALL
+         SELECT '狗'
+         UNION ALL
+         SELECT '猪') base
+            LEFT JOIN (
+        SELECT br.bet_content             AS sx,
+               COUNT(DISTINCT br.user_id) AS userCount,
+               COUNT(*)                   AS orderCount,
+               SUM(br.bet_amount)         AS totalBetAmount,
+               SUM(br.can_win_amount)     AS totalCanWinAmount
+        FROM t_bet_record br
+        WHERE br.lottery_id = #{lotteryId}
+          AND br.play_type_code = #{playTypeCode}
+          AND br.play_type_detail_code BETWEEN 1130 AND 1141
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        GROUP BY br.bet_content
+        ) t ON base.sx = t.sx
+            LEFT JOIN (SELECT sx, GROUP_CONCAT(number ORDER BY number ASC) AS numbers
+                       FROM t_lottery_relation
+                       WHERE `year` = 2025
+                       GROUP BY sx) sx_numbers ON base.sx = sx_numbers.sx
+        GROUP BY base.sx
+        ORDER BY totalBetAmount DESC,
+                 FIELD(base.sx, '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪');
+    </select>
+</mapper>

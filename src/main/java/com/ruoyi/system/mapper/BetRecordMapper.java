@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.BetRecord;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
 import org.apache.ibatis.annotations.Param;
@@ -79,4 +80,8 @@ public interface BetRecordMapper
     List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord);
 
     List<LotteryBetDataVO> getPlayTypeList(BetRecord betRecord);
+
+    List<RealTimeOrderVO> realTimeOrderByNumber(BetRecord betRecordParam);
+
+    List<RealTimeOrderVO> realTimeOrderBySx(BetRecord betRecordParam);
 }

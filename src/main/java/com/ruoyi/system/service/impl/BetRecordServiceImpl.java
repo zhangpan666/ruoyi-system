@@ -1,11 +1,16 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.Lottery;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
+import com.ruoyi.system.service.ILotteryService;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BetRecordMapper;
@@ -24,6 +29,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class BetRecordServiceImpl implements IBetRecordService {
     @Autowired
     private BetRecordMapper betRecordMapper;
+
+    @Autowired
+    private ILotteryService lotteryService;
 
     /**
      * 查询投注记录
@@ -131,6 +139,25 @@ public class BetRecordServiceImpl implements IBetRecordService {
             return betRecordMapper.getPlayTypeList(betRecord);
         }
         return betRecordMapper.statLotteryDataList(betRecord);
+    }
+
+    @Override
+    public List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type) {
+        Lottery lottery = lotteryService.selectLotteryById(id);
+        BetRecord betRecordParam = new BetRecord()
+                .setLotteryId(id)
+                .setIssueNo(StringUtil.isBlank(issueNo) ? lottery.getNextIssueNo() : issueNo)
+                .setUserId(userId)
+                .setPlayTypeCode(type);
+        List<RealTimeOrderVO> realTimeOrderList = Collections.emptyList();
+        if (type == 1) {
+            realTimeOrderList = betRecordMapper.realTimeOrderByNumber(betRecordParam);
+        } else if (type == 10) {
+            realTimeOrderList = betRecordMapper.realTimeOrderBySx(betRecordParam);
+        }
+
+
+        return realTimeOrderList;
     }
 
 }
