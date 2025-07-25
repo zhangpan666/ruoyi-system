@@ -84,4 +84,12 @@ public interface BetRecordMapper
     List<RealTimeOrderVO> realTimeOrderByNumber(BetRecord betRecordParam);
 
     List<RealTimeOrderVO> realTimeOrderBySx(BetRecord betRecordParam);
+
+    List<RealTimeOrderVO> realTimeOrderByColour(BetRecord betRecordParam);
+
+    List<RealTimeOrderVO> realTimeOrderByType(BetRecord betRecordParam);
+
+    List<RealTimeOrderVO> realTimeOrderByPtyx(BetRecord betRecordParam);
+
+    List<RealTimeOrderVO> realTimeOrderByMantissa(BetRecord betRecordParam);
 }

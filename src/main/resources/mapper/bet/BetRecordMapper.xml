@@ -756,28 +756,21 @@
                COUNT(DISTINCT br.user_id) AS userCount,
                COUNT(*)                   AS orderCount,
                SUM(br.bet_amount)         AS totalBetAmount,
-               SUM(br.can_win_amount)     AS totalCanWinAmount,
-               lr.color                   AS colour,
-               lr.sx                      AS sx,
-               -- 大小判断
-               CONCAT(
-                       CASE
-                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) = 49 THEN '和'
-                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) >= 25 THEN '大'
-                           ELSE '小'
-                           END, '/',
-                   -- 单双判断
-                       CASE
-                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) = 49 THEN '和'
-                           WHEN CAST(MAX(br.bet_content) AS UNSIGNED) % 2 = 0 THEN '双'
-                           ELSE '单'
-                           END
-               )                          AS type, RIGHT(MAX(br.bet_content),1) AS mantissa
+               SUM(br.can_win_amount)     AS totalCanWinAmount, RIGHT(MAX(br.bet_content),1) AS mantissa,
+        -- 去掉颜色、生肖
+            CONCAT(
+            CASE
+            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) = 49 THEN '和'
+            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) >= 25 THEN '大'
+            ELSE '小'
+            END, '/', CASE
+            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) = 49 THEN '和'
+            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) % 2 = 0 THEN '双'
+            ELSE '单'
+            END
+            ) AS type,
         FROM t_bet_record br
-            LEFT JOIN t_lottery_relation lr
-        ON lr.number = br.bet_content
         WHERE br.lottery_id = #{lotteryId}
-          AND lr.year = 2025
           AND br.play_type_code = #{playTypeCode}
           AND br.play_type_detail_code BETWEEN 1
           AND 49
@@ -788,6 +781,9 @@
             AND br.issue_no = #{issueNo}
         </if>
         GROUP BY br.play_type_detail_code
+        HAVING SUM (br.bet_amount) IS NOT NULL
+           AND SUM (br.bet_amount)
+             > 0
         ORDER BY totalBetAmount DESC
     </select>
 
@@ -847,5 +843,171 @@
         GROUP BY base.sx
         ORDER BY totalBetAmount DESC,
                  FIELD(base.sx, '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪');
+    </select>
+
+    <select id="realTimeOrderByColour" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT MAX(bet_content)        AS colour,
+               play_type_detail_code   AS playTypeDetailCode,
+               COUNT(DISTINCT user_id) AS userCount,
+               COUNT(*)                AS orderCount,
+               SUM(bet_amount)         AS totalBetAmount,
+               SUM(can_win_amount)     AS totalCanWinAmount,
+               CASE MAX(bet_content)
+                   -- 红波基础分类
+                   WHEN '红波' THEN '01,02,07,08,12,13,18,19,23,24,29,30,34,35,40,45,46'
+                   WHEN '红单' THEN '01,07,13,19,23,29,35,45'
+                   WHEN '红双' THEN '02,08,12,18,24,30,34,40,46'
+                   WHEN '红大' THEN '29,30,34,35,40,45,46'
+                   WHEN '红小' THEN '01,02,07,08,12,13,18,19,23,24'
+                   -- 红波组合分类
+                   WHEN '红大单' THEN '29,35,45'
+                   WHEN '红大双' THEN '30,34,40,46'
+                   WHEN '红小单' THEN '01,07,13,19,23'
+                   WHEN '红小双' THEN '02,08,12,18,24'
+                   -- 蓝波基础分类
+                   WHEN '蓝波' THEN '03,04,09,10,14,15,20,25,26,31,36,37,41,42,47,48'
+                   WHEN '蓝单' THEN '03,09,15,25,31,37,41,47'
+                   WHEN '蓝双' THEN '04,10,14,20,26,36,42,48'
+                   WHEN '蓝大' THEN '25,26,31,36,37,41,42,47,48'
+                   WHEN '蓝小' THEN '03,04,09,10,14,15,20'
+                   -- 蓝波组合分类
+                   WHEN '蓝大单' THEN '25,31,37,41,47'
+                   WHEN '蓝大双' THEN '26,36,42,48'
+                   WHEN '蓝小单' THEN '03,09,15'
+                   WHEN '蓝小双' THEN '04,10,14,20'
+                   -- 绿波基础分类
+                   WHEN '绿波' THEN '05,06,11,16,17,21,22,27,28,32,33,38,39,43,44,49'
+                   WHEN '绿单' THEN '05,11,17,21,27,33,39,43'
+                   WHEN '绿双' THEN '06,16,22,28,32,38,44'
+                   WHEN '绿大' THEN '27,28,32,33,38,39,43,44'
+                   WHEN '绿小' THEN '05,06,11,16,17,21,22'
+                   -- 绿波组合分类
+                   WHEN '绿大单' THEN '27,33,39,43'
+                   WHEN '绿大双' THEN '28,32,38,44'
+                   WHEN '绿小单' THEN '05,11,17,21'
+                   WHEN '绿小双' THEN '06,16,22'
+                   ELSE ''
+                   END                 AS number
+        FROM t_bet_record br
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code IN (1, 6)
+          AND (
+            play_type_detail_code BETWEEN 65 AND 67
+                OR play_type_detail_code BETWEEN 769 AND 811
+                OR play_type_detail_code BETWEEN 1229 AND 1240
+            )
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        GROUP BY play_type_detail_code
+        HAVING SUM(bet_amount) > 0
+        ORDER BY totalBetAmount DESC
+    </select>
+
+    <select id="realTimeOrderByType" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT MAX(bet_content)        AS type,
+               play_type_detail_code   AS playTypeDetailCode,
+               COUNT(DISTINCT user_id) AS userCount,
+               COUNT(*)                AS orderCount,
+               SUM(bet_amount)         AS totalBetAmount,
+               SUM(can_win_amount)     AS totalCanWinAmount,
+               CASE
+                   MAX(bet_content)
+                   WHEN '大' THEN
+                       '25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48'
+                   WHEN '小' THEN
+                       '01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
+                   WHEN '单' THEN
+                       '01,03,05,07,09,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47'
+                   WHEN '双' THEN
+                       '02,04,06,08,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48'
+                   ELSE
+                       '和'
+                   END                 AS number
+        FROM t_bet_record br
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code IN (1)
+          AND (play_type_detail_code BETWEEN 55 AND 58)
+        GROUP BY play_type_detail_code
+        HAVING SUM(bet_amount) > 0
+        ORDER BY totalBetAmount DESC
+    </select>
+
+    <select id="realTimeOrderByPtyx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT base.sx,
+               IFNULL(sx_numbers.numbers, '')   AS number,
+               COALESCE(t.userCount, 0)         AS userCount,
+               COALESCE(t.orderCount, 0)        AS orderCount,
+               COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
+               COALESCE(t.totalCanWinAmount, 0) AS totalCanWinAmount
+        FROM
+        (SELECT '鼠' AS sx
+         UNION ALL
+         SELECT '牛'
+         UNION ALL
+         SELECT '虎'
+         UNION ALL
+         SELECT '兔'
+         UNION ALL
+         SELECT '龙'
+         UNION ALL
+         SELECT '蛇'
+         UNION ALL
+         SELECT '马'
+         UNION ALL
+         SELECT '羊'
+         UNION ALL
+         SELECT '猴'
+         UNION ALL
+         SELECT '鸡'
+         UNION ALL
+         SELECT '狗'
+         UNION ALL
+         SELECT '猪') base
+            LEFT JOIN (
+        SELECT br.bet_content             AS sx,
+               COUNT(DISTINCT br.user_id) AS userCount,
+               COUNT(*)                   AS orderCount,
+               SUM(br.bet_amount)         AS totalBetAmount,
+               SUM(br.can_win_amount)     AS totalCanWinAmount
+        FROM t_bet_record br
+        WHERE br.lottery_id = #{lotteryId}
+          AND br.play_type_code = #{playTypeCode}
+          AND br.play_type_detail_code BETWEEN 1118 AND 1129
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        GROUP BY br.bet_content
+        ) t ON base.sx = t.sx
+            LEFT JOIN (SELECT sx, GROUP_CONCAT(number ORDER BY number ASC) AS numbers
+                       FROM t_lottery_relation
+                       WHERE `year` = 2025
+                       GROUP BY sx) sx_numbers ON base.sx = sx_numbers.sx
+        GROUP BY base.sx
+        ORDER BY totalBetAmount DESC,
+                 FIELD(base.sx, '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪');
+    </select>
+
+    <select id="realTimeOrderByMantissa" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT REPLACE(MAX(bet_content), '尾数@', '') AS mantissa,
+               play_type_detail_code                  AS playTypeDetailCode,
+               COUNT(DISTINCT user_id)                AS userCount,        -- 独立用户数
+               COUNT(*)                               AS orderCount,       -- 总投注笔数
+               SUM(bet_amount)                        AS totalBetAmount,   -- 总投注金额
+               SUM(can_win_amount)                    AS totalCanWinAmount -- 总可赢金额
+        FROM t_bet_record br
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code = 1
+          AND play_type_detail_code BETWEEN 1219
+            AND 1228
+        GROUP BY play_type_detail_code
+        HAVING SUM(bet_amount) > 0
+        ORDER BY totalBetAmount DESC
     </select>
 </mapper>
