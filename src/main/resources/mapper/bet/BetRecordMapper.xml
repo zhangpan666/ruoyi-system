@@ -756,7 +756,8 @@
                COUNT(DISTINCT br.user_id) AS userCount,
                COUNT(*)                   AS orderCount,
                SUM(br.bet_amount)         AS totalBetAmount,
-               SUM(br.can_win_amount)     AS totalCanWinAmount, RIGHT(MAX(br.bet_content),1) AS mantissa,
+               SUM(br.can_win_amount)     AS totalWinAmount,
+               RIGHT(MAX(br.bet_content),1) AS mantissa,
         -- 去掉颜色、生肖
             CONCAT(
             CASE
@@ -793,7 +794,7 @@
                COALESCE(t.userCount, 0)         AS userCount,
                COALESCE(t.orderCount, 0)        AS orderCount,
                COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
-               COALESCE(t.totalCanWinAmount, 0) AS totalCanWinAmount
+               COALESCE(t.totalCanWinAmount, 0) AS totalWinAmount
         FROM
         (SELECT '鼠' AS sx
          UNION ALL
@@ -823,7 +824,7 @@
                COUNT(DISTINCT br.user_id) AS userCount,
                COUNT(*)                   AS orderCount,
                SUM(br.bet_amount)         AS totalBetAmount,
-               SUM(br.can_win_amount)     AS totalCanWinAmount
+               SUM(br.can_win_amount)     AS totalWinAmount
         FROM t_bet_record br
         WHERE br.lottery_id = #{lotteryId}
           AND br.play_type_code = #{playTypeCode}
@@ -851,7 +852,7 @@
                COUNT(DISTINCT user_id) AS userCount,
                COUNT(*)                AS orderCount,
                SUM(bet_amount)         AS totalBetAmount,
-               SUM(can_win_amount)     AS totalCanWinAmount,
+               SUM(can_win_amount)     AS totalWinAmount,
                CASE MAX(bet_content)
                    -- 红波基础分类
                    WHEN '红波' THEN '01,02,07,08,12,13,18,19,23,24,29,30,34,35,40,45,46'
@@ -913,7 +914,7 @@
                COUNT(DISTINCT user_id) AS userCount,
                COUNT(*)                AS orderCount,
                SUM(bet_amount)         AS totalBetAmount,
-               SUM(can_win_amount)     AS totalCanWinAmount,
+               SUM(can_win_amount)     AS totalWinAmount,
                CASE
                    MAX(bet_content)
                    WHEN '大' THEN
@@ -942,7 +943,7 @@
                COALESCE(t.userCount, 0)         AS userCount,
                COALESCE(t.orderCount, 0)        AS orderCount,
                COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
-               COALESCE(t.totalCanWinAmount, 0) AS totalCanWinAmount
+               COALESCE(t.totalCanWinAmount, 0) AS totalWinAmount
         FROM
         (SELECT '鼠' AS sx
          UNION ALL
@@ -972,7 +973,7 @@
                COUNT(DISTINCT br.user_id) AS userCount,
                COUNT(*)                   AS orderCount,
                SUM(br.bet_amount)         AS totalBetAmount,
-               SUM(br.can_win_amount)     AS totalCanWinAmount
+               SUM(br.can_win_amount)     AS totalWinAmount
         FROM t_bet_record br
         WHERE br.lottery_id = #{lotteryId}
           AND br.play_type_code = #{playTypeCode}
@@ -1000,7 +1001,7 @@
                COUNT(DISTINCT user_id)                AS userCount,        -- 独立用户数
                COUNT(*)                               AS orderCount,       -- 总投注笔数
                SUM(bet_amount)                        AS totalBetAmount,   -- 总投注金额
-               SUM(can_win_amount)                    AS totalCanWinAmount -- 总可赢金额
+               SUM(can_win_amount)                    AS totalWinAmount -- 总可赢金额
         FROM t_bet_record br
         WHERE lottery_id = #{lotteryId}
           AND play_type_code = 1
