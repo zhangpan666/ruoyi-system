@@ -757,19 +757,19 @@
                COUNT(*)                   AS orderCount,
                SUM(br.bet_amount)         AS totalBetAmount,
                SUM(br.can_win_amount)     AS totalWinAmount,
-               RIGHT(MAX(br.bet_content),1) AS mantissa,
         -- 去掉颜色、生肖
             CONCAT(
             CASE
-            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) = 49 THEN '和'
-            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) >= 25 THEN '大'
+            WHEN CAST(MAX(br.bet_content) AS UNSIGNED) = 49 THEN '和'
+            WHEN CAST(MAX(br.bet_content) AS UNSIGNED) >= 25 THEN '大'
             ELSE '小'
             END, '/', CASE
-            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) = 49 THEN '和'
-            WHEN CAST (MAX (br.bet_content) AS UNSIGNED) % 2 = 0 THEN '双'
+            WHEN CAST(MAX(br.bet_content) AS UNSIGNED) = 49 THEN '和'
+            WHEN CAST(MAX(br.bet_content) AS UNSIGNED) % 2 = 0 THEN '双'
             ELSE '单'
             END
             ) AS type,
+            RIGHT(MAX(br.bet_content),1) AS mantissa
         FROM t_bet_record br
         WHERE br.lottery_id = #{lotteryId}
           AND br.play_type_code = #{playTypeCode}
@@ -782,8 +782,8 @@
             AND br.issue_no = #{issueNo}
         </if>
         GROUP BY br.play_type_detail_code
-        HAVING SUM (br.bet_amount) IS NOT NULL
-           AND SUM (br.bet_amount)
+        HAVING SUM(br.bet_amount) IS NOT NULL
+           AND SUM(br.bet_amount)
              > 0
         ORDER BY totalBetAmount DESC
     </select>
@@ -794,7 +794,7 @@
                COALESCE(t.userCount, 0)         AS userCount,
                COALESCE(t.orderCount, 0)        AS orderCount,
                COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
-               COALESCE(t.totalCanWinAmount, 0) AS totalWinAmount
+               COALESCE(t.totalWinAmount, 0)    AS totalWinAmount
         FROM
         (SELECT '鼠' AS sx
          UNION ALL
@@ -943,7 +943,7 @@
                COALESCE(t.userCount, 0)         AS userCount,
                COALESCE(t.orderCount, 0)        AS orderCount,
                COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
-               COALESCE(t.totalCanWinAmount, 0) AS totalWinAmount
+               COALESCE(t.totalWinAmount, 0)    AS totalWinAmount
         FROM
         (SELECT '鼠' AS sx
          UNION ALL
