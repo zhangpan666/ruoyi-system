@@ -932,6 +932,12 @@
         WHERE lottery_id = #{lotteryId}
           AND play_type_code IN (1)
           AND (play_type_detail_code BETWEEN 55 AND 58)
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
         ORDER BY totalBetAmount DESC
@@ -1007,6 +1013,12 @@
           AND play_type_code = 1
           AND play_type_detail_code BETWEEN 1219
             AND 1228
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
         ORDER BY totalBetAmount DESC
