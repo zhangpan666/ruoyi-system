@@ -166,10 +166,10 @@ public class BetRecordServiceImpl implements IBetRecordService {
             patchDXSSTypes(realTimeOrderList);
         } else if (type == 3) {
             realTimeOrderList = betRecordMapper.realTimeOrderByMantissa(betRecordParam);
+            realTimeOrderList.removeIf(vo -> vo.getMantissa() == null);
             // 统计已有mantissa
             Set<String> existing = realTimeOrderList.stream()
                     .map(RealTimeOrderVO::getMantissa)
-                    .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             for (RealTimeOrderVO realTimeOrderVO : realTimeOrderList) {
                 String mantissa = realTimeOrderVO.getMantissa();
@@ -186,6 +186,7 @@ public class BetRecordServiceImpl implements IBetRecordService {
             }
         } else if (type == 6) {
             realTimeOrderList = betRecordMapper.realTimeOrderByColour(betRecordParam);
+            realTimeOrderList.removeIf(vo -> vo.getColour() == null);
             // 提取已有分类名
             Set<String> existingColours = new HashSet<>();
             for (RealTimeOrderVO r : realTimeOrderList) {
@@ -277,11 +278,10 @@ public class BetRecordServiceImpl implements IBetRecordService {
     }
 
     public static void patchDXSSTypes(List<RealTimeOrderVO> realTimeOrderList) {
+        realTimeOrderList.removeIf(vo -> vo.getType() == null);
         Set<String> existingTypes = realTimeOrderList.stream()
                 .map(RealTimeOrderVO::getType)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
-
         for (Map.Entry<String, String> entry : DXSSTypeMap.entrySet()) {
             String type = entry.getKey();
             if (!existingTypes.contains(type)) {
