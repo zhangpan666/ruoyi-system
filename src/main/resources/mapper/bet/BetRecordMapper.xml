@@ -77,7 +77,7 @@
                 and bet_additional_odds = #{betAdditionalOdds}
             </if>
             <if test="platformId != null">
-                and platform_id = #{platformId}
+                and platform_id IN (${platformIds})
             </if>
             <if test="platformUserId != null">
                 and platform_user_id = #{platformUserId}
