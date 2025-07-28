@@ -28,8 +28,11 @@ public class RealTimeOrderVO {
     /**
      * 颜色
      */
-    @ApiModelProperty(example = "颜色(1红色，2-蓝色，3-绿色)")
+    @ApiModelProperty(example = "颜色")
     private String colour;
+
+    @ApiModelProperty(example = "颜色(1红色，2-蓝色，3-绿色)")
+    private String color;
 
     @ApiModelProperty(example = "类型")
     private String type;

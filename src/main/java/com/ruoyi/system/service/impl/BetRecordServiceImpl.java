@@ -197,6 +197,7 @@ public class BetRecordServiceImpl implements IBetRecordService {
                 if (!existingColours.contains(fullKey)) {
                     RealTimeOrderVO realTimeOrderVO = new RealTimeOrderVO();
                     realTimeOrderVO.setColour(fullKey);
+                    realTimeOrderVO.setColor(getColorCode(realTimeOrderVO.getColour()));
                     realTimeOrderVO.setNumber(COLOUR_MAP.get(fullKey));
                     realTimeOrderList.add(realTimeOrderVO);
                 }
@@ -224,6 +225,7 @@ public class BetRecordServiceImpl implements IBetRecordService {
                 existNumbers.add(vo.getNumber());
                 vo.setSx(lotteryRelation.getSx());
                 String colorMapOrDefault = colorMap.getOrDefault(lotteryRelation.getColor(), "");
+                vo.setColor(String.valueOf(lotteryRelation.getColor()));
                 vo.setColour(String.valueOf(colorMapOrDefault));
             }
         }
@@ -237,6 +239,7 @@ public class BetRecordServiceImpl implements IBetRecordService {
                 emptyVO.setType(getDaXiaoDanShuangType(num));
                 emptyVO.setSx(lotteryRelation.getSx());
                 emptyVO.setColour(colorMap.getOrDefault(lotteryRelation.getColor(), ""));
+                emptyVO.setColor(String.valueOf(lotteryRelation.getColor()));
                 emptyVO.setMantissa(num.substring(num.length() - 1));
                 list.add(emptyVO);
             }
@@ -246,6 +249,20 @@ public class BetRecordServiceImpl implements IBetRecordService {
             String n = vo.getNumber();
             return n == null ? "99" : n; // null 一律排最后
         }));
+    }
+
+    public static String getColorCode(String text) {
+        if (text == null) {
+            return "0";
+        }
+        if (text.contains("红")) {
+            return "1";
+        } else if (text.contains("蓝")) {
+            return "2";
+        } else if (text.contains("绿")) {
+            return "3";
+        }
+        return "0";
     }
 
 
@@ -339,8 +356,9 @@ public class BetRecordServiceImpl implements IBetRecordService {
     }
 
     // 定义尾数0~9
-    List<String> mantissaSet = Arrays.asList("0","1","2","3","4","5","6","7","8","9");
+    List<String> mantissaSet = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
     private static final Map<String, String> TAIL_MAP = new LinkedHashMap<>();
+
     static {
         TAIL_MAP.put("0", "10,20,30,40");
         TAIL_MAP.put("1", "01,11,21,31,41");
