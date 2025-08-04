@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectAccountDetailVo">
-        select id, user_id, related_id, order_no, mch_order_no, payment_type, amount, available_balance, trade_type, status, remark, create_time, update_time from t_account_detail
+        select * from t_account_detail
     </sql>
 
     <select id="selectAccountDetailList" parameterType="AccountDetail" resultMap="AccountDetailResult">
