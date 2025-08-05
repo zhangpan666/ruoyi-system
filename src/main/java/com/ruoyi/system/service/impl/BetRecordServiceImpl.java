@@ -1,7 +1,9 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.Lottery;
@@ -213,43 +215,46 @@ public class BetRecordServiceImpl implements IBetRecordService {
     }
 
     public static void fill01to49(List<RealTimeOrderVO> list, Map<String, LotteryRelation> relationMap) {
+        // 1. 颜色映射
         Map<Byte, String> colorMap = new HashMap<>();
-        colorMap.put((byte) 1, "红色");
-        colorMap.put((byte) 2, "蓝色");
-        colorMap.put((byte) 3, "绿色");
-        Set<String> existNumbers = new HashSet<>();
-        for (RealTimeOrderVO vo : list) {
-            LotteryRelation lotteryRelation = relationMap.get(vo.getNumber());
-            // 防止 number 可能为null
-            if (vo.getNumber() != null) {
-                existNumbers.add(vo.getNumber());
-                vo.setSx(lotteryRelation.getSx());
-                String colorMapOrDefault = colorMap.getOrDefault(lotteryRelation.getColor(), "");
-                vo.setColor(String.valueOf(lotteryRelation.getColor()));
-                vo.setColour(String.valueOf(colorMapOrDefault));
-            }
-        }
-        // 生成01-49
-        for (int i = 1; i <= 49; i++) {
-            String num = String.format("%02d", i);
-            if (!existNumbers.contains(num)) {
-                LotteryRelation lotteryRelation = relationMap.get(num);
-                RealTimeOrderVO emptyVO = new RealTimeOrderVO();
-                emptyVO.setNumber(num);
-                emptyVO.setType(getDaXiaoDanShuangType(num));
-                emptyVO.setSx(lotteryRelation.getSx());
-                emptyVO.setColour(colorMap.getOrDefault(lotteryRelation.getColor(), ""));
-                emptyVO.setColor(String.valueOf(lotteryRelation.getColor()));
-                emptyVO.setMantissa(num.substring(num.length() - 1));
-                list.add(emptyVO);
-            }
-        }
-        // 按number升序排序
-        list.sort(Comparator.comparing(vo -> {
-            String n = vo.getNumber();
-            return n == null ? "99" : n; // null 一律排最后
-        }));
+        colorMap.put((byte)1, "红色");
+        colorMap.put((byte)2, "蓝色");
+        colorMap.put((byte)3, "绿色");
+
+        // 原有号码映射，便于复用
+        Map<String, RealTimeOrderVO> voMap = list.stream()
+                .filter(vo -> vo.getNumber() != null)
+                .peek(vo -> {
+                    LotteryRelation rel = relationMap.get(vo.getNumber());
+                    vo.setSx(rel.getSx());
+                    vo.setColor(String.valueOf(rel.getColor()));
+                    vo.setColour(colorMap.getOrDefault(rel.getColor(), ""));
+                    vo.setMantissa(vo.getNumber().substring(vo.getNumber().length() - 1));
+                })
+                .collect(Collectors.toMap(RealTimeOrderVO::getNumber, Function.identity(), (a, b) -> a));
+
+        // 生成 01–49 全量，并复用或新建 VO
+        List<RealTimeOrderVO> fullList = IntStream.rangeClosed(1, 49)
+                .mapToObj(i -> String.format("%02d", i))
+                .map(num -> voMap.computeIfAbsent(num, n -> {
+                    LotteryRelation rel = relationMap.get(n);
+                    RealTimeOrderVO v = new RealTimeOrderVO();
+                    v.setNumber(n);
+                    v.setType(getDaXiaoDanShuangType(n));
+                    v.setSx(rel.getSx());
+                    v.setColor(String.valueOf(rel.getColor()));
+                    v.setColour(colorMap.getOrDefault(rel.getColor(), ""));
+                    v.setMantissa(n.substring(n.length() - 1));
+                    return v;
+                })).sorted(Comparator
+                        .comparing(RealTimeOrderVO::getTotalBetAmount,
+                                Comparator.nullsLast(Comparator.naturalOrder()))
+                        .reversed()).collect(Collectors.toList());
+        // 替换原列表
+        list.clear();
+        list.addAll(fullList);
     }
+
 
     public static String getColorCode(String text) {
         if (text == null) {
