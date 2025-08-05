@@ -83,6 +83,9 @@
                     #{pid}
                 </foreach>
             </if>
+            <if test="platformUserId != null">
+                and platform_user_id = #{platformUserId}
+            </if>
             <if test="lotteryId != null">
                 and lottery_id = #{lotteryId}
             </if>
