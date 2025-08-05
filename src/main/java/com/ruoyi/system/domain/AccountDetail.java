@@ -40,7 +40,7 @@ public class AccountDetail
     /** 关联ID */
     @Excel(name = "关联ID")
     @ApiModelProperty(value = "关联ID")
-    private Long relatedId;
+    private String relatedId;
 
     /** 订单号 */
     @Excel(name = "订单号")
