@@ -76,10 +76,10 @@
             <if test="betAdditionalOdds != null">
                 and bet_additional_odds = #{betAdditionalOdds}
             </if>
-            <bind name="pidArray" value="platformIds != null ? platformIds.split(',') : new String[0]" />
-            <if test="pidArray != null and pidArray.length > 0">
+            <bind name="platformIdsArray" value="platformIds != null ? platformIds.split(',') : new String[0]" />
+            <if test="platformIdsArray != null and platformIdsArray.length > 0">
                 AND platform_id IN
-                <foreach collection="pidArray" item="pid" open="(" separator="," close=")">
+                <foreach collection="platformIdsArray" item="pid" open="(" separator="," close=")">
                     #{pid}
                 </foreach>
             </if>
@@ -88,6 +88,13 @@
             </if>
             <if test="platformUserId != null">
                 and platform_user_id = #{platformUserId}
+            </if>
+            <bind name="lotteryIdsArray" value="lotteryIds != null ? lotteryIds.split(',') : new String[0]" />
+            <if test="lotteryIdsArray != null and lotteryIdsArray.length > 0">
+                AND lottery_id IN
+                <foreach collection="lotteryIdsArray" item="pid" open="(" separator="," close=")">
+                    #{pid}
+                </foreach>
             </if>
             <if test="lotteryId != null">
                 and lottery_id = #{lotteryId}

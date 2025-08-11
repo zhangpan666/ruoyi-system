@@ -218,4 +218,6 @@ public class BetRecord extends BaseEntity
 
     private String platformIds;
 
+    private String lotteryIds;
+
 }
