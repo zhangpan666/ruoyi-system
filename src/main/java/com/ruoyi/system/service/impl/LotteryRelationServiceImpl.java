@@ -1,6 +1,9 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+
+import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.LotteryRelationMapper;
@@ -89,5 +92,10 @@ public class LotteryRelationServiceImpl implements ILotteryRelationService
     public int deleteLotteryRelationById(Long id)
     {
         return lotteryRelationMapper.deleteLotteryRelationById(id);
+    }
+
+    @Override
+    public List<RealTimeOrderVO> selectSxList(Integer year) {
+        return lotteryRelationMapper.selectSxList(year);
     }
 }

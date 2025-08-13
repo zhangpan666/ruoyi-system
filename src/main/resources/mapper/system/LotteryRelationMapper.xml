@@ -75,4 +75,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectSxList" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT
+            sx,
+            GROUP_CONCAT(number ORDER BY number ASC SEPARATOR ',') AS number
+        FROM
+            t_lottery_relation
+        WHERE
+            `year` = #{year}
+        GROUP BY
+            sx
+    </select>
 </mapper>

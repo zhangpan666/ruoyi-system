@@ -804,66 +804,6 @@
         ORDER BY totalBetAmount DESC
     </select>
 
-    <select id="realTimeOrderBySx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
-        SELECT base.sx,
-               IFNULL(sx_numbers.numbers, '')   AS number,
-               COALESCE(t.userCount, 0)         AS userCount,
-               COALESCE(t.orderCount, 0)        AS orderCount,
-               COALESCE(t.totalBetAmount, 0)    AS totalBetAmount,
-               COALESCE(t.totalWinAmount, 0)    AS totalWinAmount
-        FROM
-        (SELECT '鼠' AS sx
-         UNION ALL
-         SELECT '牛'
-         UNION ALL
-         SELECT '虎'
-         UNION ALL
-         SELECT '兔'
-         UNION ALL
-         SELECT '龙'
-         UNION ALL
-         SELECT '蛇'
-         UNION ALL
-         SELECT '马'
-         UNION ALL
-         SELECT '羊'
-         UNION ALL
-         SELECT '猴'
-         UNION ALL
-         SELECT '鸡'
-         UNION ALL
-         SELECT '狗'
-         UNION ALL
-         SELECT '猪') base
-            LEFT JOIN (
-        SELECT br.bet_content             AS sx,
-               COUNT(DISTINCT br.user_id) AS userCount,
-               COUNT(*)                   AS orderCount,
-               SUM(br.bet_amount)         AS totalBetAmount,
-               SUM(br.can_win_amount)     AS totalWinAmount
-        FROM t_bet_record br
-        WHERE br.lottery_id = #{lotteryId}
-          AND br.play_type_code = #{playTypeCode}
-          AND br.play_type_detail_code BETWEEN 1130 AND 1141
-          AND br.is_auto = 0
-          AND br.is_test = 0
-        <if test="userId != null">
-            AND br.user_id = #{userId}
-        </if>
-        <if test="issueNo != null and issueNo != ''">
-            AND br.issue_no = #{issueNo}
-        </if>
-        GROUP BY br.bet_content
-        ) t ON base.sx = t.sx
-            LEFT JOIN (SELECT sx, GROUP_CONCAT(number ORDER BY number ASC) AS numbers
-                       FROM t_lottery_relation
-                       WHERE `year` = 2025
-                       GROUP BY sx) sx_numbers ON base.sx = sx_numbers.sx
-        GROUP BY base.sx
-        ORDER BY totalBetAmount DESC,
-                 FIELD(base.sx, '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪');
-    </select>
-
     <select id="realTimeOrderByColour" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT MAX(bet_content)        AS colour,
                play_type_detail_code   AS playTypeDetailCode,
@@ -948,17 +888,17 @@
                    ELSE
                        '和'
                    END                 AS number
-        FROM t_bet_record br
+        FROM t_bet_record
         WHERE lottery_id = #{lotteryId}
           AND play_type_code IN (1)
           AND (play_type_detail_code BETWEEN 55 AND 58)
-          AND br.is_auto = 0
-          AND br.is_test = 0
+          AND is_auto = 0
+          AND is_test = 0
         <if test="userId != null">
-            AND br.user_id = #{userId}
+            AND user_id = #{userId}
         </if>
         <if test="issueNo != null and issueNo != ''">
-            AND br.issue_no = #{issueNo}
+            AND issue_no = #{issueNo}
         </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
@@ -967,12 +907,12 @@
 
     <select id="realTimeOrderByPtyx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT
-            bet_content AS sx,
-            '' AS number,
+            bet_content             AS sx,
+            ''                      AS number,
             COUNT(DISTINCT user_id) AS userCount,
-            COUNT(id) AS orderCount,
-            SUM(bet_amount) AS totalBetAmount,
-            SUM(can_win_amount) AS totalWinAmount
+            COUNT(id)               AS orderCount,
+            SUM(bet_amount)         AS totalBetAmount,
+            SUM(can_win_amount)     AS totalWinAmount
         FROM
             t_bet_record
         WHERE
@@ -993,6 +933,29 @@
             totalBetAmount DESC
     </select>
 
+    <select id="realTimeOrderBySx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
+        SELECT bet_content             AS sx,
+               ''                      AS number,
+               COUNT(DISTINCT user_id) AS userCount,
+               COUNT(id)               AS orderCount,
+               SUM(bet_amount)         AS totalBetAmount,
+               SUM(can_win_amount)     AS totalWinAmount
+        FROM t_bet_record
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code = 10
+          AND play_type_detail_code BETWEEN 1130 AND 1141
+          AND is_auto = 0
+          AND is_test = 0
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND issue_no = #{issueNo}
+        </if>
+        GROUP BY bet_content
+        ORDER BY totalBetAmount DESC
+    </select>
+
     <select id="realTimeOrderByMantissa" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT REPLACE(MAX(bet_content), '尾数@', '') AS mantissa,
                play_type_detail_code                  AS playTypeDetailCode,
@@ -1000,18 +963,18 @@
                COUNT(*)                               AS orderCount,       -- 总投注笔数
                SUM(bet_amount)                        AS totalBetAmount,   -- 总投注金额
                SUM(can_win_amount)                    AS totalWinAmount -- 总可赢金额
-        FROM t_bet_record br
+        FROM t_bet_record
         WHERE lottery_id = #{lotteryId}
           AND play_type_code = 1
           AND play_type_detail_code BETWEEN 1219
           AND 1228
-          AND br.is_auto = 0
-          AND br.is_test = 0
+          AND is_auto = 0
+          AND is_test = 0
         <if test="userId != null">
-            AND br.user_id = #{userId}
+            AND user_id = #{userId}
         </if>
         <if test="issueNo != null and issueNo != ''">
-            AND br.issue_no = #{issueNo}
+            AND issue_no = #{issueNo}
         </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0

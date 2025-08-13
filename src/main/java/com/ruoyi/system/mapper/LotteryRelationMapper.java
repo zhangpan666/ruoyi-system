@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.LotteryRelation;
+import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 
 /**
  * 码表Mapper接口
@@ -58,4 +59,6 @@ public interface LotteryRelationMapper
      * @return 结果
      */
     public int deleteLotteryRelationByIds(Long[] ids);
+
+    List<RealTimeOrderVO> selectSxList(Integer year);
 }

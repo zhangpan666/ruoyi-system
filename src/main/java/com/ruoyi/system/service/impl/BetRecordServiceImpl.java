@@ -1,5 +1,6 @@
 package com.ruoyi.system.service.impl;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -205,13 +206,84 @@ public class BetRecordServiceImpl implements IBetRecordService {
                 }
             }
         } else if (type == 9) {
-            betRecordParam.setPlayTypeCode(type);
+            Map<String, String> sx = getSx(lottery);
             realTimeOrderList = betRecordMapper.realTimeOrderByPtyx(betRecordParam);
+            checkAndSyncSxList(realTimeOrderList, sx);
         } else if (type == 10) {
-            betRecordParam.setPlayTypeCode(type);
+            Map<String, String> sx = getSx(lottery);
             realTimeOrderList = betRecordMapper.realTimeOrderBySx(betRecordParam);
+            checkAndSyncSxList(realTimeOrderList, sx);
         }
         return realTimeOrderList;
+    }
+
+    private void checkAndSyncSxList(List<RealTimeOrderVO> realTimeOrderList, Map<String, String> fullSxMap) {
+        // 1. 处理空列表
+        if (realTimeOrderList == null) {
+            realTimeOrderList = new ArrayList<>();
+        }
+        // 2. 构建已有生肖的Map（便于快速查找）
+        Map<String, RealTimeOrderVO> existingSxMap = new HashMap<>();
+        for (RealTimeOrderVO vo : realTimeOrderList) {
+            if (vo != null && vo.getSx() != null) {
+                existingSxMap.put(vo.getSx(), vo);
+            }
+        }
+        // 3. 遍历完整生肖，同步number并补全缺失项
+        for (Map.Entry<String, String> entry : fullSxMap.entrySet()) {
+            String sx = entry.getKey();
+            String targetNumber = entry.getValue();
+            if (existingSxMap.containsKey(sx)) {
+                // 若生肖已存在，更新其number字段
+                RealTimeOrderVO existingVO = existingSxMap.get(sx);
+                existingVO.setNumber(targetNumber);
+            } else {
+                // 若生肖缺失，创建新对象并设置number
+                RealTimeOrderVO missingVO = new RealTimeOrderVO();
+                missingVO.setSx(sx);
+                missingVO.setNumber(targetNumber);
+                realTimeOrderList.add(missingVO);
+            }
+        }
+        // 4. 按完整生肖顺序排序
+        List<String> sortedSx = new ArrayList<>(fullSxMap.keySet());
+        // 判断是否存在有效数据（totalBetAmount > 0.00）
+        boolean hasValidData = realTimeOrderList.stream()
+                .anyMatch(vo -> vo != null
+                        && vo.getTotalBetAmount() != null
+                        // 字符串转BigDecimal后比较
+                        && new BigDecimal(vo.getTotalBetAmount()).compareTo(BigDecimal.ZERO) > 0);
+        if (hasValidData) {
+            // 有有效数据：按totalBetAmount降序排序
+            realTimeOrderList.sort((vo1, vo2) -> {
+                // 处理null和空字符串，默认转为0.00
+                String amountStr1 = (vo1.getTotalBetAmount() == null || vo1.getTotalBetAmount().trim().isEmpty())
+                        ? "0.00" : vo1.getTotalBetAmount();
+                String amountStr2 = (vo2.getTotalBetAmount() == null || vo2.getTotalBetAmount().trim().isEmpty())
+                        ? "0.00" : vo2.getTotalBetAmount();
+                // 转换为BigDecimal进行数值比较
+                BigDecimal amount1 = new BigDecimal(amountStr1);
+                BigDecimal amount2 = new BigDecimal(amountStr2);
+                // 降序排列（金额大的在前）
+                return amount2.compareTo(amount1);
+            });
+        } else {
+            // 无有效数据：按生肖固定顺序排序
+            realTimeOrderList.sort(Comparator.comparingInt(vo -> sortedSx.indexOf(vo.getSx())));
+        }
+    }
+
+    private Map<String, String> getSx(Lottery lottery) {
+        List<RealTimeOrderVO> ptyxList = lotteryRelationService.selectSxList(lottery.getNextLotteryYear());
+        return ptyxList.stream()
+                // 过滤掉null元素或sx为null的元素
+                .filter(vo -> vo != null && vo.getSx() != null)
+                // 以sx为键，number为值（若有重复sx，保留最后一个）
+                .collect(Collectors.toMap(
+                        RealTimeOrderVO::getSx,    // key：提取sx
+                        RealTimeOrderVO::getNumber, // value：提取number
+                        (existingValue, newValue) -> newValue // 遇到重复key时的处理：保留新值
+                ));
     }
 
     public static void fill01to49(List<RealTimeOrderVO> list, Map<String, LotteryRelation> relationMap) {

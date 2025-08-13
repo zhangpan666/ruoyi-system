@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.LotteryRelation;
+import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 
 /**
  * 码表Service接口
@@ -58,4 +59,6 @@ public interface ILotteryRelationService
      * @return 结果
      */
     public int deleteLotteryRelationById(Long id);
+
+    List<RealTimeOrderVO> selectSxList(Integer year);
 }
