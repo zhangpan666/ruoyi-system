@@ -222,6 +222,8 @@ public class BetRecordServiceImpl implements IBetRecordService {
         if (realTimeOrderList == null) {
             realTimeOrderList = new ArrayList<>();
         }
+        // 1.1 移除列表中的null元素和sx为null的元素
+        realTimeOrderList.removeIf(vo -> vo == null || vo.getSx() == null);
         // 2. 构建已有生肖的Map（便于快速查找）
         Map<String, RealTimeOrderVO> existingSxMap = new HashMap<>();
         for (RealTimeOrderVO vo : realTimeOrderList) {
