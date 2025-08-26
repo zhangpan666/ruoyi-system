@@ -150,9 +150,10 @@ public class BetRecordServiceImpl implements IBetRecordService {
     }
 
     @Override
-    public List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type) {
+    public List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type, Long platformId) {
         Lottery lottery = lotteryService.selectLotteryById(id);
         BetRecord betRecordParam = new BetRecord()
+                .setPlatformId(platformId)
                 .setLotteryId(id)
                 .setIssueNo(StringUtil.isBlank(issueNo) ? lottery.getNextIssueNo() : issueNo)
                 .setUserId(userId);
@@ -291,9 +292,9 @@ public class BetRecordServiceImpl implements IBetRecordService {
     public static void fill01to49(List<RealTimeOrderVO> list, Map<String, LotteryRelation> relationMap) {
         // 1. 颜色映射
         Map<Byte, String> colorMap = new HashMap<>();
-        colorMap.put((byte)1, "红色");
-        colorMap.put((byte)2, "蓝色");
-        colorMap.put((byte)3, "绿色");
+        colorMap.put((byte) 1, "红色");
+        colorMap.put((byte) 2, "蓝色");
+        colorMap.put((byte) 3, "绿色");
 
         // 原有号码映射，便于复用
         Map<String, RealTimeOrderVO> voMap = list.stream()

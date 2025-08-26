@@ -78,6 +78,6 @@ public interface IBetRecordService {
 
     List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord);
 
-    List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type);
+    List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type, Long platformId);
 
 }

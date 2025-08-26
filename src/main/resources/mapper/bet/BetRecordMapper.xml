@@ -797,6 +797,9 @@
         <if test="issueNo != null and issueNo != ''">
             AND br.issue_no = #{issueNo}
         </if>
+        <if test="platformId != null">
+            AND br.platformId = #{platformId}
+        </if>
         GROUP BY br.play_type_detail_code
         HAVING SUM(br.bet_amount) IS NOT NULL
            AND SUM(br.bet_amount)
@@ -863,6 +866,9 @@
         <if test="issueNo != null and issueNo != ''">
             AND br.issue_no = #{issueNo}
         </if>
+        <if test="platformId != null">
+            AND br.platformId = #{platformId}
+        </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
         ORDER BY totalBetAmount DESC
@@ -900,6 +906,9 @@
         <if test="issueNo != null and issueNo != ''">
             AND issue_no = #{issueNo}
         </if>
+        <if test="platformId != null">
+            AND platformId = #{platformId}
+        </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
         ORDER BY totalBetAmount DESC
@@ -927,6 +936,9 @@
         <if test="issueNo != null and issueNo != ''">
             AND issue_no = #{issueNo}
         </if>
+        <if test="platformId != null">
+            AND platformId = #{platformId}
+        </if>
         GROUP BY
             bet_content
         ORDER BY
@@ -952,6 +964,9 @@
         <if test="issueNo != null and issueNo != ''">
             AND issue_no = #{issueNo}
         </if>
+        <if test="platformId != null">
+            AND platformId = #{platformId}
+        </if>
         GROUP BY bet_content
         ORDER BY totalBetAmount DESC
     </select>
@@ -975,6 +990,9 @@
         </if>
         <if test="issueNo != null and issueNo != ''">
             AND issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND platformId = #{platformId}
         </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
