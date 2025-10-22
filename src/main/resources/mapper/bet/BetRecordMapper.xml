@@ -96,6 +96,13 @@
                     #{pid}
                 </foreach>
             </if>
+            <bind name="platformUserIdsArray" value="platformUserIds != null ? platformUserIds.split(',') : new String[0]" />
+            <if test="platformUserIdsArray != null and platformUserIdsArray.length > 0">
+                AND platform_user_id IN
+                <foreach collection="platformUserIdsArray" item="userId" open="(" separator="," close=")">
+                    #{userId}
+                </foreach>
+            </if>
             <if test="lotteryId != null">
                 and lottery_id = #{lotteryId}
             </if>
