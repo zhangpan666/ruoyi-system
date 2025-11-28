@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryPrizeConfigMapper">
+    
+    <resultMap type="LotteryPrizeConfig" id="LotteryPrizeConfigResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="extractionRatio"    column="extraction_ratio"    />
+        <result property="totalAmount"    column="total_amount"    />
+        <result property="triggerAmount"    column="trigger_amount"    />
+        <result property="status"    column="status"    />
+        <result property="maxPrizeAmount"    column="max_prize_amount"    />
+        <result property="minPrizeAmount"    column="min_prize_amount"    />
+        <result property="lastTriggerTime"    column="last_trigger_time"    />
+        <result property="lastPrizeAmount"    column="last_prize_amount"    />
+        <result property="targetUserType"    column="target_user_type"    />
+        <result property="targetUserIds"    column="target_user_ids"    />
+        <result property="targetBeginTime"    column="target_begin_time"    />
+        <result property="targetEndTime"    column="target_end_time"    />
+        <result property="totalBetAmountRank"    column="total_bet_amount_rank"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLotteryPrizeConfigVo">
+        select id, lottery_id, extraction_ratio, total_amount, trigger_amount, status, max_prize_amount, min_prize_amount, last_trigger_time, last_prize_amount, target_user_type, target_user_ids, target_begin_time, target_end_time, total_bet_amount_rank, create_time, update_time from t_lottery_prize_config
+    </sql>
+
+    <select id="selectLotteryPrizeConfigList" parameterType="LotteryPrizeConfig" resultMap="LotteryPrizeConfigResult">
+        <include refid="selectLotteryPrizeConfigVo"/>
+        <where>  
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="extractionRatio != null  and extractionRatio != ''"> and extraction_ratio = #{extractionRatio}</if>
+            <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
+            <if test="triggerAmount != null "> and trigger_amount = #{triggerAmount}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="maxPrizeAmount != null "> and max_prize_amount = #{maxPrizeAmount}</if>
+            <if test="minPrizeAmount != null "> and min_prize_amount = #{minPrizeAmount}</if>
+            <if test="lastTriggerTime != null "> and last_trigger_time = #{lastTriggerTime}</if>
+            <if test="lastPrizeAmount != null "> and last_prize_amount = #{lastPrizeAmount}</if>
+            <if test="targetUserType != null "> and target_user_type = #{targetUserType}</if>
+            <if test="targetUserIds != null  and targetUserIds != ''"> and target_user_ids = #{targetUserIds}</if>
+            <if test="targetBeginTime != null "> and target_begin_time = #{targetBeginTime}</if>
+            <if test="targetEndTime != null "> and target_end_time = #{targetEndTime}</if>
+            <if test="totalBetAmountRank != null "> and total_bet_amount_rank = #{totalBetAmountRank}</if>
+        </where>
+    </select>
+    
+    <select id="selectLotteryPrizeConfigById" parameterType="Long" resultMap="LotteryPrizeConfigResult">
+        <include refid="selectLotteryPrizeConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryPrizeConfig" parameterType="LotteryPrizeConfig">
+        insert into t_lottery_prize_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="extractionRatio != null and extractionRatio != ''">extraction_ratio,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="triggerAmount != null">trigger_amount,</if>
+            <if test="status != null">status,</if>
+            <if test="maxPrizeAmount != null">max_prize_amount,</if>
+            <if test="minPrizeAmount != null">min_prize_amount,</if>
+            <if test="lastTriggerTime != null">last_trigger_time,</if>
+            <if test="lastPrizeAmount != null">last_prize_amount,</if>
+            <if test="targetUserType != null">target_user_type,</if>
+            <if test="targetUserIds != null">target_user_ids,</if>
+            <if test="targetBeginTime != null">target_begin_time,</if>
+            <if test="targetEndTime != null">target_end_time,</if>
+            <if test="totalBetAmountRank != null">total_bet_amount_rank,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="extractionRatio != null and extractionRatio != ''">#{extractionRatio},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="triggerAmount != null">#{triggerAmount},</if>
+            <if test="status != null">#{status},</if>
+            <if test="maxPrizeAmount != null">#{maxPrizeAmount},</if>
+            <if test="minPrizeAmount != null">#{minPrizeAmount},</if>
+            <if test="lastTriggerTime != null">#{lastTriggerTime},</if>
+            <if test="lastPrizeAmount != null">#{lastPrizeAmount},</if>
+            <if test="targetUserType != null">#{targetUserType},</if>
+            <if test="targetUserIds != null">#{targetUserIds},</if>
+            <if test="targetBeginTime != null">#{targetBeginTime},</if>
+            <if test="targetEndTime != null">#{targetEndTime},</if>
+            <if test="totalBetAmountRank != null">#{totalBetAmountRank},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryPrizeConfig" parameterType="LotteryPrizeConfig">
+        update t_lottery_prize_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="extractionRatio != null and extractionRatio != ''">extraction_ratio = #{extractionRatio},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
+            <if test="triggerAmount != null">trigger_amount = #{triggerAmount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
+            <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
+            <if test="lastTriggerTime != null">last_trigger_time = #{lastTriggerTime},</if>
+            <if test="lastPrizeAmount != null">last_prize_amount = #{lastPrizeAmount},</if>
+            <if test="targetUserType != null">target_user_type = #{targetUserType},</if>
+            <if test="targetUserIds != null">target_user_ids = #{targetUserIds},</if>
+            <if test="targetBeginTime != null">target_begin_time = #{targetBeginTime},</if>
+            <if test="targetEndTime != null">target_end_time = #{targetEndTime},</if>
+            <if test="totalBetAmountRank != null">total_bet_amount_rank = #{totalBetAmountRank},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryPrizeConfigById" parameterType="Long">
+        delete from t_lottery_prize_config where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryPrizeConfigByIds" parameterType="String">
+        delete from t_lottery_prize_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

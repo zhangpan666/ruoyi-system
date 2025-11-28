@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryPrizeTaskMapper">
+    
+    <resultMap type="LotteryPrizeTask" id="LotteryPrizeTaskResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="execType"    column="exec_type"    />
+        <result property="execTime"    column="exec_time"    />
+        <result property="cron"    column="cron"    />
+        <result property="targetUserType"    column="target_user_type"    />
+        <result property="targetUserIds"    column="target_user_ids"    />
+        <result property="targetBeginTime"    column="target_begin_time"    />
+        <result property="targetEndTime"    column="target_end_time"    />
+        <result property="totalBetAmountRank"    column="total_bet_amount_rank"    />
+        <result property="maxPrizeAmount"    column="max_prize_amount"    />
+        <result property="minPrizeAmount"    column="min_prize_amount"    />
+        <result property="status"    column="status"    />
+        <result property="execStatus"    column="exec_status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLotteryPrizeTaskVo">
+        select id, lottery_id, exec_type, exec_time, cron, target_user_type, target_user_ids, target_begin_time, target_end_time, total_bet_amount_rank, max_prize_amount, min_prize_amount, status, exec_status, create_time, update_time from t_lottery_prize_task
+    </sql>
+
+    <select id="selectLotteryPrizeTaskList" parameterType="LotteryPrizeTask" resultMap="LotteryPrizeTaskResult">
+        <include refid="selectLotteryPrizeTaskVo"/>
+        <where>  
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="execType != null "> and exec_type = #{execType}</if>
+            <if test="execTime != null "> and exec_time = #{execTime}</if>
+            <if test="cron != null  and cron != ''"> and cron = #{cron}</if>
+            <if test="targetUserType != null "> and target_user_type = #{targetUserType}</if>
+            <if test="targetUserIds != null  and targetUserIds != ''"> and target_user_ids = #{targetUserIds}</if>
+            <if test="targetBeginTime != null "> and target_begin_time = #{targetBeginTime}</if>
+            <if test="targetEndTime != null "> and target_end_time = #{targetEndTime}</if>
+            <if test="totalBetAmountRank != null "> and total_bet_amount_rank = #{totalBetAmountRank}</if>
+            <if test="maxPrizeAmount != null "> and max_prize_amount = #{maxPrizeAmount}</if>
+            <if test="minPrizeAmount != null "> and min_prize_amount = #{minPrizeAmount}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="execStatus != null "> and exec_status = #{execStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectLotteryPrizeTaskById" parameterType="Long" resultMap="LotteryPrizeTaskResult">
+        <include refid="selectLotteryPrizeTaskVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryPrizeTask" parameterType="LotteryPrizeTask" useGeneratedKeys="true" keyProperty="id">
+        insert into t_lottery_prize_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="execType != null">exec_type,</if>
+            <if test="execTime != null">exec_time,</if>
+            <if test="cron != null">cron,</if>
+            <if test="targetUserType != null">target_user_type,</if>
+            <if test="targetUserIds != null">target_user_ids,</if>
+            <if test="targetBeginTime != null">target_begin_time,</if>
+            <if test="targetEndTime != null">target_end_time,</if>
+            <if test="totalBetAmountRank != null">total_bet_amount_rank,</if>
+            <if test="maxPrizeAmount != null">max_prize_amount,</if>
+            <if test="minPrizeAmount != null">min_prize_amount,</if>
+            <if test="status != null">status,</if>
+            <if test="execStatus != null">exec_status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="execType != null">#{execType},</if>
+            <if test="execTime != null">#{execTime},</if>
+            <if test="cron != null">#{cron},</if>
+            <if test="targetUserType != null">#{targetUserType},</if>
+            <if test="targetUserIds != null">#{targetUserIds},</if>
+            <if test="targetBeginTime != null">#{targetBeginTime},</if>
+            <if test="targetEndTime != null">#{targetEndTime},</if>
+            <if test="totalBetAmountRank != null">#{totalBetAmountRank},</if>
+            <if test="maxPrizeAmount != null">#{maxPrizeAmount},</if>
+            <if test="minPrizeAmount != null">#{minPrizeAmount},</if>
+            <if test="status != null">#{status},</if>
+            <if test="execStatus != null">#{execStatus},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryPrizeTask" parameterType="LotteryPrizeTask">
+        update t_lottery_prize_task
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="execType != null">exec_type = #{execType},</if>
+            <if test="execTime != null">exec_time = #{execTime},</if>
+            <if test="cron != null">cron = #{cron},</if>
+            <if test="targetUserType != null">target_user_type = #{targetUserType},</if>
+            <if test="targetUserIds != null">target_user_ids = #{targetUserIds},</if>
+            <if test="targetBeginTime != null">target_begin_time = #{targetBeginTime},</if>
+            <if test="targetEndTime != null">target_end_time = #{targetEndTime},</if>
+            <if test="totalBetAmountRank != null">total_bet_amount_rank = #{totalBetAmountRank},</if>
+            <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
+            <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="execStatus != null">exec_status = #{execStatus},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryPrizeTaskById" parameterType="Long">
+        delete from t_lottery_prize_task where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryPrizeTaskByIds" parameterType="String">
+        delete from t_lottery_prize_task where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

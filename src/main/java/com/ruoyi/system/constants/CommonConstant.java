@@ -77,6 +77,8 @@ public class CommonConstant {
         public static final CommonConstantInfo FREEZE = new CommonConstantInfo(5, "冻结");
         public static final CommonConstantInfo UNFREEZE = new CommonConstantInfo(6, "解冻");
         public static final CommonConstantInfo CANCEL_ORDER = new CommonConstantInfo(7, "撤单");
+        public static final CommonConstantInfo BALANCE = new CommonConstantInfo(8, "查询额度");
+        public static final CommonConstantInfo PRIZE = new CommonConstantInfo(9, "爆奖");
         public static final Map<Byte, String> map = BaseConstantClassUtil.getMap(TradeType.class);
     }
 
@@ -462,6 +464,8 @@ public class CommonConstant {
         public static final CommonConstantInfo LOTTERY_COUNT_NOTICE = new CommonConstantInfo(8, "开奖结算通知");
         public static final CommonConstantInfo LOTTERY_CONTROL_NOTICE = new CommonConstantInfo(9, "控奖通知");
         public static final CommonConstantInfo ACTIVITY_SPECIAL_NUMBER_NOTICE = new CommonConstantInfo(10, "活动特码通知");
+        public static final CommonConstantInfo PRIZE_NOTICE = new CommonConstantInfo(11, "爆奖通知");
+        public static final CommonConstantInfo PRIZE_RESULT_NOTICE = new CommonConstantInfo(12, "爆奖结果通知");
     }
 
     public static class WinRateConfigType {
@@ -473,6 +477,19 @@ public class CommonConstant {
         public static final byte LHC = 1;
         public static final byte DWC = 2;
         public static final byte SZC = 3;
+    }
+
+
+    public static class TaskExecuteType {
+        public static final byte IMMEDIATELY = 1;
+        public static final byte SCHEDULED = 2;
+    }
+
+    public static class TaskExecStatus {
+        public static final byte STATUS_WAIT = 0;
+        public static final byte STATUS_ING = 1;
+        public static final byte STATUS_SUCCESS = 2;
+        public static final byte STATUS_FAIL = 3;
     }
 
 
