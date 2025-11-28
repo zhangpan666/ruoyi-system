@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LotteryPrizeConfigMapper">
-    
+
     <resultMap type="LotteryPrizeConfig" id="LotteryPrizeConfigResult">
         <result property="id"    column="id"    />
         <result property="lotteryId"    column="lottery_id"    />
@@ -25,12 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryPrizeConfigVo">
-        select id, lottery_id, extraction_ratio, total_amount, trigger_amount, status, max_prize_amount, min_prize_amount, last_trigger_time, last_prize_amount, target_user_type, target_user_ids, target_begin_time, target_end_time, total_bet_amount_rank, create_time, update_time from t_lottery_prize_config
+        select * from t_lottery_prize_config
     </sql>
 
     <select id="selectLotteryPrizeConfigList" parameterType="LotteryPrizeConfig" resultMap="LotteryPrizeConfigResult">
         <include refid="selectLotteryPrizeConfigVo"/>
-        <where>  
+        <where>
             <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
             <if test="extractionRatio != null  and extractionRatio != ''"> and extraction_ratio = #{extractionRatio}</if>
             <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalBetAmountRank != null "> and total_bet_amount_rank = #{totalBetAmountRank}</if>
         </where>
     </select>
-    
+
     <select id="selectLotteryPrizeConfigById" parameterType="Long" resultMap="LotteryPrizeConfigResult">
         <include refid="selectLotteryPrizeConfigVo"/>
         where id = #{id}
@@ -98,15 +98,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateLotteryPrizeConfig" parameterType="LotteryPrizeConfig">
         update t_lottery_prize_config
         <trim prefix="SET" suffixOverrides=",">
-            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
             <if test="extractionRatio != null and extractionRatio != ''">extraction_ratio = #{extractionRatio},</if>
-            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
             <if test="triggerAmount != null">trigger_amount = #{triggerAmount},</if>
             <if test="status != null">status = #{status},</if>
             <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
             <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
-            <if test="lastTriggerTime != null">last_trigger_time = #{lastTriggerTime},</if>
-            <if test="lastPrizeAmount != null">last_prize_amount = #{lastPrizeAmount},</if>
             <if test="targetUserType != null">target_user_type = #{targetUserType},</if>
             <if test="targetUserIds != null">target_user_ids = #{targetUserIds},</if>
             <if test="targetBeginTime != null">target_begin_time = #{targetBeginTime},</if>
@@ -123,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLotteryPrizeConfigByIds" parameterType="String">
-        delete from t_lottery_prize_config where id in 
+        delete from t_lottery_prize_config where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
