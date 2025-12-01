@@ -43,9 +43,14 @@ public class CommonConstant {
         public static final RedisInfo ALL_ODDS_MAP = new RedisInfo().setMinute(30).setKeyPrefix("ALL_ODDS_MAP").setName("彩票赔率表");
         public static final RedisInfo PLATFORM_DETAIL = new RedisInfo().setDay(1).setKeyPrefix("PLATFORM_DETAIL").setName("平台详情");
         public static final RedisInfo IP_WHITE_LIST_LIST = new RedisInfo().setDay(1).setKeyPrefix("IP_WHITE_LIST_LIST").setName("IP白名单列表");
+        public static final RedisInfo ANIMAL_SPORTS_MEETING_CHAMPION_PLAYER_STAT = new RedisInfo().setMinute(10).setKeyPrefix("ANIMAL_SPORTS_MEETING_CHAMPION_PLAYER_STAT").setName("动物运动会冠军次数统计");
+        public static final RedisInfo ACTIVITY_SPECIAL_NUMBER_RECORD_DETAIL = new RedisInfo().setMinute(30).setKeyPrefix("ACTIVITY_SPECIAL_NUMBER_RECORD_DETAIL").setName("活动特码详情");
         public static final RedisInfo PLATFORM_PLAY_TYPE_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_LIST").setName("平台玩法大类");
         public static final RedisInfo PLATFORM_PLAY_TYPE_ITEM_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_ITEM_LIST").setName("平台玩法小类");
+        public static final RedisInfo BET_LIMIT_LIST = new RedisInfo().setHour(2).setKeyPrefix("BET_LIMIT_LIST").setName("投注限制");
+        public static final RedisInfo LOTTERY_PRIZE_CONFIG = new RedisInfo().setHour(2).setKeyPrefix("LOTTERY_PRIZE_CONFIG").setName("奖池提取比例");
     }
+
 
 
     public static class SmsType {
