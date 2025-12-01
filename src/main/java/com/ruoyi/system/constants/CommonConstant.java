@@ -497,6 +497,13 @@ public class CommonConstant {
         public static final byte STATUS_FAIL = 3;
     }
 
+    public static final class LotteryPrizeTargetUserType {
+        public static final byte ALL = 1;
+        public static final byte SPECIFY = 2;
+        public static final byte WIN = 3;
+        public static final byte LOSE = 4;
+        public static final byte BET = 5;
+    }
 
     public static void main(String[] args) {
 
