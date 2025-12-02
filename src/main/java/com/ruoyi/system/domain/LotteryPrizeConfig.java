@@ -48,14 +48,6 @@ public class LotteryPrizeConfig extends BaseEntity
     @Excel(name = "状态", readConverterExp = "1=有效,0=无效")
     private Byte status;
 
-    /** 最大爆奖金额 */
-    @Excel(name = "最大爆奖金额")
-    private Integer maxPrizeAmount;
-
-    /** 最小爆奖金额 */
-    @Excel(name = "最小爆奖金额")
-    private Integer minPrizeAmount;
-
     /** 最近爆奖时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "最近爆奖时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
