@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LotteryPrizeRecordMapper">
-    
+
     <resultMap type="LotteryPrizeRecord" id="LotteryPrizeRecordResult">
         <result property="id"    column="id"    />
         <result property="lotteryId"    column="lottery_id"    />
@@ -14,18 +14,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryPrizeRecordVo">
-        select id, lottery_id, amount, user_id, create_time, update_time from t_lottery_prize_record
+        select * from t_lottery_prize_record
     </sql>
 
     <select id="selectLotteryPrizeRecordList" parameterType="LotteryPrizeRecord" resultMap="LotteryPrizeRecordResult">
         <include refid="selectLotteryPrizeRecordVo"/>
-        <where>  
+        <where>
             <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
             <if test="amount != null "> and amount = #{amount}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
     </select>
-    
+
     <select id="selectLotteryPrizeRecordById" parameterType="Long" resultMap="LotteryPrizeRecordResult">
         <include refid="selectLotteryPrizeRecordVo"/>
         where id = #{id}
@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLotteryPrizeRecordByIds" parameterType="String">
-        delete from t_lottery_prize_record where id in 
+        delete from t_lottery_prize_record where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

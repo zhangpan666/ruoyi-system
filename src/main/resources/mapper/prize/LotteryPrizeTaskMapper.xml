@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryPrizeTaskVo">
-        select id, lottery_id, exec_type, exec_time, cron, target_user_type, target_user_ids, target_begin_time, target_end_time, total_bet_amount_rank, max_prize_amount, min_prize_amount, status, exec_status, create_time, update_time from t_lottery_prize_task
+        select * from t_lottery_prize_task
     </sql>
 
     <select id="selectLotteryPrizeTaskList" parameterType="LotteryPrizeTask" resultMap="LotteryPrizeTaskResult">
