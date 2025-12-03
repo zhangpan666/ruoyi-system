@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LotteryPrizeTaskMapper">
-    
+
     <resultMap type="LotteryPrizeTask" id="LotteryPrizeTaskResult">
         <result property="id"    column="id"    />
         <result property="lotteryId"    column="lottery_id"    />
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectLotteryPrizeTaskList" parameterType="LotteryPrizeTask" resultMap="LotteryPrizeTaskResult">
         <include refid="selectLotteryPrizeTaskVo"/>
-        <where>  
+        <where>
             <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
             <if test="execType != null "> and exec_type = #{execType}</if>
             <if test="execTime != null "> and exec_time = #{execTime}</if>
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="execStatus != null "> and exec_status = #{execStatus}</if>
         </where>
     </select>
-    
+
     <select id="selectLotteryPrizeTaskById" parameterType="Long" resultMap="LotteryPrizeTaskResult">
         <include refid="selectLotteryPrizeTaskVo"/>
         where id = #{id}
@@ -92,8 +92,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateLotteryPrizeTask" parameterType="LotteryPrizeTask">
         update t_lottery_prize_task
         <trim prefix="SET" suffixOverrides=",">
-            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
-            <if test="execType != null">exec_type = #{execType},</if>
             <if test="execTime != null">exec_time = #{execTime},</if>
             <if test="cron != null">cron = #{cron},</if>
             <if test="targetUserType != null">target_user_type = #{targetUserType},</if>
@@ -104,7 +102,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
             <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
             <if test="status != null">status = #{status},</if>
-            <if test="execStatus != null">exec_status = #{execStatus},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
@@ -116,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLotteryPrizeTaskByIds" parameterType="String">
-        delete from t_lottery_prize_task where id in 
+        delete from t_lottery_prize_task where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -99,4 +99,11 @@ public class LotteryPrizeTask
     @Excel(name = "备注")
     private String remark;
 
+    /**
+     * 彩种名称
+     */
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(value = "彩种名称")
+    private String lotteryName;
+
 }
