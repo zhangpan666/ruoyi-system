@@ -28,18 +28,22 @@ public class LotteryPrizeRecord
 
     /** id */
     @Excel(name = "ID")
+    @ApiModelProperty(value = "ID")
     private Long id;
 
     /** 彩种ID */
     @Excel(name = "彩种ID")
+    @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
 
     /** 金额 */
     @Excel(name = "金额")
+    @ApiModelProperty(value = "金额")
     private BigDecimal amount;
 
     /** 目标用户ID */
     @Excel(name = "目标用户ID")
+    @ApiModelProperty(value = "目标用户ID")
     private Long userId;
 
     /** 创建时间 */
