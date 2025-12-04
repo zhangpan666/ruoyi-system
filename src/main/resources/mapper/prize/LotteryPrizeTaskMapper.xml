@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectLotteryPrizeTaskList" parameterType="LotteryPrizeTask" resultMap="LotteryPrizeTaskResult">
-        <include refid="selectLotteryPrizeTaskVo"/>
+        select * from t_lottery_prize_task
         <where>
             <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
             <if test="execType != null "> and exec_type = #{execType}</if>
@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null "> and status = #{status}</if>
             <if test="execStatus != null "> and exec_status = #{execStatus}</if>
         </where>
+            order by create_time desc
     </select>
 
     <select id="selectLotteryPrizeTaskById" parameterType="Long" resultMap="LotteryPrizeTaskResult">
