@@ -473,6 +473,7 @@ public class CommonConstant {
         public static final CommonConstantInfo PRIZE_RESULT_NOTICE = new CommonConstantInfo(12, "爆奖结果通知");
         public static final CommonConstantInfo VIRTUAL_ORDER_NOTICE = new CommonConstantInfo(13, "虚拟注单通知");
         public static final CommonConstantInfo PRIZE_TASK_NOTICE = new CommonConstantInfo(14, "爆奖任务通知");
+        public static final CommonConstantInfo PRIZE_TASK_EDIT_NOTICE = new CommonConstantInfo(15, "爆奖任务编辑通知");
     }
 
     public static class WinRateConfigType {
