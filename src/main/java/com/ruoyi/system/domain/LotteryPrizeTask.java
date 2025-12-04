@@ -34,6 +34,13 @@ public class LotteryPrizeTask
     @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
 
+    /**
+     * 彩种名称
+     */
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(value = "彩种名称")
+    private String lotteryName;
+
     /** 执行类型，1-立即执行，2-定时执行 */
     @Excel(name = "执行类型", readConverterExp = "1=立即执行,2=定时执行")
     @ApiModelProperty(value = "执行类型，1-立即执行，2-定时执行")
@@ -53,9 +60,9 @@ public class LotteryPrizeTask
     @ApiModelProperty(value = "目标用户，1-所有用户，2-指定用户，3-盈利用户，4-亏损用户，5-打码量较高用户")
     private Byte targetUserType;
 
-    /** 指定用户id */
-    @Excel(name = "指定用户id")
-    @ApiModelProperty(value = "指定用户id")
+    /** 指定用户ID */
+    @Excel(name = "指定用户ID")
+    @ApiModelProperty(value = "指定用户ID")
     private String targetUserIds;
 
     /** 开始时间 */
@@ -110,12 +117,5 @@ public class LotteryPrizeTask
     @ApiModelProperty(example = "备注")
     @Excel(name = "备注")
     private String remark;
-
-    /**
-     * 彩种名称
-     */
-    @Excel(name = "彩种名称")
-    @ApiModelProperty(value = "彩种名称")
-    private String lotteryName;
 
 }

@@ -35,6 +35,13 @@ public class LotteryPrizeConfig extends BaseEntity
     @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
 
+    /**
+     * 彩种名称
+     */
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(value = "彩种名称")
+    private String lotteryName;
+
     /** 提取比例 */
     @Excel(name = "提取比例")
     @ApiModelProperty(value = "提取比例")
@@ -71,9 +78,9 @@ public class LotteryPrizeConfig extends BaseEntity
     @ApiModelProperty(value = "目标用户，1-所有用户，2-指定用户，3-盈利用户，4-亏损用户，5-打码量较高用户")
     private Long targetUserType;
 
-    /** 指定用户id */
-    @Excel(name = "指定用户id")
-    @ApiModelProperty(value = "指定用户id")
+    /** 指定用户ID */
+    @Excel(name = "指定用户ID")
+    @ApiModelProperty(value = "指定用户ID")
     private String targetUserIds;
 
     /** 开始时间 */
@@ -92,12 +99,5 @@ public class LotteryPrizeConfig extends BaseEntity
     @Excel(name = "打码量排名")
     @ApiModelProperty(value = "打码量排名")
     private Integer totalBetAmountRank;
-
-    /**
-     * 彩种名称
-     */
-    @Excel(name = "彩种名称")
-    @ApiModelProperty(value = "彩种名称")
-    private String lotteryName;
 
 }

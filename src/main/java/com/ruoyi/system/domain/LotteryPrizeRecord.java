@@ -36,6 +36,13 @@ public class LotteryPrizeRecord
     @ApiModelProperty(value = "彩种ID")
     private Long lotteryId;
 
+    /**
+     * 彩种名称
+     */
+    @Excel(name = "彩种名称")
+    @ApiModelProperty(value = "彩种名称")
+    private String lotteryName;
+
     /** 金额 */
     @Excel(name = "金额")
     @ApiModelProperty(value = "金额")
@@ -57,13 +64,5 @@ public class LotteryPrizeRecord
     @ApiModelProperty(example = "更新时间")
     @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-
-    /**
-     * 彩种名称
-     */
-    @Excel(name = "彩种名称")
-    @ApiModelProperty(value = "彩种名称")
-    private String lotteryName;
-
 
 }
