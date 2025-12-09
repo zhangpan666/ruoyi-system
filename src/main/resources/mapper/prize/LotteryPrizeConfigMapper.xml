@@ -18,6 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="targetBeginTime"    column="target_begin_time"    />
         <result property="targetEndTime"    column="target_end_time"    />
         <result property="totalBetAmountRank"    column="total_bet_amount_rank"    />
+        <result property="maxPrizeAmount"    column="max_prize_amount"    />
+        <result property="minPrizeAmount"    column="min_prize_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
@@ -98,6 +100,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetBeginTime != null">target_begin_time = #{targetBeginTime},</if>
             <if test="targetEndTime != null">target_end_time = #{targetEndTime},</if>
             <if test="totalBetAmountRank != null">total_bet_amount_rank = #{totalBetAmountRank},</if>
+            <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
+            <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>

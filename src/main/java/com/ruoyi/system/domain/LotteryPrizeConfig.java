@@ -100,4 +100,14 @@ public class LotteryPrizeConfig extends BaseEntity
     @ApiModelProperty(value = "打码量排名")
     private Integer totalBetAmountRank;
 
+    /** 最大爆奖金额 */
+    @Excel(name = "最大爆奖金额")
+    @ApiModelProperty(value = "最大爆奖金额")
+    private Integer maxPrizeAmount;
+
+    /** 最小爆奖金额 */
+    @Excel(name = "最小爆奖金额")
+    @ApiModelProperty(value = "最小爆奖金额")
+    private Integer minPrizeAmount;
+
 }
