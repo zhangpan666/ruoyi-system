@@ -67,6 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetBeginTime != null">target_begin_time,</if>
             <if test="targetEndTime != null">target_end_time,</if>
             <if test="totalBetAmountRank != null">total_bet_amount_rank,</if>
+            <if test="maxPrizeAmount != null">max_prize_amount,</if>
+            <if test="minPrizeAmount != null">min_prize_amount,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
          </trim>
@@ -84,6 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetBeginTime != null">#{targetBeginTime},</if>
             <if test="targetEndTime != null">#{targetEndTime},</if>
             <if test="totalBetAmountRank != null">#{totalBetAmountRank},</if>
+            <if test="maxPrizeAmount != null">#{maxPrizeAmount},</if>
+            <if test="minPrizeAmount != null">#{minPrizeAmount},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
          </trim>
