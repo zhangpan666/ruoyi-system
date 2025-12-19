@@ -53,6 +53,14 @@ public class LotteryPrizeRecord
     @ApiModelProperty(value = "目标用户ID")
     private Long userId;
 
+    @Excel(name = "平台id")
+    @ApiModelProperty(value = "平台ID")
+    private Long platformId;
+
+    @Excel(name = "平台名称")
+    @ApiModelProperty(value = "平台名称")
+    private String platformName;
+
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "创建时间")

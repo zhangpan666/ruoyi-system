@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPlatformVo">
-        select id, name, md5_key, secret_key, status, credit_limit, used_credit_limit,free_transfer_wallet_callback_address, create_time, update_time from t_platform
+        select * from t_platform
     </sql>
 
     <select id="selectPlatformList" parameterType="Platform" resultMap="PlatformResult">
