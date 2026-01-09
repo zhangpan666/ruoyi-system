@@ -118,4 +118,8 @@ public class LotteryPrizeTask
     @Excel(name = "备注")
     private String remark;
 
+    private Date beginTime;
+
+    private Date endTime;
+
 }
