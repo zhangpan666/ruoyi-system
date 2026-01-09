@@ -43,6 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="minPrizeAmount != null "> and min_prize_amount = #{minPrizeAmount}</if>
             <if test="status != null "> and status = #{status}</if>
             <if test="execStatus != null "> and exec_status = #{execStatus}</if>
+            <if test="beginTime != null "> and create_time &gt;= #{beginTime}</if>
+            <if test="endTime != null "> and create_time &lt;= #{endTime}</if>
         </where>
             order by create_time desc
     </select>
