@@ -73,4 +73,8 @@ public class LotteryPrizeRecord
     @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    private Date beginTime;
+
+    private Date endTime;
+
 }
