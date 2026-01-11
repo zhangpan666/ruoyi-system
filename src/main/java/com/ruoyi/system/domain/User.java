@@ -133,6 +133,23 @@ public class User {
     @ApiModelProperty(value = "可用余额")
     private BigDecimal availableBalance;
 
+    /** 最近中奖时间 */
+    @Excel(name = "最近中奖时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "最近中奖时间")
+    private Date lastPrizeTime;
+
+    /** 最近投注时间 */
+    @Excel(name = "最近投注时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "最近投注时间")
+    private Date lastBetTime;
+
+    /** 备注 */
+    @Excel(name = "备注")
+    @ApiModelProperty(example = "备注")
+    private String remark;
+
     /** 创建时间 */
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
