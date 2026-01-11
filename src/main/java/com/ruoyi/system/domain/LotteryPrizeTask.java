@@ -77,6 +77,18 @@ public class LotteryPrizeTask
     @ApiModelProperty(value = "结束时间")
     private Date targetEndTime;
 
+    /** 投注开始时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "投注开始时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "投注开始时间")
+    private Date betBeginTime;
+
+    /** 投注结束时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "投注结束时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "投注结束时间")
+    private Date betEndTime;
+
     /** 打码量排名 */
     @Excel(name = "打码量排名")
     @ApiModelProperty(value = "打码量排名")

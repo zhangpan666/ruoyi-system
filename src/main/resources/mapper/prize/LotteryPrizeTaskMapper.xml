@@ -65,6 +65,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetUserIds != null">target_user_ids,</if>
             <if test="targetBeginTime != null">target_begin_time,</if>
             <if test="targetEndTime != null">target_end_time,</if>
+            <if test="betBeginTime != null">bet_begin_time,</if>
+            <if test="betEndTime != null">bet_end_time,</if>
             <if test="totalBetAmountRank != null">total_bet_amount_rank,</if>
             <if test="maxPrizeAmount != null">max_prize_amount,</if>
             <if test="minPrizeAmount != null">min_prize_amount,</if>
@@ -82,6 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetUserIds != null">#{targetUserIds},</if>
             <if test="targetBeginTime != null">#{targetBeginTime},</if>
             <if test="targetEndTime != null">#{targetEndTime},</if>
+            <if test="betBeginTime != null">#{betBeginTime},</if>
+            <if test="betEndTime != null">#{betEndTime},</if>
             <if test="totalBetAmountRank != null">#{totalBetAmountRank},</if>
             <if test="maxPrizeAmount != null">#{maxPrizeAmount},</if>
             <if test="minPrizeAmount != null">#{minPrizeAmount},</if>
@@ -99,6 +103,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetUserIds != null">target_user_ids = #{targetUserIds},</if>
             <if test="targetBeginTime != null">target_begin_time = #{targetBeginTime},</if>
             <if test="targetEndTime != null">target_end_time = #{targetEndTime},</if>
+            <if test="betBeginTime != null">bet_begin_time = #{betBeginTime},</if>
+            <if test="betEndTime != null">bet_end_time = #{betEndTime},</if>
             <if test="totalBetAmountRank != null">total_bet_amount_rank = #{totalBetAmountRank},</if>
             <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
             <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
