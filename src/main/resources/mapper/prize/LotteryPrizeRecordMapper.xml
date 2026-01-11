@@ -18,13 +18,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectLotteryPrizeRecordList" parameterType="LotteryPrizeRecord" resultMap="LotteryPrizeRecordResult">
-        select a.*,b.platform_id as platformId,c.name as platformName from t_lottery_prize_record a inner join t_user b on a.user_id = b.id
-        inner join t_platform c on b.platform_id = c.id
+        select a.*,b.platform_id as platformId,c.name as platformName,b.platform_user_id as platformUserId from t_lottery_prize_record a
+        inner join t_user b on a.user_id = b.id inner join t_platform c on b.platform_id = c.id
         <where>
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
             <if test="amount != null "> and a.amount = #{amount}</if>
             <if test="userId != null "> and a.user_id = #{userId}</if>
             <if test="platformId != null "> and b.platform_id = #{platformId}</if>
+            <if test="platformUserId != null "> and b.platform_user_id = #{platformUserId}</if>
             <if test="beginTime != null "> and a.create_time &gt;= #{beginTime}</if>
             <if test="endTime != null "> and a.create_time &lt;= #{endTime}</if>
         </where>

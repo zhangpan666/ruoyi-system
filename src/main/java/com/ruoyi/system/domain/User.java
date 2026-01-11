@@ -21,27 +21,34 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class User extends BaseEntity {
+public class User {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
-    @Excel(name = "id")
+    @Excel(name = "ID")
     @ApiModelProperty(value = "ID")
     private Long id;
 
     /**
      * 平台id
      */
-    @Excel(name = "平台id")
+    @Excel(name = "平台ID")
     @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
     /**
+     * 平台名称
+     */
+    @Excel(name = "平台名称", type = Excel.Type.EXPORT)
+    @ApiModelProperty(value = "平台名称")
+    private String platformName;
+
+    /**
      * 平台用户id
      */
-    @Excel(name = "平台用户id")
+    @Excel(name = "平台用户ID")
     @ApiModelProperty(value = "平台用户ID")
     private Long platformUserId;
 
@@ -63,6 +70,7 @@ public class User extends BaseEntity {
     /**
      * 类型
      */
+    @Excel(name = "类型", readConverterExp = "1=真实用户,2=虚拟用户,3=测试用户")
     @ApiModelProperty(example = "类型，1-真实用户,2-虚拟用户")
     private Byte type;
 
@@ -120,17 +128,22 @@ public class User extends BaseEntity {
     @ApiModelProperty(value = "登录地")
     private String loginLocation;
 
-    /**
-     * 平台名称
-     */
-    @Excel(name = "平台名称", type = Excel.Type.EXPORT)
-    @ApiModelProperty(value = "平台名称")
-    private String platformName;
-
     /** 可用余额 */
     @Excel(name = "可用余额")
     @ApiModelProperty(value = "可用余额")
     private BigDecimal availableBalance;
+
+    /** 创建时间 */
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "创建时间")
+    private Date createTime;
+
+    /** 更新时间 */
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "更新时间")
+    private Date updateTime;
 
     private Date beginTime;
 
