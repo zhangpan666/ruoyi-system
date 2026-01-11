@@ -95,8 +95,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateLotteryPrizeTask" parameterType="LotteryPrizeTask">
         update t_lottery_prize_task
         <trim prefix="SET" suffixOverrides=",">
-            <if test="execTime != null">exec_time = #{execTime},</if>
-            <if test="cron != null">cron = #{cron},</if>
             <if test="targetUserType != null">target_user_type = #{targetUserType},</if>
             <if test="targetUserIds != null">target_user_ids = #{targetUserIds},</if>
             <if test="targetBeginTime != null">target_begin_time = #{targetBeginTime},</if>
