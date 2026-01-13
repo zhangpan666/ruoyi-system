@@ -145,6 +145,12 @@ public class User {
     @ApiModelProperty(example = "最近投注时间")
     private Date lastBetTime;
 
+    /** 最近投注疯狂系列时间 */
+    @Excel(name = "最近投注疯狂系列时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(example = "最近投注疯狂系列时间")
+    private Date lastBetCrazySeriesTime;
+
     /** 备注 */
     @Excel(name = "备注")
     @ApiModelProperty(example = "备注")

@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="availableBalance"    column="availableBalance"    />
         <result property="lastPrizeTime"    column="last_prize_time"    />
         <result property="lastBetTime"    column="last_bet_time"    />
+        <result property="lastBetCrazySeriesTime"    column="last_bet_crazy_series_time"    />
     </resultMap>
 
     <sql id="selectUserVo">
