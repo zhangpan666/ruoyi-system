@@ -73,6 +73,13 @@ public class Platform
     @ApiModelProperty(value = "免转钱包回调地址")
     private String freeTransferWalletCallbackAddress;
 
+    /**
+     * 爆奖通知地址
+     */
+    @Excel(name = "爆奖通知地址")
+    @ApiModelProperty(value = "爆奖通知地址")
+    private String freeTransferWalletPrizeNotifyAddress;
+
     /** 创建时间 */
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
