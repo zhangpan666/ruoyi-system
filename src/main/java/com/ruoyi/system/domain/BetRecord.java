@@ -170,6 +170,26 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单")
     private Byte cancelType;
 
+    /** 彩种奖池贡献比例 */
+    @Excel(name = "彩种奖池贡献比例")
+    @ApiModelProperty(value = "彩种奖池贡献比例")
+    private String lotteryJackpotContributeRatio;
+
+    /** 彩种奖池贡献金额 */
+    @Excel(name = "彩种奖池贡献金额")
+    @ApiModelProperty(value = "彩种奖池贡献金额")
+    private BigDecimal lotteryJackpotContributeAmount;
+
+    /** 全场大奖奖池贡献比例 */
+    @Excel(name = "全场大奖奖池贡献比例")
+    @ApiModelProperty(value = "全场大奖奖池贡献比例")
+    private String globalJackpotContributeRatio;
+
+    /** 全场大奖奖池贡献金额 */
+    @Excel(name = "全场大奖奖池贡献金额")
+    @ApiModelProperty(value = "全场大奖奖池贡献金额")
+    private BigDecimal globalJackpotContributeAmount;
+
     /** 平台id */
 //    @Excel(name = "平台ID")
     @ApiModelProperty(value = "平台ID")

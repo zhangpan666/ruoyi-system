@@ -41,11 +41,14 @@
         <result property="rewardStatus" column="reward_status"/>
         <result property="betPosition" column="bet_position"/>
         <result property="displayBetPosition" column="display_bet_position"/>
+        <result property="lotteryJackpotContributeRatio" column="lottery_jackpot_contribute_ratio"/>
+        <result property="lotteryJackpotContributeAmount" column="lottery_jackpot_contribute_amount"/>
+        <result property="globalJackpotContributeRatio" column="global_jackpot_contribute_ratio"/>
+        <result property="globalJackpotContributeAmount" column="global_jackpot_contribute_amount"/>
     </resultMap>
 
     <sql id="selectBetRecordVo">
-        select *
-        from t_bet_record
+        select * from t_bet_record
     </sql>
 
     <select id="selectBetRecordList" parameterType="BetRecord" resultMap="BetRecordResult">
