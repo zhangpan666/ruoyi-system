@@ -68,6 +68,11 @@ public class LotteryPrizeRecord
     @ApiModelProperty(value = "平台用户ID")
     private Long platformUserId;
 
+    /** 是否虚拟，1-是，0-否 */
+    @Excel(name = "是否虚拟", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "是否虚拟，1-是，0-否")
+    private Byte isVirtual;
+
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "创建时间")

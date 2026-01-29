@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.LotteryPrizeStatDayMapper">
-    
+
     <resultMap type="LotteryPrizeStatDay" id="LotteryPrizeStatDayResult">
         <result property="id"    column="id"    />
         <result property="statDate"    column="stat_date"    />
@@ -19,12 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectLotteryPrizeStatDayVo">
-        select id, stat_date, lottery_id, total_bet_amount, total_prize_count, total_prize_people_count, total_prize_amount, total_jackpot_extraction_amount, jackpot_balance, create_time, update_time from t_lottery_prize_stat_day
+        select * from t_lottery_prize_stat_day
     </sql>
 
     <select id="selectLotteryPrizeStatDayList" parameterType="LotteryPrizeStatDay" resultMap="LotteryPrizeStatDayResult">
-        <include refid="selectLotteryPrizeStatDayVo"/>
-        <where>  
+        select * from t_lottery_prize_stat_day
+        <where>
             <if test="statDate != null "> and stat_date = #{statDate}</if>
             <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
             <if test="totalBetAmount != null "> and total_bet_amount = #{totalBetAmount}</if>
@@ -34,8 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalJackpotExtractionAmount != null "> and total_jackpot_extraction_amount = #{totalJackpotExtractionAmount}</if>
             <if test="jackpotBalance != null "> and jackpot_balance = #{jackpotBalance}</if>
         </where>
+            order by stat_date desc,lottery_id asc
     </select>
-    
+
     <select id="selectLotteryPrizeStatDayById" parameterType="Long" resultMap="LotteryPrizeStatDayResult">
         <include refid="selectLotteryPrizeStatDayVo"/>
         where id = #{id}
@@ -93,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLotteryPrizeStatDayByIds" parameterType="String">
-        delete from t_lottery_prize_stat_day where id in 
+        delete from t_lottery_prize_stat_day where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

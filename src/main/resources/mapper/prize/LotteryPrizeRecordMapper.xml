@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotteryId"    column="lottery_id"    />
         <result property="amount"    column="amount"    />
         <result property="userId"    column="user_id"    />
+        <result property="isVirtual"    column="is_virtual"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
@@ -24,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
             <if test="amount != null "> and a.amount = #{amount}</if>
             <if test="userId != null "> and a.user_id = #{userId}</if>
+            <if test="isVirtual != null "> and a.is_virtual = #{isVirtual}</if>
             <if test="platformId != null "> and b.platform_id = #{platformId}</if>
             <if test="platformUserId != null "> and b.platform_user_id = #{platformUserId}</if>
             <if test="beginTime != null "> and a.create_time &gt;= #{beginTime}</if>
@@ -94,6 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="endTime != null ">
                 and create_time &lt;= #{endTime}
              </if>
+                and is_virtual = 0
         </where>
                 group by statDate order by statDate desc
     </select>
