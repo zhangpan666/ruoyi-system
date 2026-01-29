@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryPrizeStatDayMapper">
+    
+    <resultMap type="LotteryPrizeStatDay" id="LotteryPrizeStatDayResult">
+        <result property="id"    column="id"    />
+        <result property="statDate"    column="stat_date"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="totalBetAmount"    column="total_bet_amount"    />
+        <result property="totalPrizeCount"    column="total_prize_count"    />
+        <result property="totalPrizePeopleCount"    column="total_prize_people_count"    />
+        <result property="totalPrizeAmount"    column="total_prize_amount"    />
+        <result property="totalJackpotExtractionAmount"    column="total_jackpot_extraction_amount"    />
+        <result property="jackpotBalance"    column="jackpot_balance"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLotteryPrizeStatDayVo">
+        select id, stat_date, lottery_id, total_bet_amount, total_prize_count, total_prize_people_count, total_prize_amount, total_jackpot_extraction_amount, jackpot_balance, create_time, update_time from t_lottery_prize_stat_day
+    </sql>
+
+    <select id="selectLotteryPrizeStatDayList" parameterType="LotteryPrizeStatDay" resultMap="LotteryPrizeStatDayResult">
+        <include refid="selectLotteryPrizeStatDayVo"/>
+        <where>  
+            <if test="statDate != null "> and stat_date = #{statDate}</if>
+            <if test="lotteryId != null "> and lottery_id = #{lotteryId}</if>
+            <if test="totalBetAmount != null "> and total_bet_amount = #{totalBetAmount}</if>
+            <if test="totalPrizeCount != null "> and total_prize_count = #{totalPrizeCount}</if>
+            <if test="totalPrizePeopleCount != null "> and total_prize_people_count = #{totalPrizePeopleCount}</if>
+            <if test="totalPrizeAmount != null "> and total_prize_amount = #{totalPrizeAmount}</if>
+            <if test="totalJackpotExtractionAmount != null "> and total_jackpot_extraction_amount = #{totalJackpotExtractionAmount}</if>
+            <if test="jackpotBalance != null "> and jackpot_balance = #{jackpotBalance}</if>
+        </where>
+    </select>
+    
+    <select id="selectLotteryPrizeStatDayById" parameterType="Long" resultMap="LotteryPrizeStatDayResult">
+        <include refid="selectLotteryPrizeStatDayVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryPrizeStatDay" parameterType="LotteryPrizeStatDay">
+        insert into t_lottery_prize_stat_day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="statDate != null">stat_date,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="totalBetAmount != null">total_bet_amount,</if>
+            <if test="totalPrizeCount != null">total_prize_count,</if>
+            <if test="totalPrizePeopleCount != null">total_prize_people_count,</if>
+            <if test="totalPrizeAmount != null">total_prize_amount,</if>
+            <if test="totalJackpotExtractionAmount != null">total_jackpot_extraction_amount,</if>
+            <if test="jackpotBalance != null">jackpot_balance,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="statDate != null">#{statDate},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="totalBetAmount != null">#{totalBetAmount},</if>
+            <if test="totalPrizeCount != null">#{totalPrizeCount},</if>
+            <if test="totalPrizePeopleCount != null">#{totalPrizePeopleCount},</if>
+            <if test="totalPrizeAmount != null">#{totalPrizeAmount},</if>
+            <if test="totalJackpotExtractionAmount != null">#{totalJackpotExtractionAmount},</if>
+            <if test="jackpotBalance != null">#{jackpotBalance},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryPrizeStatDay" parameterType="LotteryPrizeStatDay">
+        update t_lottery_prize_stat_day
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="statDate != null">stat_date = #{statDate},</if>
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="totalBetAmount != null">total_bet_amount = #{totalBetAmount},</if>
+            <if test="totalPrizeCount != null">total_prize_count = #{totalPrizeCount},</if>
+            <if test="totalPrizePeopleCount != null">total_prize_people_count = #{totalPrizePeopleCount},</if>
+            <if test="totalPrizeAmount != null">total_prize_amount = #{totalPrizeAmount},</if>
+            <if test="totalJackpotExtractionAmount != null">total_jackpot_extraction_amount = #{totalJackpotExtractionAmount},</if>
+            <if test="jackpotBalance != null">jackpot_balance = #{jackpotBalance},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryPrizeStatDayById" parameterType="Long">
+        delete from t_lottery_prize_stat_day where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryPrizeStatDayByIds" parameterType="String">
+        delete from t_lottery_prize_stat_day where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
