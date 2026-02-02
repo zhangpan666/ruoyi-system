@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.pojo.LotteryPrizeStatDTO;
 import com.ruoyi.system.pojo.LotteryPrizeStatVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,7 +104,7 @@ public class LotteryPrizeRecordServiceImpl implements ILotteryPrizeRecordService
 
 
     @Override
-    public List<LotteryPrizeStatVO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord) {
+    public List<LotteryPrizeStatDTO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord) {
         return lotteryPrizeRecordMapper.statAndGroupByLotteryId(lotteryPrizeRecord);
     }
 }

@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.LotteryPrizeRecord;
+import com.ruoyi.system.pojo.LotteryPrizeStatDTO;
 import com.ruoyi.system.pojo.LotteryPrizeStatVO;
 
 /**
@@ -62,6 +63,6 @@ public interface ILotteryPrizeRecordService
 
     List<LotteryPrizeStatVO> stat(LotteryPrizeRecord lotteryPrizeRecord);
 
-    List<LotteryPrizeStatVO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord);
+    List<LotteryPrizeStatDTO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord);
 
 }
