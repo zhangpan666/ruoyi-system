@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 group by statDate order by statDate desc
     </select>
 
-    <select id="statAndGroupByLotteryId" parameterType="LotteryPrizeRecord" resultType="com.ruoyi.system.pojo.LotteryPrizeStatVO">
+    <select id="statAndGroupByLotteryId" parameterType="LotteryPrizeRecord" resultType="com.ruoyi.system.pojo.LotteryPrizeStatDTO">
         select coalesce(sum(amount),0) as totalPrizeAmount,count(*) as totalPrizeCount,count(distinct user_id) as totalPrizePeopleCount
         ,lottery_id as lotteryId from t_lottery_prize_record
         <where>
