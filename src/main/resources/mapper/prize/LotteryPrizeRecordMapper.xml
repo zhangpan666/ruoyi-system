@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             and is_virtual = 0
         </where>
-        group by lottery_id order by lottery_id desc
+        group by lottery_id order by lottery_id asc
     </select>
 
 </mapper>
