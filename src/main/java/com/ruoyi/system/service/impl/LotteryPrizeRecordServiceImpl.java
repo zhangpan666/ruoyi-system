@@ -100,4 +100,10 @@ public class LotteryPrizeRecordServiceImpl implements ILotteryPrizeRecordService
     public List<LotteryPrizeStatVO> stat(LotteryPrizeRecord lotteryPrizeRecord) {
         return lotteryPrizeRecordMapper.stat(lotteryPrizeRecord);
     }
+
+
+    @Override
+    public List<LotteryPrizeStatVO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord) {
+        return lotteryPrizeRecordMapper.statAndGroupByLotteryId(lotteryPrizeRecord);
+    }
 }

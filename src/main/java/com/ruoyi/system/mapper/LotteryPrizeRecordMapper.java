@@ -61,4 +61,6 @@ public interface LotteryPrizeRecordMapper
     public int deleteLotteryPrizeRecordByIds(Long[] ids);
 
     List<LotteryPrizeStatVO> stat(LotteryPrizeRecord lotteryPrizeRecord);
+
+    List<LotteryPrizeStatVO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord);
 }

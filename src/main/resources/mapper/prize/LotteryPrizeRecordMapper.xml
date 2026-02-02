@@ -101,4 +101,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 group by statDate order by statDate desc
     </select>
 
+    <select id="statAndGroupByLotteryId" parameterType="LotteryPrizeRecord" resultType="com.ruoyi.system.pojo.LotteryPrizeStatVO">
+        select coalesce(sum(amount),0) as totalPrizeAmount,count(*) as totalPrizeCount,count(distinct user_id) as totalPrizePeopleCount
+        ,lottery_id as lotteryId from t_lottery_prize_record
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="beginTime != null ">
+                and create_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null ">
+                and create_time &lt;= #{endTime}
+            </if>
+            and is_virtual = 0
+        </where>
+        group by lottery_id order by lottery_id desc
+    </select>
+
 </mapper>

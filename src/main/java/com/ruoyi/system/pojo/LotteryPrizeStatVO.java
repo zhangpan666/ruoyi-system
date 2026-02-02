@@ -17,6 +17,9 @@ import java.util.Date;
 @Accessors(chain = true)
 public class LotteryPrizeStatVO implements Serializable {
 
+    @ApiModelProperty(value = "彩种ID")
+    private Long lotteryId;
+
     @ApiModelProperty(value = "日期")
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "日期", width = 30, dateFormat = "yyyy-MM-dd")

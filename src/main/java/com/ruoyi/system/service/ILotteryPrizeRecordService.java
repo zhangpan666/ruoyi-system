@@ -62,4 +62,6 @@ public interface ILotteryPrizeRecordService
 
     List<LotteryPrizeStatVO> stat(LotteryPrizeRecord lotteryPrizeRecord);
 
+    List<LotteryPrizeStatVO> statAndGroupByLotteryId(LotteryPrizeRecord lotteryPrizeRecord);
+
 }
