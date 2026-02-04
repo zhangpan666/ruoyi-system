@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.Lottery;
 import com.ruoyi.system.domain.LotteryRelation;
+import com.ruoyi.system.domain.dto.BetRecordStatDTO;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
 import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
@@ -216,6 +217,12 @@ public class BetRecordServiceImpl implements IBetRecordService {
             checkAndSyncSxList(realTimeOrderList, sx);
         }
         return realTimeOrderList;
+    }
+
+
+    @Override
+    public List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord) {
+        return betRecordMapper.statForLotteryPrize(betRecord);
     }
 
     private void checkAndSyncSxList(List<RealTimeOrderVO> realTimeOrderList, Map<String, String> fullSxMap) {

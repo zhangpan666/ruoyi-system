@@ -614,6 +614,7 @@
             <if test="endTime != null">
                 and create_time &lt;= #{endTime}
             </if>
+
         </where>
         group by lottery_id
     </select>
@@ -1010,4 +1011,21 @@
         HAVING SUM(bet_amount) > 0
         ORDER BY totalBetAmount DESC
     </select>
+
+
+    <select id="statForLotteryPrize" parameterType="com.ruoyi.system.domain.BetRecord" resultType="com.ruoyi.system.domain.dto.BetRecordStatDTO">
+        select coalesce(sum(bet_amount),0) as totalBetAmount,coalesce(sum(lottery_jackpot_contribute_amount),0) as totalLotteryJackpotContributeAmount
+        ,coalesce(sum(global_jackpot_contribute_amount),0) as totalGlobalJackpotContributeAmount,lottery_id as lotteryId from t_bet_record
+        <where>
+            <if test="beginTime != null">
+                and bet_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and bet_time &lt;= #{endTime}
+            </if>
+            and status != 3 and is_auto = 0 and is_test = 0
+        </where>
+        group by lottery_id
+    </select>
+
 </mapper>

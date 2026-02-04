@@ -3,6 +3,7 @@ package com.ruoyi.system.service;
 import java.util.List;
 
 import com.ruoyi.system.domain.BetRecord;
+import com.ruoyi.system.domain.dto.BetRecordStatDTO;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
 import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
@@ -79,5 +80,7 @@ public interface IBetRecordService {
     List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord);
 
     List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type, Long platformId);
+
+    List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord);
 
 }

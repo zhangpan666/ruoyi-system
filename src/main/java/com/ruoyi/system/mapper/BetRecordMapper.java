@@ -3,6 +3,7 @@ package com.ruoyi.system.mapper;
 import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.BetRecord;
+import com.ruoyi.system.domain.dto.BetRecordStatDTO;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
 import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
@@ -92,4 +93,6 @@ public interface BetRecordMapper
     List<RealTimeOrderVO> realTimeOrderBySx(BetRecord betRecordParam);
 
     List<RealTimeOrderVO> realTimeOrderByMantissa(BetRecord betRecordParam);
+
+    List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord);
 }
