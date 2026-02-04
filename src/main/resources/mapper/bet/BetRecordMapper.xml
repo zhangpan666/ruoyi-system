@@ -583,6 +583,8 @@
              , sum(valid_bet_amount) as totalValidBetAmount
              , sum(win_lose_amount)  as winLoseAmount
              , sum(win_amount)       as totalWinAmount
+             , sum(lottery_jackpot_contribute_amount)       as totalLotteryJackpotContributeAmount
+             , sum(global_jackpot_contribute_amount)       as totalGlobalJackpotContributeAmount
         from t_bet_record
         <where>
             <if test="platformId != null">

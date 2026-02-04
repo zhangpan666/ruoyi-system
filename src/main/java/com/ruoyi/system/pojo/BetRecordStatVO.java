@@ -45,6 +45,12 @@ public class BetRecordStatVO implements Serializable {
     @ApiModelProperty(value = "派彩金额")
     private BigDecimal totalWinAmount = BigDecimal.ZERO;
 
+    @ApiModelProperty(value = "彩种奖池提取总金额")
+    private BigDecimal totalLotteryJackpotContributeAmount = BigDecimal.ZERO;
+
+    @ApiModelProperty(value = "全场大奖奖池提取总金额")
+    private BigDecimal totalGlobalJackpotContributeAmount = BigDecimal.ZERO;
+
     @ApiModelProperty(value = "玩法名称")
     private String playTypeName;
 
