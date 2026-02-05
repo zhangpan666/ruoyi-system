@@ -83,4 +83,6 @@ public interface IBetRecordService {
 
     List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord);
 
+    List<BetRecord> queryForLotteryPrizeStat(BetRecord betRecord);
+
 }

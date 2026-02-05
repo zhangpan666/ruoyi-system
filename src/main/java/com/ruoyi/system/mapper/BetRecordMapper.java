@@ -95,4 +95,6 @@ public interface BetRecordMapper
     List<RealTimeOrderVO> realTimeOrderByMantissa(BetRecord betRecordParam);
 
     List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord);
+
+    List<BetRecord> queryForLotteryPrizeStat(BetRecord betRecord);
 }

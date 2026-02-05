@@ -225,6 +225,12 @@ public class BetRecordServiceImpl implements IBetRecordService {
         return betRecordMapper.statForLotteryPrize(betRecord);
     }
 
+
+    @Override
+    public List<BetRecord> queryForLotteryPrizeStat(BetRecord betRecord) {
+        return betRecordMapper.queryForLotteryPrizeStat(betRecord);
+    }
+
     private void checkAndSyncSxList(List<RealTimeOrderVO> realTimeOrderList, Map<String, String> fullSxMap) {
         // 1. 处理空列表
         if (realTimeOrderList == null) {

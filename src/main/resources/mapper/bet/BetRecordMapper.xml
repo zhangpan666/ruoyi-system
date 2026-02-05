@@ -1028,4 +1028,21 @@
         group by lottery_id
     </select>
 
+    <select id="queryForLotteryPrizeStat" parameterType="com.ruoyi.system.domain.BetRecord" resultMap="BetRecordResult">
+        select * from t_bet_record
+        <where>
+            <if test="lotteryId != null">
+                and lottery_id = #{lotteryId}
+            </if>
+            <if test="beginTime != null">
+                and bet_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and bet_time &lt;= #{endTime}
+            </if>
+            and status != 3 and is_auto = 0 and is_test = 0
+        </where>
+        order by bet_time desc
+    </select>
+
 </mapper>
