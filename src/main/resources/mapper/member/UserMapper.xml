@@ -53,13 +53,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loginLocation != null  and loginLocation != ''"> and a.login_location = #{loginLocation}</if>
             <if test="onlineStatus != null and onlineStatus == 1">
                 and a.id in
-                <foreach collection="idList" open="(" close=")" separator="," item="id">
+                <foreach collection="onlineUserIdList" open="(" close=")" separator="," item="id">
                     #{id}
                 </foreach>
             </if>
             <if test="onlineStatus != null and onlineStatus == 0">
                 and a.id not in
-                <foreach collection="idList" open="(" close=")" separator="," item="id">
+                <foreach collection="onlineUserIdList" open="(" close=")" separator="," item="id">
                     #{id}
                 </foreach>
             </if>
@@ -164,13 +164,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loginLocation != null  and loginLocation != ''"> and login_location = #{loginLocation}</if>
             <if test="onlineStatus != null and onlineStatus == 1">
                 and a.id in
-                <foreach collection="idList" open="(" close=")" separator="," item="id">
+                <foreach collection="onlineUserIdList" open="(" close=")" separator="," item="id">
                     #{id}
                 </foreach>
             </if>
             <if test="onlineStatus != null and onlineStatus == 0">
                 and a.id not in
-                <foreach collection="idList" open="(" close=")" separator="," item="id">
+                <foreach collection="onlineUserIdList" open="(" close=")" separator="," item="id">
                     #{id}
                 </foreach>
             </if>

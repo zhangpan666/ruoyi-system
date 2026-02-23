@@ -177,6 +177,6 @@ public class User {
 
     private Date endTime;
 
-    private List<Long> idList;
+    private List<Long> onlineUserIdList;
 
 }
