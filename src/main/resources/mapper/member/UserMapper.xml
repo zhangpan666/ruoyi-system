@@ -51,6 +51,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sameIp != null "> and a.same_ip = #{sameIp}</if>
             <if test="loginIp != null  and loginIp != ''"> and a.login_ip = #{loginIp}</if>
             <if test="loginLocation != null  and loginLocation != ''"> and a.login_location = #{loginLocation}</if>
+            <if test="onlineStatus != null and onlineStatus == 1">
+                and a.id in
+                <foreach collection="idList" open="(" close=")" separator="," item="id">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="onlineStatus != null and onlineStatus == 0">
+                and a.id not in
+                <foreach collection="idList" open="(" close=")" separator="," item="id">
+                    #{id}
+                </foreach>
+            </if>
         </where>
         order by a.create_time desc
     </select>

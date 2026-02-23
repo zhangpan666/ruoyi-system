@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 会员对象 t_user
@@ -86,6 +87,10 @@ public class User {
     @Excel(name = "状态", readConverterExp = "1=正常,0=停用")
     @ApiModelProperty(value = "状态，1=正常,0=停用")
     private Byte status;
+
+
+    @ApiModelProperty(value = "在线状态，1=在线,0=离线")
+    private Byte onlineStatus;
 
     /**
      * 最近登录时间
@@ -171,5 +176,7 @@ public class User {
     private Date beginTime;
 
     private Date endTime;
+
+    private List<Long> idList;
 
 }

@@ -24,7 +24,7 @@ public class CommonConstant {
         public static final RedisInfo ONLINE_ADMIN_COUNT = new RedisInfo().setSecond(-1).setKeyPrefix("ONLINE_ADMIN_COUNT").setName("管理员在线人数");
         public static final RedisInfo ONLINE_ADMIN = new RedisInfo().setSecond(-1).setKeyPrefix("ONLINE_ADMIN").setName("管理员在线人数");
         public static final RedisInfo ONLINE_USER_COUNT = new RedisInfo().setSecond(-1).setKeyPrefix("ONLINE_USER_COUNT").setName("用户在线人数");
-        public static final RedisInfo ONLINE_USER = new RedisInfo().setSecond(-1).setKeyPrefix("ONLINE_USER").setName("用户在线人数");
+        public static final RedisInfo ONLINE_USER = new RedisInfo().setSecond(-1).setKeyPrefix("ONLINE_USER").setName("在线用户");
         public static final RedisInfo CURRENT_LOTTERY_PERIOD_INFO = new RedisInfo().setMinute(4).setKeyPrefix("CURRENT_LOTTERY_PERIOD_INFO").setName("当前开奖期数信息");
         public static final RedisInfo LOGIN_USER = new RedisInfo().setMinute(30).setKeyPrefix("LOGIN_USER").setName("登录信息");
         public static final RedisInfo PLAY_TYPE_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLAY_TYPE_LIST").setName("彩票玩法列表");
@@ -49,6 +49,10 @@ public class CommonConstant {
         public static final RedisInfo PLATFORM_PLAY_TYPE_ITEM_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_ITEM_LIST").setName("平台玩法小类");
         public static final RedisInfo BET_LIMIT_LIST = new RedisInfo().setHour(2).setKeyPrefix("BET_LIMIT_LIST").setName("投注限制");
         public static final RedisInfo LOTTERY_PRIZE_CONFIG = new RedisInfo().setHour(2).setKeyPrefix("LOTTERY_PRIZE_CONFIG").setName("奖池提取比例");
+        public static final RedisInfo JACKPOT_AMOUNT = new RedisInfo().setMinute(30).setKeyPrefix("JACKPOT_AMOUNT").setName("奖池");
+        public static final RedisInfo LOTTERY_PRIZE_RECORD_RANK_LIST = new RedisInfo().setMinute(30).setKeyPrefix("LOTTERY_PRIZE_RECORD_RANK_LIST").setName("中奖排行榜");
+        public static final RedisInfo RECENT_LOTTERY_PRIZE_NOTICE = new RedisInfo().setMinute(10).setKeyPrefix("RECENT_LOTTERY_PRIZE_NOTICE").setName("最近中奖通知");
+        public static final RedisInfo TOTAL_PRIZE_AMOUNT = new RedisInfo().setMinute(10).setKeyPrefix("TOTAL_PRIZE_AMOUNT").setName("已爆奖总金额");
     }
 
 
