@@ -45,6 +45,8 @@
         <result property="lotteryJackpotContributeAmount" column="lottery_jackpot_contribute_amount"/>
         <result property="globalJackpotContributeRatio" column="global_jackpot_contribute_ratio"/>
         <result property="globalJackpotContributeAmount" column="global_jackpot_contribute_amount"/>
+        <result property="isAuto" column="is_auto"/>
+        <result property="isTest" column="is_test"/>
     </resultMap>
 
     <sql id="selectBetRecordVo">
@@ -150,6 +152,12 @@
             </if>
             <if test="rewardStatus != null">
                 and reward_status = #{rewardStatus}
+            </if>
+            <if test="isVirtual != null and isVirtual == 1">
+                and (is_auto = 1 or is_test = 1)
+            </if>
+            <if test="isVirtual != null and isVirtual == 0">
+                and is_auto = 0 and is_test = 0
             </if>
             <if test="platformUserIdList != null and platformUserIdList.size() > 0">
                 and platform_user_id in

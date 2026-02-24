@@ -93,7 +93,7 @@ public class User {
      */
 
     @Excel(name = "在线状态", readConverterExp = "1=在线,0=离线")
-    @ApiModelProperty(value = "在线状态，1=在线,0=离线")
+    @ApiModelProperty(value = "在线状态，1-在线,0-离线")
     private Byte onlineStatus;
 
     /**

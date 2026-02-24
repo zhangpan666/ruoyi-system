@@ -214,6 +214,14 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "单注投注金额")
     private BigDecimal singleTimeBetAmount;
 
+    @Excel(name = "虚拟注单", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "虚拟注单，1-是，0-否")
+    private Byte isAuto;
+
+    @Excel(name = "测试注单", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "测试注单，1-是，0-否")
+    private Byte isTest;
+
     @Excel(name = "派奖状态", readConverterExp = "1=成功,0=失败")
     @ApiModelProperty(value = "派奖状态，1-成功，0-失败")
     private Byte rewardStatus;
@@ -239,5 +247,7 @@ public class BetRecord extends BaseEntity
     private String platformIds;
 
     private String lotteryIds;
+
+    private Byte isVirtual;
 
 }
