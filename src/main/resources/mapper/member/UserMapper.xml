@@ -166,13 +166,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loginLocation != null  and loginLocation != ''"> and login_location = #{loginLocation}</if>
             <if test="onlineUserIdList != null and onlineUserIdList.size() > 0">
                 <if test="onlineStatus != null and onlineStatus == 1">
-                    and a.id in
+                    and id in
                     <foreach collection="onlineUserIdList" open="(" close=")" separator="," item="id">
                         #{id}
                     </foreach>
                 </if>
                 <if test="onlineStatus != null and onlineStatus == 0">
-                    and a.id not in
+                    and id not in
                     <foreach collection="onlineUserIdList" open="(" close=")" separator="," item="id">
                         #{id}
                     </foreach>
