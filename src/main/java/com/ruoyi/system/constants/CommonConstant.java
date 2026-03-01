@@ -53,6 +53,7 @@ public class CommonConstant {
         public static final RedisInfo LOTTERY_PRIZE_RECORD_RANK_LIST = new RedisInfo().setMinute(30).setKeyPrefix("LOTTERY_PRIZE_RECORD_RANK_LIST").setName("中奖排行榜");
         public static final RedisInfo RECENT_LOTTERY_PRIZE_NOTICE = new RedisInfo().setMinute(10).setKeyPrefix("RECENT_LOTTERY_PRIZE_NOTICE").setName("最近中奖通知");
         public static final RedisInfo TOTAL_PRIZE_AMOUNT = new RedisInfo().setMinute(10).setKeyPrefix("TOTAL_PRIZE_AMOUNT").setName("已爆奖总金额");
+        public static final RedisInfo USER_ONLINE_NOTICE_STATUS = new RedisInfo().setMinute(30).setKeyPrefix("USER_ONLINE_NOTICE_STATUS").setName("用户上线通知状态");
     }
 
 
@@ -479,6 +480,7 @@ public class CommonConstant {
         public static final CommonConstantInfo PRIZE_TASK_NOTICE = new CommonConstantInfo(14, "爆奖任务通知");
         public static final CommonConstantInfo PRIZE_TASK_EDIT_NOTICE = new CommonConstantInfo(15, "爆奖任务编辑通知");
         public static final CommonConstantInfo PRIZE_TASK_DELETE_NOTICE = new CommonConstantInfo(16, "爆奖任务删除通知");
+        public static final CommonConstantInfo USER_ONLINE_NOTICE = new CommonConstantInfo(17, "用户上线通知");
     }
 
     public static class WinRateConfigType {

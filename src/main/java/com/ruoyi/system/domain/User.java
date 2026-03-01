@@ -160,6 +160,13 @@ public class User {
     @ApiModelProperty(example = "最近投注疯狂系列时间")
     private Date lastBetCrazySeriesTime;
 
+    /**
+     * 上线通知，1-开启，0-关闭
+     */
+    @Excel(name = "上线通知", readConverterExp = "1=开启,0=关闭")
+    @ApiModelProperty(value = "上线通知，1-开启，0-关闭")
+    private Byte onlineNotice;
+
     /** 备注 */
     @Excel(name = "备注")
     @ApiModelProperty(example = "备注")

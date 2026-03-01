@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lastPrizeTime"    column="last_prize_time"    />
         <result property="lastBetTime"    column="last_bet_time"    />
         <result property="lastBetCrazySeriesTime"    column="last_bet_crazy_series_time"    />
+        <result property="onlineNotice"    column="online_notice"    />
     </resultMap>
 
     <sql id="selectUserVo">
@@ -34,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
-        select a.*, b.name as platformName,c.available_balance as availableBalance from t_user a left join t_platform b on a.platform_id = b.id
+        select a.*,b.name as platformName,c.available_balance as availableBalance from t_user a left join t_platform b on a.platform_id = b.id
         left join t_account c on a.id = c.id
         <where>
             <if test="id != null "> and a.id = #{id}</if>
