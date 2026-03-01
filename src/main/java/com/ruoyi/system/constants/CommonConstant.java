@@ -464,6 +464,7 @@ public class CommonConstant {
 
 
     public static class MessageType {
+        public static final CommonConstantInfo SYSTEM_NOTICE = new CommonConstantInfo(0, "系统通知");
         public static final CommonConstantInfo CONNECT_NOTICE = new CommonConstantInfo(1, "连接通知");
         public static final CommonConstantInfo LOTTERY_VIDEO_NOTICE = new CommonConstantInfo(2, "开奖直播通知");
         public static final CommonConstantInfo REFRESH_CONFIGURATION_VAR_NOTICE = new CommonConstantInfo(3, "系统参数变更通知");
