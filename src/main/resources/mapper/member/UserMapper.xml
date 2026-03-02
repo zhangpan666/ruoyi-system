@@ -131,6 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sameIp != null">same_ip = #{sameIp},</if>
             <if test="loginIp != null">login_ip = #{loginIp},</if>
             <if test="loginLocation != null">login_location = #{loginLocation},</if>
+            <if test="onlineNotice != null">online_notice = #{onlineNotice},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
