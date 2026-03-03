@@ -52,6 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sameIp != null "> and a.same_ip = #{sameIp}</if>
             <if test="loginIp != null  and loginIp != ''"> and a.login_ip = #{loginIp}</if>
             <if test="loginLocation != null  and loginLocation != ''"> and a.login_location = #{loginLocation}</if>
+            <if test="onlineNotice != null"> and a.online_notice = #{onlineNotice}</if>
            <if test="onlineUserIdList != null and onlineUserIdList.size() > 0">
                <if test="onlineStatus != null and onlineStatus == 1">
                    and a.id in
