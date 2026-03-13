@@ -60,6 +60,11 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
+    /** 彩种ID */
+    @Excel(name = "彩种ID")
+    @ApiModelProperty(value = "彩种ID")
+    private Long lotteryId;
+
     /**
      * 彩种名称
      */
@@ -194,11 +199,6 @@ public class BetRecord extends BaseEntity
 //    @Excel(name = "平台ID")
     @ApiModelProperty(value = "平台ID")
     private Long platformId;
-
-    /** 彩种ID */
-//    @Excel(name = "彩种ID")
-    @ApiModelProperty(value = "彩种ID")
-    private Long lotteryId;
 
     /** 玩法code */
 //    @Excel(name = "玩法code")
