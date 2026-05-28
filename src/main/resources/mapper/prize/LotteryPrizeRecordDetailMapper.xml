@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.LotteryPrizeRecordDetailMapper">
+
+    <resultMap type="LotteryPrizeRecordDetail" id="LotteryPrizeRecordDetailResult">
+        <result property="id"    column="id"    />
+        <result property="lotteryPrizeRecordId"    column="lottery_prize_record_id"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="amount"    column="amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLotteryPrizeRecordDetailVo">
+        select * from t_lottery_prize_record_detail
+    </sql>
+
+    <select id="selectLotteryPrizeRecordDetailList" parameterType="LotteryPrizeRecordDetail" resultMap="LotteryPrizeRecordDetailResult">
+        select a.*,b.platform_id as platformId,c.name as platformName,b.platform_user_id as platformUserId from t_lottery_prize_record_detail a
+        inner join t_user b on a.user_id = b.id inner join t_platform c on b.platform_id = c.id
+        <where>
+            <if test="id != null "> and a.id = #{id}</if>
+            <if test="lotteryPrizeRecordId != null "> and a.lottery_prize_record_id = #{lotteryPrizeRecordId}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="userId != null "> and a.user_id = #{userId}</if>
+            <if test="amount != null "> and a.amount = #{amount}</if>
+        </where>
+        order by a.create_time desc
+    </select>
+
+    <select id="selectLotteryPrizeRecordDetailById" parameterType="Long" resultMap="LotteryPrizeRecordDetailResult">
+        <include refid="selectLotteryPrizeRecordDetailVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLotteryPrizeRecordDetail" parameterType="LotteryPrizeRecordDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into t_lottery_prize_record_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lotteryPrizeRecordId != null">lottery_prize_record_id,</if>
+            <if test="lotteryId != null">lottery_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="amount != null">amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lotteryPrizeRecordId != null">#{lotteryPrizeRecordId},</if>
+            <if test="lotteryId != null">#{lotteryId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLotteryPrizeRecordDetail" parameterType="LotteryPrizeRecordDetail">
+        update t_lottery_prize_record_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lotteryPrizeRecordId != null">lottery_prize_record_id = #{lotteryPrizeRecordId},</if>
+            <if test="lotteryId != null">lottery_id = #{lotteryId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLotteryPrizeRecordDetailById" parameterType="Long">
+        delete from t_lottery_prize_record_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteLotteryPrizeRecordDetailByIds" parameterType="String">
+        delete from t_lottery_prize_record_detail where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

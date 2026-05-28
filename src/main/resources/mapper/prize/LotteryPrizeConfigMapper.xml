@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="totalBetAmountRank"    column="total_bet_amount_rank"    />
         <result property="maxPrizeAmount"    column="max_prize_amount"    />
         <result property="minPrizeAmount"    column="min_prize_amount"    />
+        <result property="rechargeNewUserPrizeAmountRatio"    column="recharge_new_user_prize_amount_ratio"    />
+        <result property="noRechargeNewUserPrizeAmountRatio"    column="no_recharge_new_user_prize_amount_ratio"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
@@ -106,6 +108,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalBetAmountRank != null">total_bet_amount_rank = #{totalBetAmountRank},</if>
             <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
             <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
+            <if test="rechargeNewUserPrizeAmountRatio != null">recharge_new_user_prize_amount_ratio = #{rechargeNewUserPrizeAmountRatio},</if>
+            <if test="noRechargeNewUserPrizeAmountRatio != null">no_recharge_new_user_prize_amount_ratio = #{noRechargeNewUserPrizeAmountRatio},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>

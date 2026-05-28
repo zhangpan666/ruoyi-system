@@ -1,16 +1,15 @@
 package com.ruoyi.system.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.core.domain.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 爆奖配置对象 t_lottery_prize_config
@@ -109,5 +108,15 @@ public class LotteryPrizeConfig extends BaseEntity
     @Excel(name = "最小爆奖金额")
     @ApiModelProperty(value = "最小爆奖金额")
     private Integer minPrizeAmount;
+
+    /** 充值新用户爆奖比例 */
+    @Excel(name = "充值新用户爆奖比例")
+    @ApiModelProperty(value = "充值新用户爆奖比例")
+    private String rechargeNewUserPrizeAmountRatio;
+
+    /** 未充值新用户爆奖比例 */
+    @Excel(name = "未充值新用户爆奖比例")
+    @ApiModelProperty(value = "未充值新用户爆奖比例")
+    private String noRechargeNewUserPrizeAmountRatio;
 
 }
