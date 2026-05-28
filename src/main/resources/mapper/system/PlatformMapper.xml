@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="freeTransferWalletCallbackAddress"    column="free_transfer_wallet_callback_address"    />
         <result property="freeTransferWalletPrizeNotifyAddress"    column="free_transfer_wallet_prize_notify_address"    />
+        <result property="freeTransferWalletGetUserInfoAddress"    column="free_transfer_wallet_get_user_info_address"    />
     </resultMap>
 
     <sql id="selectPlatformVo">
@@ -80,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="usedCreditLimit != null">used_credit_limit = #{usedCreditLimit},</if>
             <if test="freeTransferWalletCallbackAddress != null">free_transfer_wallet_callback_address = #{freeTransferWalletCallbackAddress},</if>
             <if test="freeTransferWalletPrizeNotifyAddress != null">free_transfer_wallet_prize_notify_address = #{freeTransferWalletPrizeNotifyAddress},</if>
+            <if test="freeTransferWalletGetUserInfoAddress != null">free_transfer_wallet_get_user_info_address = #{freeTransferWalletGetUserInfoAddress},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
