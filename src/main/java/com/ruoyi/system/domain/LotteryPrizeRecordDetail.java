@@ -58,6 +58,10 @@ public class LotteryPrizeRecordDetail
     @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
+    @Excel(name = "平台用户ID")
+    @ApiModelProperty(value = "平台用户ID")
+    private Long platformUserId;
+
     @Excel(name = "平台名称")
     @ApiModelProperty(value = "平台名称")
     private String platformName;
