@@ -104,6 +104,11 @@ public class LotteryPrizeConfig extends BaseEntity
     @ApiModelProperty(value = "排名")
     private Integer ranking;
 
+    /** 爆奖人数 */
+    @Excel(name = "爆奖人数")
+    @ApiModelProperty(value = "爆奖人数")
+    private Integer prizePeopleCount;
+
     /** 最大爆奖金额 */
     @Excel(name = "最大爆奖金额")
     @ApiModelProperty(value = "最大爆奖金额")

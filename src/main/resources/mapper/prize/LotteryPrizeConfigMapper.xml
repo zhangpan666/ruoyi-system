@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="targetEndTime"    column="target_end_time"    />
         <result property="totalBetAmountRank"    column="total_bet_amount_rank"    />
         <result property="ranking"    column="ranking"    />
+        <result property="prizePeopleCount"    column="prize_people_count"    />
         <result property="maxPrizeAmount"    column="max_prize_amount"    />
         <result property="minPrizeAmount"    column="min_prize_amount"    />
         <result property="rechargeNewUserPrizeAmountRatio"    column="recharge_new_user_prize_amount_ratio"    />
@@ -108,6 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="targetEndTime != null">target_end_time = #{targetEndTime},</if>
             <if test="totalBetAmountRank != null">total_bet_amount_rank = #{totalBetAmountRank},</if>
             <if test="ranking != null">ranking = #{ranking},</if>
+            <if test="prizePeopleCount != null">prize_people_count = #{prizePeopleCount},</if>
             <if test="maxPrizeAmount != null">max_prize_amount = #{maxPrizeAmount},</if>
             <if test="minPrizeAmount != null">min_prize_amount = #{minPrizeAmount},</if>
             <if test="rechargeNewUserPrizeAmountRatio != null">recharge_new_user_prize_amount_ratio = #{rechargeNewUserPrizeAmountRatio},</if>
