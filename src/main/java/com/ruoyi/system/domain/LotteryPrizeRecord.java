@@ -48,6 +48,11 @@ public class LotteryPrizeRecord
     @ApiModelProperty(value = "金额")
     private BigDecimal amount;
 
+    /** 爆奖人数 */
+    @Excel(name = "爆奖人数")
+    @ApiModelProperty(value = "爆奖人数")
+    private Integer prizePeopleCount;
+
     /** 是否虚拟，1-是，0-否 */
     @Excel(name = "是否虚拟", readConverterExp = "1=是,0=否")
     @ApiModelProperty(value = "是否虚拟，1-是，0-否")
