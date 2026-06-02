@@ -114,6 +114,11 @@ public class LotteryPrizeTask
     @ApiModelProperty(value = "执行状态，0-待执行，1-执行中，2-执行完成，3-执行失败")
     private Byte execStatus;
 
+    /** 爆奖人数 */
+    @Excel(name = "爆奖人数")
+    @ApiModelProperty(value = "爆奖人数")
+    private Integer prizePeopleCount;
+
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "创建时间")
