@@ -6,6 +6,8 @@ import com.light.core.utils.BaseCommonKVStringClassUtil;
 import com.light.core.utils.BaseConstantClassUtil;
 import com.ruoyi.common.core.redis.RedisInfo;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class CommonConstant {
@@ -15,6 +17,24 @@ public class CommonConstant {
     public static final byte COMMON_STATUS_NOT_AVAILABLE = 0;
 
     public static final byte COMMON_STATUS_DELETE = -1;
+
+    public static final List<Long> LHC_LOTTERY_ID_LIST = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 11L);
+
+    public static final List<Long> FC_3D_LOTTERY_ID_LIST = Arrays.asList(16L, 17L, 19L);
+
+    public static final List<Long> FK_DONG_WU_CAI_LOTTERY_ID_LIST = Arrays.asList(9L, 10L);
+
+    public static final List<Long> PL5_LOTTERY_ID_LIST = Arrays.asList(18L, 20L, 39L, 41L);
+
+    public static final List<Long> PK10_LOTTERY_ID_LIST = Arrays.asList(35L, 36L, 37L, 40L, 42L);
+
+    public static final List<Long> PCDD_LOTTERY_ID_LIST = Arrays.asList(43L, 44L, 45L);
+
+    public static final List<Long> QXC_LOTTERY_ID_LIST = Arrays.asList(15L);
+
+    public static final List<Long> SSQ_LOTTERY_ID_LIST = Arrays.asList(12L, 46L);
+
+    public static final List<Long> FK_HIGH_FREQUENCY_LHC_LOTTERY_ID_LIST = Arrays.asList(1L, 2L, 3L, 8L);
 
 
     public static class RedisKey {
