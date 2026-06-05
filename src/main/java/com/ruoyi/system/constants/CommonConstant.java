@@ -36,6 +36,8 @@ public class CommonConstant {
 
     public static final List<Long> FK_HIGH_FREQUENCY_LHC_LOTTERY_ID_LIST = Arrays.asList(1L, 2L, 3L, 8L);
 
+    public static final List<Long> FAST3_ID = Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L, 34L, 47L);
+
 
     public static class RedisKey {
         public static final RedisInfo USER_LOGIN_VERIFY_CODE = new RedisInfo().setKeyPrefix("USER_LOGIN_VERIFY_CODE").setName("谷歌验证器").setDay(30 * 6).setDbIndex(2);
