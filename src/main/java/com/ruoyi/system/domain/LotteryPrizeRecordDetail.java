@@ -76,6 +76,16 @@ public class LotteryPrizeRecordDetail
     @ApiModelProperty(value = "是否虚拟，1-是，0-否")
     private Byte isVirtual;
 
+    /** 是否新用户爆奖，1-是，0-否 */
+    @Excel(name = "是否新用户爆奖", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "是否新用户爆奖，1-是，0-否")
+    private Byte isNewUserPrize;
+
+    /** 用户是否充值，1-是，0-否 */
+    @Excel(name = "用户是否充值", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "用户是否充值，1-是，0-否")
+    private Byte isRecharged;
+
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "创建时间")

@@ -11,6 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"    column="user_id"    />
         <result property="amount"    column="amount"    />
         <result property="isVirtual"    column="is_virtual"    />
+        <result property="isNewUserPrize"    column="is_new_user_prize"    />
+        <result property="isRecharged"    column="is_recharged"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
@@ -29,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and a.user_id = #{userId}</if>
             <if test="amount != null "> and a.amount = #{amount}</if>
             <if test="isVirtual != null "> and a.is_virtual = #{isVirtual}</if>
+            <if test="isNewUserPrize != null "> and a.is_new_user_prize = #{isNewUserPrize}</if>
             <if test="platformId != null "> and b.platform_id = #{platformId}</if>
             <if test="platformUserId != null "> and a.platform_user_id = #{platformUserId}</if>
             <if test="beginTime != null "> and a.create_time &gt;= #{beginTime}</if>
