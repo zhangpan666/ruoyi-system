@@ -63,6 +63,11 @@ public class WinRateConfig
     @ApiModelProperty(value = "状态，1-有效，0-无效")
     private Byte status;
 
+    /** 状态，1-有效，0-无效 */
+    @Excel(name = "是否按照返奖率计算", readConverterExp = "1=是,0=否")
+    @ApiModelProperty(value = "是否按照返奖率计算，1-是，0-否")
+    private Byte returnRateCalcStatus;
+
     /** 是否开启虚拟注单，1-是，0-否 */
     @Excel(name = "是否开启虚拟注单", readConverterExp = "1=是,0=否")
     @ApiModelProperty(value = "是否开启虚拟注单，1-是，0-否")
