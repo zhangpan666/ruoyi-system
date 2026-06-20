@@ -85,6 +85,16 @@ public class WinRateConfig
     @ApiModelProperty(value = "虚拟注单金额")
     private BigDecimal autoBetAmount;
 
+    /** 玩法code */
+    @Excel(name = "玩法code")
+    @ApiModelProperty(value = "玩法code")
+    private Byte playTypeCode;
+
+    /** 玩法名称 */
+    @Excel(name = "玩法名称")
+    @ApiModelProperty(value = "玩法名称")
+    private String playTypeName;
+
     /** 创建时间 */
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

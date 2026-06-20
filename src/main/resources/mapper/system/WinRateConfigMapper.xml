@@ -92,6 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="autoBetAmount != null">auto_bet_amount = #{autoBetAmount},</if>
             <if test="returnRateCalcStatus != null">return_rate_calc_status = #{returnRateCalcStatus},</if>
             <if test="status != null">status = #{status},</if>
+            <if test="playTypeCode != null">play_type_code = #{playTypeCode},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
