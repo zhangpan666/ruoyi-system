@@ -2,9 +2,12 @@ package com.ruoyi.system.mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import com.ruoyi.system.domain.BetRecord;
 import com.ruoyi.system.domain.dto.BetRecordStatDTO;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderDetailStatVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderDetailVO;
 import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
@@ -93,6 +96,38 @@ public interface BetRecordMapper
     List<RealTimeOrderVO> realTimeOrderBySx(BetRecord betRecordParam);
 
     List<RealTimeOrderVO> realTimeOrderByMantissa(BetRecord betRecordParam);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetailByNumber(BetRecord betRecordParam);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetailByType(BetRecord betRecordParam);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetailByMantissa(BetRecord betRecordParam);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetailByColour(BetRecord betRecordParam);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetailByPtyx(BetRecord betRecordParam);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetailBySx(BetRecord betRecordParam);
+
+    RealTimeOrderDetailStatVO realTimeOrderDetailStat(BetRecord betRecordParam);
+
+    List<String> getRecentIssuesByLottery(@Param("lotteryId") Long lotteryId,
+                                          @Param("currentIssueNo") String currentIssueNo,
+                                          @Param("limit") int limit);
+
+    List<Long> getCurrentIssueBetUsers(@Param("lotteryId") Long lotteryId,
+                                       @Param("type") Byte type,
+                                       @Param("betContent") String betContent,
+                                       @Param("issueNo") String issueNo,
+                                       @Param("platformId") Long platformId,
+                                       @Param("userId") Long userId);
+
+    List<Map<String, Object>> getBetUserIssuesForContent(@Param("lotteryId") Long lotteryId,
+                                                         @Param("type") Byte type,
+                                                         @Param("betContent") String betContent,
+                                                         @Param("platformId") Long platformId,
+                                                         @Param("userIds") List<Long> userIds,
+                                                         @Param("issueNos") List<String> issueNos);
 
     List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord);
 

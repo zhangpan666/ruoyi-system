@@ -5,6 +5,8 @@ import java.util.List;
 import com.ruoyi.system.domain.BetRecord;
 import com.ruoyi.system.domain.dto.BetRecordStatDTO;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderDetailStatVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderDetailVO;
 import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
@@ -80,6 +82,10 @@ public interface IBetRecordService {
     List<LotteryBetDataVO> statLotteryDataList(BetRecord betRecord);
 
     List<RealTimeOrderVO> realTimeOrder(Long id, String issueNo, Long userId, Byte type, Long platformId);
+
+    List<RealTimeOrderDetailVO> realTimeOrderDetail(Long id, String issueNo, Long userId, Byte type, Long platformId, String betContent);
+
+    RealTimeOrderDetailStatVO realTimeOrderDetailStat(Long id, String issueNo, Long userId, Byte type, Long platformId, String betContent);
 
     List<BetRecordStatDTO> statForLotteryPrize(BetRecord betRecord);
 

@@ -11,6 +11,8 @@ import com.ruoyi.system.domain.Lottery;
 import com.ruoyi.system.domain.LotteryRelation;
 import com.ruoyi.system.domain.dto.BetRecordStatDTO;
 import com.ruoyi.system.domain.vo.LotteryBetDataVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderDetailStatVO;
+import com.ruoyi.system.domain.vo.RealTimeOrderDetailVO;
 import com.ruoyi.system.domain.vo.RealTimeOrderVO;
 import com.ruoyi.system.pojo.BetRecordDateStatVO;
 import com.ruoyi.system.pojo.BetRecordStatVO;
@@ -217,6 +219,145 @@ public class BetRecordServiceImpl implements IBetRecordService {
             checkAndSyncSxList(realTimeOrderList, sx);
         }
         return realTimeOrderList;
+    }
+
+
+    private static final int CONSECUTIVE_ISSUE_WINDOW = 500;
+
+    @Override
+    public List<RealTimeOrderDetailVO> realTimeOrderDetail(Long id, String issueNo, Long userId, Byte type, Long platformId, String betContent) {
+        Lottery lottery = lotteryService.selectLotteryById(id);
+        String currentIssueNo = StringUtil.isBlank(issueNo) ? lottery.getNextIssueNo() : issueNo;
+        BetRecord betRecordParam = new BetRecord()
+                .setPlatformId(platformId)
+                .setLotteryId(id)
+                .setIssueNo(currentIssueNo)
+                .setUserId(userId)
+                .setBetContent(betContent);
+        List<RealTimeOrderDetailVO> list;
+        if (type == 1) {
+            list = betRecordMapper.realTimeOrderDetailByNumber(betRecordParam);
+        } else if (type == 2) {
+            list = betRecordMapper.realTimeOrderDetailByType(betRecordParam);
+        } else if (type == 3) {
+            list = betRecordMapper.realTimeOrderDetailByMantissa(betRecordParam);
+        } else if (type == 6) {
+            list = betRecordMapper.realTimeOrderDetailByColour(betRecordParam);
+        } else if (type == 9) {
+            list = betRecordMapper.realTimeOrderDetailByPtyx(betRecordParam);
+        } else if (type == 10) {
+            list = betRecordMapper.realTimeOrderDetailBySx(betRecordParam);
+        } else {
+            return Collections.emptyList();
+        }
+        if (list != null && !list.isEmpty()) {
+            List<Long> pageUserIds = list.stream()
+                    .map(RealTimeOrderDetailVO::getUserId)
+                    .filter(Objects::nonNull)
+                    .distinct()
+                    .collect(Collectors.toList());
+            Map<Long, Integer> consMap = computeUsersConsecutivePeriods(
+                    id, type, betContent, currentIssueNo, platformId, pageUserIds);
+            list.forEach(v -> v.setConsecutivePeriods(
+                    consMap.getOrDefault(v.getUserId(), 1)));
+        }
+        return list;
+    }
+
+
+    @Override
+    public RealTimeOrderDetailStatVO realTimeOrderDetailStat(Long id, String issueNo, Long userId, Byte type, Long platformId, String betContent) {
+        Lottery lottery = lotteryService.selectLotteryById(id);
+        String currentIssueNo = StringUtil.isBlank(issueNo) ? lottery.getNextIssueNo() : issueNo;
+        BetRecord betRecordParam = new BetRecord()
+                .setPlatformId(platformId)
+                .setLotteryId(id)
+                .setIssueNo(currentIssueNo)
+                .setUserId(userId)
+                .setBetContent(betContent)
+                .setType(type);
+        RealTimeOrderDetailStatVO stat = betRecordMapper.realTimeOrderDetailStat(betRecordParam);
+        if (stat == null) stat = new RealTimeOrderDetailStatVO();
+
+        // 计算本期所有下注用户里"最长连下"
+        List<Long> currentUsers = betRecordMapper.getCurrentIssueBetUsers(
+                id, type, betContent, currentIssueNo, platformId, userId);
+        if (currentUsers != null && !currentUsers.isEmpty()) {
+            Map<Long, Integer> consMap = computeUsersConsecutivePeriods(
+                    id, type, betContent, currentIssueNo, platformId, currentUsers);
+            int maxCount = 0;
+            Long maxUid = null;
+            for (Map.Entry<Long, Integer> e : consMap.entrySet()) {
+                Integer v = e.getValue();
+                if (v != null && v > maxCount) {
+                    maxCount = v;
+                    maxUid = e.getKey();
+                }
+            }
+            stat.setMaxConsecutivePeriods(maxCount);
+            stat.setMaxConsecutiveUserId(maxUid);
+        }
+        return stat;
+    }
+
+    /**
+     * 对一批用户计算"以当前期为锚点向前的连下期数"（方案A）：
+     *   命中本期则计数+1，继续往前；首次遇到该用户没下的期就停。
+     */
+    private Map<Long, Integer> computeUsersConsecutivePeriods(Long lotteryId, Byte type, String betContent,
+                                                              String currentIssueNo, Long platformId,
+                                                              List<Long> userIds) {
+        if (userIds == null || userIds.isEmpty()) {
+            return Collections.emptyMap();
+        }
+        List<String> globalIssues = betRecordMapper.getRecentIssuesByLottery(
+                lotteryId, currentIssueNo, CONSECUTIVE_ISSUE_WINDOW);
+        List<Map<String, Object>> pairs = betRecordMapper.getBetUserIssuesForContent(
+                lotteryId, type, betContent, platformId, userIds,
+                (globalIssues == null || globalIssues.isEmpty())
+                        ? Collections.singletonList(currentIssueNo) : globalIssues);
+        Map<Long, Set<String>> userIssueMap = new HashMap<>();
+        if (pairs != null) {
+            for (Map<String, Object> row : pairs) {
+                Object u = row.get("userId");
+                Object i = row.get("issueNo");
+                if (u == null || i == null) continue;
+                Long uid = ((Number) u).longValue();
+                String iss = String.valueOf(i);
+                userIssueMap.computeIfAbsent(uid, k -> new HashSet<>()).add(iss);
+            }
+        }
+        Map<Long, Integer> result = new HashMap<>();
+        // 期号序列不可用时降级：每个用户都按 1 期算
+        if (globalIssues == null || globalIssues.isEmpty()) {
+            for (Long uid : userIds) {
+                Set<String> set = userIssueMap.getOrDefault(uid, Collections.emptySet());
+                result.put(uid, set.contains(currentIssueNo) ? 1 : 0);
+            }
+            return result;
+        }
+        int currentIdx = globalIssues.indexOf(currentIssueNo);
+        if (currentIdx < 0) {
+            // 当前期未在期序列里（极少见，比如计划表缺数据），退化为按 1 计
+            for (Long uid : userIds) {
+                Set<String> set = userIssueMap.getOrDefault(uid, Collections.emptySet());
+                result.put(uid, set.contains(currentIssueNo) ? 1 : 0);
+            }
+            return result;
+        }
+        for (Long uid : userIds) {
+            Set<String> issues = userIssueMap.getOrDefault(uid, Collections.emptySet());
+            int count = 0;
+            for (int i = currentIdx; i < globalIssues.size(); i++) {
+                if (issues.contains(globalIssues.get(i))) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            result.put(uid, count);
+        }
+        return result;
     }
 
 

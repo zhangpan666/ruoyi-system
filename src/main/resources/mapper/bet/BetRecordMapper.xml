@@ -1021,6 +1021,295 @@
     </select>
 
 
+    <sql id="realTimeOrderDetailColumns">
+        user_id            AS userId,
+        platform_user_id   AS platformUserId,
+        bet_amount         AS betAmount,
+        display_bet_content AS displayBetContent,
+        can_win_amount     AS canWinAmount
+    </sql>
+
+    <select id="realTimeOrderDetailByNumber" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailVO">
+        SELECT <include refid="realTimeOrderDetailColumns"/>
+        FROM t_bet_record br
+        WHERE br.lottery_id = #{lotteryId}
+          AND br.play_type_code = 1
+          AND br.play_type_detail_code BETWEEN 1 AND 49
+          AND br.is_auto = 0
+          AND br.is_test = 0
+          AND br.bet_content = #{betContent}
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND br.platform_id = #{platformId}
+        </if>
+        ORDER BY br.bet_amount DESC
+    </select>
+
+    <select id="realTimeOrderDetailByType" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailVO">
+        SELECT <include refid="realTimeOrderDetailColumns"/>
+        FROM t_bet_record
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code = 1
+          AND play_type_detail_code BETWEEN 55 AND 58
+          AND is_auto = 0
+          AND is_test = 0
+          AND bet_content = #{betContent}
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND platform_id = #{platformId}
+        </if>
+        ORDER BY bet_amount DESC
+    </select>
+
+    <select id="realTimeOrderDetailByMantissa" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailVO">
+        SELECT <include refid="realTimeOrderDetailColumns"/>
+        FROM t_bet_record
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code = 1
+          AND play_type_detail_code BETWEEN 1219 AND 1228
+          AND is_auto = 0
+          AND is_test = 0
+          AND bet_content = #{betContent}
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND platform_id = #{platformId}
+        </if>
+        ORDER BY bet_amount DESC
+    </select>
+
+    <select id="realTimeOrderDetailByColour" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailVO">
+        SELECT <include refid="realTimeOrderDetailColumns"/>
+        FROM t_bet_record br
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code IN (1, 6)
+          AND br.is_auto = 0
+          AND br.is_test = 0
+          AND (
+            play_type_detail_code BETWEEN 65 AND 67
+                OR play_type_detail_code BETWEEN 769 AND 811
+                OR play_type_detail_code BETWEEN 1229 AND 1240
+            )
+          AND bet_content = #{betContent}
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND br.platform_id = #{platformId}
+        </if>
+        ORDER BY br.bet_amount DESC
+    </select>
+
+    <select id="realTimeOrderDetailByPtyx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailVO">
+        SELECT <include refid="realTimeOrderDetailColumns"/>
+        FROM t_bet_record
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code = 9
+          AND play_type_detail_code BETWEEN 1118 AND 1129
+          AND is_auto = 0
+          AND is_test = 0
+          AND bet_content = #{betContent}
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND platform_id = #{platformId}
+        </if>
+        ORDER BY bet_amount DESC
+    </select>
+
+    <select id="realTimeOrderDetailBySx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailVO">
+        SELECT <include refid="realTimeOrderDetailColumns"/>
+        FROM t_bet_record
+        WHERE lottery_id = #{lotteryId}
+          AND play_type_code = 10
+          AND play_type_detail_code BETWEEN 1130 AND 1141
+          AND is_auto = 0
+          AND is_test = 0
+          AND bet_content = #{betContent}
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND platform_id = #{platformId}
+        </if>
+        ORDER BY bet_amount DESC
+    </select>
+
+    <select id="realTimeOrderDetailStat" resultType="com.ruoyi.system.domain.vo.RealTimeOrderDetailStatVO">
+        SELECT
+            COALESCE(SUM(br.bet_amount), 0)     AS totalBetAmount,
+            COALESCE(SUM(br.can_win_amount), 0) AS totalCanWinAmount,
+            COALESCE(SUM(br.bet_amount), 0) - COALESCE(SUM(br.can_win_amount), 0) AS winLose,
+            COUNT(*)                            AS orderCount,
+            COUNT(DISTINCT br.user_id)          AS userCount
+        FROM t_bet_record br
+        WHERE br.lottery_id = #{lotteryId}
+          AND br.is_auto = 0
+          AND br.is_test = 0
+          AND br.bet_content = #{betContent}
+        <choose>
+            <when test="type == 1">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 1 AND 49
+            </when>
+            <when test="type == 2">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 55 AND 58
+            </when>
+            <when test="type == 3">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 1219 AND 1228
+            </when>
+            <when test="type == 6">
+                AND br.play_type_code IN (1, 6)
+                AND (br.play_type_detail_code BETWEEN 65 AND 67
+                     OR br.play_type_detail_code BETWEEN 769 AND 811
+                     OR br.play_type_detail_code BETWEEN 1229 AND 1240)
+            </when>
+            <when test="type == 9">
+                AND br.play_type_code = 9
+                AND br.play_type_detail_code BETWEEN 1118 AND 1129
+            </when>
+            <when test="type == 10">
+                AND br.play_type_code = 10
+                AND br.play_type_detail_code BETWEEN 1130 AND 1141
+            </when>
+        </choose>
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND br.issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND br.platform_id = #{platformId}
+        </if>
+    </select>
+
+    <!-- 取彩种最近 N 期期号（含当前期，从当前期往回） -->
+    <select id="getRecentIssuesByLottery" resultType="string">
+        SELECT issue_no
+        FROM t_lottery_open_plan
+        WHERE lottery_id = #{lotteryId}
+          AND issue_no &lt;= #{currentIssueNo}
+        ORDER BY issue_no DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 取本期下注本下注内容的全部用户ID -->
+    <select id="getCurrentIssueBetUsers" resultType="long">
+        SELECT DISTINCT user_id
+        FROM t_bet_record br
+        WHERE br.lottery_id = #{lotteryId}
+          AND br.issue_no = #{issueNo}
+          AND br.bet_content = #{betContent}
+          AND br.is_auto = 0
+          AND br.is_test = 0
+        <choose>
+            <when test="type == 1">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 1 AND 49
+            </when>
+            <when test="type == 2">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 55 AND 58
+            </when>
+            <when test="type == 3">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 1219 AND 1228
+            </when>
+            <when test="type == 6">
+                AND br.play_type_code IN (1, 6)
+                AND (br.play_type_detail_code BETWEEN 65 AND 67
+                     OR br.play_type_detail_code BETWEEN 769 AND 811
+                     OR br.play_type_detail_code BETWEEN 1229 AND 1240)
+            </when>
+            <when test="type == 9">
+                AND br.play_type_code = 9
+                AND br.play_type_detail_code BETWEEN 1118 AND 1129
+            </when>
+            <when test="type == 10">
+                AND br.play_type_code = 10
+                AND br.play_type_detail_code BETWEEN 1130 AND 1141
+            </when>
+        </choose>
+        <if test="platformId != null">
+            AND br.platform_id = #{platformId}
+        </if>
+        <if test="userId != null">
+            AND br.user_id = #{userId}
+        </if>
+    </select>
+
+    <!-- 取给定用户在给定期号集合内、对该下注内容的(userId, issueNo)集合 -->
+    <select id="getBetUserIssuesForContent" resultType="map">
+        SELECT DISTINCT br.user_id AS userId, br.issue_no AS issueNo
+        FROM t_bet_record br
+        WHERE br.lottery_id = #{lotteryId}
+          AND br.bet_content = #{betContent}
+          AND br.is_auto = 0
+          AND br.is_test = 0
+        <choose>
+            <when test="type == 1">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 1 AND 49
+            </when>
+            <when test="type == 2">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 55 AND 58
+            </when>
+            <when test="type == 3">
+                AND br.play_type_code = 1
+                AND br.play_type_detail_code BETWEEN 1219 AND 1228
+            </when>
+            <when test="type == 6">
+                AND br.play_type_code IN (1, 6)
+                AND (br.play_type_detail_code BETWEEN 65 AND 67
+                     OR br.play_type_detail_code BETWEEN 769 AND 811
+                     OR br.play_type_detail_code BETWEEN 1229 AND 1240)
+            </when>
+            <when test="type == 9">
+                AND br.play_type_code = 9
+                AND br.play_type_detail_code BETWEEN 1118 AND 1129
+            </when>
+            <when test="type == 10">
+                AND br.play_type_code = 10
+                AND br.play_type_detail_code BETWEEN 1130 AND 1141
+            </when>
+        </choose>
+        <if test="platformId != null">
+            AND br.platform_id = #{platformId}
+        </if>
+        AND br.user_id IN
+        <foreach item="uid" collection="userIds" open="(" separator="," close=")">#{uid}</foreach>
+        AND br.issue_no IN
+        <foreach item="iss" collection="issueNos" open="(" separator="," close=")">#{iss}</foreach>
+    </select>
+
     <select id="statForLotteryPrize" parameterType="com.ruoyi.system.domain.BetRecord" resultType="com.ruoyi.system.domain.dto.BetRecordStatDTO">
         select coalesce(sum(bet_amount),0) as totalBetAmount,coalesce(sum(lottery_jackpot_contribute_amount),0) as totalLotteryJackpotContributeAmount
         ,coalesce(sum(global_jackpot_contribute_amount),0) as totalGlobalJackpotContributeAmount,lottery_id as lotteryId from t_bet_record
