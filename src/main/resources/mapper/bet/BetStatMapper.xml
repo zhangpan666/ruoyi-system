@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BetStatMapper">
+
+    <!-- 公共 WHERE 条件 -->
+    <sql id="betStatWhere">
+        1=1
+        <if test="param.beginTime != null">
+            AND br.bet_time &gt;= #{param.beginTime}
+        </if>
+        <if test="param.endTime != null">
+            AND br.bet_time &lt;= #{param.endTime}
+        </if>
+        <if test="param.issueNoFrom != null and param.issueNoFrom != ''">
+            AND br.issue_no &gt;= #{param.issueNoFrom}
+        </if>
+        <if test="param.issueNoTo != null and param.issueNoTo != ''">
+            AND br.issue_no &lt;= #{param.issueNoTo}
+        </if>
+        <if test="param.lotteryId != null">
+            AND br.lottery_id = #{param.lotteryId}
+        </if>
+        <if test="param.platformId != null">
+            AND br.platform_id = #{param.platformId}
+        </if>
+        <choose>
+            <when test="param.includeUnsettled != null and param.includeUnsettled">
+                AND br.status IN (0, 1)
+            </when>
+            <otherwise>
+                AND br.status = 1
+            </otherwise>
+        </choose>
+        <if test="param.includeAuto == null or !param.includeAuto">
+            AND br.is_auto = 0
+        </if>
+        <if test="param.includeTest == null or !param.includeTest">
+            AND br.is_test = 0
+        </if>
+    </sql>
+
+    <!-- 公共聚合表达式 -->
+    <sql id="aggSelect">
+        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        COALESCE(SUM(br.valid_bet_amount), 0)   AS totalValidBetAmount,
+        COUNT(*)                                AS orderCount,
+        COUNT(DISTINCT br.user_id)              AS userCount,
+        COALESCE(SUM(br.can_win_amount), 0)     AS totalCanWinAmount,
+        COALESCE(SUM(CASE WHEN br.status = 1 THEN br.win_amount ELSE 0 END), 0) AS totalWinAmount,
+        COALESCE(SUM(
+            CASE
+                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
+                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                ELSE 0
+            END
+        ), 0) AS totalWinLose
+    </sql>
+
+    <!-- ① 全平台合计 -->
+    <select id="overview" resultType="com.ruoyi.system.domain.vo.BetStatOverviewVO">
+        SELECT
+        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        COALESCE(SUM(br.valid_bet_amount), 0)   AS totalValidBetAmount,
+        COUNT(*)                                AS totalOrderCount,
+        COUNT(DISTINCT br.user_id)              AS totalUserCount,
+        COALESCE(SUM(br.can_win_amount), 0)     AS totalCanWinAmount,
+        COALESCE(SUM(CASE WHEN br.status = 1 THEN br.win_amount ELSE 0 END), 0) AS totalWinAmount,
+        COALESCE(SUM(
+            CASE
+                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
+                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                ELSE 0
+            END
+        ), 0) AS totalWinLose
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+    </select>
+
+    <!-- ② 按彩种明细 -->
+    <select id="byLottery" resultType="com.ruoyi.system.domain.vo.BetStatByLotteryVO">
+        SELECT
+        br.lottery_id                           AS lotteryId,
+        MAX(l.name)                             AS lotteryName,
+        COUNT(DISTINCT br.issue_no)             AS issueCount,
+        <include refid="aggSelect"/>
+        FROM t_bet_record br
+        LEFT JOIN t_lottery l ON l.id = br.lottery_id
+        WHERE
+        <include refid="betStatWhere"/>
+        GROUP BY br.lottery_id
+        ORDER BY totalBetAmount DESC
+    </select>
+
+    <!-- ③ 趋势按日 -->
+    <select id="trendByDay" resultType="com.ruoyi.system.domain.vo.BetStatTrendVO">
+        SELECT
+        DATE_FORMAT(br.bet_time, '%Y-%m-%d')    AS label,
+        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        COUNT(*)                                AS orderCount,
+        COALESCE(SUM(
+            CASE
+                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
+                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                ELSE 0
+            END
+        ), 0) AS totalWinLose
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+        GROUP BY DATE_FORMAT(br.bet_time, '%Y-%m-%d')
+        ORDER BY label ASC
+    </select>
+
+    <!-- ④ 趋势按期 -->
+    <select id="trendByIssue" resultType="com.ruoyi.system.domain.vo.BetStatTrendVO">
+        SELECT
+        br.issue_no                             AS label,
+        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        COUNT(*)                                AS orderCount,
+        COALESCE(SUM(
+            CASE
+                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
+                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                ELSE 0
+            END
+        ), 0) AS totalWinLose
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+        GROUP BY br.issue_no
+        ORDER BY label ASC
+    </select>
+
+    <!-- ⑤ Top 彩种（盈利或亏损） - 分页由 PageHelper 处理 -->
+    <select id="topLotteries" resultType="com.ruoyi.system.domain.vo.BetStatByLotteryVO">
+        SELECT
+        br.lottery_id                           AS lotteryId,
+        MAX(l.name)                             AS lotteryName,
+        COUNT(DISTINCT br.issue_no)             AS issueCount,
+        <include refid="aggSelect"/>
+        FROM t_bet_record br
+        LEFT JOIN t_lottery l ON l.id = br.lottery_id
+        WHERE
+        <include refid="betStatWhere"/>
+        GROUP BY br.lottery_id
+        ORDER BY totalWinLose
+        <choose>
+            <when test="order != null and order.equalsIgnoreCase('ASC')">ASC</when>
+            <otherwise>DESC</otherwise>
+        </choose>
+    </select>
+
+    <!-- ⑥ Top 用户 - 分页由 PageHelper 处理 -->
+    <select id="topUsers" resultType="com.ruoyi.system.domain.vo.BetStatTopUserVO">
+        SELECT
+        br.user_id                              AS userId,
+        MAX(br.platform_user_id)                AS platformUserId,
+        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        COUNT(*)                                AS orderCount,
+        COALESCE(SUM(
+            CASE
+                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
+                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                ELSE 0
+            END
+        ), 0) AS totalWinLose
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+        GROUP BY br.user_id
+        ORDER BY totalWinLose
+        <choose>
+            <when test="order != null and order.equalsIgnoreCase('ASC')">ASC</when>
+            <otherwise>DESC</otherwise>
+        </choose>
+    </select>
+
+</mapper>
