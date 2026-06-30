@@ -3,6 +3,7 @@ package com.ruoyi.system.service.impl;
 import com.ruoyi.system.domain.dto.BetStatQueryParam;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ruoyi.system.domain.Lottery;
 import com.ruoyi.system.domain.vo.BetStatByLotteryVO;
 import com.ruoyi.system.domain.vo.BetStatOverviewVO;
 import com.ruoyi.system.domain.vo.BetStatTopUserVO;
@@ -10,6 +11,7 @@ import com.ruoyi.system.domain.vo.BetStatTopUsersDualVO;
 import com.ruoyi.system.domain.vo.BetStatTrendVO;
 import com.ruoyi.system.mapper.BetStatMapper;
 import com.ruoyi.system.service.IBetStatService;
+import com.ruoyi.system.service.ILotteryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +19,25 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class BetStatServiceImpl implements IBetStatService {
 
     @Autowired
     private BetStatMapper betStatMapper;
+
+    @Autowired
+    private ILotteryService lotteryService;
+
+    /** 给 byLottery 结果统一回填 lotteryName（避开 sharding-jdbc 的 JOIN 缺陷） */
+    private void fillLotteryNames(List<BetStatByLotteryVO> list) {
+        if (list == null || list.isEmpty()) return;
+        Map<Long, String> nameMap = lotteryService.selectLotteryList(new Lottery()).stream()
+                .collect(Collectors.toMap(Lottery::getId, Lottery::getName, (a, b) -> a));
+        list.forEach(v -> v.setLotteryName(nameMap.get(v.getLotteryId())));
+    }
 
     @Override
     public BetStatOverviewVO overview(BetStatQueryParam param) {
@@ -35,7 +50,10 @@ public class BetStatServiceImpl implements IBetStatService {
     @Override
     public List<BetStatByLotteryVO> byLottery(BetStatQueryParam param) {
         List<BetStatByLotteryVO> list = betStatMapper.byLottery(param);
-        if (list != null) list.forEach(this::fillRates);
+        if (list != null) {
+            list.forEach(this::fillRates);
+            fillLotteryNames(list);
+        }
         return list;
     }
 
@@ -50,7 +68,10 @@ public class BetStatServiceImpl implements IBetStatService {
     @Override
     public List<BetStatByLotteryVO> topLotteries(BetStatQueryParam param, String order) {
         List<BetStatByLotteryVO> list = betStatMapper.topLotteries(param, order);
-        if (list != null) list.forEach(this::fillRates);
+        if (list != null) {
+            list.forEach(this::fillRates);
+            fillLotteryNames(list);
+        }
         return list;
     }
 

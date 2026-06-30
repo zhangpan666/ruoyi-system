@@ -27,10 +27,10 @@
         </if>
         <choose>
             <when test="param.includeUnsettled != null and param.includeUnsettled">
-                AND br.status IN (0, 1)
+                AND br.status IN (0, 1, 2)
             </when>
             <otherwise>
-                AND br.status = 1
+                AND br.status IN (1, 2)
             </otherwise>
         </choose>
         <if test="param.includeAuto == null or !param.includeAuto">
@@ -41,53 +41,51 @@
         </if>
     </sql>
 
-    <!-- 公共聚合表达式 -->
+    <!-- 公共聚合表达式（去掉 COALESCE 避免 sharding-jdbc 聚合合并失效） -->
     <sql id="aggSelect">
-        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
-        COALESCE(SUM(br.valid_bet_amount), 0)   AS totalValidBetAmount,
+        SUM(br.bet_amount)                      AS totalBetAmount,
+        SUM(br.valid_bet_amount)                AS totalValidBetAmount,
         COUNT(*)                                AS orderCount,
         COUNT(DISTINCT br.user_id)              AS userCount,
-        COALESCE(SUM(br.can_win_amount), 0)     AS totalCanWinAmount,
-        COALESCE(SUM(CASE WHEN br.status = 1 THEN br.win_amount ELSE 0 END), 0) AS totalWinAmount,
-        COALESCE(SUM(
+        SUM(br.can_win_amount)                  AS totalCanWinAmount,
+        SUM(br.win_amount)                      AS totalWinAmount,
+        SUM(
             CASE
-                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
-                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
+                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
-        ), 0) AS totalWinLose
+        ) AS totalWinLose
     </sql>
 
     <!-- ① 全平台合计 -->
     <select id="overview" resultType="com.ruoyi.system.domain.vo.BetStatOverviewVO">
         SELECT
-        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
-        COALESCE(SUM(br.valid_bet_amount), 0)   AS totalValidBetAmount,
+        SUM(br.bet_amount)                      AS totalBetAmount,
+        SUM(br.valid_bet_amount)                AS totalValidBetAmount,
         COUNT(*)                                AS totalOrderCount,
         COUNT(DISTINCT br.user_id)              AS totalUserCount,
-        COALESCE(SUM(br.can_win_amount), 0)     AS totalCanWinAmount,
-        COALESCE(SUM(CASE WHEN br.status = 1 THEN br.win_amount ELSE 0 END), 0) AS totalWinAmount,
-        COALESCE(SUM(
+        SUM(br.can_win_amount)                  AS totalCanWinAmount,
+        SUM(br.win_amount)                      AS totalWinAmount,
+        SUM(
             CASE
-                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
-                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
+                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
-        ), 0) AS totalWinLose
+        ) AS totalWinLose
         FROM t_bet_record br
         WHERE
         <include refid="betStatWhere"/>
     </select>
 
-    <!-- ② 按彩种明细 -->
+    <!-- ② 按彩种明细 - 不 JOIN，避免 Sharding-JDBC 多表查询缺陷；lotteryName 在 service 层补 -->
     <select id="byLottery" resultType="com.ruoyi.system.domain.vo.BetStatByLotteryVO">
         SELECT
         br.lottery_id                           AS lotteryId,
-        MAX(l.name)                             AS lotteryName,
         COUNT(DISTINCT br.issue_no)             AS issueCount,
         <include refid="aggSelect"/>
         FROM t_bet_record br
-        LEFT JOIN t_lottery l ON l.id = br.lottery_id
         WHERE
         <include refid="betStatWhere"/>
         GROUP BY br.lottery_id
@@ -98,15 +96,15 @@
     <select id="trendByDay" resultType="com.ruoyi.system.domain.vo.BetStatTrendVO">
         SELECT
         DATE_FORMAT(br.bet_time, '%Y-%m-%d')    AS label,
-        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        SUM(br.bet_amount)                      AS totalBetAmount,
         COUNT(*)                                AS orderCount,
-        COALESCE(SUM(
+        SUM(
             CASE
-                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
-                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
+                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
-        ), 0) AS totalWinLose
+        ) AS totalWinLose
         FROM t_bet_record br
         WHERE
         <include refid="betStatWhere"/>
@@ -118,15 +116,15 @@
     <select id="trendByIssue" resultType="com.ruoyi.system.domain.vo.BetStatTrendVO">
         SELECT
         br.issue_no                             AS label,
-        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        SUM(br.bet_amount)                      AS totalBetAmount,
         COUNT(*)                                AS orderCount,
-        COALESCE(SUM(
+        SUM(
             CASE
-                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
-                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
+                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
-        ), 0) AS totalWinLose
+        ) AS totalWinLose
         FROM t_bet_record br
         WHERE
         <include refid="betStatWhere"/>
@@ -134,15 +132,13 @@
         ORDER BY label ASC
     </select>
 
-    <!-- ⑤ Top 彩种（盈利或亏损） - 分页由 PageHelper 处理 -->
+    <!-- ⑤ Top 彩种（盈利或亏损） - 不 JOIN，lotteryName 在 service 层补 -->
     <select id="topLotteries" resultType="com.ruoyi.system.domain.vo.BetStatByLotteryVO">
         SELECT
         br.lottery_id                           AS lotteryId,
-        MAX(l.name)                             AS lotteryName,
         COUNT(DISTINCT br.issue_no)             AS issueCount,
         <include refid="aggSelect"/>
         FROM t_bet_record br
-        LEFT JOIN t_lottery l ON l.id = br.lottery_id
         WHERE
         <include refid="betStatWhere"/>
         GROUP BY br.lottery_id
@@ -159,15 +155,15 @@
         br.user_id                              AS userId,
         MAX(br.platform_name)                   AS platformName,
         MAX(br.platform_user_id)                AS platformUserId,
-        COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
+        SUM(br.bet_amount)                      AS totalBetAmount,
         COUNT(*)                                AS orderCount,
-        COALESCE(SUM(
+        SUM(
             CASE
-                WHEN br.status = 1 THEN COALESCE(br.bet_amount,0) - COALESCE(br.win_amount,0)
-                WHEN br.status = 0 THEN COALESCE(br.bet_amount,0) - COALESCE(br.can_win_amount,0)
+                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
+                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
-        ), 0) AS totalWinLose
+        ) AS totalWinLose
         FROM t_bet_record br
         WHERE
         <include refid="betStatWhere"/>
