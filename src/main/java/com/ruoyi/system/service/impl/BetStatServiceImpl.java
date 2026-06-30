@@ -18,8 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,10 +42,44 @@ public class BetStatServiceImpl implements IBetStatService {
         list.forEach(v -> v.setLotteryName(nameMap.get(v.getLotteryId())));
     }
 
+    /** 拉全量 (lottery_id, user_id/issue_no) 在 Java 端 Set 去重计数 */
+    private void fillLotteryUserAndIssueCounts(List<BetStatByLotteryVO> list, BetStatQueryParam param) {
+        if (list == null || list.isEmpty()) return;
+
+        // 按彩种聚合 distinct user_id
+        Map<Long, Set<Long>> userSetByLottery = new HashMap<>();
+        for (Map<String, Object> row : betStatMapper.selectAllLotteryUserPairs(param)) {
+            Object lid = row.get("lotteryId"), uid = row.get("userId");
+            if (lid == null || uid == null) continue;
+            userSetByLottery
+                    .computeIfAbsent(((Number) lid).longValue(), k -> new HashSet<>())
+                    .add(((Number) uid).longValue());
+        }
+
+        // 按彩种聚合 distinct issue_no
+        Map<Long, Set<String>> issueSetByLottery = new HashMap<>();
+        for (Map<String, Object> row : betStatMapper.selectAllLotteryIssuePairs(param)) {
+            Object lid = row.get("lotteryId"), iss = row.get("issueNo");
+            if (lid == null || iss == null) continue;
+            issueSetByLottery
+                    .computeIfAbsent(((Number) lid).longValue(), k -> new HashSet<>())
+                    .add(String.valueOf(iss));
+        }
+
+        list.forEach(v -> {
+            v.setUserCount((long) userSetByLottery.getOrDefault(v.getLotteryId(), new HashSet<>()).size());
+            v.setIssueCount((long) issueSetByLottery.getOrDefault(v.getLotteryId(), new HashSet<>()).size());
+        });
+    }
+
     @Override
     public BetStatOverviewVO overview(BetStatQueryParam param) {
         BetStatOverviewVO vo = betStatMapper.overview(param);
         if (vo == null) vo = new BetStatOverviewVO();
+        // 拉全量 user_id 在 Java 端 Set 去重（绕开 sharding-jdbc 跨分表 DISTINCT 合并 bug）
+        List<Long> userIds = betStatMapper.selectAllUserIds(param);
+        Set<Long> distinctUsers = userIds == null ? new HashSet<>() : new HashSet<>(userIds);
+        vo.setTotalUserCount((long) distinctUsers.size());
         fillRates(vo);
         return vo;
     }
@@ -53,6 +90,7 @@ public class BetStatServiceImpl implements IBetStatService {
         if (list != null) {
             list.forEach(this::fillRates);
             fillLotteryNames(list);
+            fillLotteryUserAndIssueCounts(list, param);
         }
         return list;
     }
@@ -71,6 +109,7 @@ public class BetStatServiceImpl implements IBetStatService {
         if (list != null) {
             list.forEach(this::fillRates);
             fillLotteryNames(list);
+            fillLotteryUserAndIssueCounts(list, param);
         }
         return list;
     }

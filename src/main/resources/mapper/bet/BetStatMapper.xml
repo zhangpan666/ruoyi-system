@@ -41,12 +41,11 @@
         </if>
     </sql>
 
-    <!-- 公共聚合表达式（去掉 COALESCE 避免 sharding-jdbc 聚合合并失效） -->
+    <!-- 公共聚合表达式（不含 COUNT(DISTINCT)，sharding-jdbc 跨分表 distinct 有 bug，userCount 在 service 层补） -->
     <sql id="aggSelect">
         SUM(br.bet_amount)                      AS totalBetAmount,
         SUM(br.valid_bet_amount)                AS totalValidBetAmount,
         COUNT(*)                                AS orderCount,
-        COUNT(DISTINCT br.user_id)              AS userCount,
         SUM(br.can_win_amount)                  AS totalCanWinAmount,
         SUM(br.win_amount)                      AS totalWinAmount,
         SUM(
@@ -58,13 +57,12 @@
         ) AS totalWinLose
     </sql>
 
-    <!-- ① 全平台合计 -->
+    <!-- ① 全平台合计（不含 userCount，由 selectDistinctUserIds 单独查） -->
     <select id="overview" resultType="com.ruoyi.system.domain.vo.BetStatOverviewVO">
         SELECT
         SUM(br.bet_amount)                      AS totalBetAmount,
         SUM(br.valid_bet_amount)                AS totalValidBetAmount,
         COUNT(*)                                AS totalOrderCount,
-        COUNT(DISTINCT br.user_id)              AS totalUserCount,
         SUM(br.can_win_amount)                  AS totalCanWinAmount,
         SUM(br.win_amount)                      AS totalWinAmount,
         SUM(
@@ -79,11 +77,34 @@
         <include refid="betStatWhere"/>
     </select>
 
+    <!-- 全量拉取 user_id（不在 SQL 去重，避开 sharding-jdbc DISTINCT 合并 bug，Java 用 Set 去重） -->
+    <select id="selectAllUserIds" resultType="long">
+        SELECT br.user_id
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+    </select>
+
+    <!-- 全量 (lottery_id, user_id)，Java 端去重计数 -->
+    <select id="selectAllLotteryUserPairs" resultType="map">
+        SELECT br.lottery_id AS lotteryId, br.user_id AS userId
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+    </select>
+
+    <!-- 全量 (lottery_id, issue_no)，Java 端去重计数 -->
+    <select id="selectAllLotteryIssuePairs" resultType="map">
+        SELECT br.lottery_id AS lotteryId, br.issue_no AS issueNo
+        FROM t_bet_record br
+        WHERE
+        <include refid="betStatWhere"/>
+    </select>
+
     <!-- ② 按彩种明细 - 不 JOIN，避免 Sharding-JDBC 多表查询缺陷；lotteryName 在 service 层补 -->
     <select id="byLottery" resultType="com.ruoyi.system.domain.vo.BetStatByLotteryVO">
         SELECT
         br.lottery_id                           AS lotteryId,
-        COUNT(DISTINCT br.issue_no)             AS issueCount,
         <include refid="aggSelect"/>
         FROM t_bet_record br
         WHERE
@@ -136,7 +157,6 @@
     <select id="topLotteries" resultType="com.ruoyi.system.domain.vo.BetStatByLotteryVO">
         SELECT
         br.lottery_id                           AS lotteryId,
-        COUNT(DISTINCT br.issue_no)             AS issueCount,
         <include refid="aggSelect"/>
         FROM t_bet_record br
         WHERE
