@@ -1,14 +1,18 @@
 package com.ruoyi.system.service.impl;
 
 import com.ruoyi.system.domain.dto.BetStatQueryParam;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ruoyi.system.domain.vo.BetStatByLotteryVO;
 import com.ruoyi.system.domain.vo.BetStatOverviewVO;
 import com.ruoyi.system.domain.vo.BetStatTopUserVO;
+import com.ruoyi.system.domain.vo.BetStatTopUsersDualVO;
 import com.ruoyi.system.domain.vo.BetStatTrendVO;
 import com.ruoyi.system.mapper.BetStatMapper;
 import com.ruoyi.system.service.IBetStatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -53,6 +57,32 @@ public class BetStatServiceImpl implements IBetStatService {
     @Override
     public List<BetStatTopUserVO> topUsers(BetStatQueryParam param, String order) {
         return betStatMapper.topUsers(param, order);
+    }
+
+    /**
+     * 单事务双查询：MySQL InnoDB 默认 REPEATABLE READ，保证两次 SELECT 看到同一快照，
+     * 杜绝"同一个用户同时出现在赢/输两个表"的脏数据。
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public BetStatTopUsersDualVO topUsersDual(BetStatQueryParam param,
+                                              int lossPageNum, int lossPageSize,
+                                              int winPageNum, int winPageSize) {
+        // 大额赢用户：winLose ASC（最负在前）
+        PageHelper.startPage(lossPageNum, lossPageSize);
+        List<BetStatTopUserVO> lossList = betStatMapper.topUsers(param, "ASC");
+        PageInfo<BetStatTopUserVO> lossInfo = new PageInfo<>(lossList);
+
+        // 大额输用户：winLose DESC（最正在前）
+        PageHelper.startPage(winPageNum, winPageSize);
+        List<BetStatTopUserVO> winList = betStatMapper.topUsers(param, "DESC");
+        PageInfo<BetStatTopUserVO> winInfo = new PageInfo<>(winList);
+
+        return new BetStatTopUsersDualVO()
+                .setLossList(lossList)
+                .setLossTotal(lossInfo.getTotal())
+                .setWinList(winList)
+                .setWinTotal(winInfo.getTotal());
     }
 
     /** 派生指标统一在 service 算，不在 SQL 里搞 */

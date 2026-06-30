@@ -157,6 +157,7 @@
     <select id="topUsers" resultType="com.ruoyi.system.domain.vo.BetStatTopUserVO">
         SELECT
         br.user_id                              AS userId,
+        MAX(br.platform_name)                   AS platformName,
         MAX(br.platform_user_id)                AS platformUserId,
         COALESCE(SUM(br.bet_amount), 0)         AS totalBetAmount,
         COUNT(*)                                AS orderCount,

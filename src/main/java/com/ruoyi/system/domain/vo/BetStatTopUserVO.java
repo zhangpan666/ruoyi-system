@@ -15,6 +15,9 @@ public class BetStatTopUserVO {
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
+    @ApiModelProperty(value = "平台名称")
+    private String platformName;
+
     @ApiModelProperty(value = "平台用户ID")
     private Long platformUserId;
 
