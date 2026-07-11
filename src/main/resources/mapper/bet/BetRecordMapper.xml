@@ -28,6 +28,7 @@
         <result property="cancelType" column="cancel_type"/>
         <result property="betTime" column="bet_time"/>
         <result property="countTime" column="count_time"/>
+        <result property="cancelTime" column="cancel_time"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -432,6 +433,9 @@
             </if>
             <if test="countTime != null">
                 count_time = #{countTime},
+            </if>
+            <if test="cancelTime != null">
+                cancel_time = #{cancelTime},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
