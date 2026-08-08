@@ -175,6 +175,13 @@ public class BetRecord extends BaseEntity
     @ApiModelProperty(value = "撤单类型，1-个人撤单，2-系统撤单，3-系统管理员撤单")
     private Byte cancelType;
 
+    /** 撤单时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "撤单时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "撤单时间")
+    @JSONField(format = DateUtils.DATE_TIME_FORMAT)
+    private Date cancelTime;
+
     /** 彩种奖池贡献比例 */
     @Excel(name = "彩种奖池贡献比例")
     @ApiModelProperty(value = "彩种奖池贡献比例")
