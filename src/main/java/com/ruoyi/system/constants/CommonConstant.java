@@ -70,6 +70,11 @@ public class CommonConstant {
         public static final RedisInfo PLATFORM_PLAY_TYPE_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_LIST").setName("平台玩法大类");
         public static final RedisInfo PLATFORM_PLAY_TYPE_ITEM_LIST = new RedisInfo().setMinute(30).setKeyPrefix("PLATFORM_PLAY_TYPE_ITEM_LIST").setName("平台玩法小类");
         public static final RedisInfo BET_LIMIT_LIST = new RedisInfo().setHour(2).setKeyPrefix("BET_LIMIT_LIST").setName("投注限制");
+        /**
+         * 快三单期注单，下注时写、控奖时读，后台撤单要跟着把对应的注单摘掉。
+         * 这里的前缀和存活时间必须和 lottery-tools 里那份保持一致，两边指的是同一批键。
+         */
+        public static final RedisInfo FAST3_ISSUE_BET_RECORDS = new RedisInfo().setHour(26).setKeyPrefix("FAST3_ISSUE_BET_RECORDS").setName("快三单期注单");
         public static final RedisInfo LOTTERY_PRIZE_CONFIG = new RedisInfo().setHour(2).setKeyPrefix("LOTTERY_PRIZE_CONFIG").setName("奖池提取比例");
         public static final RedisInfo JACKPOT_AMOUNT = new RedisInfo().setMinute(30).setKeyPrefix("JACKPOT_AMOUNT").setName("奖池");
         public static final RedisInfo LOTTERY_PRIZE_RECORD_RANK_LIST = new RedisInfo().setMinute(30).setKeyPrefix("LOTTERY_PRIZE_RECORD_RANK_LIST").setName("中奖排行榜");
