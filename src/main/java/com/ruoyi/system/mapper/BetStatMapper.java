@@ -32,9 +32,6 @@ public interface BetStatMapper {
     /** 全量 user_id（含重复），Java 用 Set 去重——绕开 sharding-jdbc 的 DISTINCT 跨分表 bug */
     List<Long> selectAllUserIds(@Param("param") BetStatQueryParam param);
 
-    /** 全量 (lottery_id, user_id) 对，Java 端 group by lotteryId + Set 去重 */
-    List<Map<String, Object>> selectAllLotteryUserPairs(@Param("param") BetStatQueryParam param);
-
-    /** 全量 (lottery_id, issue_no) 对，Java 端 group by lotteryId + Set 去重 */
-    List<Map<String, Object>> selectAllLotteryIssuePairs(@Param("param") BetStatQueryParam param);
+    /** 全量 (lottery_id, user_id, issue_no)，一次广播后在 Java 端分别去重 */
+    List<Map<String, Object>> selectAllLotteryUserIssueRows(@Param("param") BetStatQueryParam param);
 }

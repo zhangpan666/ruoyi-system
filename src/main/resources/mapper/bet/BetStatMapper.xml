@@ -30,7 +30,7 @@
                 AND br.status IN (0, 1, 2)
             </when>
             <otherwise>
-                AND br.status IN (1, 2)
+                AND br.status = 1
             </otherwise>
         </choose>
         <if test="param.includeAuto == null or !param.includeAuto">
@@ -47,11 +47,11 @@
         SUM(br.valid_bet_amount)                AS totalValidBetAmount,
         COUNT(*)                                AS orderCount,
         SUM(br.can_win_amount)                  AS totalCanWinAmount,
-        SUM(br.win_amount)                      AS totalWinAmount,
+        SUM(CASE WHEN br.status = 1 THEN br.win_amount ELSE 0 END) AS totalWinAmount,
         SUM(
             CASE
-                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
-                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
+                WHEN br.status = 1       THEN -br.win_lose_amount
+                WHEN br.status IN (0, 2) THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
         ) AS totalWinLose
@@ -64,11 +64,11 @@
         SUM(br.valid_bet_amount)                AS totalValidBetAmount,
         COUNT(*)                                AS totalOrderCount,
         SUM(br.can_win_amount)                  AS totalCanWinAmount,
-        SUM(br.win_amount)                      AS totalWinAmount,
+        SUM(CASE WHEN br.status = 1 THEN br.win_amount ELSE 0 END) AS totalWinAmount,
         SUM(
             CASE
-                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
-                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
+                WHEN br.status = 1       THEN -br.win_lose_amount
+                WHEN br.status IN (0, 2) THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
         ) AS totalWinLose
@@ -85,17 +85,9 @@
         <include refid="betStatWhere"/>
     </select>
 
-    <!-- 全量 (lottery_id, user_id)，Java 端去重计数 -->
-    <select id="selectAllLotteryUserPairs" resultType="map">
-        SELECT br.lottery_id AS lotteryId, br.user_id AS userId
-        FROM t_bet_record br
-        WHERE
-        <include refid="betStatWhere"/>
-    </select>
-
-    <!-- 全量 (lottery_id, issue_no)，Java 端去重计数 -->
-    <select id="selectAllLotteryIssuePairs" resultType="map">
-        SELECT br.lottery_id AS lotteryId, br.issue_no AS issueNo
+    <!-- 全量 (lottery_id, user_id, issue_no)，Java 端分别去重计数 -->
+    <select id="selectAllLotteryUserIssueRows" resultType="map">
+        SELECT br.lottery_id AS lotteryId, br.user_id AS userId, br.issue_no AS issueNo
         FROM t_bet_record br
         WHERE
         <include refid="betStatWhere"/>
@@ -121,8 +113,8 @@
         COUNT(*)                                AS orderCount,
         SUM(
             CASE
-                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
-                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
+                WHEN br.status = 1       THEN -br.win_lose_amount
+                WHEN br.status IN (0, 2) THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
         ) AS totalWinLose
@@ -141,8 +133,8 @@
         COUNT(*)                                AS orderCount,
         SUM(
             CASE
-                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
-                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
+                WHEN br.status = 1       THEN -br.win_lose_amount
+                WHEN br.status IN (0, 2) THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
         ) AS totalWinLose
@@ -179,8 +171,8 @@
         COUNT(*)                                AS orderCount,
         SUM(
             CASE
-                WHEN br.status IN (1, 2) THEN -br.win_lose_amount
-                WHEN br.status = 0       THEN br.bet_amount - br.can_win_amount
+                WHEN br.status = 1       THEN -br.win_lose_amount
+                WHEN br.status IN (0, 2) THEN br.bet_amount - br.can_win_amount
                 ELSE 0
             END
         ) AS totalWinLose

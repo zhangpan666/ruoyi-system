@@ -36,7 +36,7 @@ public class BetStatOverviewVO {
     @ApiModelProperty(value = "盈亏率% = totalWinLose / totalBetAmount * 100")
     private BigDecimal winLoseRate = BigDecimal.ZERO;
 
-    @ApiModelProperty(value = "中奖率% = totalWinAmount / totalBetAmount * 100")
+    @ApiModelProperty(value = "派彩率(RTP)% = totalWinAmount / totalBetAmount * 100")
     private BigDecimal payoutRate = BigDecimal.ZERO;
 
     @ApiModelProperty(value = "人均下注金额")

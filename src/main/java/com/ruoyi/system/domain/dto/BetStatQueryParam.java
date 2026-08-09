@@ -38,8 +38,8 @@ public class BetStatQueryParam {
     @ApiModelProperty(value = "平台ID（可选）")
     private Long platformId;
 
-    @ApiModelProperty(value = "是否包含未结算注单（按预计盈亏算），默认 true")
-    private Boolean includeUnsettled = true;
+    @ApiModelProperty(value = "是否包含待结算及结算失败注单（按预计盈亏算），默认 false")
+    private Boolean includeUnsettled = false;
 
     @ApiModelProperty(value = "是否包含虚拟注单，默认 false")
     private Boolean includeAuto = false;

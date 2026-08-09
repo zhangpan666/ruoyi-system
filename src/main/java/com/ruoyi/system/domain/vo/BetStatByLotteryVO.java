@@ -57,7 +57,7 @@ public class BetStatByLotteryVO {
     @ApiModelProperty(value = "盈亏率%")
     private BigDecimal winLoseRate = BigDecimal.ZERO;
 
-    @Excel(name = "中奖率%")
-    @ApiModelProperty(value = "中奖率%")
+    @Excel(name = "派彩率(RTP)%")
+    @ApiModelProperty(value = "派彩率(RTP)%")
     private BigDecimal payoutRate = BigDecimal.ZERO;
 }

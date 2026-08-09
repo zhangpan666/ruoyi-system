@@ -46,24 +46,22 @@ public class BetStatServiceImpl implements IBetStatService {
     private void fillLotteryUserAndIssueCounts(List<BetStatByLotteryVO> list, BetStatQueryParam param) {
         if (list == null || list.isEmpty()) return;
 
-        // 按彩种聚合 distinct user_id
         Map<Long, Set<Long>> userSetByLottery = new HashMap<>();
-        for (Map<String, Object> row : betStatMapper.selectAllLotteryUserPairs(param)) {
-            Object lid = row.get("lotteryId"), uid = row.get("userId");
-            if (lid == null || uid == null) continue;
-            userSetByLottery
-                    .computeIfAbsent(((Number) lid).longValue(), k -> new HashSet<>())
-                    .add(((Number) uid).longValue());
-        }
-
-        // 按彩种聚合 distinct issue_no
         Map<Long, Set<String>> issueSetByLottery = new HashMap<>();
-        for (Map<String, Object> row : betStatMapper.selectAllLotteryIssuePairs(param)) {
-            Object lid = row.get("lotteryId"), iss = row.get("issueNo");
-            if (lid == null || iss == null) continue;
-            issueSetByLottery
-                    .computeIfAbsent(((Number) lid).longValue(), k -> new HashSet<>())
-                    .add(String.valueOf(iss));
+        for (Map<String, Object> row : betStatMapper.selectAllLotteryUserIssueRows(param)) {
+            Object lid = row.get("lotteryId");
+            if (lid == null) continue;
+            long lotteryId = ((Number) lid).longValue();
+            Object uid = row.get("userId");
+            if (uid != null) {
+                userSetByLottery.computeIfAbsent(lotteryId, k -> new HashSet<>())
+                        .add(((Number) uid).longValue());
+            }
+            Object issueNo = row.get("issueNo");
+            if (issueNo != null) {
+                issueSetByLottery.computeIfAbsent(lotteryId, k -> new HashSet<>())
+                        .add(String.valueOf(issueNo));
+            }
         }
 
         list.forEach(v -> {
