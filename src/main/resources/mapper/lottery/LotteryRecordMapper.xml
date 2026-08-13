@@ -22,7 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotteryVideoStatus"    column="lottery_video_status"    />
         <result property="betRecordCountStatus"    column="bet_record_count_status"    />
         <result property="lotteryStatus"    column="lottery_status"    />
-        <result property="lotteryNumberType"    column="lottery_number_type"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
@@ -62,7 +61,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryVideoStatus != null "> and a.lottery_video_status = #{lotteryVideoStatus}</if>
             <if test="betRecordCountStatus != null "> and a.bet_record_count_status = #{betRecordCountStatus}</if>
             <if test="lotteryStatus != null "> and a.lottery_status = #{lotteryStatus}</if>
-            <if test="lotteryNumberType != null "> and a.lottery_number_type = #{lotteryNumberType}</if>
         </where>
             order by a.id desc
     </select>
