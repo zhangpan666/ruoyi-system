@@ -27,6 +27,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
+    <resultMap type="LotteryOpenPlanData" id="LotteryOpenPlanDataResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="lotteryId"    column="lottery_id"    />
+        <result property="year"    column="year"    />
+        <result property="issueNo"    column="issue_no"    />
+        <result property="date"    column="date"    />
+        <result property="lotteryTime"    column="lottery_time"    />
+        <result property="lotteryNumberType"    column="lottery_number_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
     <sql id="selectLotteryRecordVo">
         select * from t_lottery_record
     </sql>
@@ -139,6 +152,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <foreach collection="idList" item="id" open="(" close=")" index="i" separator=",">
             #{id}
         </foreach>
+    </select>
+
+
+    <select id="selectLotteryOpenPlanDataList" parameterType="LotteryOpenPlanData" resultMap="LotteryOpenPlanDataResult">
+        select a.*, b.name as lotteryName from t_lottery_record a left join t_lottery b on a.lottery_id = b.id
+        <where>
+            <if test="id != null "> and a.id = #{id}</if>
+            <if test="type != null "> and a.type = #{type}</if>
+            <if test="lotteryId != null "> and a.lottery_id = #{lotteryId}</if>
+            <if test="year != null "> and a.year = #{year}</if>
+            <if test="issueNo != null  and issueNo != ''"> and a.issue_no = #{issueNo}</if>
+            <if test="date != null  and date != ''"> and a.date = #{date}</if>
+            <if test="lotteryTime != null "> and date(a.lottery_time) = date(#{lotteryTime})</if>
+            <if test="lotteryNumberType != null "> and a.lottery_number_type = #{lotteryNumberType}</if>
+        </where>
+        order by a.id desc
     </select>
 
 

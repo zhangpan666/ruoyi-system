@@ -3,6 +3,7 @@ package com.ruoyi.system.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.LotteryOpenPlanData;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,5 +104,10 @@ public class LotteryRecordServiceImpl implements ILotteryRecordService
             return new ArrayList<>();
         }
         return lotteryRecordMapper.selectLotteryRecordByIds(idList);
+    }
+
+    @Override
+    public List<LotteryOpenPlanData> selectLotteryOpenPlanDataList(LotteryOpenPlanData lotteryOpenPlanData) {
+        return lotteryRecordMapper.selectLotteryOpenPlanDataList(lotteryOpenPlanData);
     }
 }

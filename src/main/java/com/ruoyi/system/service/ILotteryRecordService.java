@@ -1,6 +1,8 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.LotteryOpenPlanData;
 import com.ruoyi.system.domain.LotteryRecord;
 
 /**
@@ -60,5 +62,7 @@ public interface ILotteryRecordService
     public int deleteLotteryRecordById(Long id);
 
     List<LotteryRecord> selectLotteryRecordByIds(List<Long> idList);
+
+    List<LotteryOpenPlanData> selectLotteryOpenPlanDataList(LotteryOpenPlanData lotteryOpenPlanData);
 
 }

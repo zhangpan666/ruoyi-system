@@ -1,6 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.LotteryOpenPlanData;
 import com.ruoyi.system.domain.LotteryRecord;
 import org.apache.ibatis.annotations.Param;
 
@@ -62,5 +64,8 @@ public interface LotteryRecordMapper
 
 
     List<LotteryRecord> selectLotteryRecordByIds(@Param("idList") List<Long> idList);
+
+
+   List<LotteryOpenPlanData> selectLotteryOpenPlanDataList(LotteryOpenPlanData lotteryOpenPlanData);
 
 }
