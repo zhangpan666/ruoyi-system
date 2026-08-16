@@ -69,9 +69,9 @@ public class LotteryOpenPlanData extends BaseEntity
     @ApiModelProperty(example = "开奖时间")
     private Date lotteryTime;
 
-    /** 开奖号码类型，1-预设，2-随机，3-控奖，4-官方 */
-    @Excel(name = "开奖号码类型", readConverterExp = "1=预设,2=随机,3=控奖,4=官方")
-    @ApiModelProperty(example = "开奖号码类型，1-预设，2-随机，3-控奖，4-官方")
+    /** 开奖号码类型，1-预设，2-随机，3-控奖，4-官方，5-有下注随机 */
+    @Excel(name = "开奖号码类型", readConverterExp = "1=预设,2=随机,3=控奖,4=官方,5=有下注随机")
+    @ApiModelProperty(example = "开奖号码类型，1-预设，2-随机，3-控奖，4-官方，5-有下注随机")
     private Byte lotteryNumberType;
 
 }
