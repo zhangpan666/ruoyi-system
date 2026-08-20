@@ -74,4 +74,14 @@ public class LotteryOpenPlanData extends BaseEntity
     @ApiModelProperty(example = "开奖号码类型，1-预设，2-随机，3-控奖，4-官方，5-有下注随机")
     private Byte lotteryNumberType;
 
+    /** 目标杀率 */
+    @Excel(name = "目标杀率")
+    @ApiModelProperty(example = "目标杀率")
+    private String targetKillRate;
+
+    /** 实际杀率 */
+    @Excel(name = "实际杀率")
+    @ApiModelProperty(example = "实际杀率")
+    private String realKillRate;
+
 }
