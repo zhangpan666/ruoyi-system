@@ -154,11 +154,17 @@
             <if test="rewardStatus != null">
                 and reward_status = #{rewardStatus}
             </if>
-            <if test="isVirtual != null and isVirtual == 1">
+            <if test="isReal != null and isReal == 1">
+                and is_auto = 0 and is_test = 0
+            </if>
+            <if test="isReal != null and isReal == 0">
                 and (is_auto = 1 or is_test = 1)
             </if>
-            <if test="isVirtual != null and isVirtual == 0">
-                and is_auto = 0 and is_test = 0
+            <if test="isAuto != null">
+                and is_auto = #{isAuto}
+            </if>
+            <if test="isTest != null">
+                and is_test = #{isTest}
             </if>
             <if test="platformUserIdList != null and platformUserIdList.size() > 0">
                 and platform_user_id in
