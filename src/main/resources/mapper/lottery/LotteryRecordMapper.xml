@@ -37,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotteryNumberType"    column="lottery_number_type"    />
         <result property="targetKillRate"    column="target_kill_rate"    />
         <result property="realKillRate"    column="real_kill_rate"    />
+        <result property="totalBetAmount"    column="total_bet_amount"    />
+        <result property="totalWinAmount"    column="total_win_amount"    />
+        <result property="totalWinLoseAmount"    column="total_win_lose_amount"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>

@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -83,5 +84,20 @@ public class LotteryOpenPlanData extends BaseEntity
     @Excel(name = "实际杀率")
     @ApiModelProperty(example = "实际杀率")
     private String realKillRate;
+
+    /** 总投注金额 */
+    @Excel(name = "总投注金额")
+    @ApiModelProperty(example = "总投注金额")
+    private BigDecimal totalBetAmount;
+
+    /** 总派彩金额 */
+    @Excel(name = "总派彩金额")
+    @ApiModelProperty(example = "总派彩金额")
+    private BigDecimal totalWinAmount;
+
+    /** 总输赢金额 */
+    @Excel(name = "总输赢金额")
+    @ApiModelProperty(example = "总输赢金额")
+    private BigDecimal totalWinLoseAmount;
 
 }
