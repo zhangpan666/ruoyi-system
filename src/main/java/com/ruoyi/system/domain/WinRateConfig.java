@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 赢率配置对象 t_win_rate_config
@@ -112,5 +113,7 @@ public class WinRateConfig
     private String remark;
 
     private String verifyCode;
+
+    private List<Long> idList;
 
 }
