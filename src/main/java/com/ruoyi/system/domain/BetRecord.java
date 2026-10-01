@@ -255,6 +255,6 @@ public class BetRecord extends BaseEntity
 
     private String lotteryIds;
 
-    private Byte isVirtual;
+    private Byte isReal;
 
 }
