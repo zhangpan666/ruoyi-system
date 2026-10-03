@@ -99,6 +99,8 @@ public interface BetRecordMapper
 
     List<RealTimeOrderVO> realTimeOrderByMantissa(BetRecord betRecordParam);
 
+    List<Map<String, Object>> selectRealTimeOrderUserRows(BetRecord betRecordParam);
+
     List<RealTimeOrderDetailVO> realTimeOrderDetailByNumber(BetRecord betRecordParam);
 
     List<RealTimeOrderDetailVO> realTimeOrderDetailByType(BetRecord betRecordParam);

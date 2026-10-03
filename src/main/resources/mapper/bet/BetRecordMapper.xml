@@ -863,7 +863,6 @@
     <select id="realTimeOrderByNumber" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT MAX(br.bet_content)        AS number,
                br.play_type_detail_code   AS playTypeDetailCode,
-               COUNT(DISTINCT br.user_id) AS userCount,
                COUNT(*)                   AS orderCount,
                SUM(br.bet_amount)         AS totalBetAmount,
                SUM(br.can_win_amount)     AS totalWinAmount,
@@ -894,7 +893,7 @@
             AND br.issue_no = #{issueNo}
         </if>
         <if test="platformId != null">
-            AND br.platformId = #{platformId}
+            AND br.platform_id = #{platformId}
         </if>
         GROUP BY br.play_type_detail_code
         HAVING SUM(br.bet_amount) IS NOT NULL
@@ -906,7 +905,6 @@
     <select id="realTimeOrderByColour" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT MAX(bet_content)        AS colour,
                play_type_detail_code   AS playTypeDetailCode,
-               COUNT(DISTINCT user_id) AS userCount,
                COUNT(*)                AS orderCount,
                SUM(bet_amount)         AS totalBetAmount,
                SUM(can_win_amount)     AS totalWinAmount,
@@ -963,7 +961,7 @@
             AND br.issue_no = #{issueNo}
         </if>
         <if test="platformId != null">
-            AND br.platformId = #{platformId}
+            AND br.platform_id = #{platformId}
         </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
@@ -973,7 +971,6 @@
     <select id="realTimeOrderByType" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT MAX(bet_content)        AS type,
                play_type_detail_code   AS playTypeDetailCode,
-               COUNT(DISTINCT user_id) AS userCount,
                COUNT(*)                AS orderCount,
                SUM(bet_amount)         AS totalBetAmount,
                SUM(can_win_amount)     AS totalWinAmount,
@@ -1003,7 +1000,7 @@
             AND issue_no = #{issueNo}
         </if>
         <if test="platformId != null">
-            AND platformId = #{platformId}
+            AND platform_id = #{platformId}
         </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
@@ -1014,7 +1011,6 @@
         SELECT
             bet_content             AS sx,
             ''                      AS number,
-            COUNT(DISTINCT user_id) AS userCount,
             COUNT(id)               AS orderCount,
             SUM(bet_amount)         AS totalBetAmount,
             SUM(can_win_amount)     AS totalWinAmount
@@ -1033,7 +1029,7 @@
             AND issue_no = #{issueNo}
         </if>
         <if test="platformId != null">
-            AND platformId = #{platformId}
+            AND platform_id = #{platformId}
         </if>
         GROUP BY
             bet_content
@@ -1044,7 +1040,6 @@
     <select id="realTimeOrderBySx" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT bet_content             AS sx,
                ''                      AS number,
-               COUNT(DISTINCT user_id) AS userCount,
                COUNT(id)               AS orderCount,
                SUM(bet_amount)         AS totalBetAmount,
                SUM(can_win_amount)     AS totalWinAmount
@@ -1061,7 +1056,7 @@
             AND issue_no = #{issueNo}
         </if>
         <if test="platformId != null">
-            AND platformId = #{platformId}
+            AND platform_id = #{platformId}
         </if>
         GROUP BY bet_content
         ORDER BY totalBetAmount DESC
@@ -1070,7 +1065,6 @@
     <select id="realTimeOrderByMantissa" resultType="com.ruoyi.system.domain.vo.RealTimeOrderVO">
         SELECT REPLACE(MAX(bet_content), '尾数@', '') AS mantissa,
                play_type_detail_code                  AS playTypeDetailCode,
-               COUNT(DISTINCT user_id)                AS userCount,        -- 独立用户数
                COUNT(*)                               AS orderCount,       -- 总投注笔数
                SUM(bet_amount)                        AS totalBetAmount,   -- 总投注金额
                SUM(can_win_amount)                    AS totalWinAmount -- 总可赢金额
@@ -1088,11 +1082,56 @@
             AND issue_no = #{issueNo}
         </if>
         <if test="platformId != null">
-            AND platformId = #{platformId}
+            AND platform_id = #{platformId}
         </if>
         GROUP BY play_type_detail_code
         HAVING SUM(bet_amount) > 0
         ORDER BY totalBetAmount DESC
+    </select>
+
+    <select id="selectRealTimeOrderUserRows" resultType="map">
+        SELECT bet_content AS groupKey, user_id AS userId
+        FROM t_bet_record
+        WHERE lottery_id = #{lotteryId}
+          AND is_auto = 0
+          AND is_test = 0
+        <choose>
+            <when test="type == 1">
+                AND play_type_code = 1
+                AND play_type_detail_code BETWEEN 1 AND 49
+            </when>
+            <when test="type == 2">
+                AND play_type_code = 1
+                AND play_type_detail_code BETWEEN 55 AND 58
+            </when>
+            <when test="type == 3">
+                AND play_type_code = 1
+                AND play_type_detail_code BETWEEN 1219 AND 1228
+            </when>
+            <when test="type == 6">
+                AND play_type_code IN (1, 6)
+                AND (play_type_detail_code BETWEEN 65 AND 67
+                  OR play_type_detail_code BETWEEN 769 AND 811
+                  OR play_type_detail_code BETWEEN 1229 AND 1240)
+            </when>
+            <when test="type == 9">
+                AND play_type_code = 9
+                AND play_type_detail_code BETWEEN 1118 AND 1129
+            </when>
+            <when test="type == 10">
+                AND play_type_code = 10
+                AND play_type_detail_code BETWEEN 1130 AND 1141
+            </when>
+        </choose>
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="issueNo != null and issueNo != ''">
+            AND issue_no = #{issueNo}
+        </if>
+        <if test="platformId != null">
+            AND platform_id = #{platformId}
+        </if>
     </select>
 
 
@@ -1239,8 +1278,7 @@
             COALESCE(SUM(br.bet_amount), 0)     AS totalBetAmount,
             COALESCE(SUM(br.can_win_amount), 0) AS totalCanWinAmount,
             COALESCE(SUM(br.bet_amount), 0) - COALESCE(SUM(br.can_win_amount), 0) AS winLose,
-            COUNT(*)                            AS orderCount,
-            COUNT(DISTINCT br.user_id)          AS userCount
+            COUNT(*)                            AS orderCount
         FROM t_bet_record br
         WHERE br.lottery_id = #{lotteryId}
           AND br.is_auto = 0

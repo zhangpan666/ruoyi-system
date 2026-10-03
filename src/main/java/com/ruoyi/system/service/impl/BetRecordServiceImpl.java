@@ -161,7 +161,8 @@ public class BetRecordServiceImpl implements IBetRecordService {
                 .setPlatformId(platformId)
                 .setLotteryId(id)
                 .setIssueNo(StringUtil.isBlank(issueNo) ? lottery.getNextIssueNo() : issueNo)
-                .setUserId(userId);
+                .setUserId(userId)
+                .setType(type);
         List<RealTimeOrderVO> realTimeOrderList = Collections.emptyList();
         if (type == 1) {
             betRecordParam.setPlayTypeCode(type);
@@ -220,7 +221,34 @@ public class BetRecordServiceImpl implements IBetRecordService {
             realTimeOrderList = betRecordMapper.realTimeOrderBySx(betRecordParam);
             checkAndSyncSxList(realTimeOrderList, sx);
         }
+        fillRealTimeOrderUserCounts(realTimeOrderList, betRecordParam, type);
         return realTimeOrderList;
+    }
+
+    private void fillRealTimeOrderUserCounts(List<RealTimeOrderVO> list, BetRecord param, Byte type) {
+        if (list.isEmpty()) return;
+        Map<String, Set<Object>> usersByContent = getRealTimeOrderUsersByContent(param);
+        for (RealTimeOrderVO row : list) {
+            String key;
+            if (type == 1) key = row.getNumber();
+            else if (type == 2) key = row.getType();
+            else if (type == 3) key = "尾数@" + row.getMantissa();
+            else if (type == 6) key = row.getColour();
+            else key = row.getSx();
+            row.setUserCount(String.valueOf(usersByContent.getOrDefault(key, Collections.emptySet()).size()));
+        }
+    }
+
+    private Map<String, Set<Object>> getRealTimeOrderUsersByContent(BetRecord param) {
+        Map<String, Set<Object>> usersByContent = new HashMap<>();
+        for (Map<String, Object> row : betRecordMapper.selectRealTimeOrderUserRows(param)) {
+            Object content = row.get("groupKey");
+            Object userId = row.get("userId");
+            if (content != null && userId != null) {
+                usersByContent.computeIfAbsent(String.valueOf(content), ignored -> new HashSet<>()).add(userId);
+            }
+        }
+        return usersByContent;
     }
 
 
@@ -280,6 +308,8 @@ public class BetRecordServiceImpl implements IBetRecordService {
                 .setType(type);
         RealTimeOrderDetailStatVO stat = betRecordMapper.realTimeOrderDetailStat(betRecordParam);
         if (stat == null) stat = new RealTimeOrderDetailStatVO();
+        stat.setUserCount((long) getRealTimeOrderUsersByContent(betRecordParam)
+                .getOrDefault(betContent, Collections.emptySet()).size());
 
         // 计算本期所有下注用户里"最长连下"
         List<Long> currentUsers = betRecordMapper.getCurrentIssueBetUsers(
