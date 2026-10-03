@@ -114,7 +114,9 @@ public class BetRecordServiceImpl implements IBetRecordService {
 
     @Override
     public BetRecordStatVO statBetRecord(BetRecord betRecord) {
-        return betRecordMapper.statBetRecord(betRecord);
+        BetRecordStatVO result = betRecordMapper.statBetRecord(betRecord);
+        result.setTotalBetUserCount(betRecordMapper.countDistinctBetUsers(betRecord));
+        return result;
     }
 
     @Override

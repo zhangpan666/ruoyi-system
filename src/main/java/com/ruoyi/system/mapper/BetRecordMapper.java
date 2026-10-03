@@ -71,6 +71,8 @@ public interface BetRecordMapper
 
     BetRecordStatVO statBetRecord(BetRecord betRecord);
 
+    int countDistinctBetUsers(BetRecord betRecord);
+
     List<BetRecordStatVO> statBetRecordAndGroupByUserId(BetRecord betRecord);
 
     List<BetRecordDateStatVO> statBetRecordAndGroupByDate(BetRecord betRecord);

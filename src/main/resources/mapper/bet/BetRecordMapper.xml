@@ -476,12 +476,21 @@
     <select id="statBetRecord" parameterType="com.ruoyi.system.domain.BetRecord"
             resultType="com.ruoyi.system.pojo.BetRecordStatVO">
         select count(*)                as totalCount
-             , count(distinct user_id) as totalBetUserCount
              , sum(bet_amount)         as totalAmount
              , sum(valid_bet_amount)   as totalValidBetAmount
              , sum(win_lose_amount)    as winLoseAmount
              , sum(win_amount)         as totalWinAmount
         from t_bet_record
+        <include refid="statBetRecordWhere"/>
+    </select>
+
+    <select id="countDistinctBetUsers" parameterType="com.ruoyi.system.domain.BetRecord" resultType="int">
+        select count(distinct user_id)
+        from t_bet_record
+        <include refid="statBetRecordWhere"/>
+    </select>
+
+    <sql id="statBetRecordWhere">
         <where>
             <bind name="platformIdsArray" value="platformIds != null ? platformIds.split(',') : new String[0]" />
             <if test="platformIdsArray != null and platformIdsArray.length > 0">
@@ -567,7 +576,7 @@
                 </choose>
             </if>
         </where>
-    </select>
+    </sql>
 
     <select id="statBetRecordAndGroupByUserId" parameterType="com.ruoyi.system.domain.BetRecord"
             resultType="com.ruoyi.system.pojo.BetRecordStatVO">
