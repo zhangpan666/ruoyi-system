@@ -549,11 +549,11 @@
             <if test="playTypeDetailCode != null and playTypeDetailCode != ''">
                 and play_type_detail_code = #{playTypeDetailCode}
             </if>
-            <if test="isVirtual != null and isVirtual == 1">
-                and (is_auto = 1 or is_test = 1)
-            </if>
-            <if test="isVirtual != null and isVirtual == 0">
+            <if test="isReal != null and isReal == 1">
                 and is_auto = 0 and is_test = 0
+            </if>
+            <if test="isReal != null and isReal == 0">
+                and (is_auto = 1 or is_test = 1)
             </if>
             <if test="beginTime != null">
                 <choose>
