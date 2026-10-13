@@ -123,6 +123,11 @@ public class LotteryRecord extends BaseEntity
     @ApiModelProperty(example = "开奖状态，0-开奖中，1-开奖完成")
     private Byte lotteryStatus;
 
+    /** 是否允许结算，1-是，0-否 */
+    @Excel(name = "是否允许结算", readConverterExp = "0=是,1=否")
+    @ApiModelProperty(example = "是否允许结算，1-是，0-否")
+    private Byte allowedCount;
+
     private List<LotterySingleNumberInfo> numberList;
 
     @ApiModelProperty(example = "总和")

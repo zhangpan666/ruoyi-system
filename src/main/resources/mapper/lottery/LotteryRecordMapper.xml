@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotteryVideoStatus"    column="lottery_video_status"    />
         <result property="betRecordCountStatus"    column="bet_record_count_status"    />
         <result property="lotteryStatus"    column="lottery_status"    />
+        <result property="allowedCount"    column="allowed_count"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
@@ -66,6 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryVideoStatus != null "> and a.lottery_video_status = #{lotteryVideoStatus}</if>
             <if test="betRecordCountStatus != null "> and a.bet_record_count_status = #{betRecordCountStatus}</if>
             <if test="lotteryStatus != null "> and a.lottery_status = #{lotteryStatus}</if>
+            <if test="allowedCount != null "> and a.allowed_count = #{allowedCount}</if>
         </where>
             order by a.id desc
     </select>
@@ -131,6 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lotteryVideoStatus != null">lottery_video_status = #{lotteryVideoStatus},</if>
             <if test="betRecordCountStatus != null">bet_record_count_status = #{betRecordCountStatus},</if>
             <if test="lotteryStatus != null">lottery_status = #{lotteryStatus},</if>
+            <if test="allowedCount != null">allowed_count = #{allowedCount},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
         </trim>
